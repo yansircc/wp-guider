@@ -79,14 +79,23 @@ func doCheckpointRestore(name string) {
 		fatal("checkpoint not found: " + name)
 	}
 
-	// 1. Restore database
+	// 1. Restore wp-config.php FIRST (broken-db fault changes DB_PASSWORD)
+	configSrc := filepath.Join(dir, "wp-config.php")
+	configDst := filepath.Join(wpRoot, "wp-config.php")
+	if fileExists(configSrc) {
+		log("Restoring wp-config.php...")
+		data, _ := os.ReadFile(configSrc)
+		os.WriteFile(configDst, data, 0644)
+	}
+
+	// 2. Restore database (now wp-config.php has correct credentials)
 	dumpPath := filepath.Join(dir, "db.sql")
 	if fileExists(dumpPath) {
 		log("Restoring database from checkpoint '" + name + "'...")
 		shellMust(fmt.Sprintf("locwp wp %s -- db import %s --quiet", siteName, dumpPath))
 	}
 
-	// 2. Restore wp-content from git tag
+	// 3. Restore wp-content from git tag
 	tag := "checkpoint/" + name
 	tagExists, _ := shell(fmt.Sprintf("cd %s && git tag -l %s", wpContent, tag))
 	if strings.TrimSpace(tagExists) != "" {
@@ -94,15 +103,6 @@ func doCheckpointRestore(name string) {
 		shellMust(fmt.Sprintf("cd %s && git checkout %s -- . 2>/dev/null && git checkout main 2>/dev/null || git checkout master 2>/dev/null || true", wpContent, tag))
 		// Clean untracked files that weren't in the checkpoint
 		shell(fmt.Sprintf("cd %s && git clean -fd 2>/dev/null || true", wpContent))
-	}
-
-	// 3. Restore wp-config.php
-	configSrc := filepath.Join(dir, "wp-config.php")
-	configDst := filepath.Join(wpRoot, "wp-config.php")
-	if fileExists(configSrc) {
-		log("Restoring wp-config.php...")
-		data, _ := os.ReadFile(configSrc)
-		os.WriteFile(configDst, data, 0644)
 	}
 
 	log("Checkpoint '" + name + "' restored")

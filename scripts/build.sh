@@ -16,6 +16,8 @@ REQUIRED=(
   "out/.claude/skills/wp-train/references/curriculum.md"
   "out/.claude/skills/wp-check/SKILL.md"
   "out/.claude/skills/wp-progress/SKILL.md"
+  "out/.claude/skills/wp-inject/SKILL.md"
+  "out/.claude/skills/wp-checkpoint/SKILL.md"
   "out/.claude/CLAUDE.md"
 )
 

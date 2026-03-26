@@ -312,7 +312,10 @@ func checkGitDiffNotEmpty() CheckResult {
 }
 
 func checkWpEval(phpCode, expectedOutput string) CheckResult {
-	actual, err := shell(fmt.Sprintf("locwp wp %s -- eval '%s'", siteName, phpCode))
+	// Use double quotes and escape any internal double quotes in phpCode
+	escaped := strings.ReplaceAll(phpCode, `"`, `\"`)
+	escaped = strings.ReplaceAll(escaped, `$`, `\$`)
+	actual, err := shell(fmt.Sprintf(`locwp wp %s -- eval "%s"`, siteName, escaped))
 	if err != nil {
 		return CheckResult{Passed: false, Error: err.Error()}
 	}
