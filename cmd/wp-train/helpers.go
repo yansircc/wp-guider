@@ -32,7 +32,7 @@ func init() {
 
 	// Find .claude/ directory (product root)
 	claudeDir = findClaudeDir()
-	taskBankPath = filepath.Join(claudeDir, "references", "task-bank.json")
+	taskBankPath = filepath.Join(claudeDir, "references", "task-bank.json") // legacy fallback only
 }
 
 func findClaudeDir() string {
@@ -47,13 +47,13 @@ func findClaudeDir() string {
 		dir := filepath.Dir(exe)
 		if filepath.Base(dir) == "scripts" {
 			parent := filepath.Dir(dir)
-			if fileExists(filepath.Join(parent, "references", "task-bank.json")) {
+			if isTaskBankDir(parent) {
 				return parent
 			}
 		}
-		// Walk up looking for references/task-bank.json
+		// Walk up looking for references/tasks/ directory
 		for d := dir; d != "/"; d = filepath.Dir(d) {
-			if fileExists(filepath.Join(d, "references", "task-bank.json")) {
+			if isTaskBankDir(d) {
 				return d
 			}
 		}
@@ -61,10 +61,25 @@ func findClaudeDir() string {
 
 	// Fallback: cwd/.claude
 	cwd, _ := os.Getwd()
-	if d := filepath.Join(cwd, ".claude"); fileExists(filepath.Join(d, "references", "task-bank.json")) {
+	if d := filepath.Join(cwd, ".claude"); isTaskBankDir(d) {
 		return d
 	}
 	return cwd
+}
+
+// isTaskBankDir checks whether dir looks like a valid .claude/ product root.
+// Primary anchor: references/tasks/ directory with ≥1 JSON file.
+// Legacy fallback: references/task-bank.json (single-file format).
+func isTaskBankDir(dir string) bool {
+	tasksDir := filepath.Join(dir, "references", "tasks")
+	if entries, err := os.ReadDir(tasksDir); err == nil {
+		for _, e := range entries {
+			if !e.IsDir() && strings.HasSuffix(e.Name(), ".json") {
+				return true
+			}
+		}
+	}
+	return fileExists(filepath.Join(dir, "references", "task-bank.json"))
 }
 
 // shell runs a command and returns stdout.

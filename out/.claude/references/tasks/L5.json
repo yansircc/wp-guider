@@ -20,12 +20,12 @@
       {
         "id": "L5.2-a",
         "difficulty": 1,
-        "description": "安装并激活「Advanced Custom Fields」（ACF）插件",
+        "description": "安装并激活「Advanced Custom Fields PRO」插件。后续任务需要 Repeater、Flexible Content、Options Page 等 PRO 功能，免费版不包含这些",
         "verify": [
-          {"type": "plugin_active", "plugin": "advanced-custom-fields"}
+          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'advanced-custom-fields') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
         ],
-        "hints": ["插件 → 安装插件 → 搜索 Advanced Custom Fields → 安装 → 激活"],
-        "on_pass_note": "ACF 是 WordPress 最重要的内容建模插件（500 万+活跃安装）。它让你无需写代码就能给任何内容类型添加自定义字段。",
+        "hints": ["安装 ACF PRO：从 advancedcustomfields.com 下载 → 插件 → 上传插件 → 安装 → 激活。免费版无法完成后续 Repeater/Flexible Content/Options Page 任务"],
+        "on_pass_note": "ACF 是 WordPress 最重要的内容建模插件。PRO 版额外提供 Repeater（重复器）、Flexible Content（弹性内容）、Options Page（选项页面）、Gallery（画廊）等高级字段类型。后续任务会用到这些功能。",
         "chain": "ACF 入门", "chain_order": 0
       },
       {
@@ -73,10 +73,11 @@
         "difficulty": 2,
         "description": "创建字段组「服务列表」，添加一个 Repeater 字段「服务项」（services），子字段：文本「服务名称」（service_name）和文本区域「服务描述」（service_desc）。位置规则设为页面",
         "verify": [
+          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'advanced-custom-fields-pro') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes", "label": "ACF PRO 已激活"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('services'); echo $f ? $f['type'] : 'no';", "expected_output": "repeater"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('services'); echo count($f['sub_fields']) >= 2 ? 'yes' : 'no';", "expected_output": "yes"}
         ],
-        "hints": ["ACF → 新增字段组 → 添加 Repeater 字段 → 在 Repeater 内添加子字段"],
+        "hints": ["需要 ACF PRO 才有 Repeater 字段类型。ACF → 新增字段组 → 添加 Repeater 字段 → 在 Repeater 内添加子字段"],
         "on_pass_note": "Repeater 让编辑者动态添加/删除/排序行。数据库中每行存为独立 meta：services_0_service_name、services_1_service_name...\n\nAgent 协作提示：让 agent 查询 Repeater 数据时，告诉它字段名和结构，agent 用 have_rows() 遍历。"
       },
       {
@@ -94,10 +95,11 @@
         "difficulty": 3,
         "description": "创建字段组「灵活内容块」，添加 Flexible Content 字段「内容模块」（content_modules），定义两种布局：「文字模块」（text_block，含文本区域）和「图文模块」（image_text，含图片+文本区域）",
         "verify": [
+          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'advanced-custom-fields-pro') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes", "label": "ACF PRO 已激活"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('content_modules'); echo $f ? $f['type'] : 'no';", "expected_output": "flexible_content"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('content_modules'); $layouts = wp_list_pluck($f['layouts'], 'name'); echo in_array('text_block', $layouts) && in_array('image_text', $layouts) ? 'yes' : 'no';", "expected_output": "yes"}
         ],
-        "hints": ["ACF → 新增字段组 → Flexible Content 字段 → 添加两种 Layout → 每种 Layout 内添加子字段"],
+        "hints": ["需要 ACF PRO 才有 Flexible Content 字段类型。ACF → 新增字段组 → Flexible Content 字段 → 添加两种 Layout → 每种 Layout 内添加子字段"],
         "on_pass_note": "Flexible Content 是 ACF 的页面构建器级功能。编辑者从预定义布局中选择并自由排列——轻量级 Page Builder。和 Repeater 的区别：Repeater 每行结构相同，Flexible Content 每行可以是不同布局。"
       }
     ]
@@ -110,7 +112,9 @@
         "difficulty": 2,
         "description": "修改「页面附加信息」字段组的位置规则，让它只在「关于我们」和「联系我们」两个页面上显示",
         "verify": [
-          {"type": "wp_eval", "php_code": "$groups = acf_get_field_groups(['post_id' => get_page_by_title('关于我们', OBJECT, 'page')->ID]); $found = false; foreach($groups as $g) { if(strpos($g['title'], '页面附加信息') !== false) $found = true; } echo $found ? 'yes' : 'no';", "expected_output": "yes"}
+          {"type": "wp_eval", "php_code": "$groups = acf_get_field_groups(['post_id' => get_page_by_title('关于我们', OBJECT, 'page')->ID]); $found = false; foreach($groups as $g) { if(strpos($g['title'], '页面附加信息') !== false) $found = true; } echo $found ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$groups = acf_get_field_groups(['post_id' => get_page_by_title('联系我们', OBJECT, 'page')->ID]); $found = false; foreach($groups as $g) { if(strpos($g['title'], '页面附加信息') !== false) $found = true; } echo $found ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$groups = acf_get_field_groups(['post_id' => get_page_by_title('服务项目', OBJECT, 'page')->ID]); $found = false; foreach($groups as $g) { if(strpos($g['title'], '页面附加信息') !== false) $found = true; } echo $found ? 'yes' : 'no';", "expected_output": "no"}
         ],
         "hints": ["ACF → 编辑字段组 → 位置规则改为「页面 等于 关于我们」OR「页面 等于 联系我们」"],
         "on_pass_note": "位置规则支持 AND（同组内多条件都满足）和 OR（多个条件组任一满足）。精确的位置规则让后台保持整洁——编辑者只看到相关字段。"
@@ -162,9 +166,10 @@
         "difficulty": 3,
         "description": "用 ACF 注册一个选项页面「站点设置」（需要在 functions.php 中添加代码——可以让 AI 帮你写）",
         "verify": [
-          {"type": "file_contains", "path": "wp-content/themes/twentytwentyfive/functions.php", "pattern": "acf_add_options_page"}
+          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'advanced-custom-fields-pro') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes", "label": "ACF PRO 已激活"},
+          {"type": "wp_eval", "php_code": "$f = get_stylesheet_directory() . '/functions.php'; echo file_exists($f) && strpos(file_get_contents($f), 'acf_add_options_page') !== false ? 'yes' : 'no';", "expected_output": "yes"}
         ],
-        "hints": ["需要在 functions.php 中调用 acf_add_options_page()。让 AI 帮你写代码"],
+        "hints": ["需要 ACF PRO 才有 Options Page 功能。在当前主题的 functions.php 中调用 acf_add_options_page()。让 AI 帮你写代码"],
         "on_pass_note": "Options Page 数据存在 wp_options 表中。常见用途：公司电话/地址、社交链接、页脚内容、全站公告。\n\nAgent 协作提示：让 agent 在 functions.php 中添加 acf_add_options_page 调用。"
       },
       {
@@ -215,7 +220,7 @@
         "difficulty": 3,
         "description": "在当前主题目录下创建 acf-json 文件夹，启用 ACF 本地 JSON 同步。然后编辑任意字段组并保存，确认 acf-json/ 中生成了 JSON 文件",
         "verify": [
-          {"type": "file_exists", "path": "wp-content/themes/twentytwentyfive/acf-json"},
+          {"type": "wp_eval", "php_code": "$dir = get_stylesheet_directory() . '/acf-json'; echo is_dir($dir) ? 'yes' : 'no';", "expected_output": "yes"},
           {"type": "wp_eval", "php_code": "$dir = get_stylesheet_directory() . '/acf-json'; $files = glob($dir . '/*.json'); echo count($files) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
         ],
         "hints": ["让 AI 帮你创建 acf-json 目录 → 编辑任意字段组 → 更新 → 检查目录"],

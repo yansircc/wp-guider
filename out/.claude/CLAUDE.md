@@ -31,7 +31,7 @@
 | `.claude/scripts/wp-train checkpoint restore <name>` | 还原到指定快照 |
 | `.claude/scripts/wp-train checkpoint list` | 列出所有快照 |
 
-题库: `.claude/references/task-bank.json`
+题库: `.claude/references/tasks/` (按 Layer 分文件)
 数据库: `~/.locwp/sites/wp-train/training/wp-guider.db`
 
 ## 故障注入（Layer 8 排障训练）

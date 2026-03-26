@@ -257,12 +257,14 @@ func pickLeastAttempted(db *sql.DB, topic string, tasks []Task) *Task {
 	}
 
 	// For chained tasks: find the first not-yet-passed task in chain order
+	allChainsPassed := true
 	for _, chainTasks := range chains {
 		sort.Slice(chainTasks, func(i, j int) bool {
 			return chainTasks[i].ChainOrder < chainTasks[j].ChainOrder
 		})
 		for i := range chainTasks {
 			if !passed[chainTasks[i].ID] {
+				allChainsPassed = false
 				t := chainTasks[i]
 				return &t
 			}
@@ -278,6 +280,18 @@ func pickLeastAttempted(db *sql.DB, topic string, tasks []Task) *Task {
 	if len(sorted) > 0 {
 		return &sorted[0]
 	}
+
+	// All chains completed and no unchained tasks: pick least attempted
+	// from all tasks for mastery review.
+	if allChainsPassed && len(chains) > 0 {
+		all := make([]Task, len(tasks))
+		copy(all, tasks)
+		sort.Slice(all, func(i, j int) bool {
+			return counts[all[i].ID] < counts[all[j].ID]
+		})
+		return &all[0]
+	}
+
 	return nil
 }
 
