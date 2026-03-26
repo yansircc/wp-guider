@@ -59,9 +59,12 @@ func findClaudeDir() string {
 		}
 	}
 
-	// Fallback: cwd/.claude
+	// Fallback: cwd/.claude or cwd/out/.claude (dev mode)
 	cwd, _ := os.Getwd()
 	if d := filepath.Join(cwd, ".claude"); isTaskBankDir(d) {
+		return d
+	}
+	if d := filepath.Join(cwd, "out", ".claude"); isTaskBankDir(d) {
 		return d
 	}
 	return cwd

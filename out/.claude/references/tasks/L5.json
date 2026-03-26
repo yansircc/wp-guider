@@ -22,9 +22,9 @@
         "difficulty": 1,
         "description": "安装并激活「Advanced Custom Fields PRO」插件。后续任务需要 Repeater、Flexible Content、Options Page 等 PRO 功能，免费版不包含这些",
         "verify": [
-          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'advanced-custom-fields') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'advanced-custom-fields-pro') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
         ],
-        "hints": ["安装 ACF PRO：从 advancedcustomfields.com 下载 → 插件 → 上传插件 → 安装 → 激活。免费版无法完成后续 Repeater/Flexible Content/Options Page 任务"],
+        "hints": ["安装 ACF PRO：从 advancedcustomfields.com 下载 PRO 版 → 插件 → 上传插件 → 安装 → 激活。免费版（advanced-custom-fields）无法完成后续 Repeater/Flexible Content/Options Page 任务"],
         "on_pass_note": "ACF 是 WordPress 最重要的内容建模插件。PRO 版额外提供 Repeater（重复器）、Flexible Content（弹性内容）、Options Page（选项页面）、Gallery（画廊）等高级字段类型。后续任务会用到这些功能。",
         "chain": "ACF 入门", "chain_order": 0
       },
