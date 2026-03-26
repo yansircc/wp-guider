@@ -572,5 +572,330 @@
         "on_pass_note": "批量停用插件是排障的核心技能。当站点出问题时，先停用所有插件看问题是否消失，再逐个激活找出冲突的那个——这就是「二分法排障」。active_plugins 是一个序列化数组，停用所有插件后它变成空数组 a:0:{}。"
       }
     ]
+  },
+  "L3.1": {
+    "name": "SEO 基础",
+    "tasks": [
+      {
+        "id": "L3.1-a",
+        "difficulty": 1,
+        "description": "安装并激活「Yoast SEO」插件",
+        "verify": [
+          {"type": "plugin_active", "plugin": "wordpress-seo"}
+        ],
+        "hints": ["插件 → 安装插件 → 搜索 Yoast SEO → 安装 → 激活"],
+        "on_pass_note": "Yoast SEO 是最流行的 WordPress SEO 插件（1200 万+活跃安装）。它在每篇内容的编辑界面下方添加 SEO 分析面板。插件的核心价值不是「自动优化 SEO」，而是「提供 SEO 检查清单」——真正的优化还是靠你的内容质量。\n\nAgent 协作提示：告诉 agent 你用的是哪个 SEO 插件（Yoast/RankMath/All in One），因为它们存储 meta 数据的方式不同。"
+      },
+      {
+        "id": "L3.1-b",
+        "difficulty": 2,
+        "description": "编辑「关于我们」页面，在 Yoast SEO 面板中设置 SEO 标题为「关于我们 - 教练训练站」，Meta 描述为「了解我们的团队和使命」",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo get_post_meta($p->ID, '_yoast_wpseo_title', true);", "expected_output": "关于我们 - 教练训练站"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo get_post_meta($p->ID, '_yoast_wpseo_metadesc', true);", "expected_output": "了解我们的团队和使命"}
+        ],
+        "hints": ["编辑「关于我们」→ 页面底部 Yoast SEO 面板 → 编辑代码段（Snippet）→ SEO 标题 + Meta 描述"],
+        "on_pass_note": "SEO 标题出现在搜索结果和浏览器标签中。Meta 描述出现在搜索结果摘要中。两者都存在 wp_postmeta 表（_yoast_wpseo_title / _yoast_wpseo_metadesc）。Google 会根据搜索意图决定是否使用你设置的 meta description——但设置了总比没设好。"
+      },
+      {
+        "id": "L3.1-c",
+        "difficulty": 2,
+        "description": "检查「首页」的 URL 别名（slug），确保是 home 而不是中文编码。再检查「联系我们」的 slug，改为 contact",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo $p->post_name;", "expected_output": "home"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo $p->post_name;", "expected_output": "contact"}
+        ],
+        "hints": ["编辑页面 → 右侧面板 → 链接/URL → 修改别名"],
+        "on_pass_note": "slug 优化是 SEO 的基础功。原则：用英文、小写、短词、用连字符分隔。避免中文编码（%E9%A6%96%E9%A1%B5）——虽然 Google 能处理，但英文 slug 在分享和打印时更友好。\n\nAgent 协作提示：描述 SEO 问题时，提供当前 slug 和目标 slug，agent 可以用 wp-cli 批量修改。"
+      },
+      {
+        "id": "L3.1-d",
+        "difficulty": 2,
+        "description": "编辑「关于我们」页面的内容，确保页面中只有一个 H1（即页面标题），其余小标题都用 H2 或 H3",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); $c = $p->post_content; $h1_count = preg_match_all('/<h1|wp:heading {\"level\":1/', $c); echo $h1_count <= 1 ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); $c = $p->post_content; echo (strpos($c, 'wp:heading') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑页面 → 检查所有 Heading 区块 → 确保级别是 H2 或 H3，不要用 H1"],
+        "on_pass_note": "H1 是页面的唯一主标题，WordPress 自动用页面标题作为 H1。内容中的小标题应该用 H2（大节）和 H3（小节），形成清晰的层级。搜索引擎通过标题层级理解页面结构——多个 H1 会混淆语义。"
+      },
+      {
+        "id": "L3.1-e",
+        "difficulty": 3,
+        "description": "在 Yoast SEO 设置中，确认 XML Sitemap 功能已开启，然后访问站点的 sitemap 地址确认可以访问",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$opts = get_option('wpseo'); echo isset($opts['enable_xml_sitemap']) ? ($opts['enable_xml_sitemap'] ? 'yes' : 'no') : 'yes';", "expected_output": "yes"}
+        ],
+        "hints": ["Yoast SEO → 设置 → 站点功能 → XML 站点地图 → 确认开启", "站点地图地址通常是 /sitemap_index.xml"],
+        "on_pass_note": "XML Sitemap 告诉搜索引擎你站点有哪些页面、最后更新时间、更新频率。Yoast 自动生成并维护 sitemap。提交 sitemap 到 Google Search Console 可以加速索引。\n\nAgent 协作提示：如果 sitemap 有问题，告诉 agent SEO 插件名称和 sitemap URL，agent 可以用 wp-cli 检查配置。"
+      }
+    ]
+  },
+  "L3.2": {
+    "name": "内容排版规范",
+    "tasks": [
+      {
+        "id": "L3.2-a",
+        "difficulty": 2,
+        "description": "编辑「首页」内容，按照以下结构重新排版：1) Cover 区块作为 hero 2) 一段欢迎文字（至少 50 字）3) 一个 H2 标题 4) 三列 Columns 布局展示三个特点 5) 一个 CTA 按钮",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); $c = $p->post_content; $checks = [strpos($c,'wp:cover')!==false, strpos($c,'wp:columns')!==false, strpos($c,'wp:buttons')!==false, strpos($c,'wp:heading')!==false]; echo array_sum($checks) >= 4 ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo mb_strlen(strip_tags($p->post_content)) >= 50 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["按顺序添加区块：Cover → Paragraph → Heading(H2) → Columns(3列) → Buttons"],
+        "on_pass_note": "这是一个典型的着陆页结构：Hero → 价值主张 → 特点展示 → CTA。这不是 WordPress 特有的——几乎所有专业网站都遵循这个模式。区块编辑器让你不用写代码就能实现这个结构。",
+        "chain": "首页改造", "chain_order": 0
+      },
+      {
+        "id": "L3.2-b",
+        "difficulty": 2,
+        "description": "在「关于我们」页面中添加一个引用（Quote）区块，写一句公司理念。再添加一个 Gallery 或多张图片展示团队",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:quote') !== false || strpos($p->post_content, 'wp:pullquote') !== false) ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:gallery') !== false || substr_count($p->post_content, 'wp:image') >= 2) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["+ Quote 区块（或 Pullquote）写理念", "上传 2-3 张图片 → + Gallery 区块或多个 Image 区块"],
+        "on_pass_note": "Quote 和 Pullquote 的区别：Quote 是行内引用（通常较短），Pullquote 是大字强调引用（通常用于杂志风格排版）。Gallery 区块自动创建网格布局，比逐个 Image 区块更整齐。"
+      },
+      {
+        "id": "L3.2-c",
+        "difficulty": 2,
+        "description": "编辑「联系我们」页面，添加：一个 H2 标题「联系方式」、一个列表（电话/邮箱/地址）、一个 H2 标题「营业时间」、一个表格（Table）区块列出周一到周五的营业时间",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); $c = $p->post_content; echo (strpos($c, '联系方式') !== false && strpos($c, '营业时间') !== false) ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:table') !== false) ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:list') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["H2「联系方式」→ List 区块（三行）→ H2「营业时间」→ Table 区块（2 列 5 行）"],
+        "on_pass_note": "Table 区块适合结构化数据（营业时间、价格表、对比表）。注意移动端 Table 可能需要横向滚动——对于超过 3 列的表格，考虑用其他布局方式。"
+      },
+      {
+        "id": "L3.2-d",
+        "difficulty": 3,
+        "description": "为「首页」的三个 Columns 中的每一列都添加一个图片、一个 H3 标题和一段说明文字（模拟「我们的服务」板块）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo substr_count($p->post_content, 'wp:column --') >= 3 ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo substr_count($p->post_content, 'wp:image') >= 3 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑首页 → 找到 Columns → 每列中依次添加 Image + Heading(H3) + Paragraph"],
+        "on_pass_note": "图片 + 标题 + 文字的三列布局是最经典的「服务/特点」展示模式。专业设计的关键：三列保持视觉一致（图片同尺寸、标题同长度、文字同段数）。不一致比缺内容更糟糕。",
+        "chain": "首页改造", "chain_order": 1
+      }
+    ]
+  },
+  "L3.3": {
+    "name": "备份与恢复",
+    "tasks": [
+      {
+        "id": "L3.3-a",
+        "difficulty": 2,
+        "description": "使用 WordPress 自带的导出功能（Tools → Export），导出「所有内容」",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$uploads = wp_upload_dir(); $export_dir = $uploads['basedir']; $files = glob($export_dir . '/*.xml'); echo count($files) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["工具 → 导出 → 选择「所有内容」→ 下载导出文件"],
+        "on_pass_note": "WordPress 导出的 WXR（WordPress eXtended RSS）文件是 XML 格式，包含所有文章、页面、评论、分类、标签和自定义字段。但不包含：主题设置、插件配置、媒体文件本身（只包含 URL 引用）。这意味着 WXR 是内容级备份，不是完整站点备份。\n\nAgent 协作提示：告诉 agent 是需要「内容导出」还是「完整备份（文件+数据库）」，两者的操作完全不同。"
+      },
+      {
+        "id": "L3.3-b",
+        "difficulty": 2,
+        "description": "安装并激活 WordPress Importer 插件（工具 → 导入 → WordPress → 安装），确认导入器就绪",
+        "verify": [
+          {"type": "plugin_active", "plugin": "wordpress-importer"}
+        ],
+        "hints": ["工具 → 导入 → WordPress 一栏 → 现在安装 → 激活"],
+        "on_pass_note": "WordPress Importer 是官方的导入插件，但默认不预装——需要手动安装。它可以导入 WXR 文件中的所有内容，并在导入时选择把内容归属给哪个用户。大文件导入可能超时，此时需要用 wp-cli: `wp import file.xml --authors=mapping`。"
+      },
+      {
+        "id": "L3.3-c",
+        "difficulty": 3,
+        "description": "做一次完整的备份恢复演练：1) 记住当前有多少篇已发布的文章和页面 2) 删除所有文章（移至回收站并清空） 3) 确认文章数变为 0 4) 然后用之前导出的 WXR 文件通过「工具 → 导入」恢复",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => -1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["文章 → 全选 → 批量操作 → 移至回收站 → 回收站 → 清空", "工具 → 导入 → WordPress → 上传 WXR 文件 → 导入"],
+        "on_pass_note": "这个「删除→恢复」演练非常重要。真实场景中你可能面对：客户误删内容、站点被黑需要恢复、迁移到新服务器。掌握了导出/导入流程，你就有了最基本的灾难恢复能力。更完整的备份方案需要插件（UpdraftPlus），因为 WXR 不包含主题/插件/媒体文件。"
+      }
+    ]
+  },
+  "L3.4": {
+    "name": "响应式与预览",
+    "tasks": [
+      {
+        "id": "L3.4-a",
+        "difficulty": 1,
+        "description": "在编辑「首页」时，使用编辑器右上角的预览功能，切换到「平板」和「手机」预览模式查看效果",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'yes';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑页面 → 右上角预览按钮（眼睛图标旁）→ 选择 Tablet / Mobile"],
+        "on_pass_note": "WordPress 编辑器内置三种预览：Desktop、Tablet、Mobile。但这只是宽度模拟——不能完全代替真实设备测试。建议额外用浏览器的开发者工具（F12 → 设备模拟）来测试，因为那里可以模拟更多设备和触摸交互。\n\nAgent 协作提示：描述布局问题时，说清楚在哪个设备宽度下出现问题（如「在 375px 宽度下 Columns 没有堆叠」）。"
+      },
+      {
+        "id": "L3.4-b",
+        "difficulty": 2,
+        "description": "确认站点主题的 viewport meta 标签已正确设置（这是响应式的基础）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "ob_start(); wp_head(); $head = ob_get_clean(); echo (strpos($head, 'viewport') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["在浏览器中查看站点源代码（右键 → 查看页面源代码），搜索 viewport"],
+        "on_pass_note": "viewport meta 标签（<meta name='viewport' content='width=device-width, initial-scale=1'>）告诉移动浏览器按设备宽度渲染页面。没有它，手机会按桌面宽度缩放整个页面。现代 WordPress 主题都会自动添加这个标签——但有些老主题或自定义主题可能遗漏。"
+      },
+      {
+        "id": "L3.4-c",
+        "difficulty": 2,
+        "description": "编辑一篇文章，添加一张图片，确认图片使用了响应式属性（在前台查看源代码，检查 img 标签是否有 srcset 属性）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['numberposts'=>1]); if($posts) { $content = apply_filters('the_content', $posts[0]->post_content); echo (strpos($content, 'srcset') !== false) ? 'yes' : 'no'; } else { echo 'no'; }", "expected_output": "yes"}
+        ],
+        "hints": ["编辑文章 → 插入图片 → 发布 → 前台查看 → 右键图片 → 检查元素 → 看 srcset"],
+        "on_pass_note": "WordPress 4.4+ 自动为上传的图片生成 srcset 属性，列出不同尺寸的图片 URL。浏览器根据屏幕宽度和分辨率自动选择最合适的尺寸——手机不会下载桌面版的大图。这是零配置的性能优化。"
+      }
+    ]
+  },
+  "L3.5": {
+    "name": "客户建站项目",
+    "tasks": [
+      {
+        "id": "L3.5-a",
+        "difficulty": 2,
+        "description": "客户 brief：「我开了一家咖啡馆，需要一个简单的网站。」请创建以下页面并发布：「首页」（如果已有则跳过）、「我们的故事」、「菜单」、「联系方式」",
+        "verify": [
+          {"type": "post_exists", "post_type": "page", "title": "我们的故事", "status": "publish"},
+          {"type": "post_exists", "post_type": "page", "title": "菜单", "status": "publish"},
+          {"type": "post_exists", "post_type": "page", "title": "联系方式", "status": "publish"}
+        ],
+        "hints": ["根据客户需求规划页面结构，然后逐个创建"],
+        "on_pass_note": "拿到客户 brief 后第一步是规划页面结构，而不是直接动手。好的规划：首页（吸引）→ 故事（建立信任）→ 菜单（核心内容）→ 联系（转化）。这个四页结构适用于大多数小型企业站。",
+        "chain": "咖啡馆官网", "chain_order": 0
+      },
+      {
+        "id": "L3.5-b",
+        "difficulty": 2,
+        "description": "创建导航菜单「咖啡馆导航」，按顺序包含：首页、我们的故事、菜单、联系方式",
+        "verify": [
+          {"type": "menu_exists", "name": "咖啡馆导航"},
+          {"type": "menu_has_items", "menu": "咖啡馆导航", "min_count": 4}
+        ],
+        "hints": ["外观 → 菜单 → 创建新菜单 → 添加四个页面 → 保存"],
+        "on_pass_note": "菜单顺序反映用户旅程：首先看到品牌（首页）→ 了解故事（建立情感）→ 看产品（菜单）→ 行动（联系）。这不是随便排的——是转化漏斗。",
+        "chain": "咖啡馆官网", "chain_order": 1
+      },
+      {
+        "id": "L3.5-c",
+        "difficulty": 2,
+        "description": "给「我们的故事」页面添加内容：一个 H2 标题、至少 100 字的段落（编一个咖啡馆故事）、一张图片、一个引用区块（写一句咖啡馆的座右铭）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('我们的故事', OBJECT, 'page'); $c = $p->post_content; echo mb_strlen(strip_tags($c)) >= 100 ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('我们的故事', OBJECT, 'page'); $c = $p->post_content; echo (strpos($c, 'wp:image') !== false || strpos($c, '<img') !== false) ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('我们的故事', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:quote') !== false || strpos($p->post_content, 'wp:pullquote') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑页面 → 按顺序添加区块 → 内容可以虚构但要像真的"],
+        "on_pass_note": "「关于我们」页面是客户最常低估的页面——它实际上是建立信任的关键。好的故事页包含：创始故事（情感连接）、使命/价值观（品牌定位）、团队/人物照片（真实感）。",
+        "chain": "咖啡馆官网", "chain_order": 2
+      },
+      {
+        "id": "L3.5-d",
+        "difficulty": 3,
+        "description": "设置所有页面的 SEO：每个页面都设置英文 slug（home/story/menu/contact）和 Yoast SEO meta description（每个至少 20 字）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$slugs = ['home','story','menu','contact']; $ok = true; foreach($slugs as $s) { $p = get_page_by_path($s); if(!$p) $ok = false; } echo $ok ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$pages = get_pages(); $ok = true; foreach($pages as $p) { $meta = get_post_meta($p->ID, '_yoast_wpseo_metadesc', true); if(empty($meta) || mb_strlen($meta) < 20) $ok = false; } echo $ok ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["逐个编辑每个页面 → 修改 slug → 在 Yoast 面板填写 meta description"],
+        "on_pass_note": "SEO 不是建完站再做的「额外步骤」——它应该在建站过程中同步完成。每个页面的 slug + title + meta description 是 SEO 三件套。专业建站师交付时这些都已就绪，不需要客户再费心。\n\nAgent 协作提示：让 agent 批量检查 SEO 状态时，说「检查所有页面的 slug、SEO 标题和 meta description 是否都已设置」。",
+        "chain": "咖啡馆官网", "chain_order": 3
+      },
+      {
+        "id": "L3.5-e",
+        "difficulty": 3,
+        "description": "最终检查：确保首页设为静态首页、导航菜单完整（4 项）、所有页面都有内容（每页至少 50 字）、站点标题已改为「Bean & Brew 咖啡馆」",
+        "verify": [
+          {"type": "option_equals", "key": "blogname", "expected": "Bean & Brew 咖啡馆"},
+          {"type": "option_equals", "key": "show_on_front", "expected": "page"},
+          {"type": "menu_has_items", "menu": "咖啡馆导航", "min_count": 4},
+          {"type": "wp_eval", "php_code": "$pages = get_pages(['post_status'=>'publish']); $ok = true; foreach($pages as $p) { if(mb_strlen(strip_tags($p->post_content)) < 50) $ok = false; } echo $ok ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["设置 → 常规 → 站点标题", "设置 → 阅读 → 静态首页", "检查每个页面内容是否充实"],
+        "on_pass_note": "交付前 checklist 是专业和业余的分水岭。标准 checklist：① 所有页面有内容 ② SEO 已配置 ③ 导航完整 ④ 站点标题/图标已设 ⑤ 移动端检查通过 ⑥ 无断裂链接 ⑦ 备份已做。养成这个习惯，你的交付质量会超过 90% 的建站者。",
+        "chain": "咖啡馆官网", "chain_order": 4
+      }
+    ]
+  },
+  "L4.1": {
+    "name": "主题选择与评估",
+    "tasks": [
+      {
+        "id": "L4.1-a",
+        "difficulty": 2,
+        "description": "在 WordPress 主题目录中搜索一个评分 4 星以上、活跃安装 10000+ 的主题并安装（不激活）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$themes = wp_get_themes(); echo count($themes) >= 4 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["外观 → 主题 → 添加新主题 → 用筛选器过滤"],
+        "on_pass_note": "选主题的红线：最近 6 个月未更新、兼容性低于当前 WP 版本、评分低于 4 星、无支持论坛活跃度。"
+      }
+    ]
+  },
+  "L5.1": {
+    "name": "插件选型方法论",
+    "tasks": [
+      {
+        "id": "L5.1-a",
+        "difficulty": 2,
+        "description": "在插件目录中找到一个「联系表单」插件，要求：活跃安装 100 万+、最近 3 个月内有更新、评分 4 星+。安装并激活它",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$plugins = get_plugins(); foreach($plugins as $p) { if(stripos($p['Name'], 'form') !== false || stripos($p['Name'], 'contact') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["插件 → 安装插件 → 搜索 contact form → 查看详情检查安装数和更新日期"],
+        "on_pass_note": "插件选型五看：① 活跃安装数（>10 万较安全）② 最近更新（<3 个月）③ 兼容 WP 版本 ④ 评分和评价内容 ⑤ 支持论坛响应速度。"
+      }
+    ]
+  },
+  "L6.1": {
+    "name": "文件结构",
+    "tasks": [
+      {
+        "id": "L6.1-a",
+        "difficulty": 2,
+        "description": "找到 wp-config.php 文件，告诉 AI 这个站点的数据库名称（DB_NAME）是什么",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo DB_NAME;", "expected_output": "wp_wp_train"}
+        ],
+        "hints": ["wp-config.php 在 WordPress 根目录，可以用 locwp 的路径找到"],
+        "on_pass_note": "wp-config.php 是 WordPress 最重要的配置文件。里面有数据库连接信息、安全密钥、调试开关等。修改前一定要备份——改错了整个站点都打不开。\n\nAgent 协作提示：告诉 agent「检查 wp-config.php 中的 DB_NAME」比说「数据库连接有问题」精确得多。"
+      }
+    ]
+  },
+  "L7.1": {
+    "name": "备份策略",
+    "tasks": [
+      {
+        "id": "L7.1-a",
+        "difficulty": 2,
+        "description": "安装 UpdraftPlus 备份插件并进行一次手动完整备份（数据库 + 文件）",
+        "verify": [
+          {"type": "plugin_active", "plugin": "updraftplus"}
+        ],
+        "hints": ["插件 → 安装插件 → 搜索 UpdraftPlus → 安装 → 激活 → 设置 → 立即备份"],
+        "on_pass_note": "3-2-1 法则：3 份备份、2 种介质、1 份异地。UpdraftPlus 支持自动备份到 Google Drive/Dropbox/S3 等云端。"
+      }
+    ]
+  },
+  "L8.1": {
+    "name": "调试工具",
+    "tasks": [
+      {
+        "id": "L8.1-a",
+        "difficulty": 2,
+        "description": "在 wp-config.php 中开启 WP_DEBUG 和 WP_DEBUG_LOG，然后查看 debug.log 文件是否生成",
+        "verify": [
+          {"type": "config_equals", "key": "WP_DEBUG", "expected": "1"},
+          {"type": "config_equals", "key": "WP_DEBUG_LOG", "expected": "1"}
+        ],
+        "hints": ["可以让 agent 帮你修改 wp-config.php，或者用 wp-cli: wp config set WP_DEBUG true --raw"],
+        "on_pass_note": "WP_DEBUG 是排障的第一步。开启后 WordPress 会显示 PHP 警告和错误。WP_DEBUG_LOG 把错误写入 wp-content/debug.log 而不是显示在页面上。生产环境一定要关闭 WP_DEBUG_DISPLAY，只用 LOG。\n\nAgent 协作提示：排障时告诉 agent「我开了 WP_DEBUG_LOG，debug.log 最后几行是...」——这是 agent 能最快定位问题的信息。"
+      }
+    ]
   }
 }
