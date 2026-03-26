@@ -118,7 +118,8 @@
           {"type": "post_exists", "post_type": "page", "title": "联系我们", "status": "publish"}
         ],
         "hints": ["页面 → 新建页面 → 输入标题 → 发布"],
-        "on_pass_note": "在 WordPress 中，页面（Page）和文章（Post）都存储在 wp_posts 表中，通过 post_type 字段区分。页面适合静态内容（关于我们、联系方式），文章适合时间线内容（新闻、博客）。"
+        "on_pass_note": "在 WordPress 中，页面（Page）和文章（Post）都存储在 wp_posts 表中，通过 post_type 字段区分。页面适合静态内容（关于我们、联系方式），文章适合时间线内容（新闻、博客）。",
+        "chain": "企业官网", "chain_order": 0
       },
       {
         "id": "L2.1-b",
@@ -129,7 +130,8 @@
           {"type": "wp_eval", "php_code": "$pid = get_option('page_on_front'); $p = get_post($pid); echo $p ? $p->post_title : '';", "expected_output": "首页"}
         ],
         "hints": ["设置 → 阅读 → 您的主页显示 → 一个静态页面 → 主页选择「首页」"],
-        "on_pass_note": "WordPress 默认显示最新文章列表作为首页。改为静态页面后，show_on_front 变为 'page'，page_on_front 存储首页的 post ID。"
+        "on_pass_note": "WordPress 默认显示最新文章列表作为首页。改为静态页面后，show_on_front 变为 'page'，page_on_front 存储首页的 post ID。",
+        "chain": "企业官网", "chain_order": 1
       },
       {
         "id": "L2.1-c",
@@ -140,7 +142,8 @@
           {"type": "wp_eval", "php_code": "$p = get_page_by_title('服务项目', OBJECT, 'page'); $parent = get_post($p->post_parent); echo $parent ? $parent->post_title : '';", "expected_output": "关于我们"}
         ],
         "hints": ["编辑「服务项目」→ 右侧面板 → 页面属性 → 父级页面 → 选择「关于我们」"],
-        "on_pass_note": "页面支持层级结构（post_parent 字段），URL 会变成 /about-us/services/ 这样的嵌套路径。这对组织大型网站的信息架构很有用。"
+        "on_pass_note": "页面支持层级结构（post_parent 字段），URL 会变成 /about-us/services/ 这样的嵌套路径。这对组织大型网站的信息架构很有用。",
+        "chain": "企业官网", "chain_order": 2
       }
     ]
   },
