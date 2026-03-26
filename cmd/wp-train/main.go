@@ -29,6 +29,10 @@ func main() {
 		cmdSnapshot()
 	case "history":
 		cmdHistory(args)
+	case "inject":
+		cmdInject(args)
+	case "checkpoint":
+		cmdCheckpoint(args)
 	case "explain":
 		if len(args) < 1 {
 			fatal("usage: wp-train explain <topic>")
@@ -51,6 +55,8 @@ Commands:
   progress            Show formatted progress
   snapshot            Full site state snapshot (JSON)
   history [-n 10]     Recent attempt history (JSON)
+  inject [type]       Inject a fault for troubleshooting training
+  checkpoint <cmd>    Save/restore/list site checkpoints
   explain <topic>     Explain a topic (e.g. L1.1)`)
 }
 

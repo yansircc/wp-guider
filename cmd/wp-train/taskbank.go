@@ -21,6 +21,8 @@ type Task struct {
 	Verify      []map[string]any `json:"verify"`
 	Hints       []string         `json:"hints"`
 	OnPassNote  string           `json:"on_pass_note"`
+	Chain       string           `json:"chain,omitempty"`     // chain name (tasks with same chain are linked)
+	ChainOrder  int              `json:"chain_order,omitempty"` // order within chain (0-based)
 }
 
 func loadTaskBank() TaskBank {

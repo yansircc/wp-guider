@@ -143,6 +143,10 @@ func cmdNext(args []string) {
 		"on_pass_note": selectedTask.OnPassNote,
 		"verify":       selectedTask.Verify,
 	}
+	if selectedTask.Chain != "" {
+		record["chain"] = selectedTask.Chain
+		record["chain_order"] = selectedTask.ChainOrder
+	}
 	recordJSON, _ := json.Marshal(record)
 	db.Exec("INSERT OR REPLACE INTO current_task (id, task_json, issued_at) VALUES (1, ?, ?)", string(recordJSON), nowISO())
 
@@ -173,6 +177,18 @@ func cmdNext(args []string) {
 			"weak_topics":     weakTopics,
 			"task_attempts":   dbGetInt(db, "SELECT COUNT(*) FROM attempts WHERE task_id = ?", selectedTask.ID),
 		},
+	}
+	if selectedTask.Chain != "" {
+		output["chain"] = selectedTask.Chain
+		output["chain_step"] = selectedTask.ChainOrder + 1
+		// Count total steps in this chain
+		total := 0
+		for _, t := range bank[selectedTopic].Tasks {
+			if t.Chain == selectedTask.Chain {
+				total++
+			}
+		}
+		output["chain_total"] = total
 	}
 	jprintln(output)
 }
@@ -207,6 +223,7 @@ func selectNextTask(db *sql.DB, bank TaskBank) (string, *Task) {
 
 func pickLeastAttempted(db *sql.DB, topic string, tasks []Task) *Task {
 	counts := make(map[string]int)
+	passed := make(map[string]bool)
 	rows, _ := db.Query("SELECT task_id, COUNT(*) FROM attempts WHERE topic = ? GROUP BY task_id", topic)
 	if rows != nil {
 		defer rows.Close()
@@ -217,8 +234,44 @@ func pickLeastAttempted(db *sql.DB, topic string, tasks []Task) *Task {
 			counts[id] = c
 		}
 	}
-	sorted := make([]Task, len(tasks))
-	copy(sorted, tasks)
+	// Check which tasks have been passed at least once
+	rows2, _ := db.Query("SELECT DISTINCT task_id FROM attempts WHERE topic = ? AND passed = 1", topic)
+	if rows2 != nil {
+		defer rows2.Close()
+		for rows2.Next() {
+			var id string
+			rows2.Scan(&id)
+			passed[id] = true
+		}
+	}
+
+	// Group by chain
+	chains := make(map[string][]Task)
+	var unchained []Task
+	for _, t := range tasks {
+		if t.Chain != "" {
+			chains[t.Chain] = append(chains[t.Chain], t)
+		} else {
+			unchained = append(unchained, t)
+		}
+	}
+
+	// For chained tasks: find the first not-yet-passed task in chain order
+	for _, chainTasks := range chains {
+		sort.Slice(chainTasks, func(i, j int) bool {
+			return chainTasks[i].ChainOrder < chainTasks[j].ChainOrder
+		})
+		for i := range chainTasks {
+			if !passed[chainTasks[i].ID] {
+				t := chainTasks[i]
+				return &t
+			}
+		}
+	}
+
+	// For unchained tasks: pick least attempted
+	sorted := make([]Task, len(unchained))
+	copy(sorted, unchained)
 	sort.Slice(sorted, func(i, j int) bool {
 		return counts[sorted[i].ID] < counts[sorted[j].ID]
 	})
