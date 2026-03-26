@@ -11,20 +11,42 @@
 
 ## 核心工具
 
-所有操作通过 `scripts/wp-train` 二进制完成，每个操作只需一次调用：
+所有操作通过 `.claude/scripts/wp-train` 二进制完成，每个操作只需一次调用：
 
 | 命令 | 用途 |
 |------|------|
 | `.claude/scripts/wp-train init` | 创建/重置训练站 + git init + SQLite |
 | `.claude/scripts/wp-train next` | 从题库选题，返回任务 JSON |
+| `.claude/scripts/wp-train next --force` | 跳过当前任务，出下一题 |
+| `.claude/scripts/wp-train next --topic=L2.1` | 指定知识点出题 |
 | `.claude/scripts/wp-train verify` | 声明式验证，返回 pass/fail JSON |
-| `.claude/scripts/wp-train progress` | 格式化进度展示 |
+| `.claude/scripts/wp-train progress` | 进度概览 JSON |
 | `.claude/scripts/wp-train status` | 当前状态 JSON |
 | `.claude/scripts/wp-train snapshot` | 站点全量状态 JSON |
+| `.claude/scripts/wp-train history` | 最近尝试记录 JSON |
 | `.claude/scripts/wp-train explain <topic>` | 知识点详情 |
+| `.claude/scripts/wp-train inject` | 列出可用故障类型 |
+| `.claude/scripts/wp-train inject <type>` | 注入故障（自动保存 checkpoint） |
+| `.claude/scripts/wp-train checkpoint save <name>` | 保存站点快照（DB + 文件 + 配置） |
+| `.claude/scripts/wp-train checkpoint restore <name>` | 还原到指定快照 |
+| `.claude/scripts/wp-train checkpoint list` | 列出所有快照 |
 
 题库: `.claude/references/task-bank.json`
 数据库: `~/.locwp/sites/wp-train/training/wp-guider.db`
+
+## 故障注入（Layer 8 排障训练）
+
+7 种故障类型：syntax-error、plugin-conflict、wrong-siteurl、memory-limit、broken-db、broken-htaccess、debug-off。
+
+使用流程：
+1. `inject <type>` 注入故障（自动保存 pre-fault 检查点）
+2. 告诉教练症状，让教练自行诊断并修复
+3. 教练修复后用 `verify` 验证，或教练放弃时用 `checkpoint restore pre-fault` 还原
+
+## 任务链
+
+部分知识点的题目串成项目（chain），强制按顺序出题。`next` 返回的 JSON 中含 `chain`（项目名）、`chain_step`（第几步）、`chain_total`（总步数）。
+向教练展示时标注"这是「XX 项目」第 N/M 步"，让教练看到成果累积。
 
 ## 训练站点约定
 
