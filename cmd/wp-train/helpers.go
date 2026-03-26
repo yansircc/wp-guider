@@ -1,0 +1,118 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+)
+
+const siteName = "wp-train"
+
+var (
+	homeDir      string
+	locwpBase    string
+	wpRoot       string
+	wpContent    string
+	trainingDir  string
+	dbPath       string
+	claudeDir    string // .claude/ directory (product root)
+	taskBankPath string
+)
+
+func init() {
+	homeDir, _ = os.UserHomeDir()
+	locwpBase = filepath.Join(homeDir, ".locwp", "sites", siteName)
+	wpRoot = filepath.Join(locwpBase, "wordpress")
+	wpContent = filepath.Join(wpRoot, "wp-content")
+	trainingDir = filepath.Join(locwpBase, "training")
+	dbPath = filepath.Join(trainingDir, "wp-guider.db")
+
+	// Find .claude/ directory (product root)
+	claudeDir = findClaudeDir()
+	taskBankPath = filepath.Join(claudeDir, "references", "task-bank.json")
+}
+
+func findClaudeDir() string {
+	// Try WP_GUIDER_DIR env first (points to .claude/)
+	if d := os.Getenv("WP_GUIDER_DIR"); d != "" {
+		return d
+	}
+
+	// Binary is at .claude/scripts/wp-train → parent of scripts/ is .claude/
+	exe, err := os.Executable()
+	if err == nil {
+		dir := filepath.Dir(exe)
+		if filepath.Base(dir) == "scripts" {
+			parent := filepath.Dir(dir)
+			if fileExists(filepath.Join(parent, "references", "task-bank.json")) {
+				return parent
+			}
+		}
+		// Walk up looking for references/task-bank.json
+		for d := dir; d != "/"; d = filepath.Dir(d) {
+			if fileExists(filepath.Join(d, "references", "task-bank.json")) {
+				return d
+			}
+		}
+	}
+
+	// Fallback: cwd/.claude
+	cwd, _ := os.Getwd()
+	if d := filepath.Join(cwd, ".claude"); fileExists(filepath.Join(d, "references", "task-bank.json")) {
+		return d
+	}
+	return cwd
+}
+
+// shell runs a command and returns stdout.
+func shell(command string) (string, error) {
+	cmd := exec.Command("sh", "-c", command)
+	out, err := cmd.Output()
+	return strings.TrimSpace(string(out)), err
+}
+
+// shellMust runs a command and panics on failure.
+func shellMust(command string) string {
+	out, err := shell(command)
+	if err != nil {
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			fatal(fmt.Sprintf("command failed: %s\n%s", command, string(exitErr.Stderr)))
+		}
+		fatal(fmt.Sprintf("command failed: %s: %v", command, err))
+	}
+	return out
+}
+
+// wp runs a wp-cli command via locwp.
+func wp(args string) string {
+	return shellMust(fmt.Sprintf("locwp wp %s -- %s", siteName, args))
+}
+
+// wpJSON runs a wp-cli command and parses JSON output.
+func wpJSON(args string) []map[string]any {
+	out := wp(args + " --format=json")
+	if out == "" {
+		return nil
+	}
+	var result []map[string]any
+	if err := json.Unmarshal([]byte(out), &result); err != nil {
+		return nil
+	}
+	return result
+}
+
+// jprintln prints a value as JSON to stdout.
+func jprintln(v any) {
+	enc := json.NewEncoder(os.Stdout)
+	enc.SetIndent("", "  ")
+	enc.SetEscapeHTML(false)
+	enc.Encode(v)
+}
+
+func fileExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
+}
