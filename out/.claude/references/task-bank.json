@@ -1,0 +1,328 @@
+{
+  "L1.1": {
+    "name": "登录与仪表盘",
+    "tasks": [
+      {
+        "id": "L1.1-a",
+        "difficulty": 1,
+        "description": "把站点标题改为「教练训练站」",
+        "verify": [
+          {"type": "option_equals", "key": "blogname", "expected": "教练训练站"}
+        ],
+        "hints": ["设置 → 常规 → 站点标题"],
+        "on_pass_note": "站点标题存在 wp_options 表的 blogname 行。WordPress 的所有设置本质都是 key-value 对。"
+      },
+      {
+        "id": "L1.1-b",
+        "difficulty": 1,
+        "description": "把站点副标题（Tagline）改为「WordPress 从入门到精通」",
+        "verify": [
+          {"type": "option_equals", "key": "blogdescription", "expected": "WordPress 从入门到精通"}
+        ],
+        "hints": ["设置 → 常规 → 副标题"],
+        "on_pass_note": "副标题对应 blogdescription。很多主题会在 header 或 SEO title 中引用它。"
+      },
+      {
+        "id": "L1.1-c",
+        "difficulty": 1,
+        "description": "在仪表盘中找到「站点健康」页面，确认没有严重问题（Critical Issues = 0）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$counts = get_transient('health-check-site-status-result'); echo $counts ? json_decode($counts)->critical : 0;", "expected_output": "0"}
+        ],
+        "hints": ["仪表盘 → 站点健康（或工具 → 站点健康）"],
+        "on_pass_note": "站点健康检查是 WordPress 5.2+ 内置的诊断工具，它会检查 PHP 版本、数据库连接、HTTPS 等关键项。"
+      }
+    ]
+  },
+  "L1.2": {
+    "name": "站点基础设置",
+    "tasks": [
+      {
+        "id": "L1.2-a",
+        "difficulty": 1,
+        "description": "把固定链接结构改为「文章名」（Post name），即 URL 中使用 /%postname%/",
+        "verify": [
+          {"type": "option_equals", "key": "permalink_structure", "expected": "/%postname%/"}
+        ],
+        "hints": ["设置 → 固定链接 → 选择「文章名」"],
+        "on_pass_note": "固定链接对 SEO 非常重要。/%postname%/ 是最常用的结构，URL 简洁且包含关键词。WordPress 通过 .htaccess（Apache）或 Nginx 配置的 rewrite 规则来实现这个功能。"
+      },
+      {
+        "id": "L1.2-b",
+        "difficulty": 1,
+        "description": "把站点时区设置为 Asia/Shanghai（UTC+8）",
+        "verify": [
+          {"type": "option_equals", "key": "timezone_string", "expected": "Asia/Shanghai"}
+        ],
+        "hints": ["设置 → 常规 → 时区 → 选择 Shanghai"],
+        "on_pass_note": "WordPress 内部所有时间都存储为 UTC，timezone_string 只影响前端显示。这是国际化应用的常见做法。"
+      },
+      {
+        "id": "L1.2-c",
+        "difficulty": 1,
+        "description": "把日期格式改为 Y-m-d（如 2026-03-26），时间格式改为 H:i（如 14:30）",
+        "verify": [
+          {"type": "option_equals", "key": "date_format", "expected": "Y-m-d"},
+          {"type": "option_equals", "key": "time_format", "expected": "H:i"}
+        ],
+        "hints": ["设置 → 常规 → 日期格式 / 时间格式，选择或输入自定义格式"],
+        "on_pass_note": "这些格式使用 PHP 的 date() 函数语法。Y=四位年，m=月，d=日，H=24小时制，i=分钟。"
+      }
+    ]
+  },
+  "L1.3": {
+    "name": "用户与个人资料",
+    "tasks": [
+      {
+        "id": "L1.3-a",
+        "difficulty": 1,
+        "description": "把管理员的昵称（Nickname）改为「教练」，并把「公开显示为」也改为「教练」",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$u = get_user_by('login','admin'); echo $u->display_name;", "expected_output": "教练"}
+        ],
+        "hints": ["用户 → 编辑个人资料 → 昵称 + 公开显示为"],
+        "on_pass_note": "WordPress 用户有 user_login（不可改）、nickname、display_name 三个名称。文章作者显示的是 display_name。"
+      },
+      {
+        "id": "L1.3-b",
+        "difficulty": 1,
+        "description": "创建一个新用户：用户名 editor1，角色为「编辑」（Editor），邮箱 editor1@test.com",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$u = get_user_by('login','editor1'); echo $u ? implode(',', $u->roles) : 'not_found';", "expected_output": "editor"}
+        ],
+        "hints": ["用户 → 添加新用户"],
+        "on_pass_note": "WordPress 有 5 个内置角色：管理员(Administrator)、编辑(Editor)、作者(Author)、投稿者(Contributor)、订阅者(Subscriber)。每个角色有不同的权限集合（capabilities）。"
+      },
+      {
+        "id": "L1.3-c",
+        "difficulty": 2,
+        "description": "把默认新用户角色从「订阅者」改为「投稿者」（Contributor）",
+        "verify": [
+          {"type": "option_equals", "key": "default_role", "expected": "contributor"}
+        ],
+        "hints": ["设置 → 常规 → 新用户默认角色"],
+        "on_pass_note": "投稿者可以写文章但不能自行发布，需要编辑或管理员审核。这在多作者网站中是常见的权限设置。"
+      }
+    ]
+  },
+  "L2.1": {
+    "name": "页面管理",
+    "tasks": [
+      {
+        "id": "L2.1-a",
+        "difficulty": 1,
+        "description": "创建三个页面并发布：「首页」「关于我们」「联系我们」",
+        "verify": [
+          {"type": "post_exists", "post_type": "page", "title": "首页", "status": "publish"},
+          {"type": "post_exists", "post_type": "page", "title": "关于我们", "status": "publish"},
+          {"type": "post_exists", "post_type": "page", "title": "联系我们", "status": "publish"}
+        ],
+        "hints": ["页面 → 新建页面 → 输入标题 → 发布"],
+        "on_pass_note": "在 WordPress 中，页面（Page）和文章（Post）都存储在 wp_posts 表中，通过 post_type 字段区分。页面适合静态内容（关于我们、联系方式），文章适合时间线内容（新闻、博客）。"
+      },
+      {
+        "id": "L2.1-b",
+        "difficulty": 1,
+        "description": "把「首页」设置为站点的静态首页（而不是显示最新文章）",
+        "verify": [
+          {"type": "option_equals", "key": "show_on_front", "expected": "page"},
+          {"type": "wp_eval", "php_code": "$pid = get_option('page_on_front'); $p = get_post($pid); echo $p ? $p->post_title : '';", "expected_output": "首页"}
+        ],
+        "hints": ["设置 → 阅读 → 您的主页显示 → 一个静态页面 → 主页选择「首页」"],
+        "on_pass_note": "WordPress 默认显示最新文章列表作为首页。改为静态页面后，show_on_front 变为 'page'，page_on_front 存储首页的 post ID。"
+      },
+      {
+        "id": "L2.1-c",
+        "difficulty": 2,
+        "description": "创建一个页面「服务项目」，把它设为「关于我们」的子页面",
+        "verify": [
+          {"type": "post_exists", "post_type": "page", "title": "服务项目", "status": "publish"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('服务项目', OBJECT, 'page'); $parent = get_post($p->post_parent); echo $parent ? $parent->post_title : '';", "expected_output": "关于我们"}
+        ],
+        "hints": ["编辑「服务项目」→ 右侧面板 → 页面属性 → 父级页面 → 选择「关于我们」"],
+        "on_pass_note": "页面支持层级结构（post_parent 字段），URL 会变成 /about-us/services/ 这样的嵌套路径。这对组织大型网站的信息架构很有用。"
+      }
+    ]
+  },
+  "L2.2": {
+    "name": "文章与分类体系",
+    "tasks": [
+      {
+        "id": "L2.2-a",
+        "difficulty": 1,
+        "description": "创建两个分类：「公司新闻」和「行业动态」",
+        "verify": [
+          {"type": "term_exists", "taxonomy": "category", "name": "公司新闻"},
+          {"type": "term_exists", "taxonomy": "category", "name": "行业动态"}
+        ],
+        "hints": ["文章 → 分类目录 → 添加新分类目录"],
+        "on_pass_note": "分类（Category）是层级结构的分类法（taxonomy），存在 wp_terms 和 wp_term_taxonomy 表中。一篇文章可以属于多个分类。"
+      },
+      {
+        "id": "L2.2-b",
+        "difficulty": 1,
+        "description": "发布一篇文章，标题为「欢迎来到我们的网站」，归类到「公司新闻」",
+        "verify": [
+          {"type": "post_exists", "post_type": "post", "title": "欢迎来到我们的网站", "status": "publish"},
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['title'=>'欢迎来到我们的网站','post_type'=>'post']); $cats = wp_get_post_categories($posts[0]->ID, ['fields'=>'names']); echo implode(',', $cats);", "expected_output": "公司新闻"}
+        ],
+        "hints": ["文章 → 写文章 → 填写标题 → 右侧选择分类 → 发布"],
+        "on_pass_note": "文章和分类的关系存在 wp_term_relationships 表中。WordPress 的分类系统非常灵活，除了内置的 Category 和 Tag，还可以注册自定义分类法。"
+      },
+      {
+        "id": "L2.2-c",
+        "difficulty": 1,
+        "description": "创建两个标签（Tag）：「WordPress」和「教程」",
+        "verify": [
+          {"type": "term_exists", "taxonomy": "post_tag", "name": "WordPress"},
+          {"type": "term_exists", "taxonomy": "post_tag", "name": "教程"}
+        ],
+        "hints": ["文章 → 标签 → 添加新标签"],
+        "on_pass_note": "标签（Tag）和分类的区别：分类是层级结构（可以有子分类），标签是扁平的。分类通常用于主要内容分组，标签用于细粒度标记。"
+      }
+    ]
+  },
+  "L2.3": {
+    "name": "媒体管理",
+    "tasks": [
+      {
+        "id": "L2.3-a",
+        "difficulty": 1,
+        "description": "上传一张图片到媒体库（任意图片都可以）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$q = new WP_Query(['post_type'=>'attachment','post_mime_type'=>'image','posts_per_page'=>1]); echo $q->found_posts > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["媒体 → 添加新文件 → 上传图片"],
+        "on_pass_note": "上传的文件存在 wp-content/uploads/YYYY/MM/ 目录下。WordPress 会自动生成多个尺寸的缩略图（thumbnail、medium、large）。每个附件也是一条 wp_posts 记录，post_type = 'attachment'。"
+      },
+      {
+        "id": "L2.3-b",
+        "difficulty": 2,
+        "description": "把缩略图尺寸改为 300x300，中等尺寸改为 600x600",
+        "verify": [
+          {"type": "option_equals", "key": "thumbnail_size_w", "expected": "300"},
+          {"type": "option_equals", "key": "thumbnail_size_h", "expected": "300"},
+          {"type": "option_equals", "key": "medium_size_w", "expected": "600"},
+          {"type": "option_equals", "key": "medium_size_h", "expected": "600"}
+        ],
+        "hints": ["设置 → 媒体 → 缩略图尺寸 / 中等尺寸"],
+        "on_pass_note": "这些设置只影响新上传的图片。已有图片需要用 Regenerate Thumbnails 插件重新生成。图片尺寸设置对应 thumbnail_size_w/h、medium_size_w/h、large_size_w/h 这些 option。"
+      }
+    ]
+  },
+  "L2.4": {
+    "name": "区块编辑器基础",
+    "tasks": [
+      {
+        "id": "L2.4-a",
+        "difficulty": 1,
+        "description": "编辑「关于我们」页面，添加一个标题区块（Heading）写「我们的故事」，下面添加一个段落区块写至少 20 个字的介绍",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo (strpos($p->post_content, '我们的故事') !== false) ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo mb_strlen(strip_tags($p->post_content)) >= 20 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑「关于我们」→ 点击 + 添加区块 → 搜索 Heading → 输入标题 → 再添加 Paragraph"],
+        "on_pass_note": "区块编辑器（Gutenberg）将内容存储为带有特殊 HTML 注释标记的内容，如 <!-- wp:heading --> 和 <!-- wp:paragraph -->。这些标记让 WordPress 能在编辑时识别区块类型。"
+      },
+      {
+        "id": "L2.4-b",
+        "difficulty": 2,
+        "description": "在「首页」添加一个两列（Columns）布局：左列放一个段落写「欢迎」，右列放一个段落写「了解更多」",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:columns') !== false) ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); $has_welcome = strpos($p->post_content, '欢迎') !== false; $has_more = strpos($p->post_content, '了解更多') !== false; echo ($has_welcome && $has_more) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑首页 → 添加 Columns 区块 → 选择 50/50 布局 → 在每列中添加 Paragraph"],
+        "on_pass_note": "Columns 区块是 WordPress 区块编辑器中实现多栏布局的标准方式。它在 HTML 中渲染为 flexbox 容器。"
+      }
+    ]
+  },
+  "L2.5": {
+    "name": "菜单与导航",
+    "tasks": [
+      {
+        "id": "L2.5-a",
+        "difficulty": 1,
+        "description": "创建一个名为「主导航」的菜单，包含「首页」「关于我们」「联系我们」三个页面链接",
+        "verify": [
+          {"type": "menu_exists", "name": "主导航"},
+          {"type": "menu_has_items", "menu": "主导航", "min_count": 3}
+        ],
+        "hints": ["外观 → 菜单 → 输入菜单名「主导航」→ 创建菜单 → 勾选页面 → 添加到菜单 → 保存"],
+        "on_pass_note": "菜单在数据库中的存储方式很有趣：菜单本身是一个 term（wp_terms 表），菜单项是 post_type='nav_menu_item' 的 posts。每个菜单项通过 postmeta 存储目标 URL、标题等信息。"
+      },
+      {
+        "id": "L2.5-b",
+        "difficulty": 2,
+        "description": "在「主导航」菜单中，把「服务项目」作为「关于我们」的子菜单项",
+        "verify": [
+          {"type": "menu_has_items", "menu": "主导航", "min_count": 4},
+          {"type": "wp_eval", "php_code": "$menus = wp_get_nav_menus(); $menu = null; foreach($menus as $m) { if($m->name === '主导航') $menu = $m; } $items = wp_get_nav_menu_items($menu->term_id); $sub = null; foreach($items as $i) { if(strpos($i->title, '服务项目') !== false) $sub = $i; } echo $sub && $sub->menu_item_parent ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["外观 → 菜单 → 添加「服务项目」页面 → 向右拖动使其缩进（成为子项）→ 保存"],
+        "on_pass_note": "子菜单通过 menu_item_parent 字段实现层级。菜单项的 menu_order 决定显示顺序。这个结构和页面的 post_parent 类似——WordPress 大量使用 parent-child 模式。"
+      }
+    ]
+  },
+  "L2.6": {
+    "name": "外观基础",
+    "tasks": [
+      {
+        "id": "L2.6-a",
+        "difficulty": 1,
+        "description": "安装并激活 Twenty Twenty-Four 主题",
+        "verify": [
+          {"type": "theme_active", "theme": "Twenty Twenty-Four"}
+        ],
+        "hints": ["外观 → 主题 → 添加新主题 → 搜索 Twenty Twenty-Four → 安装 → 激活"],
+        "on_pass_note": "Twenty Twenty-Four 是一个 Block Theme（区块主题），支持全站编辑（FSE）。传统主题用 PHP 模板文件，Block Theme 用 HTML 模板 + theme.json 配置。这是 WordPress 主题的未来方向。"
+      },
+      {
+        "id": "L2.6-b",
+        "difficulty": 2,
+        "description": "切换回默认主题（Twenty Twenty-Five 或 Twenty Twenty-Three，取决于你安装的版本），然后在自定义器中修改站点标识（Site Identity）的站点图标（Site Icon）—— 上传任意一张图片作为 favicon",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo get_option('site_icon') ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["外观 → 自定义 → 站点标识 → 站点图标 → 上传图片"],
+        "on_pass_note": "站点图标（favicon）存储为一个 attachment ID，保存在 site_icon option 中。WordPress 会自动从上传的图片生成多种尺寸供不同场景使用（浏览器标签、手机书签等）。"
+      }
+    ]
+  },
+  "L2.7": {
+    "name": "插件管理",
+    "tasks": [
+      {
+        "id": "L2.7-a",
+        "difficulty": 1,
+        "description": "安装并激活「WP Super Cache」插件",
+        "verify": [
+          {"type": "plugin_active", "plugin": "wp-super-cache"}
+        ],
+        "hints": ["插件 → 安装插件 → 搜索 WP Super Cache → 安装 → 激活"],
+        "on_pass_note": "缓存插件是 WordPress 性能优化的基础。WP Super Cache 将动态 PHP 页面生成静态 HTML 文件，后续访问直接读取静态文件，大幅减少数据库查询和 PHP 执行。"
+      },
+      {
+        "id": "L2.7-b",
+        "difficulty": 1,
+        "description": "停用「WP Super Cache」，然后安装并激活「Classic Editor」插件",
+        "verify": [
+          {"type": "plugin_active", "plugin": "classic-editor"},
+          {"type": "wp_eval", "php_code": "echo is_plugin_active('wp-super-cache/wp-cache.php') ? 'active' : 'inactive';", "expected_output": "inactive"}
+        ],
+        "hints": ["插件 → 已安装的插件 → 停用 WP Super Cache → 安装插件 → 搜索 Classic Editor → 安装 → 激活"],
+        "on_pass_note": "Classic Editor 恢复旧版编辑器。插件的激活状态存储在 wp_options 表的 active_plugins 行中，是一个序列化的 PHP 数组。理解这一点对排障很有帮助——如果后台打不开，可以直接在数据库中修改这个值来停用问题插件。"
+      },
+      {
+        "id": "L2.7-c",
+        "difficulty": 2,
+        "description": "删除「WP Super Cache」插件（不只是停用，要完全删除）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo file_exists(WP_PLUGIN_DIR . '/wp-super-cache') ? 'exists' : 'deleted';", "expected_output": "deleted"}
+        ],
+        "hints": ["插件 → 已安装的插件 → 确保 WP Super Cache 已停用 → 删除"],
+        "on_pass_note": "删除插件会触发 uninstall hook（如果插件定义了的话），然后删除插件文件夹。但有些插件在卸载时不会清理数据库中的 option 和表——这是常见的「插件残留」问题。"
+      }
+    ]
+  }
+}
