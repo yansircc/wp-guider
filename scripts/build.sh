@@ -19,6 +19,7 @@ REQUIRED=(
   "out/.claude/skills/wp-inject/SKILL.md"
   "out/.claude/skills/wp-checkpoint/SKILL.md"
   "out/.claude/CLAUDE.md"
+  "out/README.md"
 )
 
 MISSING=0

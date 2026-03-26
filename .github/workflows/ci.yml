@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Run tests
+        run: go test ./cmd/wp-train/ -v
+
+      - name: Build (linux/amd64)
+        run: GOOS=linux GOARCH=amd64 go build -o /dev/null ./cmd/wp-train/
+
+      - name: Build (darwin/arm64)
+        run: GOOS=darwin GOARCH=arm64 go build -o /dev/null ./cmd/wp-train/
+
+      - name: Validate task bank
+        run: |
+          python3 -c "
+          import json
+          with open('out/.claude/references/task-bank.json') as f:
+              bank = json.load(f)
+          tasks = sum(len(t['tasks']) for t in bank.values())
+          print(f'Task bank OK: {len(bank)} topics, {tasks} tasks')
+          for key, entry in bank.items():
+              for task in entry['tasks']:
+                  assert task.get('id'), f'{key}: task missing id'
+                  assert task.get('verify'), f'{task[\"id\"]}: missing verify'
+          "
+
+      - name: Validate consumer artifacts
+        run: |
+          for f in \
+            out/.claude/CLAUDE.md \
+            out/.claude/references/task-bank.json \
+            out/.claude/skills/wp-site/SKILL.md \
+            out/.claude/skills/wp-train/SKILL.md \
+            out/.claude/skills/wp-train/references/curriculum.md \
+            out/.claude/skills/wp-check/SKILL.md \
+            out/.claude/skills/wp-progress/SKILL.md \
+            out/.claude/skills/wp-inject/SKILL.md \
+            out/.claude/skills/wp-checkpoint/SKILL.md \
+            out/README.md; do
+            test -s "$f" || { echo "Missing or empty: $f"; exit 1; }
+          done
+          echo "All consumer artifacts present"

@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Run tests
+        run: go test ./cmd/wp-train/ -v
+
+      - name: Build binaries
+        run: |
+          mkdir -p dist
+
+          # macOS ARM (Apple Silicon)
+          GOOS=darwin GOARCH=arm64 go build -o dist/wp-train-darwin-arm64 ./cmd/wp-train/
+
+          # macOS Intel
+          GOOS=darwin GOARCH=amd64 go build -o dist/wp-train-darwin-amd64 ./cmd/wp-train/
+
+          # Linux
+          GOOS=linux GOARCH=amd64 go build -o dist/wp-train-linux-amd64 ./cmd/wp-train/
+
+      - name: Package release zips
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+
+          for arch in darwin-arm64 darwin-amd64 linux-amd64; do
+            DIR="wp-guider-${VERSION}-${arch}"
+            mkdir -p "${DIR}/.claude/scripts"
+
+            # Copy consumer artifacts
+            cp -r out/.claude/CLAUDE.md "${DIR}/.claude/"
+            cp -r out/.claude/references "${DIR}/.claude/"
+            cp -r out/.claude/skills "${DIR}/.claude/"
+            cp out/README.md "${DIR}/"
+
+            # Copy platform binary
+            cp "dist/wp-train-${arch}" "${DIR}/.claude/scripts/wp-train"
+            chmod +x "${DIR}/.claude/scripts/wp-train"
+
+            # Zip
+            zip -r "wp-guider-${VERSION}-${arch}.zip" "${DIR}"
+          done
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            wp-guider-*.zip
