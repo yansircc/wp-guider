@@ -1,0 +1,22 @@
+{
+  "L7.1": {
+    "name": "备份策略",
+    "tasks": [
+      {
+        "id": "L7.1-a",
+        "difficulty": 2,
+        "description": "安装 UpdraftPlus 备份插件并进行一次手动完整备份（数据库 + 文件）",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "updraftplus"
+          }
+        ],
+        "hints": [
+          "插件 → 安装插件 → 搜索 UpdraftPlus → 安装 → 激活 → 设置 → 立即备份"
+        ],
+        "on_pass_note": "3-2-1 法则：3 份备份、2 种介质、1 份异地。UpdraftPlus 支持自动备份到 Google Drive/Dropbox/S3 等云端。"
+      }
+    ]
+  }
+}

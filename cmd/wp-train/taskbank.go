@@ -3,7 +3,9 @@ package main
 import (
 	"encoding/json"
 	"os"
+	"path/filepath"
 	"sort"
+	"strings"
 )
 
 // TaskBank is the top-level task bank structure: map of topic_key -> TopicEntry.
@@ -21,17 +23,42 @@ type Task struct {
 	Verify      []map[string]any `json:"verify"`
 	Hints       []string         `json:"hints"`
 	OnPassNote  string           `json:"on_pass_note"`
-	Chain       string           `json:"chain,omitempty"`     // chain name (tasks with same chain are linked)
-	ChainOrder  int              `json:"chain_order,omitempty"` // order within chain (0-based)
+	Chain       string           `json:"chain,omitempty"`
+	ChainOrder  int              `json:"chain_order,omitempty"`
 }
 
 func loadTaskBank() TaskBank {
+	bank := make(TaskBank)
+
+	// Try tasks/ directory first (split by layer)
+	tasksDir := filepath.Join(claudeDir, "references", "tasks")
+	if entries, err := os.ReadDir(tasksDir); err == nil {
+		for _, e := range entries {
+			if e.IsDir() || !strings.HasSuffix(e.Name(), ".json") {
+				continue
+			}
+			data, err := os.ReadFile(filepath.Join(tasksDir, e.Name()))
+			if err != nil {
+				continue
+			}
+			var partial TaskBank
+			if json.Unmarshal(data, &partial) == nil {
+				for k, v := range partial {
+					bank[k] = v
+				}
+			}
+		}
+		if len(bank) > 0 {
+			return bank
+		}
+	}
+
+	// Fallback: single task-bank.json
 	data, err := os.ReadFile(taskBankPath)
 	if err != nil {
 		return nil
 	}
-	var bank TaskBank
-	if err := json.Unmarshal(data, &bank); err != nil {
+	if json.Unmarshal(data, &bank) != nil {
 		return nil
 	}
 	return bank

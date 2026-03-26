@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -339,55 +340,66 @@ func TestCheckFileNotContains(t *testing.T) {
 // ── JSON output helpers ──────────────────────────────────────────────────────
 
 func TestTaskBankJSON(t *testing.T) {
-	// Verify the actual task-bank.json is valid
-	// This runs relative to the module root in CI
-	paths := []string{
-		"out/.claude/references/task-bank.json",
-		// CI might run from repo root
-		filepath.Join("..", "..", "out", ".claude", "references", "task-bank.json"),
+	// Verify actual task bank files are valid
+	tasksDirs := []string{
+		"out/.claude/references/tasks",
+		filepath.Join("..", "..", "out", ".claude", "references", "tasks"),
 	}
 
-	var data []byte
-	var err error
-	for _, p := range paths {
-		data, err = os.ReadFile(p)
-		if err == nil {
+	var dir string
+	for _, d := range tasksDirs {
+		if _, err := os.Stat(d); err == nil {
+			dir = d
 			break
 		}
 	}
+	if dir == "" {
+		t.Skip("tasks/ directory not found (expected in repo root)")
+	}
+
+	entries, err := os.ReadDir(dir)
 	if err != nil {
-		t.Skip("task-bank.json not found (expected in repo root)")
+		t.Fatalf("cannot read tasks dir: %v", err)
 	}
 
-	var bank TaskBank
-	if err := json.Unmarshal(data, &bank); err != nil {
-		t.Fatalf("invalid task-bank.json: %v", err)
-	}
-
-	// Every task must have id, description, verify
-	for topicKey, entry := range bank {
-		if entry.Name == "" {
-			t.Errorf("topic %s: missing name", topicKey)
+	totalTasks := 0
+	for _, e := range entries {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), ".json") {
+			continue
 		}
-		for _, task := range entry.Tasks {
-			if task.ID == "" {
-				t.Errorf("topic %s: task missing id", topicKey)
+		data, err := os.ReadFile(filepath.Join(dir, e.Name()))
+		if err != nil {
+			t.Fatalf("cannot read %s: %v", e.Name(), err)
+		}
+		var bank TaskBank
+		if err := json.Unmarshal(data, &bank); err != nil {
+			t.Fatalf("invalid %s: %v", e.Name(), err)
+		}
+		for topicKey, entry := range bank {
+			if entry.Name == "" {
+				t.Errorf("%s: topic %s missing name", e.Name(), topicKey)
 			}
-			if task.Description == "" {
-				t.Errorf("task %s: missing description", task.ID)
-			}
-			if len(task.Verify) == 0 {
-				t.Errorf("task %s: missing verify checks", task.ID)
-			}
-			for _, v := range task.Verify {
-				if _, ok := v["type"]; !ok {
-					t.Errorf("task %s: verify check missing 'type' field", task.ID)
+			for _, task := range entry.Tasks {
+				totalTasks++
+				if task.ID == "" {
+					t.Errorf("%s: task missing id", e.Name())
+				}
+				if task.Description == "" {
+					t.Errorf("task %s: missing description", task.ID)
+				}
+				if len(task.Verify) == 0 {
+					t.Errorf("task %s: missing verify checks", task.ID)
+				}
+				for _, v := range task.Verify {
+					if _, ok := v["type"]; !ok {
+						t.Errorf("task %s: verify check missing 'type'", task.ID)
+					}
+				}
+				if task.Chain != "" && task.ChainOrder < 0 {
+					t.Errorf("task %s: negative chain_order", task.ID)
 				}
 			}
-			// Chain consistency
-			if task.Chain != "" && task.ChainOrder < 0 {
-				t.Errorf("task %s: negative chain_order", task.ID)
-			}
 		}
 	}
+	t.Logf("Validated %d tasks across %d files", totalTasks, len(entries))
 }

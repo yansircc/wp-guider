@@ -28,30 +28,40 @@ jobs:
       - name: Validate task bank
         run: |
           python3 -c "
-          import json
-          with open('out/.claude/references/task-bank.json') as f:
-              bank = json.load(f)
-          tasks = sum(len(t['tasks']) for t in bank.values())
-          print(f'Task bank OK: {len(bank)} topics, {tasks} tasks')
-          for key, entry in bank.items():
-              for task in entry['tasks']:
-                  assert task.get('id'), f'{key}: task missing id'
-                  assert task.get('verify'), f'{task[\"id\"]}: missing verify'
+          import json, os
+          tasks_dir = 'out/.claude/references/tasks'
+          total_topics = 0
+          total_tasks = 0
+          for f in sorted(os.listdir(tasks_dir)):
+              if not f.endswith('.json'): continue
+              bank = json.load(open(f'{tasks_dir}/{f}'))
+              topics = len(bank)
+              tasks = sum(len(t['tasks']) for t in bank.values())
+              total_topics += topics
+              total_tasks += tasks
+              print(f'  {f}: {topics} topics, {tasks} tasks')
+              for key, entry in bank.items():
+                  for task in entry['tasks']:
+                      assert task.get('id'), f'{key}: task missing id'
+                      assert task.get('verify'), f'{task[\"id\"]}: missing verify'
+          print(f'Task bank OK: {total_topics} topics, {total_tasks} tasks')
           "
 
       - name: Validate consumer artifacts
         run: |
-          for f in \
-            out/.claude/CLAUDE.md \
-            out/.claude/references/task-bank.json \
-            out/.claude/skills/wp-site/SKILL.md \
-            out/.claude/skills/wp-train/SKILL.md \
-            out/.claude/skills/wp-train/references/curriculum.md \
-            out/.claude/skills/wp-check/SKILL.md \
-            out/.claude/skills/wp-progress/SKILL.md \
-            out/.claude/skills/wp-inject/SKILL.md \
-            out/.claude/skills/wp-checkpoint/SKILL.md \
-            out/README.md; do
-            test -s "$f" || { echo "Missing or empty: $f"; exit 1; }
+          # Dynamic checks — no hardcoded file lists
+          test -s out/.claude/CLAUDE.md || { echo "Missing: CLAUDE.md"; exit 1; }
+          test -s out/README.md || { echo "Missing: README.md"; exit 1; }
+          test -s out/.claude/skills/wp-train/references/curriculum.md || { echo "Missing: curriculum"; exit 1; }
+
+          # All skills must have SKILL.md
+          for d in out/.claude/skills/*/; do
+            test -s "${d}SKILL.md" || { echo "Missing: ${d}SKILL.md"; exit 1; }
           done
-          echo "All consumer artifacts present"
+
+          # At least one task bank file
+          test $(find out/.claude/references/tasks -name '*.json' | wc -l) -gt 0 || { echo "No task bank files"; exit 1; }
+
+          SKILLS=$(ls -d out/.claude/skills/*/SKILL.md | wc -l)
+          TASKS=$(find out/.claude/references/tasks -name '*.json' | wc -l)
+          echo "Consumer artifacts OK: $SKILLS skills, $TASKS task files"

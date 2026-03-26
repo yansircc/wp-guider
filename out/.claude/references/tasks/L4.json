@@ -1,0 +1,23 @@
+{
+  "L4.1": {
+    "name": "主题选择与评估",
+    "tasks": [
+      {
+        "id": "L4.1-a",
+        "difficulty": 2,
+        "description": "在 WordPress 主题目录中搜索一个评分 4 星以上、活跃安装 10000+ 的主题并安装（不激活）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$themes = wp_get_themes(); echo count($themes) >= 4 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 主题 → 添加新主题 → 用筛选器过滤"
+        ],
+        "on_pass_note": "选主题的红线：最近 6 个月未更新、兼容性低于当前 WP 版本、评分低于 4 星、无支持论坛活跃度。"
+      }
+    ]
+  }
+}

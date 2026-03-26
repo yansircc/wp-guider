@@ -1,0 +1,23 @@
+{
+  "L6.1": {
+    "name": "文件结构",
+    "tasks": [
+      {
+        "id": "L6.1-a",
+        "difficulty": 2,
+        "description": "找到 wp-config.php 文件，告诉 AI 这个站点的数据库名称（DB_NAME）是什么",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo DB_NAME;",
+            "expected_output": "wp_wp_train"
+          }
+        ],
+        "hints": [
+          "wp-config.php 在 WordPress 根目录，可以用 locwp 的路径找到"
+        ],
+        "on_pass_note": "wp-config.php 是 WordPress 最重要的配置文件。里面有数据库连接信息、安全密钥、调试开关等。修改前一定要备份——改错了整个站点都打不开。\n\nAgent 协作提示：告诉 agent「检查 wp-config.php 中的 DB_NAME」比说「数据库连接有问题」精确得多。"
+      }
+    ]
+  }
+}

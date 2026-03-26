@@ -1,0 +1,263 @@
+{
+  "L1.1": {
+    "name": "登录与仪表盘",
+    "tasks": [
+      {
+        "id": "L1.1-a",
+        "difficulty": 1,
+        "description": "把站点标题改为「教练训练站」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "教练训练站"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 站点标题"
+        ],
+        "on_pass_note": "站点标题存在 wp_options 表的 blogname 行。WordPress 的所有设置本质都是 key-value 对。"
+      },
+      {
+        "id": "L1.1-b",
+        "difficulty": 1,
+        "description": "把站点副标题（Tagline）改为「WordPress 从入门到精通」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogdescription",
+            "expected": "WordPress 从入门到精通"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 副标题"
+        ],
+        "on_pass_note": "副标题对应 blogdescription。很多主题会在 header 或 SEO title 中引用它。"
+      },
+      {
+        "id": "L1.1-c",
+        "difficulty": 1,
+        "description": "关闭「允许任何人注册」（Membership）选项",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "users_can_register",
+            "expected": "0"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 成员资格 → 取消勾选"
+        ],
+        "on_pass_note": "users_can_register 控制前台注册功能。生产站点通常关闭此选项，防止垃圾注册。这是 WordPress 安全加固的第一步。"
+      },
+      {
+        "id": "L1.1-d",
+        "difficulty": 2,
+        "description": "找到「工具 → 站点健康」页面，查看当前有多少个「建议改进」项。然后把站点的管理员邮箱改为 coach@train.com",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "admin_email",
+            "expected": "coach@train.com"
+          }
+        ],
+        "hints": [
+          "工具 → 站点健康 查看建议项",
+          "设置 → 常规 → 管理员邮箱（可能需要确认）"
+        ],
+        "on_pass_note": "站点健康是 WordPress 5.2+ 的自检工具。admin_email 用于系统通知（更新提醒、评论通知等）。修改时 WordPress 会发确认邮件到新地址——但本地环境没有邮件服务，所以不会触发确认流程。"
+      },
+      {
+        "id": "L1.1-e",
+        "difficulty": 2,
+        "description": "把后台语言改为「简体中文」（如果已经是中文则改为 English，再改回中文）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "WPLANG",
+            "expected": "zh_CN"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 站点语言"
+        ],
+        "on_pass_note": "WPLANG 存储在 wp_options 中。切换语言会下载对应的翻译包到 wp-content/languages/。WordPress 的国际化（i18n）基于 gettext 机制——所有可翻译字符串在代码中用 __() 和 _e() 包裹。"
+      }
+    ]
+  },
+  "L1.2": {
+    "name": "站点基础设置",
+    "tasks": [
+      {
+        "id": "L1.2-a",
+        "difficulty": 1,
+        "description": "把固定链接结构改为「文章名」（Post name），即 URL 中使用 /%postname%/",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "permalink_structure",
+            "expected": "/%postname%/"
+          }
+        ],
+        "hints": [
+          "设置 → 固定链接 → 选择「文章名」"
+        ],
+        "on_pass_note": "固定链接对 SEO 非常重要。/%postname%/ 是最常用的结构，URL 简洁且包含关键词。WordPress 通过 Nginx 的 try_files 或 Apache 的 .htaccess rewrite 规则来实现。"
+      },
+      {
+        "id": "L1.2-b",
+        "difficulty": 1,
+        "description": "把站点时区设置为 Asia/Shanghai（UTC+8）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "timezone_string",
+            "expected": "Asia/Shanghai"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 时区 → 选择 Shanghai"
+        ],
+        "on_pass_note": "WordPress 内部所有时间都存储为 UTC，timezone_string 只影响前端显示。这是国际化应用的常见做法。"
+      },
+      {
+        "id": "L1.2-c",
+        "difficulty": 1,
+        "description": "把日期格式改为 Y-m-d（如 2026-03-26），时间格式改为 H:i（如 14:30）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "date_format",
+            "expected": "Y-m-d"
+          },
+          {
+            "type": "option_equals",
+            "key": "time_format",
+            "expected": "H:i"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 日期格式 / 时间格式，选择或输入自定义格式"
+        ],
+        "on_pass_note": "这些格式使用 PHP 的 date() 函数语法。Y=四位年，m=月，d=日，H=24小时制，i=分钟。"
+      },
+      {
+        "id": "L1.2-d",
+        "difficulty": 1,
+        "description": "在「设置 → 讨论」中，关闭「允许在新文章上发表评论」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "default_comment_status",
+            "expected": "closed"
+          }
+        ],
+        "hints": [
+          "设置 → 讨论 → 默认文章设置 → 取消勾选「允许人们提交对新文章的评论」"
+        ],
+        "on_pass_note": "default_comment_status 控制新文章的默认评论开关。企业站通常关闭评论来减少垃圾评论管理成本。已有文章的评论状态不受此设置影响——需要逐篇修改。"
+      },
+      {
+        "id": "L1.2-e",
+        "difficulty": 2,
+        "description": "把「每页最多显示」的文章数改为 12 篇（默认是 10）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "posts_per_page",
+            "expected": "12"
+          }
+        ],
+        "hints": [
+          "设置 → 阅读 → 博客页面至多显示"
+        ],
+        "on_pass_note": "posts_per_page 是 WP_Query 的全局默认值。主题和插件可以通过 pre_get_posts hook 覆盖它。如果你想让首页显示不同数量的文章，不应该改这个全局值，而是用 hook 针对首页单独设置。"
+      }
+    ]
+  },
+  "L1.3": {
+    "name": "用户与个人资料",
+    "tasks": [
+      {
+        "id": "L1.3-a",
+        "difficulty": 1,
+        "description": "把管理员的昵称（Nickname）改为「教练」，并把「公开显示为」也改为「教练」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','admin'); echo $u->display_name;",
+            "expected_output": "教练"
+          }
+        ],
+        "hints": [
+          "用户 → 编辑个人资料 → 昵称 + 公开显示为"
+        ],
+        "on_pass_note": "WordPress 用户有 user_login（不可改）、nickname、display_name 三个名称。文章作者显示的是 display_name。"
+      },
+      {
+        "id": "L1.3-b",
+        "difficulty": 1,
+        "description": "创建一个新用户：用户名 editor1，角色为「编辑」（Editor），邮箱 editor1@test.com",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','editor1'); echo $u ? implode(',', $u->roles) : 'not_found';",
+            "expected_output": "editor"
+          }
+        ],
+        "hints": [
+          "用户 → 添加新用户"
+        ],
+        "on_pass_note": "WordPress 有 5 个内置角色：管理员(Administrator)、编辑(Editor)、作者(Author)、投稿者(Contributor)、订阅者(Subscriber)。每个角色有不同的权限集合（capabilities）。"
+      },
+      {
+        "id": "L1.3-c",
+        "difficulty": 2,
+        "description": "把默认新用户角色从「订阅者」改为「投稿者」（Contributor）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "default_role",
+            "expected": "contributor"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 新用户默认角色"
+        ],
+        "on_pass_note": "投稿者可以写文章但不能自行发布，需要编辑或管理员审核。这在多作者网站中是常见的权限设置。"
+      },
+      {
+        "id": "L1.3-d",
+        "difficulty": 1,
+        "description": "再创建一个用户：用户名 author1，角色为「作者」（Author），邮箱 author1@test.com",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','author1'); echo $u ? implode(',', $u->roles) : 'not_found';",
+            "expected_output": "author"
+          }
+        ],
+        "hints": [
+          "用户 → 添加新用户 → 角色选「作者」"
+        ],
+        "on_pass_note": "作者（Author）比投稿者多一个关键权限：可以自行发布文章，不需要审核。但作者只能管理自己的文章，不能编辑他人的。"
+      },
+      {
+        "id": "L1.3-e",
+        "difficulty": 3,
+        "description": "删除用户 author1，并把他的所有内容归属到 admin 用户下",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','author1'); echo $u ? 'exists' : 'deleted';",
+            "expected_output": "deleted"
+          }
+        ],
+        "hints": [
+          "用户 → 用户列表 → 删除 author1 → 选择「将所有内容归属到」→ 选 admin"
+        ],
+        "on_pass_note": "删除用户时 WordPress 提供两个选择：删除该用户的所有内容，或把内容归属给其他用户。在生产环境中，几乎总是选择归属——防止内容丢失。数据库层面是修改 wp_posts.post_author 字段。"
+      }
+    ]
+  }
+}

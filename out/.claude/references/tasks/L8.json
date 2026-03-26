@@ -1,0 +1,28 @@
+{
+  "L8.1": {
+    "name": "调试工具",
+    "tasks": [
+      {
+        "id": "L8.1-a",
+        "difficulty": 2,
+        "description": "在 wp-config.php 中开启 WP_DEBUG 和 WP_DEBUG_LOG，然后查看 debug.log 文件是否生成",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG",
+            "expected": "1"
+          },
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG_LOG",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "可以让 agent 帮你修改 wp-config.php，或者用 wp-cli: wp config set WP_DEBUG true --raw"
+        ],
+        "on_pass_note": "WP_DEBUG 是排障的第一步。开启后 WordPress 会显示 PHP 警告和错误。WP_DEBUG_LOG 把错误写入 wp-content/debug.log 而不是显示在页面上。生产环境一定要关闭 WP_DEBUG_DISPLAY，只用 LOG。\n\nAgent 协作提示：排障时告诉 agent「我开了 WP_DEBUG_LOG，debug.log 最后几行是...」——这是 agent 能最快定位问题的信息。"
+      }
+    ]
+  }
+}

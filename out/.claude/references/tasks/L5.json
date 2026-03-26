@@ -1,0 +1,23 @@
+{
+  "L5.1": {
+    "name": "插件选型方法论",
+    "tasks": [
+      {
+        "id": "L5.1-a",
+        "difficulty": 2,
+        "description": "在插件目录中找到一个「联系表单」插件，要求：活跃安装 100 万+、最近 3 个月内有更新、评分 4 星+。安装并激活它",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_plugins(); foreach($plugins as $p) { if(stripos($p['Name'], 'form') !== false || stripos($p['Name'], 'contact') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "插件 → 安装插件 → 搜索 contact form → 查看详情检查安装数和更新日期"
+        ],
+        "on_pass_note": "插件选型五看：① 活跃安装数（>10 万较安全）② 最近更新（<3 个月）③ 兼容 WP 版本 ④ 评分和评价内容 ⑤ 支持论坛响应速度。"
+      }
+    ]
+  }
+}
