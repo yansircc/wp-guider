@@ -322,58 +322,5 @@
         "on_pass_note": "安全插件核心功能：防火墙、登录保护、文件扫描、恶意软件检测。不要同时装两个——会互相冲突。"
       }
     ]
-  },
-  "L5.12": {
-    "name": "WooCommerce 基础",
-    "tasks": [
-      {
-        "id": "L5.12-a",
-        "difficulty": 2,
-        "description": "安装并激活 WooCommerce 插件，在设置中将货币设为 USD（美元）",
-        "verify": [
-          {"type": "plugin_active", "plugin": "woocommerce"},
-          {"type": "option_equals", "key": "woocommerce_currency", "expected": "USD"}
-        ],
-        "hints": ["插件 → 安装 → 搜索 WooCommerce → 安装 → 激活", "设置向导中选货币 USD，或 WooCommerce → 设置 → 常规 → 货币"],
-        "on_pass_note": "WooCommerce 是 WordPress 最大的电商插件（500 万+活跃安装）。外贸站即使不做在线交易，也常用 WooCommerce 管理产品目录。货币设为 USD 因为外贸以美元计价。"
-      },
-      {
-        "id": "L5.12-b",
-        "difficulty": 2,
-        "description": "在 WooCommerce 中创建一个简单产品：名称「Industrial Valve」，价格 299.99，SKU 为 IV-001",
-        "verify": [
-          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Industrial Valve', OBJECT, 'product'); echo $p ? 'yes' : 'no';", "expected_output": "yes"},
-          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Industrial Valve', OBJECT, 'product'); echo get_post_meta($p->ID, '_sku', true);", "expected_output": "IV-001"}
-        ],
-        "hints": ["产品 → 新增产品 → 填写标题、价格、SKU → 发布"],
-        "on_pass_note": "WooCommerce 产品存在 wp_posts（post_type=product）+ wp_postmeta（_price, _sku 等）。SKU 是产品唯一编码，外贸公司用它对接 ERP 系统。"
-      }
-    ]
-  },
-  "L5.13": {
-    "name": "多语言准备",
-    "tasks": [
-      {
-        "id": "L5.13-a",
-        "difficulty": 2,
-        "description": "安装并激活 Polylang 多语言插件，设置默认语言为 English，并添加中文（简体）作为第二语言",
-        "verify": [
-          {"type": "plugin_active", "plugin": "polylang"},
-          {"type": "wp_eval", "php_code": "if(function_exists('pll_languages_list')) { $langs = pll_languages_list(); echo count($langs) >= 2 ? 'yes' : 'no'; } else { echo 'no'; }", "expected_output": "yes"}
-        ],
-        "hints": ["插件 → 安装 → 搜索 Polylang → 安装激活 → 按向导配置", "语言 → 添加语言 → English + 简体中文"],
-        "on_pass_note": "外贸站几乎都需要多语言。Polylang 是免费多语言插件首选（每种语言一篇独立文章）。选型原则：小站用 Polylang 免费版，大站或需字符串翻译用 WPML（付费）。"
-      },
-      {
-        "id": "L5.13-b",
-        "difficulty": 3,
-        "description": "为「关于我们」页面创建英文翻译版本，标题为 About Us，内容至少写 30 个英文单词",
-        "verify": [
-          {"type": "wp_eval", "php_code": "if(function_exists('pll_get_post')) { $p = get_page_by_title('关于我们', OBJECT, 'page'); if($p) { $en_id = pll_get_post($p->ID, 'en'); $en = get_post($en_id); echo ($en && str_word_count(strip_tags($en->post_content)) >= 30) ? 'yes' : 'no'; } else { echo 'no'; } } else { echo 'no'; }", "expected_output": "yes"}
-        ],
-        "hints": ["编辑「关于我们」→ 语言栏 → 点 English 旁的 + 号创建翻译", "填写英文标题和内容 → 发布"],
-        "on_pass_note": "Polylang 用 wp_term_relationships 关联翻译。每种语言版本是独立的 post。外贸实战中，先用中文建站定结构，再逐页翻译。可以让 AI agent 批量翻译。"
-      }
-    ]
   }
 }
