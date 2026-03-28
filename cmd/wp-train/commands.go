@@ -24,6 +24,18 @@ func cmdInit() {
 	log("Creating site " + siteName + "...")
 	shellMust("locwp add " + siteName + " --pass admin")
 
+	log("Installing Classic Editor...")
+	wp("plugin install classic-editor --activate")
+	wp("option update classic-editor-replace classic")
+	wp("option update classic-editor-allow-users disallow")
+
+	log("Configuring local environment...")
+	muPluginDir := filepath.Join(wpRoot, "wp-content/mu-plugins")
+	os.MkdirAll(muPluginDir, 0755)
+	os.WriteFile(filepath.Join(muPluginDir, "skip-email-confirm.php"), []byte(
+		"<?php\nadd_filter('send_email_change_email','__return_false');\nadd_filter('send_password_change_email','__return_false');\n"), 0644)
+	wp("option update default_comment_status closed")
+
 	log("Initializing git in wp-content...")
 	shellMust(fmt.Sprintf("cd %s && git init -q && git add -A && git commit -m baseline -q", wpContent))
 

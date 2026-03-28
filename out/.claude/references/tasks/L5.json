@@ -36,7 +36,7 @@
           {"type": "wp_eval", "php_code": "$groups = acf_get_field_groups(); foreach($groups as $g) { if(strpos($g['title'], '页面附加信息') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"},
           {"type": "wp_eval", "php_code": "$field = acf_get_field('subtitle'); echo $field ? $field['type'] : 'not_found';", "expected_output": "text"}
         ],
-        "hints": ["ACF → 字段组 → 新增 → 标题「页面附加信息」→ 添加字段: 文本/副标题/subtitle → 位置: 文章类型 等于 页面 → 发布"],
+        "hints": ["ACF → 字段组 → 新增 → 标题「页面附加信息」→ 添加字段: 文本/副标题/subtitle → 位置: 文章类型 等于 页面 → 发布", "重要：先填标签（中文），然后手动清空「字段名称」栏位，再输入纯英文字段名。ACF 会自动把标签复制到字段名，必须手动清空重填"],
         "on_pass_note": "字段组是 ACF 的核心概念——一组相关字段的容器。位置规则决定它出现在哪些编辑界面。字段名（name）是 key，标签（label）是显示名。\n\nAgent 协作提示：告诉 agent 字段名 subtitle，它就能用 get_field('subtitle', $post_id) 获取值。",
         "chain": "ACF 入门", "chain_order": 1
       },
@@ -60,7 +60,7 @@
           {"type": "wp_eval", "php_code": "$f = acf_get_field('external_url'); echo $f ? $f['type'] : 'no';", "expected_output": "url"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('sort_order'); echo $f ? $f['type'] : 'no';", "expected_output": "number"}
         ],
-        "hints": ["ACF → 编辑「页面附加信息」→ 添加三个新字段"],
+        "hints": ["ACF → 编辑「页面附加信息」→ 添加三个新字段", "重要：先填标签（中文），然后手动清空「字段名称」栏位，再输入纯英文字段名。ACF 会自动把标签复制到字段名，必须手动清空重填"],
         "on_pass_note": "ACF 有 30+ 种字段类型。基础类型（Text/Number/URL）存简单值，高级类型（Image/File）存 attachment ID，关系类型（Relationship/Post Object）存关联 post ID。"
       }
     ]
@@ -77,7 +77,7 @@
           {"type": "wp_eval", "php_code": "$f = acf_get_field('services'); echo $f ? $f['type'] : 'no';", "expected_output": "repeater"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('services'); echo count($f['sub_fields']) >= 2 ? 'yes' : 'no';", "expected_output": "yes"}
         ],
-        "hints": ["需要 ACF PRO 才有 Repeater 字段类型。ACF → 新增字段组 → 添加 Repeater 字段 → 在 Repeater 内添加子字段"],
+        "hints": ["需要 ACF PRO 才有 Repeater 字段类型。ACF → 新增字段组 → 添加 Repeater 字段 → 在 Repeater 内添加子字段", "重要：先填标签（中文），然后手动清空「字段名称」栏位，再输入纯英文字段名。ACF 会自动把标签复制到字段名，必须手动清空重填"],
         "on_pass_note": "Repeater 让编辑者动态添加/删除/排序行。数据库中每行存为独立 meta：services_0_service_name、services_1_service_name...\n\nAgent 协作提示：让 agent 查询 Repeater 数据时，告诉它字段名和结构，agent 用 have_rows() 遍历。"
       },
       {
@@ -143,7 +143,7 @@
           {"type": "wp_eval", "php_code": "$f = acf_get_field('category_icon'); echo $f ? $f['type'] : 'no';", "expected_output": "image"},
           {"type": "wp_eval", "php_code": "$groups = acf_get_field_groups(['taxonomy' => 'category']); foreach($groups as $g) { if(strpos($g['title'], '分类扩展') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
         ],
-        "hints": ["ACF → 新增字段组 → 位置: Taxonomy 等于 Category → 添加图片字段"],
+        "hints": ["ACF → 新增字段组 → 位置: Taxonomy 等于 Category → 添加图片字段", "重要：先填标签（中文），然后手动清空「字段名称」栏位，再输入纯英文字段名。ACF 会自动把标签复制到字段名，必须手动清空重填"],
         "on_pass_note": "ACF 也能给 Taxonomy 加字段——存在 wp_termmeta 表中。获取方式：get_field('category_icon', 'category_' . $term_id)。注意前缀格式！"
       },
       {
@@ -197,7 +197,7 @@
           {"type": "wp_eval", "php_code": "$f = acf_get_field('cta_text'); echo $f && !empty($f['conditional_logic']) ? 'yes' : 'no';", "expected_output": "yes"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('cta_url'); echo $f && !empty($f['conditional_logic']) ? 'yes' : 'no';", "expected_output": "yes"}
         ],
-        "hints": ["添加字段 → cta_text 设置中开启条件逻辑 →「显示 CTA 按钮 等于 是」"],
+        "hints": ["添加字段 → cta_text 设置中开启条件逻辑 →「显示 CTA 按钮 等于 是」", "重要：先填标签（中文），然后手动清空「字段名称」栏位，再输入纯英文字段名。ACF 会自动把标签复制到字段名，必须手动清空重填"],
         "on_pass_note": "条件逻辑只影响后台显示/隐藏——不影响数据存储。隐藏字段如果之前有值，值仍在数据库中。条件逻辑让编辑界面更清洁。"
       }
     ]
@@ -263,7 +263,7 @@
           {"type": "wp_eval", "php_code": "$f = acf_get_field('photo'); echo $f ? $f['type'] : 'no';", "expected_output": "image"},
           {"type": "wp_eval", "php_code": "$f = acf_get_field('bio'); echo $f ? $f['type'] : 'no';", "expected_output": "textarea"}
         ],
-        "hints": ["ACF → 新增字段组 → 位置: 文章类型 等于 team_member → 添加三个字段"],
+        "hints": ["ACF → 新增字段组 → 位置: 文章类型 等于 team_member → 添加三个字段", "重要：先填标签（中文），然后手动清空「字段名称」栏位，再输入纯英文字段名。ACF 会自动把标签复制到字段名，必须手动清空重填"],
         "on_pass_note": "CPT + ACF = WordPress 内容建模黄金搭档。CPT 定义类型，ACF 定义属性。团队成员/产品/作品集/FAQ——任何业务数据都能建模。",
         "chain": "自定义内容", "chain_order": 2
       },

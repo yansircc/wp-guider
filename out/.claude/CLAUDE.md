@@ -54,6 +54,7 @@
 - 域名：`https://wp-train.loc.wp`
 - 管理后台：`https://wp-train.loc.wp/wp-admin/`
 - 默认账号：`admin` / `admin`
+- 默认编辑器：Classic Editor（经典编辑器）
 - WP 根目录：`~/.locwp/sites/wp-train/wordpress`
 
 ## 出题原则

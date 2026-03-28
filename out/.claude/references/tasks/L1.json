@@ -65,7 +65,7 @@
           "工具 → 站点健康 查看建议项",
           "设置 → 常规 → 管理员邮箱（可能需要确认）"
         ],
-        "on_pass_note": "站点健康是 WordPress 5.2+ 的自检工具。admin_email 用于系统通知（更新提醒、评论通知等）。修改时 WordPress 会发确认邮件到新地址——但本地环境没有邮件服务，所以不会触发确认流程。"
+        "on_pass_note": "站点健康是 WordPress 5.2+ 的自检工具。admin_email 用于系统通知（更新提醒、评论通知等）。训练环境已通过 mu-plugin 跳过邮件确认流程，修改后立即生效。生产环境中修改 admin_email 会触发确认邮件。"
       },
       {
         "id": "L1.1-e",
@@ -241,6 +241,22 @@
           "用户 → 添加新用户 → 角色选「作者」"
         ],
         "on_pass_note": "作者（Author）比投稿者多一个关键权限：可以自行发布文章，不需要审核。但作者只能管理自己的文章，不能编辑他人的。"
+      },
+      {
+        "id": "L1.3-d2",
+        "difficulty": 2,
+        "description": "以管理员身份，代替 author1 发布一篇文章「测试文章」（在编辑文章时把作者改为 author1）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','author1'); $posts = get_posts(['author'=>$u->ID,'post_status'=>'publish']); echo count($posts) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "文章 → 写文章 → 标题「测试文章」→ 右侧面板「作者」→ 选择 author1 → 发布"
+        ],
+        "on_pass_note": "管理员可以代替任何用户发布文章（修改 post_author 字段）。这一步确保 author1 名下有内容，后续删除用户时 WordPress 才会提供「将内容归属到其他用户」的选项。"
       },
       {
         "id": "L1.3-e",
