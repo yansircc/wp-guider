@@ -19,5 +19,157 @@
         "on_pass_note": "选主题的红线：最近 6 个月未更新、兼容性低于当前 WP 版本、评分低于 4 星、无支持论坛活跃度。"
       }
     ]
+  },
+  "L4.2": {
+    "name": "主题定制器（Customizer）",
+    "tasks": [
+      {
+        "id": "L4.2-a",
+        "difficulty": 1,
+        "description": "进入「外观 → 自定义」（Customizer），将站点标识中的站点标题改为「Global Trade Co.」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "Global Trade Co."
+          }
+        ],
+        "hints": [
+          "外观 → 自定义 → 站点标识（Site Identity）→ 站点标题"
+        ],
+        "on_pass_note": "Customizer 是 WordPress 内置的实时预览定制工具。所有修改都先预览，点「发布」才生效。站点标题虽然也能在「设置 → 常规」改，但 Customizer 的优势是边改边看效果。",
+        "chain": "品牌定制",
+        "chain_order": 0
+      },
+      {
+        "id": "L4.2-b",
+        "difficulty": 2,
+        "description": "在 Customizer 中上传一个站点图标（Site Icon / Favicon），尺寸至少 512×512 像素",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$icon_id = get_option('site_icon'); echo $icon_id > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 自定义 → 站点标识 → 站点图标 → 上传图片（建议 512×512 PNG）",
+          "如果图片太小会提示不符合要求，需要至少 512×512"
+        ],
+        "on_pass_note": "Site Icon 存储为 attachment ID（option key: site_icon）。WordPress 自动生成多种尺寸用于浏览器标签、书签、手机主屏幕图标。512×512 是最低要求——因为 iOS 需要 180×180、Android 需要 192×192，WordPress 从大图裁剪。",
+        "chain": "品牌定制",
+        "chain_order": 1
+      },
+      {
+        "id": "L4.2-c",
+        "difficulty": 2,
+        "description": "在 Customizer 中上传一个自定义 Logo",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$logo_id = get_theme_mod('custom_logo'); echo $logo_id > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 自定义 → 站点标识 → Logo → 上传图片",
+          "不同主题的 Logo 位置可能不同，大多在站点标识下"
+        ],
+        "on_pass_note": "custom_logo 通过 theme_mod 存储（不是 option），因为它和主题绑定——切换主题后 Logo 设置会丢失。这是 theme_mod 和 option 的核心区别：theme_mod 随主题走，option 全局通用。外贸站的 Logo 建议用透明背景 PNG。",
+        "chain": "品牌定制",
+        "chain_order": 2
+      },
+      {
+        "id": "L4.2-d",
+        "difficulty": 2,
+        "description": "在 Customizer 的「首页设置」中，确认首页显示为「静态页面」，并将文章页设为一个名为「博客」的页面（如没有则先创建）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "show_on_front",
+            "expected": "page"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$blog_id = get_option('page_for_posts'); $page = get_post($blog_id); echo $page ? $page->post_title : 'none';",
+            "expected_output": "博客"
+          }
+        ],
+        "hints": [
+          "先确认有「博客」页面，没有就创建一个",
+          "外观 → 自定义 → 首页设置 → 静态页面 → 文章页选「博客」"
+        ],
+        "on_pass_note": "page_for_posts 存储博客页的 page ID。外贸站几乎都用静态首页——客户打开网站看到的是精心设计的着陆页，不是博客列表。博客页通常放在导航的「News」或「Blog」下。"
+      }
+    ]
+  },
+  "L4.3": {
+    "name": "Widget 管理",
+    "tasks": [
+      {
+        "id": "L4.3-a",
+        "difficulty": 1,
+        "description": "进入「外观 → 小工具」（Widgets），查看当前主题有哪些可用的 Widget 区域",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wp_registered_sidebars; echo count($wp_registered_sidebars) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 查看列出的区域名称"
+        ],
+        "on_pass_note": "Widget 区域由主题通过 register_sidebar() 定义。不同主题提供的区域数量和位置完全不同。常见区域：侧边栏、页脚。Block 主题用模板编辑器替代了传统 Widget。"
+      },
+      {
+        "id": "L4.3-b",
+        "difficulty": 2,
+        "description": "在侧边栏（Sidebar）区域添加一个「搜索」小工具和一个「最新文章」小工具",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$sidebars = get_option('sidebars_widgets'); $has_search = false; $has_recent = false; foreach($sidebars as $area => $widgets) { if(is_array($widgets)) { foreach($widgets as $w) { if(strpos($w, 'search') !== false) $has_search = true; if(strpos($w, 'recent-posts') !== false) $has_recent = true; } } } echo ($has_search && $has_recent) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 选择侧边栏区域 → 添加「搜索」和「最新文章」"
+        ],
+        "on_pass_note": "Widget 配置存储在 wp_options 表中。外贸站侧边栏常用 Widget：产品分类、联系表单、语言切换器。"
+      },
+      {
+        "id": "L4.3-c",
+        "difficulty": 2,
+        "description": "在页脚 Widget 区域添加一个「自定义 HTML」小工具，内容写上：© 2026 Global Trade Co. All rights reserved.",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$widgets = get_option('widget_custom_html'); if(is_array($widgets)) { foreach($widgets as $w) { if(is_array($w) && isset($w['content']) && strpos($w['content'], 'Global Trade') !== false) { echo 'yes'; exit; } } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 找到 Footer 区域 → 添加「自定义 HTML」→ 输入版权信息"
+        ],
+        "on_pass_note": "「自定义 HTML」Widget 是万能工具——可以放任何 HTML 代码。外贸站页脚标配：公司名+版权、联系方式、社交链接、隐私政策链接。"
+      },
+      {
+        "id": "L4.3-d",
+        "difficulty": 3,
+        "description": "移除侧边栏中的所有默认 Widget（如「近期评论」「归档」「分类目录」等），只保留「搜索」和「最新文章」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$sidebars = get_option('sidebars_widgets'); $found = false; foreach($sidebars as $area => $widgets) { if(is_array($widgets) && strpos($area, 'sidebar') !== false) { $clean = true; foreach($widgets as $w) { if(strpos($w, 'archives') !== false || strpos($w, 'recent-comments') !== false || strpos($w, 'meta') !== false) { $clean = false; } } if(count($widgets) > 0 && $clean) $found = true; } } echo $found ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 侧边栏 → 逐个删除不需要的 Widget"
+        ],
+        "on_pass_note": "WordPress 默认放了几个 Widget（归档、分类、近期评论、Meta）。专业建站的第一步就是清理默认内容——客户不需要看到 Meta Widget 里的「登录」链接。"
+      }
+    ]
   }
 }

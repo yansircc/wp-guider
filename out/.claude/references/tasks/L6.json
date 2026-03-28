@@ -16,7 +16,175 @@
         "hints": [
           "wp-config.php 在 WordPress 根目录，可以用 locwp 的路径找到"
         ],
-        "on_pass_note": "wp-config.php 是 WordPress 最重要的配置文件。里面有数据库连接信息、安全密钥、调试开关等。修改前一定要备份——改错了整个站点都打不开。\n\nAgent 协作提示：告诉 agent「检查 wp-config.php 中的 DB_NAME」比说「数据库连接有问题」精确得多。"
+        "on_pass_note": "wp-config.php 是 WordPress 最重要的配置文件。里面有数据库连接信息、安全密钥、调试开关等。修改前一定要备份——改错了整个站点都打不开。"
+      }
+    ]
+  },
+  "L6.2": {
+    "name": "wp-content 目录结构",
+    "tasks": [
+      {
+        "id": "L6.2-a",
+        "difficulty": 1,
+        "description": "使用 wp-cli 列出所有已安装的插件及其状态，确认至少有 3 个活跃插件",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_option('active_plugins'); echo count($plugins) >= 3 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "wp plugin list 查看所有插件和状态"
+        ],
+        "on_pass_note": "每个插件是 wp-content/plugins/ 下的一个文件夹。插件的 slug 就是文件夹名。知道路径后你能：手动删除问题插件、通过 FTP 上传插件、告诉 agent 精确的插件位置。"
+      },
+      {
+        "id": "L6.2-b",
+        "difficulty": 2,
+        "description": "查看 wp-content/uploads/ 目录结构，确认上传目录按年/月组织。上传一张图片后，用 wp-cli 找到它在 uploads 目录中的路径",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$dir = wp_upload_dir(); echo is_dir($dir['path']) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$dir = wp_upload_dir(); $files = glob($dir['path'] . '/*'); echo count($files) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "上传一张图片后，用 wp-cli 查看媒体列表",
+          "uploads 目录结构默认是 uploads/年/月/"
+        ],
+        "on_pass_note": "WordPress 默认按年/月组织上传文件。每张上传的图片会生成多个尺寸（thumbnail、medium、large）。迁移站点时 uploads 目录必须完整复制，否则图片全部断裂。"
+      },
+      {
+        "id": "L6.2-c",
+        "difficulty": 2,
+        "description": "查看当前激活主题的文件夹名称（slug）和路径",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$theme = wp_get_theme(); echo file_exists(get_stylesheet_directory()) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "wp theme list 查看所有主题和状态",
+          "wp theme path 查看主题根目录"
+        ],
+        "on_pass_note": "get_stylesheet_directory() 返回当前主题的绝对路径。如果用了子主题，stylesheet（子主题）和 template（父主题）路径不同。主题文件夹名就是主题 slug。"
+      }
+    ]
+  },
+  "L6.3": {
+    "name": "wp-config.php 配置",
+    "tasks": [
+      {
+        "id": "L6.3-a",
+        "difficulty": 1,
+        "description": "用 wp-cli 查看 wp-config.php 中的 table_prefix（数据库表前缀）值",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; echo strlen($wpdb->prefix) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "wp config get table_prefix"
+        ],
+        "on_pass_note": "table_prefix 决定了数据库中所有 WordPress 表的前缀（默认 wp_）。修改前缀是一种基础安全措施——防止 SQL 注入攻击者猜到表名。安装后不能随便改。"
+      },
+      {
+        "id": "L6.3-b",
+        "difficulty": 2,
+        "description": "在 wp-config.php 中设置 WP_MEMORY_LIMIT 为 '256M'",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "WP_MEMORY_LIMIT",
+            "expected": "256M"
+          }
+        ],
+        "hints": [
+          "wp config set WP_MEMORY_LIMIT '256M' --type=constant"
+        ],
+        "on_pass_note": "WP_MEMORY_LIMIT 设置 WordPress 前台可用的 PHP 内存上限（默认 40M）。外贸站如果用了 WooCommerce + 大量插件，256M 是合理的值。注意：不能超过 PHP 的 memory_limit。"
+      },
+      {
+        "id": "L6.3-c",
+        "difficulty": 2,
+        "description": "在 wp-config.php 中设置 WP_DEBUG_DISPLAY 为 false（不在页面上显示错误）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo defined('WP_DEBUG_DISPLAY') && !WP_DEBUG_DISPLAY ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "wp config set WP_DEBUG_DISPLAY false --raw"
+        ],
+        "on_pass_note": "WP_DEBUG + WP_DEBUG_LOG + WP_DEBUG_DISPLAY=false 是生产级调试黄金组合：捕获错误、写入日志、但不显示给访客。生产站绝不能把 PHP 错误显示给访客——泄露服务器路径是安全隐患。"
+      }
+    ]
+  },
+  "L6.4": {
+    "name": "数据库基础操作",
+    "tasks": [
+      {
+        "id": "L6.4-a",
+        "difficulty": 2,
+        "description": "用 wp-cli 查询 siteurl 和 home 两个选项的值，确认两者一致",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo get_option('siteurl') === get_option('home') ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "wp option get siteurl",
+          "wp option get home"
+        ],
+        "on_pass_note": "siteurl 是 WordPress 安装路径，home 是站点访问地址。大多数情况两者相同。这两个值改错了站点就进不去——是最常见的迁移故障。"
+      },
+      {
+        "id": "L6.4-b",
+        "difficulty": 2,
+        "description": "用 wp-cli 查看 wp_posts 表中有多少条记录，按 post_type 分组统计",
+        "verify": [
+          {
+            "type": "db_query",
+            "sql": "SELECT post_type, COUNT(*) as cnt FROM wp_posts GROUP BY post_type;",
+            "expected": "post_type"
+          }
+        ],
+        "hints": [
+          "wp db query \"SELECT post_type, COUNT(*) as cnt FROM wp_posts GROUP BY post_type;\""
+        ],
+        "on_pass_note": "wp_posts 是 WordPress 最核心的表——不只存文章和页面，还存自定义文章类型、导航菜单项、修订版本。理解这张表的 post_type 字段，你就理解了 WordPress 的内容模型：一切皆 Post。"
+      },
+      {
+        "id": "L6.4-c",
+        "difficulty": 3,
+        "description": "用 wp-cli 查询「关于我们」页面的所有自定义字段（meta_key），确认 ACF 字段存在",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); $meta = get_post_meta($p->ID); echo count($meta) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "先找到页面 ID: wp post list --post_type=page --title='关于我们' --field=ID",
+          "再查询: wp post meta list <ID>"
+        ],
+        "on_pass_note": "wp_postmeta 存储所有文章/页面的扩展数据。ACF 字段、SEO 设置、页面模板都在这里。以 _ 开头的 meta_key 是「隐藏字段」，后台自定义字段面板不显示它们。"
       }
     ]
   }
