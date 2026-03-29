@@ -1,0 +1,180 @@
+{
+  "ZY.1": {
+    "name": "ZeroY 安装与基础配置",
+    "tasks": [
+      {
+        "id": "ZY.1-a",
+        "difficulty": 1,
+        "description": "安装并激活 ZeroY 主题",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$theme = wp_get_theme(); echo (strpos(strtolower($theme->get_template()), 'zeroy') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["外观 → 主题 → 上传主题 → 选择 zeroy 主题 zip → 安装 → 激活"],
+        "on_pass_note": "ZeroY 是专为 AI 驱动建站设计的 WordPress 主题。它内置可视化编辑器和 AI 内容生成功能。安装时需要同时安装 ZeroY 主题和 ZeroY 编辑器插件。"
+      },
+      {
+        "id": "ZY.1-b",
+        "difficulty": 1,
+        "description": "安装并激活 ZeroY 编辑器插件",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(stripos($p, 'zeroy') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["插件 → 安装插件 → 上传插件 → 选择 zeroy 编辑器 zip → 安装 → 激活"],
+        "on_pass_note": "ZeroY 编辑器是配合 ZeroY 主题的页面构建插件。安装后，编辑页面时会看到 ZeroY 的可视化编辑器入口。"
+      },
+      {
+        "id": "ZY.1-c",
+        "difficulty": 2,
+        "description": "配置 ZeroY 的 AI 设置：填写业务上下文（About Your Business），描述你的公司和产品",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["ZeroY → AI 设置 → 业务上下文 → 填写公司描述", "建议先用 AI 精简业务描述（脱水版本），去掉营销性语言，保留核心信息"],
+        "on_pass_note": "AI 上下文是 ZeroY 生成内容的基础。好的上下文包含：公司做什么、主要产品线、目标客户、核心优势。去掉空洞词汇，保留具体信息。"
+      },
+      {
+        "id": "ZY.1-d",
+        "difficulty": 2,
+        "description": "配置 ZeroY 的设计系统（Design System）：设置全局颜色和字体",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["ZeroY → 设计系统 → 颜色/字体设置", "可以用 AI（如 Gemini）帮你生成配色方案"],
+        "on_pass_note": "设计系统是全站视觉一致性的基础。包含：主色、辅助色、中性色、文字色、背景色，以及标题/正文字体和字号层级。"
+      }
+    ]
+  },
+  "ZY.2": {
+    "name": "ZeroY 页面创建与编辑",
+    "tasks": [
+      {
+        "id": "ZY.2-a",
+        "difficulty": 1,
+        "description": "用 ZeroY 编辑器打开 Home 页面，使用 AI 生成功能创建首页内容",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); echo ($p && strlen($p->post_content) > 100) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑 Home 页面 → 用 ZeroY 编辑器打开 → 使用 AI 生成内容"],
+        "on_pass_note": "ZeroY 的 AI 生成功能基于你配置的业务上下文来生成页面内容。生成后需要人工审核和调整。",
+        "chain": "ZeroY 建站",
+        "chain_order": 0
+      },
+      {
+        "id": "ZY.2-b",
+        "difficulty": 2,
+        "description": "用 ZeroY 编辑器修改 Home 页面中的某个区块内容（如修改标题文字或替换图片）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["在 ZeroY 编辑器中点击要修改的区块 → 直接编辑文字或替换图片 → 保存"],
+        "on_pass_note": "ZeroY 支持可视化编辑——点击页面上的任何元素就能直接修改。修改后记得保存。",
+        "chain": "ZeroY 建站",
+        "chain_order": 1
+      },
+      {
+        "id": "ZY.2-c",
+        "difficulty": 2,
+        "description": "用 ZeroY 为 About 页面生成内容，包含公司简介和团队信息",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('About', OBJECT, 'page'); echo ($p && strlen($p->post_content) > 100) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑 About 页面 → ZeroY → AI 生成"],
+        "on_pass_note": "About 页面应包含：公司简介、核心数据（工厂面积、员工数等）、资质证书、团队信息。"
+      },
+      {
+        "id": "ZY.2-d",
+        "difficulty": 2,
+        "description": "用 ZeroY 为 Contact Us 页面生成内容，包含联系方式和询盘表单",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Contact Us', OBJECT, 'page'); echo ($p && strlen($p->post_content) > 50) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑 Contact Us → ZeroY → AI 生成"],
+        "on_pass_note": "Contact 页面最少要包含：询盘表单（姓名+邮箱+留言）、公司地址、邮箱、电话。表单提交后应跳转到 Thank You 页面。"
+      }
+    ]
+  },
+  "ZY.3": {
+    "name": "ZeroY 动态模板",
+    "tasks": [
+      {
+        "id": "ZY.3-a",
+        "difficulty": 2,
+        "description": "用 ZeroY 创建页眉（Header）动态模板：左边 Logo，中间导航，右边 CTA 按钮",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["ZeroY → 动态模板 → 新建页眉模板", "提示词参考：帮我做一个页眉，左边是 logo，中间是导航，右边是按钮跳到 /contact/"],
+        "on_pass_note": "页眉模板是全站共用的——改一处所有页面都生效。导航项建议不超过 6 个。",
+        "chain": "ZeroY 模板",
+        "chain_order": 0
+      },
+      {
+        "id": "ZY.3-b",
+        "difficulty": 2,
+        "description": "用 ZeroY 创建页脚（Footer）动态模板：包含公司信息、导航链接、WhatsApp 链接和版权声明",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["ZeroY → 动态模板 → 新建页脚模板", "WhatsApp 链接格式：https://wa.me/+8619120202025"],
+        "on_pass_note": "页脚标配：公司联系方式、快速导航、Privacy Policy + Terms 链接、版权声明、WhatsApp 链接。",
+        "chain": "ZeroY 模板",
+        "chain_order": 1
+      },
+      {
+        "id": "ZY.3-c",
+        "difficulty": 2,
+        "description": "用 ZeroY 创建 404 错误页面动态模板",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["ZeroY → 动态模板 → 新建 404 模板", "提示词：帮我做一个好看的 404 页面，全英文"],
+        "on_pass_note": "好的 404 页面应该：告诉用户页面不存在、提供搜索框、提供回到首页的链接、保持品牌一致性。"
+      },
+      {
+        "id": "ZY.3-d",
+        "difficulty": 2,
+        "description": "用 ZeroY 创建搜索结果页动态模板",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["ZeroY → 动态模板 → 新建搜索结果模板", "提示词：帮我做一个好看的搜索结果页，全英文"],
+        "on_pass_note": "搜索结果页模板控制用户搜索后看到的页面样式。可以自定义布局、加入筛选、显示缩略图。"
+      }
+    ]
+  },
+  "ZY.4": {
+    "name": "ZeroY 导航与交互",
+    "tasks": [
+      {
+        "id": "ZY.4-a",
+        "difficulty": 2,
+        "description": "在页眉模板中设置导航菜单，包含二级下拉菜单（如 Product 下拉显示产品分类）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["编辑页眉模板 → 导航组件 → 设置菜单项和子菜单"],
+        "on_pass_note": "二级菜单让导航更清晰。注意移动端的二级菜单体验——确保手机上能正常展开。"
+      },
+      {
+        "id": "ZY.4-b",
+        "difficulty": 3,
+        "description": "用 ZeroY 创建一个询盘弹窗（Popup）：包含表单（姓名+邮箱+留言），设置触发条件",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["ZeroY → 弹窗 → 新建 → 添加表单 → 设置触发条件"],
+        "on_pass_note": "常见弹窗触发方式：点击按钮、页面停留 N 秒、滚动到底部、离开意图（Exit Intent）。"
+      },
+      {
+        "id": "ZY.4-c",
+        "difficulty": 2,
+        "description": "配置询盘表单的提交后行为：跳转到 Thank You 页面，并发送邮件通知到管理员邮箱",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["编辑表单 → 提交后设置 → 跳转 URL: /thank-you/", "确保已安装 SMTP 插件"],
+        "on_pass_note": "表单提交完整链路：用户填写 → 提交 → 数据保存 → 邮件通知管理员 → 跳转 Thank You。每个环节都要验证。"
+      }
+    ]
+  }
+}

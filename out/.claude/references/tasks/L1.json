@@ -82,6 +82,28 @@
           "设置 → 常规 → 站点语言"
         ],
         "on_pass_note": "WPLANG 存储在 wp_options 中。切换语言会下载对应的翻译包到 wp-content/languages/。WordPress 的国际化（i18n）基于 gettext 机制——所有可翻译字符串在代码中用 __() 和 _e() 包裹。"
+      },
+      {
+        "id": "L1.1-f",
+        "difficulty": 2,
+        "description": "在「用户 → 个人资料」中将自己的界面语言设为中文，同时保持站点语言（设置 → 常规）为 English。验证两者不同",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "WPLANG",
+            "expected": ""
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','admin'); echo get_user_meta($u->ID, 'locale', true);",
+            "expected_output": "zh_CN"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 站点语言 → English",
+          "用户 → 个人资料 → 语言 → 简体中文"
+        ],
+        "on_pass_note": "站点语言（WPLANG）影响前台和默认后台语言。用户语言（user meta: locale）只影响当前用户的后台界面。外贸站通常站点语言设 English（前台给客户看），管理员个人语言设中文（自己用着方便）。"
       }
     ]
   },

@@ -96,6 +96,22 @@
           "站点地图地址通常是 /sitemap_index.xml"
         ],
         "on_pass_note": "XML Sitemap 告诉搜索引擎你站点有哪些页面、最后更新时间、更新频率。Yoast 自动生成并维护 sitemap。提交 sitemap 到 Google Search Console 可以加速索引。\n\nAgent 协作提示：如果 sitemap 有问题，告诉 agent SEO 插件名称和 sitemap URL，agent 可以用 wp-cli 检查配置。"
+      },
+      {
+        "id": "L3.1-f",
+        "difficulty": 1,
+        "description": "在「设置 → 阅读」中，确认「建议搜索引擎不索引本站点」选项是关闭的（即允许 Google 收录）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blog_public",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "设置 → 阅读 → 最底部「对搜索引擎的可见性」→ 确保未勾选"
+        ],
+        "on_pass_note": "blog_public = 1 表示允许搜索引擎索引。开发阶段可以先关闭（设为 0），上线后务必打开。忘记打开这个选项是外贸站最常见的 SEO 事故之一——网站做好了但 Google 搜不到。WordPress 在 robots.txt 中通过 Disallow 实现此功能。"
       }
     ]
   },

@@ -79,6 +79,21 @@
         "on_pass_note": "DISALLOW_FILE_EDIT 关闭后台的主题编辑器和插件编辑器。如果攻击者获得了管理员权限，可以直接在编辑器中注入恶意代码。关闭后，代码修改只能通过 FTP/SSH。",
         "chain": "安全基线",
         "chain_order": 2
+      },
+      {
+        "id": "L7.2-d",
+        "difficulty": 2,
+        "description": "安装 Redirection 插件，创建一条 301 跳转规则：将 /old-page/ 跳转到 /about/",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "redirection"
+          }
+        ],
+        "hints": [
+          "插件 → 安装 → Redirection → 激活 → 工具 → Redirection → 添加新规则"
+        ],
+        "on_pass_note": "301 是永久跳转，告诉搜索引擎「这个页面已经搬家了」。常见场景：页面改 slug 后做跳转、旧站迁移到新站、合并重复页面。302 是临时跳转，不传递 SEO 权重。外贸站改版时一定要做 301——否则已经有排名的页面全部变 404。"
       }
     ]
   },

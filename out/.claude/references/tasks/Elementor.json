@@ -1,0 +1,396 @@
+{
+  "ELE.1": {
+    "name": "Elementor 安装与基础",
+    "tasks": [
+      {
+        "id": "ELE.1-a",
+        "difficulty": 1,
+        "description": "安装并激活 Elementor 插件（免费版）",
+        "verify": [
+          {"type": "plugin_active", "plugin": "elementor"}
+        ],
+        "hints": ["插件 → 安装插件 → 搜索 Elementor → 安装 → 激活"],
+        "on_pass_note": "Elementor 是 WordPress 最流行的页面构建器（1000 万+活跃安装）。免费版有 30+ widgets，Pro 版额外 60+ widgets + Theme Builder + Form + Popup 等。"
+      },
+      {
+        "id": "ELE.1-b",
+        "difficulty": 1,
+        "description": "安装并激活 Hello Elementor 主题（Elementor 官方极简主题）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$t = wp_get_theme(); echo (strpos(strtolower($t->get_template()), 'hello') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["外观 → 主题 → 安装主题 → 搜索 Hello Elementor → 安装 → 激活"],
+        "on_pass_note": "Hello Elementor 是 Elementor 团队开发的极简主题——几乎没有自带样式，把页面控制权完全交给 Elementor。用它作为基底主题可以避免主题样式和 Elementor 样式冲突。外贸站推荐用 Hello Elementor 或 Astra 搭配 Elementor。"
+      },
+      {
+        "id": "ELE.1-c",
+        "difficulty": 2,
+        "description": "上传并激活 Elementor Pro 插件",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'elementor-pro') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["插件 → 上传插件 → 选择 Elementor Pro zip 文件 → 安装 → 激活"],
+        "on_pass_note": "Elementor Pro 是付费版本，需要从 elementor.com 下载 zip 安装包。Pro 版增加 Theme Builder、Form Widget、Popup Builder、Dynamic Tags 等核心功能。外贸站建议用 Pro——免费版缺少表单和 Header/Footer 控制。"
+      }
+    ]
+  },
+  "ELE.2": {
+    "name": "Container 布局",
+    "tasks": [
+      {
+        "id": "ELE.2-a",
+        "difficulty": 2,
+        "description": "用 Elementor 编辑 Home 页面，创建一个全宽 Container（Flexbox），方向设为 Row，内部放置一个 Heading widget 和一个 Button widget",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $m = get_post_meta($p->ID, '_elementor_edit_mode', true); echo $m === 'builder' ? 'yes' : 'no';", "expected_output": "yes"},
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo (strpos($d, 'heading') !== false && strpos($d, 'button') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑 Home → 用 Elementor 编辑 → 拖入 Container → 设 Direction: Row → 拖入 Heading 和 Button"],
+        "on_pass_note": "Container 是 Elementor 的布局基础（已取代旧版 Section/Column）。Flexbox Container 支持 Row（水平排列）和 Column（垂直排列）方向。嵌套 Container 可以实现任意复杂布局。全宽 Container：Content Width 设为 Full Width。"
+      },
+      {
+        "id": "ELE.2-b",
+        "difficulty": 2,
+        "description": "创建一个三列等宽布局：一个 Row Container 内嵌套三个 Column Container，每列放一个 Icon Box widget",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo substr_count($d, 'icon-box') >= 3 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Row Container → 内部拖入三个 Container（自动等宽）→ 每个 Container 内拖入 Icon Box"],
+        "on_pass_note": "三列等宽是最经典的服务/特点展示布局。Icon Box = 图标 + 标题 + 描述的组合 widget。保持三列视觉一致：图标同风格、标题同长度、描述同段数。Container 的 Gap 设置控制列间距。"
+      },
+      {
+        "id": "ELE.2-c",
+        "difficulty": 2,
+        "description": "在页面中添加一个 Spacer widget（间距控件）和一个 Divider widget（分隔线），用于区分不同区块",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo (strpos($d, 'spacer') !== false || strpos($d, 'divider') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["搜索 Spacer → 拖入页面 → 设置高度", "搜索 Divider → 拖入页面"],
+        "on_pass_note": "Spacer 和 Divider 是页面呼吸感的关键。但更好的做法是用 Container 的 Padding 和 Margin 来控制间距，而不是到处插 Spacer。Spacer 适合偶尔微调，不适合作为主要间距手段。"
+      }
+    ]
+  },
+  "ELE.3": {
+    "name": "基础 Widget 操作",
+    "tasks": [
+      {
+        "id": "ELE.3-a",
+        "difficulty": 1,
+        "description": "在 Elementor 中添加一个 Image widget，上传一张图片并设置图片尺寸为 Large",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo strpos($d, 'image') !== false ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["搜索 Image → 拖入 → 上传图片 → Image Size 选 Large"],
+        "on_pass_note": "Image widget 的 Image Size 选项很重要——Full 会加载原图（可能几 MB），Large/Medium 加载缩略图（几百 KB）。外贸站图片优化原则：上传前压缩到 200KB 以内，展示用 Large 尺寸，必要时配合 Lazy Load。"
+      },
+      {
+        "id": "ELE.3-b",
+        "difficulty": 2,
+        "description": "添加一个 Text Editor widget，写一段公司简介（至少 50 个英文单词）。设置字体大小为 16px，行高为 1.6",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo strpos($d, 'text-editor') !== false ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["搜索 Text Editor → 拖入 → 输入英文内容 → Style 标签 → Typography → Size: 16px, Line Height: 1.6"],
+        "on_pass_note": "Text Editor widget 等于一个富文本编辑器。Typography 设置是 Elementor 样式控制的核心——字体、大小、粗细、行高、字间距。正文推荐：16px、行高 1.5-1.8、颜色 #333 或 #4B5563。"
+      },
+      {
+        "id": "ELE.3-c",
+        "difficulty": 2,
+        "description": "添加一个 Button widget，文字为「Request a Quote」，链接到 /contact/ 页面，按钮样式设为实色填充",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo strpos($d, 'Request a Quote') !== false ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["搜索 Button → 拖入 → Text: Request a Quote → Link: /contact/ → Style: 设置背景色"],
+        "on_pass_note": "CTA 按钮是外贸站的转化核心。按钮文案原则：用动词（Request/Get/Download），具体化（Request a Quote 比 Contact Us 更有行动力）。按钮颜色要与页面形成对比——如果页面主色是蓝色，按钮可以用橙色或绿色。"
+      }
+    ]
+  },
+  "ELE.4": {
+    "name": "响应式控制",
+    "tasks": [
+      {
+        "id": "ELE.4-a",
+        "difficulty": 2,
+        "description": "在 Elementor 编辑器底部切换到 Tablet 和 Mobile 视图，调整 Heading widget 的字体大小：Desktop 40px、Tablet 28px、Mobile 22px",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo strpos($d, 'heading') !== false ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["选中 Heading → Style → Typography → Size 旁边点设备图标切换 → 分别设置三种尺寸"],
+        "on_pass_note": "Elementor 的响应式控制在每个样式属性旁都有设备切换图标。点击后可以为 Desktop/Tablet/Mobile 设置不同的值。字体大小的经验法则：Mobile 是 Desktop 的 55-65%，Tablet 是 Desktop 的 70-80%。"
+      },
+      {
+        "id": "ELE.4-b",
+        "difficulty": 2,
+        "description": "设置某个 Container 在 Mobile 视图下隐藏（不在手机上显示）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo (strpos($d, 'hide_mobile') !== false || strpos($d, 'responsive') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["选中 Container → Advanced → Responsive → Hide on Mobile 打开"],
+        "on_pass_note": "隐藏元素是响应式设计的常用技巧。但注意：隐藏的元素仍会加载——只是 CSS display:none。大量隐藏元素会影响性能。更好的做法是为不同设备设计不同的布局，而不是隐藏整块内容。"
+      }
+    ]
+  },
+  "ELE.5": {
+    "name": "全局样式",
+    "tasks": [
+      {
+        "id": "ELE.5-a",
+        "difficulty": 2,
+        "description": "在 Elementor 的 Site Settings 中设置 Global Colors：Primary 色为 #2563EB（蓝色），Secondary 色为 #F59E0B（橙色），Text 色为 #1F2937",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$kit_id = get_option('elementor_active_kit'); echo $kit_id > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Elementor 编辑器左上角汉堡菜单 → Site Settings → Global Colors → 修改 Primary/Secondary/Text"],
+        "on_pass_note": "Global Colors 是 Elementor 的全局颜色系统。设置后，所有 widget 都可以引用这些全局色（而不是写死颜色值）。修改 Global Color 会影响所有引用它的元素——实现一处改全站变。外贸站配色建议：蓝色系（专业/信任）或绿色系（环保/健康），配一个对比色作为 CTA 色。"
+      },
+      {
+        "id": "ELE.5-b",
+        "difficulty": 2,
+        "description": "在 Site Settings 中设置 Global Fonts：Primary 字体设为 Inter，Secondary 字体设为 Inter",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$kit_id = get_option('elementor_active_kit'); echo $kit_id > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Site Settings → Global Fonts → Primary/Secondary → 选择 Inter 字体"],
+        "on_pass_note": "Global Fonts 跟 Global Colors 一样是全局设置。Inter 是外贸站推荐字体——清晰、专业、多语言支持好。其他好选择：Roboto、Open Sans、Poppins。避免用花哨的手写字体——外贸客户要的是专业感。Elementor 从 Google Fonts 加载字体，注意性能：每多一个字体就多一个 HTTP 请求。"
+      }
+    ]
+  },
+  "ELE.6": {
+    "name": "Hero Section 设计",
+    "tasks": [
+      {
+        "id": "ELE.6-a",
+        "difficulty": 2,
+        "description": "创建一个 Hero Section：全宽 Container + 背景图 + 深色叠加层（Overlay）+ 白色大标题 + 副标题 + CTA 按钮",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo (strpos($d, 'heading') !== false && strpos($d, 'button') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Container → Background: Image → Overlay: 黑色 50% 透明度 → 内部: Heading(白色大字) + Text(副标题) + Button(CTA)"],
+        "on_pass_note": "Hero Section 是首页第一屏，决定了用户是否继续浏览。要素：① 背景图（高质量、与业务相关）② 叠加层（让文字在图片上可读）③ 主标题（一句话说清你做什么）④ 副标题（补充价值主张）⑤ CTA 按钮。外贸站 Hero 文案示例：'Professional OEM/ODM Solutions for Electronics' + 'Request a Free Quote'。",
+        "chain": "首页构建",
+        "chain_order": 0
+      },
+      {
+        "id": "ELE.6-b",
+        "difficulty": 2,
+        "description": "在 Hero Section 下方创建「服务/产品」展示区：三列 Icon Box，每列一个图标+标题+描述",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo substr_count($d, 'icon-box') >= 3 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Row Container → 三个子 Container → 每个放一个 Icon Box → 选择合适图标 → 填写标题和描述"],
+        "on_pass_note": "Icon Box 三列是首页第二屏的经典布局。图标选择：使用 Font Awesome 图标，选择与业务相关的（如工厂、证书、全球、定制等）。保持三列一致：图标同大小、标题同风格、描述同长度。",
+        "chain": "首页构建",
+        "chain_order": 1
+      }
+    ]
+  },
+  "ELE.7": {
+    "name": "表单设计（Pro）",
+    "tasks": [
+      {
+        "id": "ELE.7-a",
+        "difficulty": 2,
+        "description": "使用 Elementor Pro 的 Form widget 创建询盘表单：Name、Email、Company、Product Interest（下拉选择）、Message（文本域）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$pages = get_pages(); foreach($pages as $p) { $d = get_post_meta($p->ID, '_elementor_data', true); if($d && strpos($d, '\"widgetType\":\"form\"') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["搜索 Form → 拖入页面 → 添加字段: Text(Name), Email, Text(Company), Select(Product Interest), Textarea(Message)"],
+        "on_pass_note": "Elementor Form widget 是 Pro 专属功能。字段类型：Text、Email、Textarea、Select、Checkbox、Radio、Number、Date、Upload。询盘表单字段精简原则：越少越好。Name + Email + Message 是最低配，Company 和 Product Interest 可选。太多字段会降低提交率。"
+      },
+      {
+        "id": "ELE.7-b",
+        "difficulty": 2,
+        "description": "配置表单的 Email 通知：收件人设为管理员邮箱，主题包含「New Inquiry from {field:name}」",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$pages = get_pages(); foreach($pages as $p) { $d = get_post_meta($p->ID, '_elementor_data', true); if($d && strpos($d, '\"widgetType\":\"form\"') !== false && strpos($d, 'email') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["选中 Form widget → Actions After Submit → 添加 Email → 配置收件人、主题、内容"],
+        "on_pass_note": "Actions After Submit 是 Elementor Form 的核心配置。可以同时添加多个 Action：Email（发通知）、Redirect（跳转 Thank You 页）、Webhook（发送到 CRM）。Email 2 可以发自动回复给客户。{field:name} 是动态标签——引用表单字段值。"
+      },
+      {
+        "id": "ELE.7-c",
+        "difficulty": 2,
+        "description": "配置表单提交后跳转到 Thank You 页面",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$pages = get_pages(); foreach($pages as $p) { $d = get_post_meta($p->ID, '_elementor_data', true); if($d && strpos($d, '\"widgetType\":\"form\"') !== false && (strpos($d, 'redirect') !== false || strpos($d, 'thank') !== false)) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Form → Actions After Submit → 添加 Redirect → URL: /thank-you/"],
+        "on_pass_note": "跳转到 Thank You 页面是转化追踪的基础。Google Analytics 可以设置 /thank-you/ 为转化目标页面。另外可以在 Thank You 页面加 Facebook Pixel 转化事件代码，追踪广告投放效果。"
+      }
+    ]
+  },
+  "ELE.8": {
+    "name": "互动元素",
+    "tasks": [
+      {
+        "id": "ELE.8-a",
+        "difficulty": 2,
+        "description": "添加 Counter widget 展示公司数据：如「15+ Years Experience」「500+ Projects」「50+ Countries」",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo strpos($d, 'counter') !== false ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["搜索 Counter → 拖入三列布局 → 设置起始数字、结束数字、前缀/后缀"],
+        "on_pass_note": "Counter 带滚动动画效果——数字从 0 跳到目标值。这是建立信任的有效方式。外贸站常用数据：从业年限、服务客户数、出口国家数、员工数、工厂面积。数字要真实可信——「15+ Years」比「Leading Industry Pioneer」有说服力得多。"
+      },
+      {
+        "id": "ELE.8-b",
+        "difficulty": 2,
+        "description": "添加 Tabs 或 Accordion widget 展示产品分类或 FAQ 内容",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$p = get_page_by_title('Home', OBJECT, 'page'); if(!$p) $p = get_page_by_title('首页', OBJECT, 'page'); $d = get_post_meta($p->ID, '_elementor_data', true); echo (strpos($d, 'tabs') !== false || strpos($d, 'accordion') !== false || strpos($d, 'toggle') !== false) ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["搜索 Tabs 或 Accordion → 拖入 → 编辑每个标签/折叠项的标题和内容"],
+        "on_pass_note": "Tabs 适合并列内容（如产品分类切换），Accordion 适合问答（FAQ）。区别：Tabs 同时只显示一个标签内容，Accordion 可以同时展开多个。外贸站常用 Accordion 做 FAQ：What's your MOQ? / What's the lead time? / Do you provide samples?"
+      }
+    ]
+  },
+  "ELE.9": {
+    "name": "Theme Builder — Header（Pro）",
+    "tasks": [
+      {
+        "id": "ELE.9-a",
+        "difficulty": 3,
+        "description": "用 Elementor Theme Builder 创建自定义 Header 模板：Logo（左）+ Nav Menu（中）+ CTA Button（右），设置 Display Condition 为 Entire Site",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'header', 'numberposts' => 1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Elementor → Templates → Theme Builder → Header → Add New", "布局：Row Container → Logo widget(左) + Nav Menu widget(中) + Button widget(右)", "保存后设 Display Condition: Entire Site"],
+        "on_pass_note": "Theme Builder Header 会覆盖主题自带的 header。Nav Menu widget 是 Pro 专属——它读取 WordPress 的菜单（外观 → 菜单）。Display Condition 控制模板在哪些页面生效。设为 Entire Site 表示全站通用。可以为特定页面创建不同的 Header。",
+        "chain": "Theme Builder",
+        "chain_order": 0
+      },
+      {
+        "id": "ELE.9-b",
+        "difficulty": 3,
+        "description": "设置 Header 为 Sticky（固定在顶部，滚动时不消失）",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'header', 'numberposts' => 1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["编辑 Header 模板 → 选中最外层 Container → Advanced → Motion Effects → Sticky: Top"],
+        "on_pass_note": "Sticky Header 让导航始终可见，方便用户随时点击 CTA。设置：Container → Advanced → Motion Effects → Sticky: Top。可以配合 Transparent Header + 滚动后变色效果。注意 Sticky Header 会占据屏幕空间——在手机上可能不适合。"
+      }
+    ]
+  },
+  "ELE.10": {
+    "name": "Theme Builder — Footer（Pro）",
+    "tasks": [
+      {
+        "id": "ELE.10-a",
+        "difficulty": 2,
+        "description": "用 Theme Builder 创建自定义 Footer 模板：包含公司联系信息、快速链接、社交图标和版权声明",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'footer', 'numberposts' => 1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Templates → Theme Builder → Footer → Add New", "三列或四列布局：联系信息 | 快速链接 | 社交图标", "底部一行版权声明"],
+        "on_pass_note": "Footer 是全站底部，通常包含：公司联系方式（地址/电话/邮箱）、导航链接、社交媒体图标、Privacy Policy + Terms 链接、版权声明。外贸站页脚还要加 WhatsApp 链接。",
+        "chain": "Theme Builder",
+        "chain_order": 1
+      }
+    ]
+  },
+  "ELE.11": {
+    "name": "Theme Builder — 文章模板（Pro）",
+    "tasks": [
+      {
+        "id": "ELE.11-a",
+        "difficulty": 3,
+        "description": "创建 Single Post 模板（博客文章详情页模板）：包含 Post Title、Featured Image、Post Content、Author Box、Post Navigation",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'single', 'numberposts' => 1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Templates → Theme Builder → Single Post → Add New", "拖入 Post Title + Featured Image + Post Content + Author Box"],
+        "on_pass_note": "Single Post 模板控制所有博客文章的详情页样式。使用 Dynamic 类型的 widget（Post Title、Post Content 等）——它们自动读取当前文章的数据。这就是 Theme Builder 的核心价值：定义一次模板，所有同类型内容自动套用。"
+      },
+      {
+        "id": "ELE.11-b",
+        "difficulty": 3,
+        "description": "创建 Archive 模板（文章列表页/分类页模板）：包含 Archive Title 和 Posts widget 展示文章列表",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'archive', 'numberposts' => 1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Templates → Theme Builder → Archive → Add New", "拖入 Archive Title + Posts widget → 设置列数和样式"],
+        "on_pass_note": "Archive 模板控制分类页、标签页、作者页等列表页的样式。Posts widget (Pro) 以卡片网格展示文章列表（缩略图+标题+摘要）。可以设置列数、间距、分页。"
+      }
+    ]
+  },
+  "ELE.12": {
+    "name": "Dynamic Tags + ACF（Pro）",
+    "tasks": [
+      {
+        "id": "ELE.12-a",
+        "difficulty": 3,
+        "description": "在 Single Post 模板中使用 Dynamic Tags 读取 ACF 字段：添加一个 Heading widget，内容设为动态读取 ACF 的「副标题」字段",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'single', 'numberposts' => 1]); if(count($posts) > 0) { $d = get_post_meta($posts[0]->ID, '_elementor_data', true); echo (strpos($d, 'acf') !== false || strpos($d, 'dynamic') !== false) ? 'yes' : 'no'; } else { echo 'no'; }", "expected_output": "yes"}
+        ],
+        "hints": ["编辑 Single Post 模板 → 添加 Heading → Title 旁点动态图标 → ACF Field → 选择 subtitle"],
+        "on_pass_note": "Dynamic Tags 是 Elementor Pro + ACF 的核心连接点。在任何 widget 的文本/图片/URL 设置旁，点击「动态」图标就能选择数据源。ACF Field 是最常用的动态源——它让你在模板中引用自定义字段的值。这样一个模板就能展示所有同类型内容的不同数据。"
+      },
+      {
+        "id": "ELE.12-b",
+        "difficulty": 3,
+        "description": "创建一个用于展示 CPT（如 team_member）的 Single 模板：用 Dynamic Tags 映射 ACF 的 position、bio 字段",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'numberposts' => 10]); foreach($posts as $p) { $d = get_post_meta($p->ID, '_elementor_data', true); if($d && strpos($d, 'acf') !== false) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Templates → Theme Builder → Single → Add New → Condition: team_member", "添加 Heading(动态:Post Title) + Text(动态:ACF position) + Text(动态:ACF bio)"],
+        "on_pass_note": "CPT + ACF + Elementor Theme Builder = WordPress 内容管理三剑客。流程：ACF 定义数据结构 → CPT 定义内容类型 → Elementor 定义展示模板。改数据在 WordPress 后台，改样式在 Elementor——关注点完全分离。"
+      }
+    ]
+  },
+  "ELE.13": {
+    "name": "Popup Builder（Pro）",
+    "tasks": [
+      {
+        "id": "ELE.13-a",
+        "difficulty": 3,
+        "description": "用 Elementor Popup Builder 创建一个询盘弹窗：包含表单（Name + Email + Message），触发条件设为「点击按钮时弹出」",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'popup', 'numberposts' => 1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["Templates → Popups → Add New → 添加 Form widget → 设置触发: On Click"],
+        "on_pass_note": "Popup 触发方式：On Page Load（页面加载）、On Scroll（滚动到指定位置）、On Click（点击元素）、After Inactivity（用户无操作一段时间）、On Exit Intent（用户准备离开）。外贸站推荐 On Click（用户主动点击 CTA 弹出表单）+ Exit Intent（离开时挽留）。避免 On Page Load——会打断用户体验。"
+      }
+    ]
+  },
+  "ELE.14": {
+    "name": "Landing Page 设计",
+    "tasks": [
+      {
+        "id": "ELE.14-a",
+        "difficulty": 3,
+        "description": "创建一个 Landing Page：使用 Elementor Canvas 模板（无 Header/Footer），结构为 Hero → 产品特点 → 公司优势（Counter）→ 询盘表单",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$pages = get_pages(); foreach($pages as $p) { $d = get_post_meta($p->ID, '_elementor_data', true); $t = get_post_meta($p->ID, '_wp_page_template', true); if($d && strpos($d, 'form') !== false && (strpos($t, 'canvas') !== false || strpos($t, 'elementor_canvas') !== false)) { echo 'yes'; exit; } } echo 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["新建页面 → 用 Elementor 编辑 → 左下角设置 → Page Layout: Elementor Canvas", "按需排布区块：Hero → 特点展示 → 数据展示(Counter) → 表单"],
+        "on_pass_note": "Canvas 模板移除 Header 和 Footer，让用户 100% 聚焦在 Landing Page 内容上。这是付费广告投放的标准做法——减少干扰，提高转化率。Landing Page 只有一个目标：让用户提交表单。所有内容都服务于这个目标。"
+      }
+    ]
+  },
+  "ELE.15": {
+    "name": "模板保存与复用",
+    "tasks": [
+      {
+        "id": "ELE.15-a",
+        "difficulty": 2,
+        "description": "将当前页面的某个区块保存为 Template，以便在其他页面复用",
+        "verify": [
+          {"type": "wp_eval", "php_code": "$posts = get_posts(['post_type' => 'elementor_library', 'meta_key' => '_elementor_template_type', 'meta_value' => 'section', 'numberposts' => 1]); echo count($posts) > 0 ? 'yes' : 'no';", "expected_output": "yes"}
+        ],
+        "hints": ["右键点击 Container → Save as Template → 输入名称 → 保存", "在其他页面: 添加模板 → My Templates → 插入"],
+        "on_pass_note": "Save as Template 是效率倍增器。把常用的区块（如 CTA Section、Contact Info、Testimonial Block）保存为模板，新页面直接插入。Elementor 模板存储在 elementor_library 自定义文章类型中。也可以导出 JSON 给其他站点导入。"
+      },
+      {
+        "id": "ELE.15-b",
+        "difficulty": 2,
+        "description": "从 Elementor 模板库（Template Library）导入一个预设模板到页面中",
+        "verify": [
+          {"type": "wp_eval", "php_code": "echo 'checked';", "expected_output": "checked"}
+        ],
+        "hints": ["Elementor 编辑器 → 添加模板（文件夹图标）→ 模板库 → 选择模板 → Insert"],
+        "on_pass_note": "Elementor 模板库有 300+ 预设模板（Pro 版全部可用）。模板分为 Pages（完整页面）和 Blocks（单个区块）。导入后修改内容和样式即可——比从零开始快很多。外贸站可以先导入一个 Business/Corporate 模板，再根据自己的产品定制内容。"
+      }
+    ]
+  }
+}

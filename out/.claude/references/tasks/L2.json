@@ -112,6 +112,51 @@
           "新建页面 → 标题「隐藏页面」→ 发布面板 → 可见性 → 选择「私密」→ 发布"
         ],
         "on_pass_note": "私密页面只有登录的管理员和编辑能看到。WordPress 的内容可见性有四种：公开（publish）、私密（private）、密码保护、草稿（draft）。这些状态都存在 post_status 字段中。"
+      },
+      {
+        "id": "L2.1-f",
+        "difficulty": 1,
+        "description": "创建以下页面并发布：「Thank You」「Privacy Policy」「Terms of Service」",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "Thank You",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "Privacy Policy",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "Terms of Service",
+            "status": "publish"
+          }
+        ],
+        "hints": [
+          "页面 → 新建页面 → 输入标题 → 发布，重复三次"
+        ],
+        "on_pass_note": "Thank You 页面用于表单提交后跳转（便于转化追踪）。Privacy Policy 和 Terms of Service 是合规必备页面——GDPR 要求隐私政策，Google Ads 要求 Terms。WordPress 自带隐私政策模板（设置 → 隐私）。"
+      },
+      {
+        "id": "L2.1-g",
+        "difficulty": 2,
+        "description": "在「设置 → 隐私」中，将 Privacy Policy 页面设为站点的隐私政策页面",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$id = get_option('wp_page_for_privacy_policy'); $p = get_post($id); echo $p ? $p->post_title : 'none';",
+            "expected_output": "Privacy Policy"
+          }
+        ],
+        "hints": [
+          "设置 → 隐私 → 选择隐私政策页面 → Privacy Policy"
+        ],
+        "on_pass_note": "wp_page_for_privacy_policy 存储隐私政策页面的 ID。设置后 WordPress 的登录页面和注册页面会自动显示隐私政策链接。很多 Cookie Consent 插件也会自动引用这个设置。"
       }
     ]
   },
@@ -255,6 +300,54 @@
           "文章 → 分类目录 → 找到 Uncategorized → 编辑 → 改名和 slug"
         ],
         "on_pass_note": "每个 WordPress 站点都有一个默认分类（default_category option 存储其 ID）。未指定分类的文章会归入默认分类。你可以改名但不能删除默认分类——删除时 WordPress 会自动指定另一个分类为默认。"
+      },
+      {
+        "id": "L2.2-g",
+        "difficulty": 2,
+        "description": "编辑文章「欢迎来到我们的网站」，为它设置一张特色图片（Featured Image）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['title'=>'欢迎来到我们的网站','post_type'=>'post']); echo has_post_thumbnail($posts[0]->ID) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑文章 → 右侧面板 → 特色图片 → 设置特色图片 → 选择或上传图片"
+        ],
+        "on_pass_note": "特色图片（Featured Image / Post Thumbnail）存在 wp_postmeta 中（_thumbnail_id 指向 attachment ID）。主题在文章列表和详情页自动显示特色图片。外贸站的博客文章必须设特色图片——没图片的文章在列表页和社交分享时非常难看。"
+      },
+      {
+        "id": "L2.2-h",
+        "difficulty": 2,
+        "description": "创建一篇新文章「公司年会回顾」，设置为定时发布（Schedule）：发布时间设为明天",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['title'=>'公司年会回顾','post_type'=>'post','post_status'=>'future']); echo count($posts) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "写文章 → 右侧面板 → 状态 → 定时 → 选择明天的日期 → 定时发布"
+        ],
+        "on_pass_note": "定时发布（post_status = future）依赖 wp-cron。如果 wp-cron 没正常运行，定时文章不会按时发布。这就是为什么 L7 教了用系统 cron 替代 wp-cron。外贸站定时发布常用于博客内容营销——提前写好一周的文章，每天定时发一篇。"
+      },
+      {
+        "id": "L2.2-i",
+        "difficulty": 1,
+        "description": "检查文章「WordPress 入门指南」的 URL 别名（slug），确认是英文。如果是中文编码，改为 wordpress-guide",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['title'=>'WordPress 入门指南','post_type'=>'post']); echo $posts[0]->post_name;",
+            "expected_output": "wordpress-guide"
+          }
+        ],
+        "hints": [
+          "编辑文章 → 右侧面板 → 链接/别名 → 修改为英文 slug"
+        ],
+        "on_pass_note": "文章发布后尽量不要修改 slug——已经被搜索引擎收录的 URL 改了会产生 404。如果必须改，要设置 301 跳转。发布前就把 slug 设好是最佳实践。外贸站所有内容的 slug 都应该用英文。"
       }
     ]
   },
