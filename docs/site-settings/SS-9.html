@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关闭评论 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">站点设置</a>
+  <span class="sep">/</span>
+  <span class="current">关闭评论</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>关闭评论</h1>
+    <div class="meta">
+      <span class="tag topic">站点设置</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 默认开启文章评论功能，允许访客在文章下方留言。对于企业站、产品展示站等不需要评论互动的网站，应该全局关闭评论功能。</p>
+    <p>关闭评论涉及两个层面：全局默认设置（影响新文章）和已有文章的评论状态。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>开放评论是垃圾评论（spam）的主要入口。即使安装了 Akismet 等反垃圾插件，每天仍会收到大量垃圾评论，浪费数据库资源。对于不需要评论的网站，直接关闭最省心。</p>
+    <p>垃圾评论中常包含恶意链接，影响站点 SEO 和安全性。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 讨论</strong>（Settings → Discussion）</li>
+      <li>取消勾选 <strong>"允许他人在新文章上发表评论"</strong>（Allow people to submit comments on new posts）</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <div class="callout warning">注意：这只影响<strong>新发布</strong>的文章。已有文章的评论仍然开启，需要单独处理。</div>
+    <h3>关闭已有文章的评论</h3>
+    <ol>
+      <li>进入 <strong>文章 → 所有文章</strong></li>
+      <li>勾选顶部全选框选中所有文章</li>
+      <li>在 <strong>批量操作</strong> 下拉菜单中选择 <strong>编辑</strong>，点击 <strong>应用</strong></li>
+      <li>在批量编辑面板中，将 <strong>评论</strong> 改为 <strong>不允许</strong></li>
+      <li>点击 <strong>更新</strong></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>页面（Page）的评论默认也是开启的，需要在页面列表中同样批量关闭</li>
+      <li>关闭评论后，已有的历史评论不会被删除，仍然会显示在前台</li>
+      <li>如果想彻底隐藏评论区域，可能还需要在主题模板中处理</li>
+      <li>使用 Disable Comments 插件可以一键全局禁用，比手动操作更彻底</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SS-8.html" class="prev"><div class="label">上一篇</div><div class="title">日期和时间格式</div></a>
+    <a href="SS-10.html" class="next"><div class="label">下一篇</div><div class="title">每页文章数</div></a>
+  </div>
+</div>
+</body>
+</html>

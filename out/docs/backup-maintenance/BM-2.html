@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恢复备份 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">backup-maintenance</a>
+  <span class="sep">/</span>
+  <span class="current">恢复备份</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>恢复备份</h1>
+    <div class="meta">
+      <span class="tag topic">backup-maintenance</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>从 UpdraftPlus 备份中恢复站点到之前的状态。恢复操作可以选择性执行：只恢复数据库、只恢复插件，或者全部恢复。</p>
+    <p>恢复会用备份中的数据覆盖当前数据，这是不可逆操作——除非你在恢复前又做了一次备份。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>备份的价值只有在恢复时才能体现。更新出错导致白屏、被黑客入侵、误操作删除了关键内容——这些场景都需要恢复能力。</p>
+    <p>如果你不练习恢复，出事时可能发现：备份文件损坏、恢复步骤不熟、关键数据根本没包含在备份中。在训练环境中练习恢复是零风险的。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>从现有备份恢复</h3>
+    <ol>
+      <li>进入 <strong>设置 → UpdraftPlus Backups</strong></li>
+      <li>在 <strong>现有备份</strong>（Existing Backups）列表中找到目标备份</li>
+      <li>点击 <strong>还原</strong>（Restore）按钮</li>
+      <li>勾选需要恢复的组件：数据库、插件、主题、上传文件、其他</li>
+      <li>点击 <strong>Next</strong>，确认执行恢复</li>
+      <li>等待恢复完成，页面会显示进度条</li>
+    </ol>
+
+    <div class="callout warning">恢复会覆盖当前数据，操作前务必确认。建议在恢复前先做一次当前状态的备份（UpdraftPlus 恢复时会提示是否自动备份）。</div>
+
+    <h3>从上传的备份文件恢复</h3>
+    <p>如果备份文件不在当前站点上（例如从其他地方拷贝过来的）：</p>
+    <ol>
+      <li>点击 <strong>上传备份文件</strong></li>
+      <li>拖拽或选择备份的 zip/gz 文件</li>
+      <li>上传完成后，备份会出现在列表中</li>
+      <li>按上述步骤执行恢复</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>恢复数据库会覆盖所有文章、页面、设置和用户数据，请确认后再操作</li>
+      <li>恢复后建议重新保存固定链接：<strong>设置 → 固定链接 → 保存更改</strong></li>
+      <li>如果恢复过程中断，站点可能处于不一致状态——重新执行恢复即可修复</li>
+      <li>大文件恢复可能超时（特别是共享主机），可以尝试分组件逐步恢复</li>
+      <li>如果 WordPress 后台进不去，UpdraftPlus 的恢复功能也无法使用。这时需要通过 FTP 手动恢复文件 + phpMyAdmin 导入数据库</li>
+      <li>恢复后仔细检查前后台功能和媒体文件是否完整</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-1.html" class="prev"><div class="label">上一篇</div><div class="title">UpdraftPlus 备份</div></a>
+    <a href="BM-3.html" class="next"><div class="label">下一篇</div><div class="title">备份策略选择</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-1.html">UpdraftPlus 备份</a>
+    <a href="BM-3.html">备份策略选择</a>
+    <a href="BM-5.html">WP Reset 生成快照</a>
+    <a href="BM-6.html">WP Reset 恢复快照</a>
+  </div></div>
+</div>
+</body>
+</html>

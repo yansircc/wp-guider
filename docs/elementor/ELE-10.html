@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>全局样式与设计系统 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">全局样式与设计系统</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>全局样式与设计系统</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d2">L2-L3</span></div><p class="merge-note">本文同时覆盖: ELE-10, ELE-11, ELE-12</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor 的设计系统包含三个层次：<strong>全局颜色/字体</strong>（基础）、<strong>Design System Variables</strong>（进阶变量）和 <strong>CSS Classes</strong>（样式复用）。它们共同构成一个中心化的设计管理体系，让你一处修改、全站生效。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>一致性</strong>：统一的颜色和字体确保全站视觉一致，不会出现"每个页面看起来像不同网站"的问题</li>
+      <li><strong>效率</strong>：改一次全局颜色，所有引用该颜色的地方自动更新，不用逐页修改</li>
+      <li><strong>可维护</strong>：客户要换品牌色？改一个变量就行，而不是翻遍几十个页面</li>
+      <li><strong>团队协作</strong>：统一的设计规范让多人协作时保持一致</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>全局颜色（L2）</h3>
+    <ol>
+      <li>在编辑器左上角汉堡菜单 → <strong>Site Settings → Global Colors</strong></li>
+      <li>设置四个核心颜色：Primary（主色）、Secondary（辅助色）、Text（正文色）、Accent（强调色）</li>
+      <li>可以添加自定义颜色组</li>
+      <li>使用时：在任何颜色选择器中点击"地球"图标，选择全局颜色</li>
+    </ol>
+
+    <h3>全局字体（L2）</h3>
+    <ol>
+      <li><strong>Site Settings → Global Fonts</strong></li>
+      <li>设置四个字体层级：Primary（标题）、Secondary（副标题）、Text（正文）、Accent（强调）</li>
+      <li>每个层级包含：字体族、大小、粗细、行高、字间距</li>
+      <li>使用时：在排版设置中点击"地球"图标选择全局字体</li>
+    </ol>
+
+    <h3>Design System Variables（L3，3.31+）</h3>
+    <p>在全局颜色/字体之上，Elementor 3.31 引入了更精细的变量系统：</p>
+    <ul>
+      <li>进入 <strong>Site Settings → Design System</strong></li>
+      <li>可定义变量类型：字号（font-size）、间距（spacing）、圆角（border-radius）等</li>
+      <li>例如：定义 <code>--spacing-sm: 8px</code>、<code>--spacing-md: 16px</code>、<code>--spacing-lg: 32px</code></li>
+      <li>在 Widget 的间距、圆角等属性中引用这些变量</li>
+    </ul>
+
+    <h3>CSS Classes（L3，3.29+）</h3>
+    <ol>
+      <li>进入 <strong>Site Settings → CSS Classes</strong></li>
+      <li>创建一个 Class（如 <code>card-shadow</code>），定义样式规则</li>
+      <li>在任何 Widget 的 Advanced Tab → CSS Classes 中应用该 Class</li>
+      <li>修改 Class 定义后，所有使用该 Class 的元素自动更新</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>先设后用</strong>：在开始设计页面之前先设好全局颜色和字体，避免后期大量返工</li>
+      <li><strong>命名规范</strong>：全局颜色/变量使用语义化命名（如 "Primary"、"CTA Background"），不要用 "Red"、"#FF0000" 这类具体值命名</li>
+      <li><strong>版本要求</strong>：Design System Variables 需要 Elementor 3.31+，CSS Classes 需要 3.29+。确认版本后再使用</li>
+      <li><strong>不要过度</strong>：初学阶段先用好全局颜色和字体即可，Variables 和 CSS Classes 在站点规模较大时才有明显收益</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-9.html" class="prev"><div class="label">上一篇</div><div class="title">视频 / 谷歌地图 Widget</div></a>
+    <a href="ELE-11.html" class="next"><div class="label">下一篇</div><div class="title">Design System Variables（字号/间距/圆角变量）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-1.html">安装 Elementor Pro + 激活授权</a>
+    <a href="ELE-2.html">创建第一个页面（拖拽编辑器界面认识）</a>
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-6.html">标题 / 文本编辑器 / 图片 Widget</a>
+  </div></div>
+</div></body></html>

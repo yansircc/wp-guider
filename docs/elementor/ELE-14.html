@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>按设备隐藏/显示元素 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">按设备隐藏/显示元素</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>按设备隐藏/显示元素</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor 允许你按设备类型（桌面/平板/手机）控制元素是否显示。比如桌面端显示大横幅图，手机端隐藏；或者只在手机端显示「一键拨号」按钮。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>不同设备的屏幕空间不同，某些元素在小屏幕上没有意义或影响体验</li>
+      <li>移动端可能需要专属的交互元素（如浮动电话按钮、底部导航栏）</li>
+      <li>简化移动端布局，提升加载速度和用户体验</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>选中目标 Widget（或 Container/Section）</li>
+      <li>进入 <strong>Advanced 标签 → Responsive</strong></li>
+      <li>找到<strong>「Visibility」</strong>（可见性）区域</li>
+      <li>按需切换各设备的显示状态：
+        <ul>
+          <li><strong>Hide on Desktop</strong>：桌面端隐藏</li>
+          <li><strong>Hide on Tablet</strong>：平板隐藏</li>
+          <li><strong>Hide on Mobile</strong>：手机端隐藏</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>编辑器中的视觉提示</h3>
+    <p>被隐藏的元素在编辑器中会显示为<strong>半透明</strong>并带有一个紫色的隐藏图标，表示该元素在当前预览设备下不可见。切换底部工具栏的设备预览模式可以验证效果。</p>
+
+    <h3>实战示例</h3>
+    <ul>
+      <li><strong>桌面大图 + 手机小图</strong>：创建两个 Image Widget，一个放大图（Hide on Mobile），一个放小图（Hide on Desktop + Hide on Tablet）</li>
+      <li><strong>手机专属 CTA</strong>：创建一个浮动按钮 Container，设置 Hide on Desktop</li>
+    </ul>
+    <div class="callout tip">底部工具栏的响应式切换按钮（桌面/平板/手机图标）可以快速预览不同设备下的效果。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>隐藏 ≠ 不加载</strong>：Elementor 的响应式隐藏是通过 CSS <code>display: none</code> 实现的，HTML 仍然会加载。对性能有极致要求时需注意</li>
+      <li><strong>Container 级别隐藏</strong>：如果整个区域在某个设备不显示，在 Container/Section 级别隐藏比逐个 Widget 隐藏更高效</li>
+      <li><strong>断点自定义</strong>：默认断点是 1025px（桌面/平板）和 768px（平板/手机）。可在<strong>汉堡菜单 → Site Settings → Layout → Breakpoints</strong>中自定义</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-13.html" class="prev"><div class="label">上一篇</div><div class="title">响应式断点（桌面/平板/手机预览切换）</div></a>
+    <a href="ELE-15.html" class="next"><div class="label">下一篇</div><div class="title">响应式排版（不同设备不同字号/间距）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

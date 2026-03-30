@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSC 性能报告 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">Google Analytics</a>
+  <span class="sep">/</span>
+  <span class="current">GSC 性能报告</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>GSC 性能报告（点击/展示/CTR/排名）</h1>
+    <div class="meta">
+      <span class="tag topic">Google Analytics</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Google Search Console 的「性能」（Performance）报告展示网站在 Google 搜索结果中的表现数据。四个核心指标：</p>
+    <ul>
+      <li><strong>点击次数（Clicks）</strong>：用户在搜索结果中点击了你的网站链接多少次</li>
+      <li><strong>展示次数（Impressions）</strong>：你的网站在搜索结果中出现了多少次（不论用户是否点击）</li>
+      <li><strong>平均点击率（CTR）</strong>：点击次数 ÷ 展示次数。衡量搜索结果对用户的吸引力</li>
+      <li><strong>平均排名（Position）</strong>：网站在搜索结果中的平均位置。1 = 第一名</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>GA4 告诉你"访客在网站上做了什么"，GSC 告诉你"访客怎么找到你的"。两者互补。</p>
+    <p>性能报告能回答关键 SEO 问题：</p>
+    <ul>
+      <li>哪些关键词带来了流量？哪些有展示但没人点击（CTR 低）？</li>
+      <li>哪些页面在搜索中表现好？哪些排名正在下降？</li>
+      <li>SEO 优化后效果有没有提升？</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>查看性能报告</h3>
+    <ol>
+      <li>登录 Google Search Console</li>
+      <li>点击左侧 <strong>效果</strong>（Performance）</li>
+      <li>默认显示过去 3 个月的数据，可在顶部修改日期范围</li>
+      <li>勾选要查看的指标（点击、展示、CTR、排名）</li>
+    </ol>
+
+    <h3>按关键词分析</h3>
+    <ol>
+      <li>在报告下方的表格中，默认显示「查询」（Queries）维度</li>
+      <li>这里列出了用户搜索哪些关键词时看到了你的网站</li>
+      <li>按「展示次数」降序排列，找到高展示低点击的关键词 → 这些是优化 CTR 的机会</li>
+    </ol>
+
+    <h3>按页面分析</h3>
+    <ol>
+      <li>切换到「页面」选项卡</li>
+      <li>查看每个页面的搜索表现</li>
+      <li>点击某个页面 URL，再切回「查询」选项卡 → 查看该页面的具体排名关键词</li>
+    </ol>
+
+    <h3>实用筛选技巧</h3>
+    <ul>
+      <li>顶部 <strong>+ 新增</strong> 可按查询、页面、国家/地区、设备筛选</li>
+      <li>对比功能：选择两个时间段对比，快速发现流量变化</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>数据有 2-3 天延迟</strong>：GSC 性能数据不是实时的，通常延迟 48-72 小时</li>
+      <li><strong>展示 ≠ 用户真的看到了</strong>：如果你的页面排在搜索结果第 2 页，也算一次「展示」，但用户可能根本没翻到第 2 页</li>
+      <li><strong>平均排名是加权平均</strong>：同一页面可能对不同关键词有不同排名，显示的是加权平均值</li>
+      <li><strong>CTR 低的常见原因</strong>：SEO 标题不够吸引人、meta description 缺失或不相关、搜索结果中有富文本摘要（Featured Snippet）占据了注意力</li>
+      <li><strong>关键词数据抽样</strong>：GSC 对大型站点的数据有抽样，小型站点通常是完整数据</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="GA-4.html" class="prev"><div class="label">上一篇</div><div class="title">GA4 基础报告阅读（用户/会话/页面浏览）</div></a>
+    <a href="GA-6.html" class="next"><div class="label">下一篇</div><div class="title">GA4 事件追踪（按钮点击/表单提交）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="GA-1.html">注册 Google Search Console + 验证站点所有权</a>
+    <a href="GA-2.html">提交 Sitemap 到 GSC</a>
+    <a href="GA-3.html">注册 GA4 + 安装追踪代码（通过 SEO 插件）</a>
+    <a href="GA-7.html">GA4 转化目标设置 + Google Ads 联动</a>
+  </div></div>
+</div>
+</body>
+</html>

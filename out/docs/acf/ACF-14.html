@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>添加、修改与删除字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">添加、修改与删除字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>添加、修改与删除字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>在字段组内部对具体字段进行增删改操作。每个字段都有类型、标签、名称、说明等属性，可以随时调整。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>添加字段</h3>
+    <ol>
+      <li>编辑字段组，点击<strong>「+ 添加字段」</strong></li>
+      <li>填写字段属性：
+        <ul>
+          <li><strong>字段标签</strong>：编辑界面显示名（如「产品价格」）</li>
+          <li><strong>字段名称</strong>（Field Name）：程序调用标识，自动根据标签生成（如 <code>product_price</code>）</li>
+          <li><strong>字段类型</strong>：文本、数字、图片、选择框等</li>
+          <li><strong>说明</strong>：帮助编辑者理解填写要求的提示文字</li>
+          <li><strong>必填</strong>：是否强制要求填写</li>
+          <li><strong>默认值</strong>：未填写时的预设值</li>
+        </ul>
+      </li>
+      <li>保存字段组</li>
+    </ol>
+
+    <h3>修改字段</h3>
+    <p>点击字段名称展开编辑面板，可修改除 Field Name 以外的所有属性。修改后保存即生效。</p>
+    <div class="callout warning">修改<strong>字段类型</strong>（如文本改为数字）不会自动转换已有数据。已填写的旧值可能显示异常或无法正确读取。建议先导出数据再改类型。</div>
+
+    <h3>删除字段</h3>
+    <ol>
+      <li>展开目标字段的编辑面板</li>
+      <li>点击底部的<strong>「删除」</strong>按钮</li>
+      <li>保存字段组</li>
+    </ol>
+
+    <h3>调整顺序与复制</h3>
+    <ul>
+      <li><strong>拖拽排序</strong>：按住字段左侧的拖动手柄上下移动</li>
+      <li><strong>复制字段</strong>：展开字段后点击「复制」，快速创建结构相似的字段</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Field Name 不要改</strong>：字段名一旦确定后尽量不改，改了需要同步修改前端模板中所有引用该字段的代码</li>
+      <li><strong>删除 ≠ 清数据</strong>：删除字段只是移除定义，<code>wp_postmeta</code> 中的数据仍然存在</li>
+      <li><strong>字段命名规范</strong>：英文小写 + 下划线，有意义的前缀（如 <code>product_</code>、<code>team_</code>）方便后续维护</li>
+      <li><strong>字段数量</strong>：单个字段组建议不超过 15-20 个字段，太多可拆分为多个字段组</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-13.html" class="prev"><div class="label">上一篇</div><div class="title">编辑/删除/查看字段组</div></a>
+    <a href="ACF-15.html" class="next"><div class="label">下一篇</div><div class="title">文本 / 文本区域 / 数字 / URL 字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

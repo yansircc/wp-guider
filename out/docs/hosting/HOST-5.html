@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSH 终端操作 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">主机</a>
+  <span class="sep">/</span>
+  <span class="current">SSH 终端操作</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>SSH 终端操作</h1>
+    <div class="meta">
+      <span class="tag topic">主机</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>通过 SSH 连接到服务器后，可以在终端中使用 Linux 命令行操作文件、管理 WordPress（WP-CLI）、查看日志、排查问题等。这是 WordPress 高级管理的必备技能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>有些操作在 WordPress 后台或文件管理器中无法完成，或者效率极低。例如：批量修改文件权限、查找并替换数据库中的 URL、使用 WP-CLI 一条命令完成复杂操作。</p>
+    <p>当网站后台无法访问（白屏、500 错误）时，SSH 是唯一的排障入口。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>常用命令速查</h3>
+    <ul>
+      <li><code>ls -la</code> — 列出当前目录所有文件（含隐藏文件）</li>
+      <li><code>cd wp-content/plugins/</code> — 进入插件目录</li>
+      <li><code>cat wp-config.php</code> — 查看 WordPress 配置文件</li>
+      <li><code>nano wp-config.php</code> — 编辑配置文件（nano 编辑器）</li>
+      <li><code>find . -name "*.log"</code> — 查找日志文件</li>
+      <li><code>du -sh *</code> — 查看各目录大小</li>
+      <li><code>chmod 755 目录名</code> — 修改目录权限</li>
+      <li><code>chmod 644 文件名</code> — 修改文件权限</li>
+    </ul>
+    <h3>WP-CLI 常用命令</h3>
+    <ul>
+      <li><code>wp core version</code> — 查看 WordPress 版本</li>
+      <li><code>wp plugin list</code> — 列出所有插件及状态</li>
+      <li><code>wp plugin activate plugin-name</code> — 激活插件</li>
+      <li><code>wp option get siteurl</code> — 查看站点 URL</li>
+      <li><code>wp search-replace 'old-url' 'new-url'</code> — 搜索替换</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>操作前确认当前目录：<code>pwd</code> 查看，<code>ls</code> 确认文件</li>
+      <li>编辑重要文件前先备份：<code>cp wp-config.php wp-config.php.bak</code></li>
+      <li>不要随意执行 <code>rm -rf</code>，删除操作不可逆</li>
+      <li>Hostinger 共享主机上 WP-CLI 已预装，可直接使用 <code>wp</code> 命令</li>
+      <li>如果遇到 "Permission denied"，说明文件权限不足，需要检查文件所有者</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="HOST-4.html" class="prev"><div class="label">上一篇</div><div class="title">开启 SSH 访问权限</div></a>
+    <a href="HOST-6.html" class="next"><div class="label">下一篇</div><div class="title">生成 SSH 密钥对 + 免密登录</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="HOST-4.html">开启 SSH 访问权限</a>
+    <a href="HOST-3.html">添加第二个网站 (多站点管理)</a>
+    <a href="HOST-1.html">购买 Hostinger 主机</a>
+    <a href="HOST-2.html">hPanel 控制面板导航</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建分类目录 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">文章与分类</a>
+  <span class="sep">/</span>
+  <span class="current">创建分类目录</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>创建分类目录</h1>
+    <div class="meta">
+      <span class="tag topic">文章与分类</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>分类目录（Category）是 WordPress 对文章进行归类的核心分类法（Taxonomy）。每篇文章至少属于一个分类。分类是层级结构（hierarchical），可以创建父子分类来组织内容。</p>
+    <p>分类目录与「标签」（Tag）不同：分类是大类划分，通常数量有限且结构清晰；标签是更细粒度的关键词描述，数量可以很多。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>合理的分类结构是网站信息架构的基础。访客通过分类快速找到感兴趣的内容，搜索引擎通过分类理解网站的内容主题和层级关系。</p>
+    <p>没有分类的文章会自动归入默认分类（通常是 "Uncategorized"），这对用户体验和 SEO 都不友好。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 WordPress 后台，点击左侧菜单 <strong>文章 → 分类目录</strong></li>
+      <li>在左侧「添加新分类目录」表单中填写：
+        <ul>
+          <li><strong>名称</strong>：分类的显示名称，如「公司新闻」</li>
+          <li><strong>别名</strong>（Slug）：URL 中使用的标识符，建议用英文小写，如 <code>company-news</code></li>
+          <li><strong>描述</strong>：可选，部分主题会在分类归档页显示描述</li>
+        </ul>
+      </li>
+      <li>点击 <strong>添加新分类目录</strong> 按钮</li>
+      <li>新分类会出现在右侧列表中</li>
+    </ol>
+    <div class="callout tip">也可以在编辑文章时，在右侧面板「分类目录」区域直接点击「添加新分类目录」快速创建。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Slug 使用英文</strong>：中文名称会导致 URL 中出现编码字符，不利于 SEO 和分享</li>
+      <li><strong>分类不要太多</strong>：建议控制在 5-10 个顶级分类以内，过多反而模糊了网站主题</li>
+      <li><strong>分类不能跨文章类型</strong>：默认分类只适用于「文章」，不适用于「页面」</li>
+      <li><strong>空分类不影响前台</strong>：如果分类下没有文章，大多数主题不会在前台显示该分类</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="PT-2.html" class="next"><div class="label">下一篇</div><div class="title">创建子分类</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PT-2.html">创建子分类</a>
+    <a href="PT-3.html">发布文章并归类</a>
+    <a href="PT-5.html">文章+标签+摘要</a>
+  </div></div>
+</div>
+</body>
+</html>

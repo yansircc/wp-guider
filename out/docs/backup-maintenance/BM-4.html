@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自动备份计划 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">备份与维护</a>
+  <span class="sep">/</span>
+  <span class="current">自动备份计划</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>自动备份计划</h1>
+    <div class="meta">
+      <span class="tag topic">备份与维护</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>UpdraftPlus 支持设置自动备份计划，按固定频率自动执行备份。文件备份和数据库备份可以设置不同的频率。</p>
+    <p>自动备份依赖 WordPress 的 wp-cron 系统。当有人访问站点时，wp-cron 才会触发——这对低流量站点可能是个问题。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>手动备份最大的风险是"忘了做"。自动化备份确保无论多忙，备份都在按计划执行。特别是在做高风险操作（更新 WordPress、安装新插件）前，自动备份是最后的安全网。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>配置 UpdraftPlus 自动备份</h3>
+    <ol>
+      <li>进入 <strong>设置 → UpdraftPlus Backups → 设置</strong>（Settings）标签</li>
+      <li>设置 <strong>文件备份计划</strong>（Files backup schedule）：
+        <ul>
+          <li>选择频率（每天/每周/每月）</li>
+          <li>设置保留份数（建议 3-7 份）</li>
+        </ul>
+      </li>
+      <li>设置 <strong>数据库备份计划</strong>（Database backup schedule）：
+        <ul>
+          <li>频率应高于文件备份（如文件每周、数据库每天）</li>
+        </ul>
+      </li>
+      <li>配置远程存储（Google Drive、Dropbox 等），按引导完成授权</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+
+    <h3>验证自动备份</h3>
+    <p>设置完成后，等待第一次自动备份执行。可以在"现有备份"标签中确认备份已生成。</p>
+
+    <div class="callout warning"><strong>wp-cron 注意事项：</strong>WordPress 的 wp-cron 是伪 cron——只有在站点被访问时才会触发。对于低流量站点，备份可能不会准时执行。解决方案是用系统 cron 替代（参见 wp-cron 相关文档）。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>保留份数设置太少，可能在发现问题时已经没有干净的恢复点了</li>
+      <li>保留份数设置太多，会占用大量存储空间（特别是包含 uploads 的文件备份）</li>
+      <li>免费版的远程存储只支持一个目标，付费版支持多个</li>
+      <li>自动备份在执行时会临时增加服务器负载，建议设置在低流量时段</li>
+      <li>训练环境中不需要自动备份，WP Reset 手动快照更实用</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-3.html" class="prev"><div class="label">上一篇</div><div class="title">备份策略选择</div></a>
+    <a href="BM-5.html" class="next"><div class="label">下一篇</div><div class="title">WP Reset 生成快照</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-1.html">UpdraftPlus 备份</a>
+    <a href="BM-3.html">备份策略选择</a>
+    <a href="BM-5.html">WP Reset 生成快照</a>
+    <a href="BM-6.html">WP Reset 恢复快照</a>
+  </div></div>
+</div>
+</body>
+</html>

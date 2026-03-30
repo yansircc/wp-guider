@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>WooCommerce 产品页模板 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">WooCommerce 产品页模板</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>WooCommerce 产品页模板</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>通过 Elementor Theme Builder 创建自定义的 WooCommerce 单产品页（Single Product）模板，完全替代 WooCommerce 默认的产品详情页布局。可以用 Elementor 的拖拽方式设计产品图片、标题、价格、加入购物车按钮、描述、相关产品等所有元素的位置和样式。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>品牌定制</strong>：WooCommerce 默认产品页布局固定且朴素，难以匹配品牌设计</li>
+      <li><strong>转化优化</strong>：自定义布局可以突出核心卖点、添加信任标识（安全支付、售后保障等）、优化 CTA 位置</li>
+      <li><strong>信息架构</strong>：不同类型产品可以使用不同的模板布局（如服装类突出尺码表，电子产品突出参数对比）</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>前提条件</h3>
+    <ul>
+      <li>已安装并激活 WooCommerce</li>
+      <li>已安装 Elementor Pro（WooCommerce Builder 是 Pro 功能）</li>
+      <li>至少已创建一个产品用于预览</li>
+    </ul>
+
+    <h3>创建产品页模板</h3>
+    <ol>
+      <li>进入 <strong>Templates → Theme Builder</strong></li>
+      <li>在 <strong>Single Product</strong>（或 WooCommerce 区域的 Product Page）点击 <strong>"+"</strong></li>
+      <li>选择预设模板或从空白开始</li>
+      <li>使用 WooCommerce 专用 Widget 构建页面：
+        <ul>
+          <li><strong>Product Images</strong>：产品图片画廊（支持 lightbox 和缩放）</li>
+          <li><strong>Product Title</strong>：产品名称</li>
+          <li><strong>Product Price</strong>：价格（自动处理促销价/原价显示）</li>
+          <li><strong>Add To Cart</strong>：加入购物车按钮（含数量选择器和变体选项）</li>
+          <li><strong>Product Rating</strong>：星级评分</li>
+          <li><strong>Product Short Description</strong>：简短描述</li>
+          <li><strong>Product Data Tabs</strong>：描述/评价/附加信息标签页</li>
+          <li><strong>Product Meta</strong>：SKU、分类、标签等元信息</li>
+          <li><strong>Related Products</strong>：相关产品推荐</li>
+          <li><strong>Upsells</strong>：追加销售产品</li>
+        </ul>
+      </li>
+      <li>在 Preview Settings 中选择一个具体产品预览</li>
+      <li>Publish → Display Conditions 选择 <strong>Products</strong>（或指定特定产品分类）</li>
+    </ol>
+
+    <h3>常见布局结构</h3>
+    <p>典型产品页：左侧产品图片（占 50-60% 宽度）→ 右侧标题 + 价格 + 加入购物车 → 下方描述标签页 → 相关产品网格。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Add To Cart</strong> Widget 是核心 — 没有它用户无法购买产品</li>
+      <li>可变产品（Variable Product）的变体选择器包含在 Add To Cart Widget 中，会自动显示</li>
+      <li>如果产品图片显示不正常，检查 WooCommerce 设置中的图片尺寸（<strong>WooCommerce → 设置 → 产品 → 显示</strong>）和 WordPress 媒体设置中的缩略图尺寸</li>
+      <li>Product Data Tabs 的"评价"标签需要在 WooCommerce 设置中启用产品评论功能</li>
+      <li>不同产品分类可以使用不同模板 — 通过 Display Conditions 指定分类实现</li>
+      <li>模板修改后所有产品页同时生效，发布前务必预览多个不同类型的产品确认效果</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-46.html" class="prev"><div class="label">上一篇</div><div class="title">Portfolio Widget 作品集展示</div></a>
+    <a href="ELE-48.html" class="next"><div class="label">下一篇</div><div class="title">WooCommerce 商店归档 + 购物车/结账页</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改页面 Slug 为英文 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">修改页面 Slug 为英文</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>修改页面 Slug 为英文</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Slug 是页面 URL 中的标识部分（如 <code>example.com/<strong>about-us</strong></code>）。WordPress 中文站默认会用中文标题生成 Slug，导致 URL 出现乱码（URL 编码的中文），不利于 SEO 和分享。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>中文 URL 在浏览器地址栏和分享链接中显示为 <code>%E5%85%B3%E4%BA%8E</code> 等编码，可读性差</li>
+      <li>英文 Slug 更短、更清晰，搜索引擎更易理解页面主题</li>
+      <li>便于记忆和手动输入 URL</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>编辑目标页面</li>
+      <li>在右侧栏 <strong>「链接」</strong>（或 URL）区域找到 Slug 输入框</li>
+      <li>将中文改为英文，例如：
+        <ul>
+          <li>「关于我们」→ <code>about-us</code></li>
+          <li>「联系我们」→ <code>contact</code></li>
+          <li>「产品中心」→ <code>products</code></li>
+          <li>「新闻动态」→ <code>news</code></li>
+        </ul>
+      </li>
+      <li>保存/更新页面</li>
+    </ol>
+    <div class="callout tip">Slug 使用小写英文 + 短横线分隔（如 <code>our-team</code>），不要使用下划线或大写。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>修改后旧 URL 会 404</strong>：如果页面已被收录或有外部链接，修改 Slug 后旧地址会失效。可用重定向插件（如 Redirection）做 301 跳转</li>
+      <li><strong>所有页面都要改</strong>：建议在建站初期就把所有页面的 Slug 统一改为英文，避免后期批量修改</li>
+      <li><strong>子页面 Slug</strong>：子页面的完整 URL 是 <code>父级slug/子级slug</code>，两级都要改成英文</li>
+      <li><strong>分类和标签也要改</strong>：分类目录和标签的 Slug 同样建议用英文</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-2.html" class="prev"><div class="label">上一篇</div><div class="title">Yoast：设置页面 SEO 标题/描述</div></a>
+    <a href="SEO-4.html" class="next"><div class="label">下一篇</div><div class="title">提交站点地图到 GSC</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-4.html">提交站点地图到 GSC</a>
+    <a href="SEO-5.html">Yoast：noindex 设置</a>
+    <a href="SEO-8.html">SEOPress：配置 Google 全局代码（Analytics/Ads）</a>
+    <a href="SEO-9.html">SEOPress：noindex/nofollow 设置</a>
+  </div></div>
+</div>
+</body>
+</html>

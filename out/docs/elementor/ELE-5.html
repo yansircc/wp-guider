@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Grid Container 布局 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Grid Container 布局</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Grid Container 布局</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Grid Container 是 Elementor 基于 CSS Grid 的布局模式，与默认的 Flexbox Container 互补。CSS Grid 擅长二维布局——同时控制行和列，适合创建卡片网格、图片画廊、定价表等规则网格结构。</p>
+    <p>创建 Container 时，在 Layout 设置中将 Container Type 从 <strong>Flex</strong> 切换为 <strong>Grid</strong> 即可启用。Grid 模式下你可以定义列数、行数和间距，子元素会自动填充到网格单元中。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>Flexbox 擅长一维排列（单行或单列），但处理二维网格布局时需要多层嵌套。Grid 可以直接定义行列结构，一层 Container 就能实现复杂的网格布局，减少嵌套层级，代码更简洁。</p>
+    <p>典型场景：3×2 服务卡片网格、4 列图片画廊、不等宽的杂志式布局。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 创建 Grid Container</h3>
+    <ol>
+      <li>添加新 Container，点击编辑</li>
+      <li>在 Layout Tab 中，将 <strong>Container Type</strong> 改为 <strong>Grid</strong></li>
+      <li>设置 <strong>Columns</strong>（列数）和 <strong>Rows</strong>（行数）</li>
+      <li>设置 <strong>Gaps</strong>（行间距和列间距）</li>
+    </ol>
+
+    <h3>2. 添加子元素</h3>
+    <p>拖入 Widget 或子 Container 到 Grid 中，它们会自动按顺序填充网格单元。</p>
+
+    <h3>3. 自定义网格位置</h3>
+    <p>选中子元素 → Advanced Tab → 可以指定该元素占据的网格区域（Grid Column / Grid Row），实现跨行跨列布局。</p>
+
+    <h3>4. 响应式调整</h3>
+    <p>切换到平板/手机视图，可以为不同设备设置不同的列数。例如桌面 3 列、平板 2 列、手机 1 列。</p>
+
+    <div class="callout tip">Grid 和 Flex 可以混合使用——外层用 Grid 做网格，每个网格单元内部用 Flex Container 做内容排列。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Grid Container 需要 Elementor 3.12+，确保插件已更新到最新版</li>
+      <li>Grid 适合规则网格，不规则/流式布局仍然用 Flexbox 更合适</li>
+      <li>如果子元素没有正确排列，检查是否在 Advanced Tab 中意外设置了 Grid 位置</li>
+      <li>Grid 布局在旧版浏览器（IE11）中不受支持，但现代浏览器完全兼容</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-4.html" class="prev"><div class="label">上一篇</div><div class="title">嵌套 Container（多层布局）</div></a>
+    <a href="ELE-6.html" class="next"><div class="label">下一篇</div><div class="title">标题 / 文本编辑器 / 图片 Widget</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

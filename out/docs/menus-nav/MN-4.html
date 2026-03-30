@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>子菜单层级 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">菜单与导航</a>
+  <span class="sep">/</span>
+  <span class="current">子菜单层级</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>子菜单层级</h1>
+    <div class="meta">
+      <span class="tag topic">菜单与导航</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>子菜单（Sub-menu / Dropdown）是通过缩进菜单项形成的层级导航结构。当鼠标悬停在父菜单项上时，子菜单以下拉列表的形式展开，让用户在有限的导航栏空间内访问更多页面。</p>
+    <p>例如「服务」作为父菜单，下拉显示「网站建设」「SEO 优化」「品牌设计」三个子项。WordPress 菜单系统支持多层嵌套，但实际使用中不建议超过 2 层。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>当网站页面较多时，所有页面平铺在导航栏不切实际。子菜单通过「分组 + 展开」的方式，在保持导航栏简洁的同时提供完整的页面访问路径。</p>
+    <p>合理的子菜单层级反映了网站的信息架构，帮助访客快速定位所需内容。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>外观 → 菜单</strong>，选择要编辑的菜单</li>
+      <li>在菜单结构区域，将子菜单项<strong>拖拽到父菜单项下方并向右缩进</strong></li>
+      <li>缩进成功后，该项前方会出现「子项目」标识，显示在父项的下级</li>
+      <li>可以继续缩进创建更深层级（二级子菜单）</li>
+      <li>点击 <strong>保存菜单</strong></li>
+    </ol>
+
+    <h3>创建占位父菜单</h3>
+    <p>如果父菜单不需要指向任何页面（仅用于展开子菜单）：</p>
+    <ol>
+      <li>在左侧展开 <strong>自定义链接</strong> 面板</li>
+      <li>URL 填 <code>#</code>，链接文字填你想显示的名称（如「服务」）</li>
+      <li>点击 <strong>添加到菜单</strong></li>
+      <li>将其他菜单项拖拽到它下方并缩进</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>移动端兼容性</strong>：下拉子菜单在桌面端通过悬停触发，但触屏设备需要点击。确保主题支持触摸展开子菜单</li>
+      <li><strong>层级不超过 2 层</strong>：三级及以上的子菜单在大多数主题中体验很差，且难以在移动端操作</li>
+      <li><strong># 占位链接</strong>：URL 为 <code>#</code> 的菜单项被点击后页面会跳到顶部。这是一个已知的小问题，通常可接受</li>
+      <li><strong>拖拽困难</strong>：如果拖拽菜单项时难以精确缩进，可以先把它拖到目标位置附近，再微调水平位置使其变为子项</li>
+      <li><strong>取消子菜单</strong>：将缩进的菜单项拖拽回左侧（与父项对齐），即可取消子菜单关系</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="MN-3.html" class="prev"><div class="label">上一篇</div><div class="title">添加自定义链接</div></a>
+    <a href="MN-5.html" class="next"><div class="label">下一篇</div><div class="title">菜单显示位置</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="MN-1.html">创建主导航菜单</a>
+    <a href="MN-2.html">添加页面到菜单</a>
+  </div></div>
+</div>
+</body>
+</html>

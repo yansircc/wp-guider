@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建字段组与添加字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">创建字段组与添加字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>创建字段组与添加字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><strong>字段组</strong>（Field Group）是 ACF 中组织自定义字段的容器。每个字段组包含一组相关的字段，并通过<strong>位置规则</strong>控制显示在哪些编辑页面上。</p>
+    <p>例如：创建「产品信息」字段组，包含价格、规格、购买链接等字段，并设置在「产品」CPT 的编辑页面上显示。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>WordPress 默认只有标题和正文，字段组让你添加结构化数据（价格、日期、链接等）</li>
+      <li>内容编辑者可以通过表单填写数据，而非在正文中混写</li>
+      <li>结构化数据便于前端展示和搜索筛选</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>创建字段组</h3>
+    <ol>
+      <li>进入 <strong>ACF → 字段组</strong></li>
+      <li>点击<strong>「添加新字段组」</strong></li>
+      <li>输入字段组标题（如「产品信息」）</li>
+    </ol>
+
+    <h3>添加字段</h3>
+    <ol>
+      <li>在字段组编辑页面，点击<strong>「+ 添加字段」</strong></li>
+      <li>每个字段需要设置：
+        <ul>
+          <li><strong>字段标签</strong>：显示给编辑者的名称（如「产品价格」）</li>
+          <li><strong>字段名称</strong>（Field Name）：程序用的标识（如 <code>product_price</code>），自动根据标签生成</li>
+          <li><strong>字段类型</strong>：文本、数字、图片、选择框等</li>
+          <li><strong>必填</strong>：是否为必填字段</li>
+          <li><strong>说明</strong>：帮助编辑者理解该填什么</li>
+        </ul>
+      </li>
+      <li>继续点击「+ 添加字段」添加更多字段</li>
+    </ol>
+
+    <h3>设置位置规则</h3>
+    <p>在字段组编辑页面下方的<strong>「设置」</strong>区域，设置位置规则决定字段组显示在哪里：</p>
+    <ul>
+      <li>文章类型 等于 产品 — 所有「产品」CPT 文章都会显示这个字段组</li>
+    </ul>
+    <p>保存后，去编辑一个产品文章，就能看到新添加的字段了。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>字段名称不可重复</strong>：同一字段组内的 Field Name 必须唯一</li>
+      <li><strong>字段名称用英文</strong>：自动生成的 Field Name 可能包含中文，建议手动改为英文</li>
+      <li><strong>字段组不显示</strong>：检查位置规则是否正确设置</li>
+      <li><strong>字段顺序</strong>：可以拖拽字段来调整显示顺序</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-10.html" class="prev"><div class="label">上一篇</div><div class="title">在 CPT 文章中使用分类法进行归类</div></a>
+    <a href="ACF-12.html" class="next"><div class="label">下一篇</div><div class="title">填写 ACF 字段值</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

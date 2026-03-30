@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOPress：noindex/nofollow 设置 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">SEOPress：noindex/nofollow</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>SEOPress：noindex/nofollow 设置</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d3">L3</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>noindex</code> 阻止搜索引擎收录页面，<code>nofollow</code> 阻止搜索引擎追踪页面中的链接。SEOPress 支持在页面级和全局级分别设置这两个指令。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>单个页面设置</h3>
+    <ol>
+      <li>编辑目标页面/文章</li>
+      <li>在 SEOPress 面板中，点击<strong>「高级」</strong>标签</li>
+      <li>找到 Robots meta 区域：
+        <ul>
+          <li>勾选 <code>noindex</code>：不收录此页</li>
+          <li>勾选 <code>nofollow</code>：不追踪此页链接</li>
+        </ul>
+      </li>
+      <li>保存页面</li>
+    </ol>
+
+    <h3>全局批量设置</h3>
+    <ol>
+      <li>进入 <strong>SEOPress → 标题与 Metas</strong></li>
+      <li>选择<strong>「文章类型」</strong>或<strong>「分类法」</strong>标签</li>
+      <li>找到目标类型，勾选 <code>noindex</code> 或 <code>nofollow</code></li>
+      <li>保存更改</li>
+    </ol>
+    <div class="callout warning">全局设置会影响该类型下的<strong>所有</strong>内容。个别页面的设置会覆盖全局设置。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>noindex vs nofollow</strong>：大多数情况只需要 <code>noindex</code>（不收录但允许追踪链接）。<code>nofollow</code> 较少使用，除非页面包含不想被搜索引擎发现的链接</li>
+      <li><strong>常见 noindex 场景</strong>：感谢页、表单提交成功页、标签归档页、内部搜索结果页、测试/开发页面</li>
+      <li><strong>与 Yoast 的区别</strong>：SEOPress 的 noindex/nofollow 设置在「高级」标签下直接勾选，Yoast 则用下拉菜单选择</li>
+      <li><strong>检查方法</strong>：在前台页面源代码中搜索 <code>robots</code>，确认 meta 标签包含 <code>noindex</code></li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-8.html" class="prev"><div class="label">上一篇</div><div class="title">SEOPress：配置 Google 全局代码（Analytics/Ads）</div></a>
+    <a href="SEO-10.html" class="next"><div class="label">下一篇</div><div class="title">为 ACF 自定义文章类型配置 SEO 标题模板</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-1.html">安装 Yoast SEO + 基础配置向导</a>
+    <a href="SEO-2.html">Yoast：设置页面 SEO 标题/描述</a>
+    <a href="SEO-3.html">修改页面 slug 为英文</a>
+    <a href="SEO-6.html">安装 SEOPress + 基础配置</a>
+  </div></div>
+</div>
+</body>
+</html>

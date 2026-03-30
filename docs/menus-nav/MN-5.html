@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>菜单显示位置 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">菜单与导航</a>
+  <span class="sep">/</span>
+  <span class="current">菜单显示位置</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>菜单显示位置</h1>
+    <div class="meta">
+      <span class="tag topic">菜单与导航</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 主题会注册若干「菜单显示位置」（Menu Location），常见的有：</p>
+    <ul>
+      <li><strong>Primary Menu / 主菜单</strong> — 网站顶部的主导航</li>
+      <li><strong>Footer Menu / 页脚菜单</strong> — 网站底部的链接区</li>
+      <li><strong>Mobile Menu / 移动端菜单</strong> — 手机端的汉堡菜单</li>
+    </ul>
+    <p>创建菜单后，必须将其分配到某个显示位置，前台才会渲染该菜单。一个菜单可以分配到多个位置，但一个位置只能绑定一个菜单。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>创建菜单并添加好菜单项后，如果没有分配显示位置，前台不会显示任何导航。分配位置是让菜单"上线"的最后一步。</p>
+    <p>不同位置的菜单承担不同职责：顶部主导航用于核心页面入口，页脚菜单放隐私政策、条款等辅助链接。根据位置合理分配不同菜单。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：在菜单编辑页分配</h3>
+    <ol>
+      <li>进入 <strong>外观 → 菜单</strong>，选择要分配的菜单</li>
+      <li>在页面底部找到 <strong>菜单设置</strong> 区域</li>
+      <li>在「显示位置」中勾选目标位置（如 Primary Menu）</li>
+      <li>点击 <strong>保存菜单</strong></li>
+    </ol>
+    <h3>方法二：在「管理位置」统一分配</h3>
+    <ol>
+      <li>进入 <strong>外观 → 菜单</strong>，点击顶部 <strong>管理位置</strong> 选项卡</li>
+      <li>此页列出主题注册的所有位置</li>
+      <li>为每个位置在下拉菜单中选择对应的菜单</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <div class="callout tip">「管理位置」视图可以一眼看清所有位置的分配情况，适合统一调整。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>切换主题后菜单位置丢失</strong>：不同主题注册的位置名称不同，切换主题后需要重新分配。菜单本身和菜单项不会丢失</li>
+      <li><strong>看不到显示位置选项</strong>：确认你的主题确实注册了菜单位置。部分极简主题可能只注册了一个位置</li>
+      <li><strong>菜单已分配但前台不显示</strong>：检查主题是否在对应位置的模板中正确调用了 <code>wp_nav_menu()</code>。也可能是缓存问题，清除浏览器缓存再试</li>
+      <li><strong>同一菜单多个位置</strong>：一个菜单可以同时分配到主导航和移动端菜单位置，但可能因为样式不同导致显示效果差异</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="MN-4.html" class="prev"><div class="label">上一篇</div><div class="title">子菜单层级</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="MN-1.html">创建主导航菜单</a>
+    <a href="MN-2.html">添加页面到菜单</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>嵌套 Container（多层布局） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">嵌套 Container</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>嵌套 Container（多层布局）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d2">L2</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>嵌套 Container 是指在一个 Container（容器）内部再放置子 Container，形成多层布局结构。这是实现复杂页面设计的核心技术——比如一个外层 Container 控制整体宽度和背景，内部多个子 Container 分别控制左右分栏。</p>
+    <p>Elementor 的 Container 基于 CSS Flexbox，父容器可以控制子元素的排列方向（横向/纵向）、对齐方式和间距，每个子 Container 又可以有自己独立的 Flexbox 设置。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>单层 Container 只能做简单的线性布局。现实中的页面设计几乎都需要嵌套——Hero 区域的文字+按钮组合、卡片网格中每张卡片的内部结构、页脚的多列布局等。</p>
+    <p>理解嵌套逻辑后，你可以用 Container 构建任意复杂的布局，而不依赖固定的 Section/Column 模式。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 创建外层 Container</h3>
+    <p>点击画布中的 <strong>「+」</strong>，选择一个全宽 Container。设置方向为 <strong>Row</strong>（横向排列子元素）。</p>
+
+    <h3>2. 添加子 Container</h3>
+    <ol>
+      <li>从左侧 Widget 面板拖入一个 <strong>Container</strong> Widget 到外层 Container 内</li>
+      <li>重复拖入第二个 Container，形成左右两栏</li>
+      <li>每个子 Container 可以独立设置宽度（百分比或固定值）</li>
+    </ol>
+
+    <h3>3. 设置子 Container 的布局</h3>
+    <ul>
+      <li>子 Container 默认方向为 <strong>Column</strong>（纵向堆叠），可在 Layout Tab 中修改</li>
+      <li>设置 <strong>Width</strong>：如左栏 60%，右栏 40%</li>
+      <li>设置 <strong>Gap</strong>（间距）控制子元素之间的距离</li>
+    </ul>
+
+    <h3>4. 在子 Container 中放置 Widget</h3>
+    <p>在左侧子 Container 中拖入 Heading + Text Editor，在右侧放入 Image Widget，即可实现经典的图文分栏布局。</p>
+
+    <div class="callout tip">使用 Navigator（左下角图标）可以清楚看到容器嵌套层级，拖拽调整结构比在画布上操作更精确。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>嵌套层级不宜过深——一般 2-3 层足够，过深会增加 DOM 复杂度影响性能</li>
+      <li>如果子 Container 没有按预期排列，检查父 Container 的 Direction 设置（Row vs Column）</li>
+      <li>子 Container 的宽度总和超过 100% 时会换行——确保百分比加起来不超过 100%（加上 Gap 的影响）</li>
+      <li>想要等高列（每列高度一致），在父 Container 的 Items 属性中设置 <strong>Align Items: Stretch</strong></li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-3.html" class="prev"><div class="label">上一篇</div><div class="title">Container 布局（Flexbox 方向/对齐/间距）</div></a>
+    <a href="ELE-5.html" class="next"><div class="label">下一篇</div><div class="title">Grid Container 布局</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-1.html">安装 Elementor Pro + 激活授权</a>
+    <a href="ELE-2.html">创建第一个页面（拖拽编辑器界面认识）</a>
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-6.html">标题 / 文本编辑器 / 图片 Widget</a>
+  </div></div>
+</div></body></html>

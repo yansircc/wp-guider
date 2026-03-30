@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改固定链接 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">站点设置</a>
+  <span class="sep">/</span>
+  <span class="current">修改固定链接</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>修改固定链接</h1>
+    <div class="meta">
+      <span class="tag topic">站点设置</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>固定链接（Permalinks）是 WordPress 页面和文章的 URL 结构。默认情况下 WordPress 使用 <code>?p=123</code> 这样的丑陋链接格式。通过修改固定链接结构，可以让 URL 变成可读的形式，如 <code>/sample-post/</code>。</p>
+    <p>固定链接设置决定了整个站点的 URL 规则，是建站后必须首先配置的选项之一。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>搜索引擎偏好包含关键词的、可读的 URL。<code>/product-led-lighting/</code> 比 <code>/?p=42</code> 对 SEO 更友好，对用户也更直观。</p>
+    <p>固定链接必须在建站初期就设定好。如果网站已经运营一段时间后再修改，所有旧的 URL 都会失效（404），需要额外配置 301 重定向，非常麻烦。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 固定链接</strong>（Settings → Permalinks）</li>
+      <li>选择 <strong>文章名</strong>（Post name）结构，即 <code>/%postname%/</code></li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <p>推荐使用 "文章名" 结构，这是最简洁且 SEO 最友好的格式。不建议使用包含日期的结构，除非是新闻类网站。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>时机很关键</strong>：一定要在发布内容之前设置好固定链接，避免后期更改造成链接断裂</li>
+      <li>如果保存后前台页面出现 404，通常是服务器的 <code>.htaccess</code> 文件没有正确写入，检查文件权限</li>
+      <li>Nginx 服务器不使用 <code>.htaccess</code>，需要在 Nginx 配置中添加 rewrite 规则</li>
+      <li>自定义结构中不要使用中文，slug 应使用英文或拼音</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SS-5.html" class="prev"><div class="label">上一篇</div><div class="title">确认仪表盘可用</div></a>
+    <a href="SS-7.html" class="next"><div class="label">下一篇</div><div class="title">设置时区</div></a>
+  </div>
+</div>
+</body>
+</html>

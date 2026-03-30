@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>排障：表单提交后不跳转/不发邮件 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">表单提交排障</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>排障：表单提交后不跳转/不发邮件</h1>
+    <div class="meta">
+      <span class="tag topic">ZeroY AI 建站</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 表单提交依赖 WordPress REST API 和邮件发送系统。常见的故障表现：</p>
+    <ul>
+      <li><strong>提交后无反应/不跳转</strong>：表单提交按钮点击后页面没有任何变化</li>
+      <li><strong>提交成功但不发邮件</strong>：数据到了后台但通知邮件收不到</li>
+    </ul>
+    <p>这两类问题的根因通常是三个方面之一：固定链接设置、SMTP 邮件配置、REST API 路径。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>表单是网站的核心转化入口——如果访客填完表单却提交失败，或提交成功但你收不到通知，就等于丢失潜在客户。表单故障是最紧急的线上问题之一。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+
+    <h3>排查一：固定链接（最常见原因）</h3>
+    <p>ZeroY 表单通过 <code>/wp-json/zeroy/v1/submissions</code> 提交。如果固定链接设为「朴素」模式，REST API 路径不生效。</p>
+    <ol>
+      <li>进入 <strong>设置 → 固定链接</strong></li>
+      <li>确认<strong>不是</strong>「朴素」（Plain）模式，建议选「文章名」</li>
+      <li>即使当前已经是正确设置，也点击一次 <strong>保存更改</strong>（会刷新 .htaccess / rewrite 规则）</li>
+    </ol>
+    <p>验证 REST API 是否可用：</p>
+    <pre><code># 浏览器直接访问，应返回 JSON
+https://your-site.com/wp-json/zeroy/v1/submissions
+
+# 或用命令行
+curl -s https://your-site.com/wp-json/ | head -20</code></pre>
+
+    <h3>排查二：SMTP 邮件配置</h3>
+    <p>WordPress 默认用 PHP <code>mail()</code> 函数发邮件，但大多数服务器/主机屏蔽了这个函数。需要配置 SMTP。</p>
+    <ol>
+      <li>安装并激活 <strong>WP Mail SMTP</strong> 插件</li>
+      <li>进入 <strong>WP Mail SMTP → 设置</strong></li>
+      <li>配置 SMTP 服务器信息（发件人邮箱、SMTP 主机、端口、认证方式）</li>
+      <li>使用 <strong>WP Mail SMTP → 工具 → 邮件测试</strong> 发送测试邮件</li>
+      <li>确认测试邮件已收到</li>
+    </ol>
+
+    <h3>排查三：REST API 路径问题</h3>
+    <p>如果 REST API 被安全插件阻止，或 Nginx/Apache 配置不转发 <code>/wp-json/</code> 路径：</p>
+    <ol>
+      <li>检查浏览器控制台（F12 → Network），看表单提交请求的 HTTP 状态码</li>
+      <li><strong>404</strong> → 固定链接或 rewrite 规则问题</li>
+      <li><strong>403</strong> → 安全插件或服务器防火墙阻止了 REST API</li>
+      <li><strong>500</strong> → 服务端错误，查看 debug.log</li>
+    </ol>
+
+    <div class="callout warning">先排查固定链接（1 分钟搞定），再查 SMTP（5 分钟），最后才查 REST API 路径（需要看日志）。按简单到复杂的顺序排查。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>LocalWP 环境不发邮件是正常的</strong>：本地开发环境默认没有邮件服务，邮件会进入 LocalWP 内置的 MailHog。在 LocalWP 界面点击「Open MailHog」查看</li>
+      <li><strong>检查垃圾邮件箱</strong>：SMTP 配置正确但收不到邮件时，先检查收件箱的垃圾邮件文件夹</li>
+      <li><strong>表单提交数据是否丢失</strong>：即使邮件没发出，提交的数据通常已保存在数据库中。进入 ZeroY 后台查看提交记录</li>
+      <li><strong>浏览器控制台是关键工具</strong>：表单提交问题 90% 可以通过 F12 → Network 面板看到原因（HTTP 状态码 + 响应内容）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-37.html" class="prev"><div class="label">上一篇</div><div class="title">网站语言设置对 AI 生成内容的影响</div></a>
+    <a href="ZY-39.html" class="next"><div class="label">下一篇</div><div class="title">排障：AI 生成报错（400/401/403 诊断）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div>
+</body>
+</html>

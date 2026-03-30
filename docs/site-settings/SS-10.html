@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每页文章数 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">站点设置</a>
+  <span class="sep">/</span>
+  <span class="current">每页文章数</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>每页文章数</h1>
+    <div class="meta">
+      <span class="tag topic">站点设置</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 的阅读设置中可以控制博客页面（文章列表页）每页显示多少篇文章。超出数量的文章会自动分页，前台出现"上一页/下一页"导航。</p>
+    <p>默认值是 10 篇。该设置也会影响 RSS feed 中显示的文章数量。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>每页文章数影响页面加载速度和用户体验。太少（如 3 篇）需要频繁翻页，太多（如 50 篇）会导致页面加载慢。根据站点类型和设计风格选择合适的数量。</p>
+    <p>如果使用 Elementor 的 Posts Widget 来展示文章列表，这里的设置可能不直接生效，需要在 Widget 中单独配置。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 阅读</strong>（Settings → Reading）</li>
+      <li>找到 <strong>"博客页面至多显示"</strong>（Blog pages show at most）</li>
+      <li>输入希望的数量（建议 6-12 篇）</li>
+      <li>下方的 <strong>"Feed 中显示最近"</strong>（Syndication feeds show the most recent）也可以一并设置</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>此设置影响所有使用默认查询的存档页（分类页、标签页、作者页等），不仅仅是博客首页</li>
+      <li>如果使用页面构建器（Elementor/ZeroY）自定义了文章列表，构建器的分页设置会覆盖此全局值</li>
+      <li>搜索结果页的每页显示数量也受此设置影响</li>
+      <li>修改后建议清除缓存再验证前台效果</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SS-9.html" class="prev"><div class="label">上一篇</div><div class="title">关闭评论</div></a>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>综合故障注入 — 白屏 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">troubleshooting</a>
+  <span class="sep">/</span>
+  <span class="current">综合故障注入 — 白屏</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>综合故障注入 — 白屏（WSOD）</h1>
+    <div class="meta">
+      <span class="tag topic">troubleshooting</span>
+      <span class="tag diff d5">L5</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>White Screen of Death (WSOD) 是 WordPress 最臭名昭著的故障现象：页面一片空白，没有任何错误提示。这通常是 PHP 致命错误导致的，但因为默认关闭了错误显示，所以什么都看不到。</p>
+    <p>在故障注入训练中，系统会故意制造一个白屏故障，你需要用系统性方法诊断并修复。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>白屏是 WordPress 运维中最高频的紧急故障。可能的原因包括：</p>
+    <ul>
+      <li>插件/主题的 PHP 致命错误</li>
+      <li>PHP 内存耗尽</li>
+      <li>wp-config.php 语法错误</li>
+      <li>数据库连接失败</li>
+    </ul>
+    <p>掌握系统性的白屏排障流程，才能在真实事故中冷静应对。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>系统性排障流程</h3>
+    <ol>
+      <li><strong>开启调试</strong> — 获取错误信息
+        <pre><code>locwp wp wp-train -- config set WP_DEBUG true --raw
+locwp wp wp-train -- config set WP_DEBUG_LOG true --raw</code></pre>
+      </li>
+      <li><strong>查看日志</strong> — 找到错误线索
+        <pre><code>tail -30 wp-content/debug.log</code></pre>
+      </li>
+      <li><strong>根据日志定位</strong>
+        <ul>
+          <li>错误指向插件 → 停用该插件</li>
+          <li>错误指向主题 → 切换默认主题</li>
+          <li>内存耗尽 → 增加 WP_MEMORY_LIMIT</li>
+          <li>数据库错误 → 检查 wp-config.php 中的数据库配置</li>
+        </ul>
+      </li>
+      <li><strong>如果日志没有线索</strong>
+        <pre><code># 停用所有插件
+locwp wp wp-train -- plugin deactivate --all
+
+# 问题消失？→ 逐个启用排查
+# 问题仍在？→ 切换默认主题
+locwp wp wp-train -- theme activate twentytwentyfour
+
+# 仍然白屏？→ 检查 wp-config.php
+php -l wp-config.php</code></pre>
+      </li>
+      <li><strong>验证修复</strong> — 访问前后台确认正常</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>白屏不一定是 PHP 错误——也可能是 Web 服务器配置问题（nginx/Apache）</li>
+      <li>WordPress 5.2+ 有"恢复模式"：致命错误时会发邮件给管理员，提供恢复链接</li>
+      <li>如果 WP-CLI 也无法执行（PHP 级别崩溃），说明问题在 wp-config.php 或 PHP 环境本身</li>
+      <li>排障全程保持记录：每一步做了什么、结果是什么。这有助于复盘和学习</li>
+      <li>修复后别忘了关闭调试模式，恢复正常配置</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-7.html" class="prev"><div class="label">上一篇</div><div class="title">修复错误 siteurl</div></a>
+    <a href="TS-9.html" class="next"><div class="label">下一篇</div><div class="title">综合故障注入-数据库</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-3.html">插件逐个排查</a>
+    <a href="TS-5.html">切换默认主题排查</a>
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+  </div></div>
+</div>
+</body>
+</html>

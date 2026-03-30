@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>为 CPT 配置 SEO 标题模板 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">为 CPT 配置 SEO 标题模板</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>为 ACF 自定义文章类型配置 SEO 标题模板</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d3">L3</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>用 ACF 注册的自定义文章类型（CPT）默认没有专属的 SEO 标题模板。需要在 SEO 插件中为每个 CPT 设置标题和描述模板，确保搜索结果展示一致且有意义。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>CPT 页面没有模板时，标题可能只显示文章名，缺少站点名和上下文</li>
+      <li>统一的标题格式（如「产品名 - 产品中心 | 站点名」）提升品牌一致性</li>
+      <li>模板自动应用到该 CPT 下所有文章，无需逐篇设置</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>Yoast SEO</h3>
+    <ol>
+      <li>进入 <strong>Yoast SEO → 搜索外观 → 内容类型</strong></li>
+      <li>找到目标 CPT（如「产品」）</li>
+      <li>在<strong>「SEO 标题」</strong>模板中配置，例如：<code>%%title%% %%sep%% 产品中心 %%sep%% %%sitename%%</code></li>
+      <li>在<strong>「Meta 描述」</strong>模板中配置，例如：<code>%%excerpt%%</code></li>
+      <li>保存更改</li>
+    </ol>
+
+    <h3>SEOPress</h3>
+    <ol>
+      <li>进入 <strong>SEOPress → 标题与 Metas → 文章类型</strong></li>
+      <li>找到目标 CPT</li>
+      <li>设置<strong>标题模板</strong>：如 <code>%%post_title%% %%sep%% 产品中心 | %%sitetitle%%</code></li>
+      <li>设置<strong>描述模板</strong>：如 <code>%%post_excerpt%%</code></li>
+      <li>保存更改</li>
+    </ol>
+    <div class="callout tip">模板只是默认值。单篇文章中手动设置的 SEO 标题/描述会覆盖模板。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>CPT 不出现在列表中</strong>：确认 CPT 的「公开可见」已开启，私有 CPT 可能不会出现在 SEO 插件的设置中</li>
+      <li><strong>变量名不同</strong>：Yoast 用 <code>%%title%%</code>，SEOPress 用 <code>%%post_title%%</code>，注意区分</li>
+      <li><strong>归档页标题</strong>：CPT 归档页（列表页）的标题模板在同一页面的「归档」区域设置</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-9.html" class="prev"><div class="label">上一篇</div><div class="title">SEOPress：noindex/nofollow 设置</div></a>
+    <a href="SEO-11.html" class="next"><div class="label">下一篇</div><div class="title">为 ACF 分类法（Taxonomy）配置 SEO 标题/描述</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-1.html">安装 Yoast SEO + 基础配置向导</a>
+    <a href="SEO-2.html">Yoast：设置页面 SEO 标题/描述</a>
+    <a href="SEO-3.html">修改页面 slug 为英文</a>
+    <a href="SEO-6.html">安装 SEOPress + 基础配置</a>
+  </div></div>
+</div>
+</body>
+</html>

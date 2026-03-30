@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>编辑与查看文章类型设置 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">编辑与查看文章类型设置</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>编辑与查看文章类型设置</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d1">L1</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>创建自定义文章类型（CPT）后，可以随时回到 ACF 后台查看和修改其详细设置，包括标签、可见性、支持的功能、菜单图标等。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>项目需求变化时需要调整 CPT 的标签或行为</li>
+      <li>优化后台体验（更换图标、调整菜单位置）</li>
+      <li>控制前台访问权限（公开/私有）和编辑器功能</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>ACF → 文章类型</strong></li>
+      <li>点击目标文章类型名称进入编辑页</li>
+      <li>常用设置项：
+        <ul>
+          <li><strong>标签</strong>：修改复数/单数标签、菜单名称</li>
+          <li><strong>支持</strong>（Supports）：勾选编辑器功能 — 标题、编辑器、缩略图、自定义字段、摘要等</li>
+          <li><strong>菜单图标</strong>：选择 Dashicons 让后台菜单更直观</li>
+          <li><strong>菜单位置</strong>：数字越小越靠上（如 5 在「文章」上方，25 在「评论」下方）</li>
+          <li><strong>公开可见</strong>：控制前台是否可访问</li>
+          <li><strong>在 REST API 中显示</strong>：开启后 Gutenberg 编辑器才能正常工作</li>
+        </ul>
+      </li>
+      <li>修改后点击<strong>保存更改</strong></li>
+    </ol>
+    <div class="callout warning">文章类型 Key（如 <code>product</code>）创建后<strong>不可更改</strong>。只有标签、图标、功能支持等设置可以随时修改。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>REST API 开关</strong>：如果用 Gutenberg 编辑器编辑 CPT，必须开启「在 REST API 中显示」，否则编辑器加载不出来</li>
+      <li><strong>Supports 的影响</strong>：取消勾选某功能后，编辑界面对应区块会消失，但已保存的数据不会丢失</li>
+      <li><strong>菜单图标参考</strong>：<code>developer.wordpress.org/resource/dashicons/</code> 查看所有可用图标</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-2.html" class="prev"><div class="label">上一篇</div><div class="title">添加自定义文章类型（如产品）</div></a>
+    <a href="ACF-4.html" class="next"><div class="label">下一篇</div><div class="title">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

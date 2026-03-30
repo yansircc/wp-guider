@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开启 SSH 访问权限 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">主机</a>
+  <span class="sep">/</span>
+  <span class="current">开启 SSH 访问权限</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>开启 SSH 访问权限</h1>
+    <div class="meta">
+      <span class="tag topic">主机</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>SSH（Secure Shell）提供加密的远程终端访问，允许你通过命令行直接操作主机服务器。在 Hostinger 上，SSH 需要手动开启才能使用。</p>
+    <p>开启后可以通过 SSH 客户端（如 Terminal、PuTTY）连接到服务器，执行命令行操作。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>SSH 访问对于高级操作至关重要：使用 WP-CLI 批量管理 WordPress、直接编辑配置文件、排查服务器层面的问题、执行数据库操作等。</p>
+    <p>在 WP Guider 培训中，部分高级任务（如 wp-cli 操作、文件权限修改）需要 SSH 访问。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 Hostinger hPanel</li>
+      <li>选择目标网站</li>
+      <li>进入 <strong>Advanced → SSH Access</strong></li>
+      <li>点击 <strong>Enable</strong>（启用 SSH）</li>
+      <li>页面会显示连接信息：
+        <ul>
+          <li><strong>Host</strong>：SSH 服务器地址</li>
+          <li><strong>Port</strong>：SSH 端口（通常是 65002 而非默认 22）</li>
+          <li><strong>Username</strong>：SSH 用户名</li>
+        </ul>
+      </li>
+      <li>密码使用你的 Hostinger 账号密码</li>
+    </ol>
+    <h3>连接测试</h3>
+    <pre><code>ssh -p 65002 username@ssh-host.hostinger.com</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>SSH 仅在 Business 及以上方案中可用，Premium/Single 方案不支持</li>
+      <li>Hostinger 使用非标准端口（如 65002），连接时必须指定 <code>-p</code> 参数</li>
+      <li>共享主机的 SSH 权限有限，不是 root 权限，无法执行 <code>sudo</code> 命令</li>
+      <li>如果连接超时，检查本地网络是否屏蔽了该端口</li>
+      <li>登录后的工作目录就是网站根目录，WordPress 文件就在当前目录下</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="HOST-3.html" class="prev"><div class="label">上一篇</div><div class="title">添加第二个网站 (多站点管理)</div></a>
+    <a href="HOST-5.html" class="next"><div class="label">下一篇</div><div class="title">SSH 终端操作</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="HOST-3.html">添加第二个网站 (多站点管理)</a>
+    <a href="HOST-5.html">SSH 终端操作</a>
+    <a href="HOST-6.html">生成 SSH 密钥对 + 免密登录</a>
+    <a href="HOST-1.html">购买 Hostinger 主机</a>
+  </div></div>
+</div>
+</body>
+</html>

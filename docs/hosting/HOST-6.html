@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生成 SSH 密钥对 + 免密登录 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">主机</a>
+  <span class="sep">/</span>
+  <span class="current">生成 SSH 密钥对 + 免密登录</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>生成 SSH 密钥对 + 免密登录</h1>
+    <div class="meta">
+      <span class="tag topic">主机</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>SSH 密钥对由公钥和私钥组成，用于替代密码进行身份验证。将公钥放在服务器上，本地保留私钥，连接时自动验证，无需输入密码。</p>
+    <p>这是 SSH 最安全也最便捷的认证方式，比密码登录更难被暴力破解。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>每次 SSH 连接都输入密码既麻烦又不安全（密码可能被截获）。配置密钥后一键连接，同时安全性大幅提升。对于需要频繁 SSH 操作的教练来说，这是效率刚需。</p>
+    <p>自动化脚本和 CI/CD 流程也依赖密钥认证。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：生成密钥对（本地执行）</h3>
+    <pre><code>ssh-keygen -t ed25519 -C "your_email@example.com"</code></pre>
+    <ul>
+      <li>按 Enter 接受默认路径（<code>~/.ssh/id_ed25519</code>）</li>
+      <li>设置密码短语（passphrase）或留空</li>
+      <li>生成两个文件：<code>id_ed25519</code>（私钥）和 <code>id_ed25519.pub</code>（公钥）</li>
+    </ul>
+    <h3>第二步：上传公钥到 Hostinger</h3>
+    <ol>
+      <li>登录 Hostinger hPanel → <strong>Advanced → SSH Access</strong></li>
+      <li>找到 <strong>SSH Keys</strong> 区域</li>
+      <li>点击 <strong>Add SSH Key</strong></li>
+      <li>将 <code>id_ed25519.pub</code> 的内容粘贴进去</li>
+      <li>保存</li>
+    </ol>
+    <h3>第三步：测试连接</h3>
+    <pre><code>ssh -p 65002 username@ssh-host.hostinger.com</code></pre>
+    <p>如果配置正确，应该直接登录而不需要输入密码。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>私钥文件（<code>id_ed25519</code>）绝对不能分享给任何人，泄露等于泄露了登录权限</li>
+      <li>如果有多台服务器，可以为每台生成不同的密钥对，或使用同一个公钥</li>
+      <li>私钥文件权限必须是 600：<code>chmod 600 ~/.ssh/id_ed25519</code></li>
+      <li>推荐使用 <code>ed25519</code> 算法，比传统 RSA 更安全且密钥更短</li>
+      <li>如果连接仍然要求密码，检查公钥是否正确上传、文件权限是否正确</li>
+      <li>可配置 <code>~/.ssh/config</code> 简化连接命令，避免每次输入端口和用户名</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="HOST-5.html" class="prev"><div class="label">上一篇</div><div class="title">SSH 终端操作</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="HOST-4.html">开启 SSH 访问权限</a>
+    <a href="HOST-3.html">添加第二个网站 (多站点管理)</a>
+    <a href="HOST-1.html">购买 Hostinger 主机</a>
+    <a href="HOST-2.html">hPanel 控制面板导航</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建编辑用户 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">创建编辑用户</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>创建编辑用户</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 支持多用户协作。管理员可以在后台创建新用户并分配角色。"编辑"（Editor）是 WordPress 的内置角色之一，拥有管理所有文章和页面的权限，但无法修改站点设置或安装插件。</p>
+    <p>创建编辑用户是团队协作的基础操作。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>建站项目中通常需要为客户或内容编辑人员创建专属账号。给内容编辑人员分配"编辑"角色，既能让他们管理文章内容，又不会误操作站点核心设置。</p>
+    <p>这是最小权限原则的实践：给每个人刚好够用的权限，不多不少。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台（需管理员权限）</li>
+      <li>进入 <strong>用户 → 添加用户</strong>（Users → Add New User）</li>
+      <li>填写必填字段：
+        <ul>
+          <li><strong>用户名</strong>（Username）— 登录名，创建后不可修改</li>
+          <li><strong>电子邮件</strong>（Email）— 必须唯一</li>
+        </ul>
+      </li>
+      <li>设置密码：点击 <strong>显示密码</strong> 可自定义密码，或使用自动生成的强密码</li>
+      <li>在 <strong>角色</strong>（Role）下拉菜单中选择 <strong>编辑</strong>（Editor）</li>
+      <li>点击 <strong>添加用户</strong></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>用户名一旦创建就无法修改，建议使用规范的命名（如 firstname.lastname）</li>
+      <li>邮箱地址必须唯一，不能与已有用户重复</li>
+      <li>如果勾选了"发送用户通知"，新用户会收到包含密码设置链接的邮件</li>
+      <li>编辑角色可以修改和删除所有人的文章，但不能安装插件或修改主题</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="UM-1.html" class="prev"><div class="label">上一篇</div><div class="title">修改昵称和显示名</div></a>
+    <a href="UM-3.html" class="next"><div class="label">下一篇</div><div class="title">修改默认角色</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-5.html">删除用户并归属内容</a>
+    <a href="UM-6.html">修改用户角色</a>
+    <a href="UM-8.html">用 DoLogin 生成免密登录链接</a>
+    <a href="UM-7.html">生成 Application Password</a>
+  </div></div>
+</div>
+</body>
+</html>

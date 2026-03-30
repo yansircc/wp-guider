@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>配置 AI：填写 API Key + API 端点 + 验证连接 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">配置 AI 连接</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>配置 AI：填写 API Key + API 端点 + 验证连接</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d2">L2</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 的 AI 生成功能需要连接大语言模型服务。你需要在 ZeroY 设置中填写 AI 服务的 API Key 和 API 端点地址，让 ZeroY 编辑器能够调用 AI 来生成页面内容、修改布局等。常用的 AI 服务提供商包括 aihubmix.com 等。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>API Token 只是连接 ZeroY 云端服务，AI 配置则是连接大语言模型。没有正确配置 AI 连接，你在编辑器中点击"AI 助手"会报错，无法使用自然语言生成页面内容这一核心功能。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：获取 AI 服务凭证</h3>
+    <ol>
+      <li>访问 AI 服务提供商（如 <strong>aihubmix.com</strong>），注册并登录</li>
+      <li>在控制台找到 <strong>API Key</strong>（密钥）并复制</li>
+      <li>记下 <strong>API 端点地址</strong>（Endpoint URL）</li>
+    </ol>
+
+    <h3>第二步：在 ZeroY 中配置</h3>
+    <ol>
+      <li>进入 WordPress 后台 → <strong>ZeroY → AI Settings</strong>（AI 设置）</li>
+      <li>粘贴 API Key 到密钥输入框</li>
+      <li>填写 API 端点地址</li>
+      <li>点击<strong>验证连接</strong>按钮</li>
+    </ol>
+
+    <h3>第三步：确认连接成功</h3>
+    <ol>
+      <li>验证通过后，会显示连接成功提示</li>
+      <li>保存设置</li>
+      <li>进入任意页面的 ZeroY 编辑器，尝试调用 AI 助手确认功能正常</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>端点地址不要写错</strong>：注意区分 v1/chat/completions 等路径，复制时确保完整</li>
+      <li><strong>API Key 有余额限制</strong>：如果验证失败返回 403，很可能是额度用完了</li>
+      <li><strong>401 错误</strong>：说明 API Key 过期或无效，需要重新生成</li>
+      <li><strong>400 错误</strong>：通常是网络问题，检查服务器是否能访问外部 API 端点</li>
+      <li><strong>不要混淆 API Token 和 API Key</strong>：API Token 是 ZeroY 平台凭证，API Key 是 AI 服务凭证，两者用途不同</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-2.html" class="prev"><div class="label">上一篇</div><div class="title">配置 API Token（zeroy.app 控制台绑定域名）</div></a>
+    <a href="ZY-4.html" class="next"><div class="label">下一篇</div><div class="title">设计系统：用 AI 生成全局风格（颜色/字体/间距）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-1.html">下载并安装 ZeroY 主题 + 编辑器插件</a>
+    <a href="ZY-2.html">配置 API Token（zeroy.app 控制台绑定域名）</a>
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+  </div></div>
+</div></body></html>

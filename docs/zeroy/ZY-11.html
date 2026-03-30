@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>编辑器操作：插入/删除/撤回、前后台切换、素材管理 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">编辑器操作</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>编辑器操作：插入/删除/撤回、前后台切换、素材管理</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d2">L2</span></div><p>本文同时覆盖: ZY-11, ZY-12, ZY-13</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 编辑器除了 AI 生成能力，还有一套完整的手动操作体系：插入/删除/撤回元素、在前台预览与后台编辑之间切换、以及管理图片和图标等素材。这些是日常编辑的基础技能。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>AI 生成的内容不可能一步到位。你需要手动删除多余区块、在指定位置插入新内容、替换占位图片为真实素材，并在前台确认实际效果。掌握这些操作才能把 AI 产出打磨成可交付的成品。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>插入 / 删除 / 撤回</h3>
+    <ul>
+      <li><strong>插入</strong>：选中目标位置，用工具栏或 AI 助手在该位置插入新内容（文本、图片、按钮等）</li>
+      <li><strong>删除</strong>：选中元素或区块 → 按 <code>Delete</code> 键或点击工具栏删除按钮</li>
+      <li><strong>撤回</strong>：<code>Ctrl+Z</code>（Mac 为 <code>Cmd+Z</code>）撤回上一步；<code>Ctrl+Shift+Z</code> 重做</li>
+    </ul>
+    <div class="callout warning">撤回记录仅存在于当前编辑会话，刷新页面会清空。重大修改前务必先保存。</div>
+
+    <h3>前台预览与后台编辑切换</h3>
+    <ol>
+      <li><strong>后台 → 编辑器</strong>：页面列表 → 点击「用 ZeroY 编辑」</li>
+      <li><strong>编辑器 → 前台</strong>：保存后，新标签页打开页面 URL 查看实际效果</li>
+      <li><strong>前台 → 编辑器</strong>：顶部管理工具栏点击「用 ZeroY 编辑」</li>
+    </ol>
+    <div class="callout tip">用无痕窗口检查前台效果，可以排除管理员工具栏和缓存的影响。</div>
+
+    <h3>添加 / 替换素材</h3>
+    <ol>
+      <li><strong>替换图片</strong>：点击占位图 → 设置面板 → 从媒体库选择或上传新图片</li>
+      <li><strong>添加图标</strong>：选中位置 → 用 AI 描述图标效果，或从内置图标库选择，也可上传 SVG</li>
+      <li><strong>批量操作建议</strong>：先将所有素材上传到媒体库并统一命名（如 <code>team-张三.jpg</code>），再逐一替换</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>未保存的修改前台看不到</strong>：每次编辑后先保存，再切换到前台预览</li>
+      <li><strong>删除操作要注意层级</strong>：删除整个区块会连带子元素一起移除，确认选中的是你想删的层级</li>
+      <li><strong>图片尺寸</strong>：过大影响加载速度，过小会模糊。一般 1200px 宽足够，推荐 WebP 格式</li>
+      <li><strong>Alt 文本</strong>：替换图片时填写 Alt 文本，有助于 SEO 和无障碍访问</li>
+      <li><strong>前台缓存</strong>：如果看不到最新改动，用 <code>Ctrl+Shift+R</code> 强制刷新</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-10.html" class="prev"><div class="label">上一篇</div><div class="title">创建 Thank You 感谢页</div></a>
+    <a href="ZY-12.html" class="next"><div class="label">下一篇</div><div class="title">前台预览与后台编辑切换</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-1.html">下载并安装 ZeroY 主题 + 编辑器插件</a>
+    <a href="ZY-2.html">配置 API Token（zeroy.app 控制台绑定域名）</a>
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+  </div></div>
+</div></body></html>

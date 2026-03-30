@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>备份策略选择 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">backup-maintenance</a>
+  <span class="sep">/</span>
+  <span class="current">备份策略选择</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>备份策略选择</h1>
+    <div class="meta">
+      <span class="tag topic">backup-maintenance</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 常用三种备份工具，各有定位：</p>
+    <ul>
+      <li><strong>WP Reset</strong> — 数据库快照，秒级创建和恢复，适合开发和训练环境中频繁尝试</li>
+      <li><strong>UpdraftPlus</strong> — 完整备份（数据库 + 文件），支持远程存储和定时备份，适合生产环境</li>
+      <li><strong>All-in-One WP Migration</strong> — 站点打包迁移工具，适合跨服务器搬家</li>
+    </ul>
+    <p>备份策略决定了备份什么、多久备份一次、保留多少份、存在哪里。好的策略需要在安全性和资源消耗之间取得平衡。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>不同场景需要不同的备份策略。用错工具等于做无用功：用 UpdraftPlus 做开发快照太慢，用 WP Reset 做生产备份又不完整。</p>
+    <p>没有策略的备份只是心理安慰。明确策略后才能自动化执行，确保在出事时有可靠的恢复点。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>工具对比表</h3>
+    <table style="width:100%; color: var(--text2); border-collapse: collapse; margin: 12px 0;">
+      <tr style="border-bottom: 1px solid var(--border);">
+        <th style="text-align:left; padding: 8px; color: var(--text);">特性</th>
+        <th style="text-align:left; padding: 8px; color: var(--text);">WP Reset</th>
+        <th style="text-align:left; padding: 8px; color: var(--text);">UpdraftPlus</th>
+        <th style="text-align:left; padding: 8px; color: var(--text);">All-in-One</th>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px;">备份范围</td>
+        <td style="padding: 8px;">仅数据库</td>
+        <td style="padding: 8px;">数据库 + 文件</td>
+        <td style="padding: 8px;">整站打包</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px;">速度</td>
+        <td style="padding: 8px;">秒级</td>
+        <td style="padding: 8px;">分钟级</td>
+        <td style="padding: 8px;">分钟级</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px;">定时备份</td>
+        <td style="padding: 8px;">不支持</td>
+        <td style="padding: 8px;">支持</td>
+        <td style="padding: 8px;">不支持</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 8px;">远程存储</td>
+        <td style="padding: 8px;">不支持</td>
+        <td style="padding: 8px;">支持</td>
+        <td style="padding: 8px;">导出文件</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">适用场景</td>
+        <td style="padding: 8px;">开发/学习</td>
+        <td style="padding: 8px;">生产定期备份</td>
+        <td style="padding: 8px;">跨服务器迁移</td>
+      </tr>
+    </table>
+
+    <h3>推荐组合策略</h3>
+    <ul>
+      <li><strong>开发/训练环境</strong>：WP Reset 快照为主，随时创建和恢复</li>
+      <li><strong>生产环境</strong>：UpdraftPlus 定时备份 + 远程存储，搬家时用 All-in-One</li>
+      <li><strong>3-2-1 原则</strong>：3 份副本、2 种介质、1 份异地存储</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>实际项目中多种工具配合使用，不要只依赖一种</li>
+      <li>数据库变化远比文件频繁，所以数据库备份频率应高于文件备份</li>
+      <li>备份后要定期测试恢复——不测试的备份等于不存在</li>
+      <li>WP Reset 快照不包含文件，不适合做生产环境的完整备份</li>
+      <li>不要把备份存在和站点相同的服务器上——服务器故障时备份一起丢</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-2.html" class="prev"><div class="label">上一篇</div><div class="title">恢复备份</div></a>
+    <a href="BM-4.html" class="next"><div class="label">下一篇</div><div class="title">自动备份计划</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-2.html">恢复备份</a>
+    <a href="BM-4.html">自动备份计划</a>
+    <a href="BM-7.html">All-in-One Migration 跨服务器迁移</a>
+    <a href="BM-10.html">wp-cron 检查</a>
+  </div></div>
+</div>
+</body>
+</html>

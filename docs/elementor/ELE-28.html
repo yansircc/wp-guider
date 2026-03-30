@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Elementor 表单 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Elementor 表单</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Elementor 表单</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d2">L2-L3</span></div><p class="merge-note">本文同时覆盖: ELE-28, ELE-29, ELE-30, ELE-31</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor Pro 内置强大的表单构建器，无需额外表单插件。支持拖拽式字段配置、多步骤表单、提交后自动化操作（邮件通知、Webhook、CRM 集成等）。这是 Elementor Pro 最有价值的功能之一。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>线索收集</strong>：联系表单、询盘表单是外贸/服务类网站的核心转化工具</li>
+      <li><strong>减少插件</strong>：不需要额外安装 Contact Form 7、WPForms 等插件</li>
+      <li><strong>样式统一</strong>：表单直接在 Elementor 中设计，与页面风格完全一致</li>
+      <li><strong>自动化</strong>：提交后自动发邮件、推送到 CRM，减少人工处理</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>基础联系表单（L2）</h3>
+    <ol>
+      <li>拖入 <strong>Form Widget</strong></li>
+      <li>默认字段：Name、Email、Message</li>
+      <li>添加/删除字段，可用字段类型：
+        <ul>
+          <li>Text、Email、Textarea、Tel（电话）</li>
+          <li>Select（下拉）、Radio（单选）、Checkbox（多选）</li>
+          <li>Number、Date、Time、Upload（文件上传）</li>
+          <li>Hidden（隐藏字段，用于追踪来源）</li>
+        </ul>
+      </li>
+      <li>每个字段设置：Label（标签）、Placeholder（占位文字）、Required（必填）、Width（宽度比例）</li>
+      <li>Submit Button：自定义按钮文字、样式和加载动画</li>
+    </ol>
+
+    <h3>多步骤表单（L3）</h3>
+    <ol>
+      <li>在表单中添加 <strong>Step 字段</strong>，将表单分为多个步骤</li>
+      <li>每个 Step 之间的字段属于同一步</li>
+      <li>自动生成进度指示器（步骤条）</li>
+      <li>设置 Step 类型：Number（数字步骤）、Text（文字步骤）、Icon（图标步骤）</li>
+      <li>典型用途：报价申请（第一步基本信息 → 第二步需求详情 → 第三步确认提交）</li>
+    </ol>
+
+    <h3>提交后动作 Actions After Submit（L3）</h3>
+    <p>在表单的 <strong>Actions After Submit</strong> 区域添加动作：</p>
+    <ul>
+      <li><strong>Email</strong>：发送通知邮件到指定邮箱（可自定义模板、使用字段变量）</li>
+      <li><strong>Email 2</strong>：发送自动回复邮件给提交者</li>
+      <li><strong>Redirect</strong>：提交后跳转到感谢页（用于追踪转化）</li>
+      <li><strong>Webhook</strong>：将表单数据 POST 到自定义 URL（接入任何系统）</li>
+      <li><strong>Popup</strong>：提交后关闭/打开 Popup</li>
+    </ul>
+
+    <h3>CRM 集成（L3）</h3>
+    <ul>
+      <li><strong>Mailchimp</strong>：在 Elementor → Settings → Integrations 中输入 Mailchimp API Key</li>
+      <li>在 Actions 中添加 Mailchimp，选择 List 和字段映射</li>
+      <li><strong>HubSpot</strong>：类似配置，将表单数据推送到 HubSpot CRM</li>
+      <li>其他集成：ActiveCampaign、ConvertKit、Drip、GetResponse 等</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>邮件不送达</strong>：WordPress 默认使用 PHP mail() 发送邮件，容易进垃圾箱。务必安装 SMTP 插件（如 WP Mail SMTP）配置第三方邮件服务</li>
+      <li><strong>防垃圾</strong>：在表单设置中启用 reCAPTCHA 或 Honeypot，防止垃圾提交</li>
+      <li><strong>提交记录</strong>：Elementor Pro 会将表单提交保存到 <strong>Elementor → Submissions</strong>，即使邮件发送失败也不会丢失数据</li>
+      <li><strong>GDPR</strong>：如果面向欧洲用户，需要添加隐私政策同意复选框</li>
+      <li><strong>多步骤体验</strong>：步骤不宜超过 3-4 步，每步字段控制在 3-5 个，减少用户放弃率</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-27.html" class="prev"><div class="label">上一篇</div><div class="title">Sticky 元素（固定导航/侧边栏）</div></a>
+    <a href="ELE-29.html" class="next"><div class="label">下一篇</div><div class="title">多步骤表单（Multi-step Form）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-1.html">安装 Elementor Pro + 激活授权</a>
+    <a href="ELE-2.html">创建第一个页面（拖拽编辑器界面认识）</a>
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-6.html">标题 / 文本编辑器 / 图片 Widget</a>
+  </div></div>
+</div></body></html>

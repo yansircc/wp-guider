@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HTMX 分页功能 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">HTMX 分页</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>HTMX 分页功能</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>HTMX 分页是用页码导航在不同页的内容之间切换，与传统分页不同的是点击页码后页面不会整体刷新，只有内容区域动态更新。这是比 Load More 更传统但更精确的内容浏览方式。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>分页让用户能快速跳转到特定页码，适合用户需要"翻到第 5 页"这种精准导航的场景。比如产品目录、搜索结果等内容量大且用户可能反复翻页的页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>在 ZeroY 编辑器中创建内容列表区块和分页导航区块</li>
+      <li>为分页导航的页码链接配置 HTMX 属性：
+        <ul>
+          <li>触发方式：<code>click</code></li>
+          <li>请求端点：<code>/wp-json/zeroy/v1/htmx/execute/current?block_id=...&page=N</code></li>
+          <li>目标：内容列表容器（替换而非追加）</li>
+        </ul>
+      </li>
+      <li>分页导航需要包含：上一页、页码列表、下一页</li>
+      <li>每次请求返回的 HTML 中应包含更新后的分页导航（反映当前页码高亮状态）</li>
+      <li>保存并测试各页码切换是否流畅</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>替换而非追加</strong>：与 Load More 不同，分页应该替换（swap）列表内容，不是追加</li>
+      <li><strong>滚动位置</strong>：切换页码后建议自动滚动到列表顶部，避免用户在页面底部看到新内容的末尾</li>
+      <li><strong>URL 同步</strong>：建议将页码同步到 URL 参数（如 <code>?page=2</code>），让用户可以通过浏览器前进后退按钮导航</li>
+      <li><strong>总页数</strong>：分页导航需要后端返回总页数信息来渲染页码列表</li>
+      <li><strong>与筛选联动</strong>：如果页面同时有筛选功能，切换筛选条件应重置页码到第 1 页</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-29.html" class="prev"><div class="label">上一篇</div><div class="title">HTMX 多条件筛选（ACF 分类法/字段）</div></a>
+    <a href="ZY-31.html" class="next"><div class="label">下一篇</div><div class="title">HTMX 无限滚动</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+    <a href="ZY-14.html">创建页眉模板（Logo+多级导航+CTA）</a>
+    <a href="ZY-15.html">创建页脚模板（公司信息+链接+版权）</a>
+  </div></div>
+</div></body></html>

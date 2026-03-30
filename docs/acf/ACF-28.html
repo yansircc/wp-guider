@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACF Helper — 自然语言生成 ACF JSON - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">ACF Helper — 自然语言生成 JSON</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>ACF Helper — 自然语言生成 ACF JSON</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF Helper（<code>acf-helper.vercel.app</code>）是一个 AI 辅助工具，用自然语言描述你需要的字段组，自动生成可直接导入 ACF 的 JSON 配置文件。无需手动逐个配置字段。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>大幅加速字段组搭建速度（从手动十几分钟缩短到几十秒）</li>
+      <li>降低新手门槛 — 用中文描述需求即可</li>
+      <li>生成的 JSON 格式标准，直接导入无需调整</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>访问 <code>acf-helper.vercel.app</code></li>
+      <li>在输入框中用自然语言描述需求，例如：
+        <pre><code>创建一个「团队成员」字段组，包含：
+- 姓名（文本，必填）
+- 职位（文本）
+- 照片（图片）
+- 简介（文本区域）
+- 邮箱（URL）
+- 是否显示在首页（True/False）</code></pre>
+      </li>
+      <li>点击生成，获取 JSON 配置</li>
+      <li>复制 JSON 内容保存为 <code>.json</code> 文件</li>
+      <li>在 WordPress 后台 <strong>ACF → 工具 → 导入</strong> 导入该文件</li>
+    </ol>
+    <div class="callout tip">描述越具体，生成结果越准确。建议写明字段类型、是否必填、选项值等细节。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>导入后务必检查</strong>：AI 生成的配置可能有细节偏差，导入后逐一检查字段类型、名称和设置</li>
+      <li><strong>位置规则需手动设置</strong>：工具可能不会生成位置规则，导入后需要手动指定字段组出现在哪个文章类型</li>
+      <li><strong>Field Name 检查</strong>：确认生成的字段名符合命名规范（英文小写 + 下划线），且不与已有字段冲突</li>
+      <li><strong>搭配 ACF Playground</strong>：如果更喜欢可视化操作，可以用 <code>acf-playground.vercel.app</code> 拖拽生成</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-27.html" class="prev"><div class="label">上一篇</div><div class="title">ACF Playground：可视化拖拽生成 ACF JSON</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

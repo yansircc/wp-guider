@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>切换默认主题排查 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">troubleshooting</a>
+  <span class="sep">/</span>
+  <span class="current">切换默认主题排查</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>切换默认主题排查</h1>
+    <div class="meta">
+      <span class="tag topic">troubleshooting</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 自带默认主题（如 Twenty Twenty-Four）。当遇到前台显示异常时，切换到默认主题可以快速判断问题是出在当前主题还是其他地方（插件、WordPress 核心）。</p>
+    <p>这是排障流程中"隔离变量"的经典方法：通过替换主题来排除主题因素。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>主题控制了整个前台的 HTML 结构、CSS 样式和 JS 行为。一个有 bug 的 <code>functions.php</code>、一个错误的模板文件、甚至一个 CSS 冲突，都可能导致前台崩溃或显示异常。</p>
+    <p>如果停用所有插件后问题仍在，下一步就是切换主题。如果切换到默认主题后问题消失，就确认了是主题的锅。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：WP-CLI</h3>
+    <pre><code># 查看可用的默认主题
+locwp wp wp-train -- theme list
+
+# 切换到 Twenty Twenty-Four
+locwp wp wp-train -- theme activate twentytwentyfour
+
+# 测试问题是否消失...</code></pre>
+
+    <h3>方法二：文件系统（后台无法访问时）</h3>
+    <pre><code># 重命名当前主题目录，WordPress 会自动回退到默认主题
+mv wp-content/themes/astra wp-content/themes/astra.bak</code></pre>
+    <div class="callout warning">确保至少有一个默认主题（twentytwentyfour 等）存在于 themes 目录中，否则 WordPress 会报错。</div>
+
+    <h3>排障决策树</h3>
+    <ol>
+      <li>切换默认主题后问题消失 → <strong>主题有问题</strong>
+        <ul>
+          <li>检查主题的 <code>functions.php</code> 最近是否修改</li>
+          <li>检查是否有主题更新可用</li>
+          <li>查看 debug.log 中与主题相关的错误</li>
+        </ul>
+      </li>
+      <li>切换默认主题后问题仍在 → <strong>不是主题问题</strong>
+        <ul>
+          <li>继续排查插件或 WordPress 核心</li>
+          <li>检查 <code>wp-config.php</code> 配置</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>恢复原主题</h3>
+    <pre><code># 排查完毕后切换回原主题
+locwp wp wp-train -- theme activate astra</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>切换主题会导致所有依赖当前主题的设置（菜单位置、小工具、Customizer 设置）暂时失效</li>
+      <li>切回原主题后这些设置通常会恢复，但最好先做快照</li>
+      <li>如果所有主题都没安装（极端情况），WordPress 会报致命错误</li>
+      <li>页面构建器（Elementor 等）的内容不受主题切换影响，但布局可能会变化</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-4.html" class="prev"><div class="label">上一篇</div><div class="title">mu-plugin 故障修复</div></a>
+    <a href="TS-6.html" class="next"><div class="label">下一篇</div><div class="title">functions.php 语法错误修复</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+    <a href="TS-4.html">mu-plugin 故障修复</a>
+    <a href="TS-6.html">functions.php 语法错误修复</a>
+  </div></div>
+</div>
+</body>
+</html>

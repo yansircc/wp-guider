@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Search Results 搜索结果页模板 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Search Results 搜索结果页模板</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Search Results 搜索结果页模板</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>搜索结果页模板控制用户在站内搜索后看到的结果页面布局。WordPress 默认的搜索结果页样式通常很简陋，通过 Elementor Theme Builder 可以完全自定义搜索结果的展示方式。</p>
+    <p>搜索结果页本质上是一种特殊的 Archive 页面，所以在 Theme Builder 中归类在 Archive 下。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>用户体验</strong>：默认搜索结果页往往只有标题和摘要，缺少特色图和分类标签，不利于用户快速找到目标内容</li>
+      <li><strong>品牌统一</strong>：搜索页是高频访问页面，设计应与全站一致</li>
+      <li><strong>"未找到"引导</strong>：可以在无结果时显示推荐内容或热门文章，减少用户流失</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>Templates → Theme Builder</strong></li>
+      <li>在 Archive 区域点击 <strong>"+"</strong> 新建模板</li>
+      <li>构建搜索结果页布局：
+        <ul>
+          <li><strong>Archive Title</strong>：自动显示"搜索结果：关键词"</li>
+          <li><strong>Search Form</strong>：在页面顶部放置搜索框，方便用户修改搜索词</li>
+          <li><strong>Archive Posts</strong>：搜索结果文章列表，建议开启特色图和摘要显示</li>
+        </ul>
+      </li>
+      <li>配置 Archive Posts 的 Skin 和分页方式</li>
+      <li>Publish → Display Conditions → 选择 <strong>Archives → Search Results</strong></li>
+    </ol>
+
+    <h3>"无搜索结果"处理</h3>
+    <p>在搜索结果模板中，可以额外添加一个 Section，使用 CSS 条件控制仅在无结果时显示。或者直接在 Archive Posts Widget 的 <strong>Nothing Found Message</strong> 设置中自定义提示文字。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Display Conditions 必须选择 <strong>Search Results</strong>，而不是 All Archives — 否则会覆盖所有归档页</li>
+      <li>WordPress 默认搜索只搜索文章标题和内容，不搜索自定义字段。如需增强搜索，考虑 SearchWP 或 Relevanssi 插件</li>
+      <li>搜索结果页的 URL 格式是 <code>?s=关键词</code>，某些缓存插件默认不缓存带查询参数的页面，这是正常的</li>
+      <li>Preview Settings 中选择 "Search Results" 并输入一个搜索词来预览模板效果</li>
+      <li>如果站点内容以产品为主（WooCommerce），可能需要单独处理产品搜索结果的展示</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-40.html" class="prev"><div class="label">上一篇</div><div class="title">Display Conditions 显示条件（不同页面不同模板）</div></a>
+    <a href="ELE-42.html" class="next"><div class="label">下一篇</div><div class="title">Error 404 页面模板</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

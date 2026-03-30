@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HTMX 无限滚动 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">HTMX 无限滚动</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>HTMX 无限滚动</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>无限滚动（Infinite Scroll）是用户滚动到页面底部时自动加载更多内容的交互模式，无需点击任何按钮。类似于社交媒体 feed 的浏览体验。通过 HTMX 的 <code>revealed</code> 触发器实现。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>无限滚动提供最流畅的浏览体验，用户只需不停向下滚动就能看到更多内容，适合信息流、图片画廊、新闻列表等探索型内容页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>在 ZeroY 编辑器中创建内容列表区块</li>
+      <li>在列表末尾添加一个"哨兵元素"（sentinel），当该元素进入视口时触发加载</li>
+      <li>为哨兵元素配置 HTMX 属性：
+        <ul>
+          <li>触发方式：<code>revealed</code>（元素进入视口时触发）</li>
+          <li>请求端点：<code>/wp-json/zeroy/v1/htmx/execute/current?block_id=...&page=N</code></li>
+          <li>目标：列表容器（追加模式）</li>
+        </ul>
+      </li>
+      <li>后端返回的 HTML 中应包含下一批数据和新的哨兵元素（指向下一页）</li>
+      <li>当没有更多数据时，不返回哨兵元素，加载自动停止</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>无法回到之前位置</strong>：无限滚动的缺点是用户刷新页面后会回到顶部，无法直接跳到之前浏览的位置</li>
+      <li><strong>SEO 不友好</strong>：搜索引擎可能无法抓取动态加载的内容，建议同时保留分页版本供爬虫访问</li>
+      <li><strong>页脚不可达</strong>：如果页脚有重要内容，无限滚动会让用户永远无法到达页脚（因为每次接近底部就加载更多），需要将页脚信息放到其他位置</li>
+      <li><strong>加载指示器</strong>：在加载新内容时显示加载动画（如旋转图标），告知用户内容正在加载</li>
+      <li><strong>性能</strong>：大量 DOM 节点会影响页面性能，建议考虑虚拟滚动或限制最大加载数量</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-30.html" class="prev"><div class="label">上一篇</div><div class="title">HTMX 分页功能</div></a>
+    <a href="ZY-32.html" class="next"><div class="label">下一篇</div><div class="title">Swiper 基础轮播（自动播放+导航箭头）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+    <a href="ZY-14.html">创建页眉模板（Logo+多级导航+CTA）</a>
+    <a href="ZY-15.html">创建页脚模板（公司信息+链接+版权）</a>
+  </div></div>
+</div></body></html>

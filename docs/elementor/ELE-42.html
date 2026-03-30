@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Error 404 页面模板 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Error 404 页面模板</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Error 404 页面模板</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>404 页面是用户访问不存在的 URL 时看到的错误页面。通过 Elementor Theme Builder 自定义 404 页面，可以将原本冷冰冰的"页面未找到"变成一个引导用户继续浏览的机会。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>减少跳出</strong>：默认 404 页面没有任何导航指引，用户大概率直接离开。好的 404 页面能引导用户回到有价值的内容</li>
+      <li><strong>品牌体验</strong>：即使在错误页面也保持品牌调性，给用户留下专业印象</li>
+      <li><strong>实际需求</strong>：网站改版、删除文章、修改固定链接等操作都会产生 404，这是一个常态而非例外</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>Templates → Theme Builder</strong></li>
+      <li>点击 <strong>Error 404</strong> 区域的 <strong>"+"</strong></li>
+      <li>选择预设模板或从空白开始</li>
+      <li>设计 404 页面内容，建议包含：
+        <ul>
+          <li><strong>大标题</strong>：如"404"或"页面去哪了？"</li>
+          <li><strong>友好提示</strong>：告诉用户这个页面不存在</li>
+          <li><strong>搜索框</strong>：Search Form Widget，方便用户搜索想要的内容</li>
+          <li><strong>导航链接</strong>：返回首页、热门分类等常用入口</li>
+          <li><strong>热门文章</strong>：Posts Widget 展示几篇热门文章</li>
+        </ul>
+      </li>
+      <li>Publish → Display Conditions 自动选择 <strong>404 Page</strong>（唯一选项）</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>404 页面的 Display Conditions 只有一个选项（404 Page），不需要额外配置</li>
+      <li>测试 404 页面：随意输入一个不存在的 URL（如 <code>你的域名/asdfg</code>）查看效果</li>
+      <li>404 页面不应该返回 200 状态码 — Elementor 的 404 模板会正确返回 404 状态码，但如果使用其他方法（如创建一个叫"404"的普通页面然后重定向），可能导致 SEO 问题</li>
+      <li>不要在 404 页面放太多内容，保持简洁和明确的行动指引</li>
+      <li>配合 301 重定向插件（如 Redirection），将已知的失效 URL 重定向到正确页面，减少 404 的发生</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-41.html" class="prev"><div class="label">上一篇</div><div class="title">Search Results 搜索结果页模板</div></a>
+    <a href="ELE-43.html" class="next"><div class="label">下一篇</div><div class="title">Dynamic Tags 基础（站点标题/文章标题/特色图）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

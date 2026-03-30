@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>确认仪表盘可用 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">站点设置</a>
+  <span class="sep">/</span>
+  <span class="current">确认仪表盘可用</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>确认仪表盘可用</h1>
+    <div class="meta">
+      <span class="tag topic">站点设置</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 仪表盘（Dashboard）是登录后台后的首页，显示站点概况、快速草稿、活动日志等信息。确认仪表盘可用意味着验证你能正常登录后台并看到各项功能模块。</p>
+    <p>这是建站前的基本检查步骤，确保 WordPress 安装成功、数据库连接正常、文件权限正确。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>在开始任何配置之前，必须确认后台能正常访问。如果仪表盘有报错、白屏或加载异常，说明安装过程有问题，需要先排查解决。</p>
+    <p>教练在接手客户站点时，第一步也应该是登录后台确认一切正常，然后再进行操作。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>在浏览器中访问 <code>你的域名/wp-admin</code></li>
+      <li>输入管理员用户名和密码登录</li>
+      <li>确认仪表盘页面正常加载，左侧菜单栏显示完整</li>
+      <li>检查以下模块是否可见：
+        <ul>
+          <li><strong>概览</strong>（At a Glance）— 显示文章数、页面数、评论数</li>
+          <li><strong>活动</strong>（Activity）— 显示最近发布和评论</li>
+          <li><strong>WordPress 事件和新闻</strong>（WordPress Events and News）</li>
+        </ul>
+      </li>
+      <li>点击左侧菜单中的 <strong>文章</strong>、<strong>页面</strong>、<strong>外观</strong>、<strong>插件</strong>、<strong>设置</strong> 等主要菜单，确认都能正常打开</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>如果看到白屏或 500 错误，优先检查 <code>wp-config.php</code> 的数据库配置是否正确</li>
+      <li>如果后台加载非常慢，可能是主机性能问题或 PHP 版本过低</li>
+      <li>如果左侧菜单不完整，可能是当前账号权限不足，确认使用的是管理员账号</li>
+      <li>仪表盘小部件可以通过右上角 <strong>显示选项</strong>（Screen Options）来控制显示/隐藏</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SS-4.html" class="prev"><div class="label">上一篇</div><div class="title">切换语言</div></a>
+    <a href="SS-6.html" class="next"><div class="label">下一篇</div><div class="title">修改固定链接</div></a>
+  </div>
+</div>
+</body>
+</html>

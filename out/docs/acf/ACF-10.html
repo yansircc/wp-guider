@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在 CPT 文章中使用分类法归类 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">在 CPT 文章中使用分类法归类</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>在 CPT 文章中使用分类法归类</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>将分类法绑定到 CPT 后，在编辑该 CPT 的文章时，右侧栏会出现分类选择面板。通过勾选分类项，可以对内容进行归类管理。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>让访客能按分类浏览内容（如按「产品分类」筛选产品）</li>
+      <li>前端归档页自动按分类生成列表</li>
+      <li>后台可按分类快速筛选和管理文章</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>确认分类法已绑定到目标 CPT（见 ACF-rel-1 文档）</li>
+      <li>进入 CPT 文章列表（如<strong>产品 → 所有产品</strong>）</li>
+      <li>新建或编辑一篇文章</li>
+      <li>在编辑器右侧栏找到分类面板（如「产品分类」）</li>
+      <li>勾选对应的分类项，可选多个</li>
+      <li>保存/发布文章</li>
+    </ol>
+
+    <h3>在列表页按分类筛选</h3>
+    <p>文章列表页顶部会出现分类下拉筛选器，选择分类后点击「筛选」，只显示该分类下的文章。</p>
+
+    <h3>验证前台效果</h3>
+    <p>访问分类法的归档 URL（如 <code>/product-category/electronics/</code>），应看到该分类下的所有文章列表。</p>
+    <div class="callout tip">如果前台分类归档页返回 404，先去<strong>设置 → 固定链接</strong>页面点击一次「保存更改」刷新重写规则。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>分类面板不显示</strong>：检查分类法是否已正确绑定到该 CPT，以及分类法设置中「公开可见」是否开启</li>
+      <li><strong>每篇文章至少归一类</strong>：建议设置一个「默认分类」，避免有文章未归类</li>
+      <li><strong>快速编辑</strong>：在文章列表页点击「快速编辑」也可以直接修改分类，无需进入编辑页</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-9.html" class="prev"><div class="label">上一篇</div><div class="title">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</div></a>
+    <a href="ACF-11.html" class="next"><div class="label">下一篇</div><div class="title">创建字段组 + 添加具体字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

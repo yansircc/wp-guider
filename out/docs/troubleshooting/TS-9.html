@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>综合故障注入 — 数据库 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">troubleshooting</a>
+  <span class="sep">/</span>
+  <span class="current">综合故障注入 — 数据库</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>综合故障注入 — 数据库错误</h1>
+    <div class="meta">
+      <span class="tag topic">troubleshooting</span>
+      <span class="tag diff d5">L5</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>"Error establishing a database connection" 是 WordPress 最令人恐慌的错误之一。它意味着 WordPress 无法连接到数据库，整个站点——前台和后台——都完全瘫痪。</p>
+    <p>在故障注入训练中，系统会故意破坏数据库连接（如修改 DB_NAME/DB_PASSWORD），你需要诊断并恢复。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>数据库连接错误的常见原因：</p>
+    <ul>
+      <li>wp-config.php 中的数据库凭据被误改</li>
+      <li>数据库服务器宕机或重启</li>
+      <li>数据库用户权限被修改</li>
+      <li>数据库被删除或损坏</li>
+      <li>迁移后数据库配置未更新</li>
+    </ul>
+    <p>这类故障完全无法通过后台修复，只能通过命令行或文件级别操作。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>诊断流程</h3>
+    <ol>
+      <li><strong>确认错误类型</strong>
+        <pre><code># 测试数据库连接
+locwp wp wp-train -- db check 2>&amp;1</code></pre>
+        <p>如果报连接错误，说明凭据或服务有问题。</p>
+      </li>
+      <li><strong>检查数据库配置</strong>
+        <pre><code># 查看当前配置
+locwp wp wp-train -- config get DB_NAME
+locwp wp wp-train -- config get DB_USER
+locwp wp wp-train -- config get DB_HOST</code></pre>
+      </li>
+      <li><strong>检查数据库服务</strong>
+        <pre><code># 数据库服务是否在运行？
+# Local 环境可以在 Local app 中查看站点状态</code></pre>
+      </li>
+    </ol>
+
+    <h3>修复方法</h3>
+    <pre><code># 如果是 DB_NAME 被改错
+locwp wp wp-train -- config set DB_NAME "local"
+
+# 如果是密码被改错
+locwp wp wp-train -- config set DB_PASSWORD "root"
+
+# 修复后验证
+locwp wp wp-train -- db check</code></pre>
+
+    <h3>数据库损坏时</h3>
+    <pre><code># WordPress 内置修复工具
+# 在 wp-config.php 中添加：
+# define('WP_ALLOW_REPAIR', true);
+# 然后访问 /wp-admin/maint/repair.php
+
+# 或用 WP-CLI
+locwp wp wp-train -- db repair</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Local 环境的默认数据库凭据通常是：DB_NAME=<code>local</code>，DB_USER=<code>root</code>，DB_PASSWORD=<code>root</code></li>
+      <li>如果数据库真的被删除了，只能从备份恢复</li>
+      <li>使用 <code>WP_ALLOW_REPAIR</code> 修复后务必删除该常量——它允许任何人访问修复页面</li>
+      <li>数据库密码等敏感信息不要在日志或聊天中明文分享</li>
+      <li>这个故障场景再次证明了备份的重要性——没有备份的数据库丢失是灾难性的</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-8.html" class="prev"><div class="label">上一篇</div><div class="title">综合故障注入-白屏</div></a>
+    <a href="TS-10.html" class="next"><div class="label">下一篇</div><div class="title">综合故障注入-500</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-3.html">插件逐个排查</a>
+    <a href="TS-5.html">切换默认主题排查</a>
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+  </div></div>
+</div>
+</body>
+</html>

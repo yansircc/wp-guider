@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>提交 Sitemap 到 GSC - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">Google Analytics</a>
+  <span class="sep">/</span>
+  <span class="current">提交 Sitemap 到 GSC</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>提交 Sitemap 到 GSC</h1>
+    <div class="meta">
+      <span class="tag topic">Google Analytics</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>XML 站点地图（Sitemap）是一个列出网站所有公开 URL 的文件，帮助搜索引擎发现和抓取你的页面。Yoast SEO 和 SEOPress 都会自动生成站点地图，你只需将其地址提交给 Google Search Console。</p>
+    <p>提交站点地图不保证 Google 一定收录所有页面，但可以加速发现新页面和更新。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>Google 的爬虫（Googlebot）虽然可以自行发现页面，但对新站点或内部链接不完善的站点，很多页面可能长时间不被收录。站点地图是主动告诉 Google "这些页面存在，请来抓取"的最高效方式。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 确认站点地图 URL</h3>
+    <ul>
+      <li><strong>Yoast SEO</strong>：<code>https://your-site.com/sitemap_index.xml</code></li>
+      <li><strong>SEOPress</strong>：<code>https://your-site.com/sitemaps.xml</code></li>
+    </ul>
+    <p>在浏览器中访问上述地址，确认能看到 XML 格式的站点地图。</p>
+
+    <h3>2. 在 GSC 中提交</h3>
+    <ol>
+      <li>登录 Google Search Console</li>
+      <li>在左侧菜单点击 <strong>站点地图</strong>（Sitemaps）</li>
+      <li>在「添加新的站点地图」输入框中粘贴站点地图 URL</li>
+      <li>点击 <strong>提交</strong></li>
+      <li>状态显示为「成功」即表示 Google 已接收</li>
+    </ol>
+
+    <div class="callout tip">只需提交一次。SEO 插件会在内容更新时自动更新站点地图，Google 会定期重新抓取。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>状态「无法获取」</strong>：检查站点地图 URL 是否正确、网站是否可被外部访问、是否有安全插件阻止了爬虫</li>
+      <li><strong>站点地图中没有某个页面</strong>：检查该页面是否被设为 noindex，或者是草稿/私密状态。只有已发布且未设 noindex 的内容才会出现在站点地图中</li>
+      <li><strong>不要提交多个重复站点地图</strong>：如果同时启用了 Yoast 和 SEOPress，会生成两份不同的站点地图，只提交你正在使用的 SEO 插件生成的那个</li>
+      <li><strong>提交后不代表立即收录</strong>：Google 会按自己的节奏抓取，通常几天到几周不等</li>
+      <li><strong>固定链接影响站点地图</strong>：如果固定链接设为「朴素」模式，站点地图 URL 可能不正确。确保使用「文章名」等非朴素模式</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="GA-1.html" class="prev"><div class="label">上一篇</div><div class="title">注册 Google Search Console + 验证站点所有权</div></a>
+    <a href="GA-3.html" class="next"><div class="label">下一篇</div><div class="title">注册 GA4 + 安装追踪代码（通过 SEO 插件）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="GA-4.html">GA4 基础报告阅读（用户/会话/页面浏览）</a>
+    <a href="GA-5.html">GSC 性能报告（点击/展示/CTR/排名）</a>
+    <a href="GA-6.html">GA4 事件追踪（按钮点击/表单提交）</a>
+    <a href="GA-7.html">GA4 转化目标设置 + Google Ads 联动</a>
+  </div></div>
+</div>
+</body>
+</html>

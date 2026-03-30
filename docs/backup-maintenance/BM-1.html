@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UpdraftPlus 备份 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">backup-maintenance</a>
+  <span class="sep">/</span>
+  <span class="current">UpdraftPlus 备份</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>UpdraftPlus 备份</h1>
+    <div class="meta">
+      <span class="tag topic">backup-maintenance</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>UpdraftPlus 是 WordPress 最流行的备份插件，拥有超过 300 万活跃安装量。它能一键备份整个站点的文件和数据库，并支持将备份发送到 Google Drive、Dropbox、Amazon S3 等远程存储。</p>
+    <p>WordPress 本身没有内置完整的备份功能，UpdraftPlus 填补了这个关键空缺。备份内容包含五个部分：数据库、插件、主题、上传文件和其他文件，可以按需选择。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>没有备份等于裸奔。服务器故障、插件冲突白屏、黑客入侵、误删内容——这些都不是"会不会发生"的问题，而是"什么时候发生"的问题。</p>
+    <p>有备份，灾难只是小插曲；没备份，任何意外都可能是毁灭性的。备份是网站管理的第一铁律，而 UpdraftPlus 让这件事变得简单。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 安装并激活</h3>
+    <pre><code>locwp wp wp-train -- plugin install updraftplus --activate</code></pre>
+    <p>或通过后台：<strong>插件 → 安装插件</strong>，搜索 "UpdraftPlus"，点击安装并激活。</p>
+
+    <h3>2. 执行手动备份</h3>
+    <ol>
+      <li>进入 <strong>设置 → UpdraftPlus Backups</strong></li>
+      <li>点击 <strong>立即备份</strong>（Backup Now）</li>
+      <li>勾选需要备份的内容（建议首次全选）</li>
+      <li>点击确认，等待备份完成</li>
+    </ol>
+
+    <h3>3. 备份文件说明</h3>
+    <p>UpdraftPlus 会在 <code>wp-content/updraft/</code> 目录下生成多个压缩文件：</p>
+    <ul>
+      <li><code>backup_*-db.gz</code> — 数据库备份</li>
+      <li><code>backup_*-plugins.zip</code> — 插件文件</li>
+      <li><code>backup_*-themes.zip</code> — 主题文件</li>
+      <li><code>backup_*-uploads.zip</code> — 上传的媒体文件</li>
+      <li><code>backup_*-others.zip</code> — 其他 wp-content 文件</li>
+    </ul>
+
+    <div class="callout tip">备份完成后，在"现有备份"列表中点击验证，确认备份文件完整无损。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>备份只存本地等于没有备份——服务器挂了备份一起丢，建议配置远程存储</li>
+      <li>免费版支持本地存储和基本云存储（Google Drive、Dropbox 等），足够日常使用</li>
+      <li>大站点的 <code>uploads</code> 目录可能非常大，备份和恢复耗时较长</li>
+      <li>训练环境中更推荐 WP Reset 的快照功能——更轻量、恢复更快</li>
+      <li>首次安装后建议立即做一次完整备份，验证流程是否通畅</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="BM-2.html" class="next"><div class="label">下一篇</div><div class="title">恢复备份</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-2.html">恢复备份</a>
+    <a href="BM-4.html">自动备份计划</a>
+    <a href="BM-7.html">All-in-One Migration 跨服务器迁移</a>
+    <a href="BM-10.html">wp-cron 检查</a>
+  </div></div>
+</div>
+</body>
+</html>

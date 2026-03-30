@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>响应式排版 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">响应式排版</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>响应式排版（不同设备不同字号/间距）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor 支持为不同设备（桌面/平板/手机）设置不同的排版参数：字号、行高、内外边距、列间距等。桌面端的大标题在手机上可能太大，需要逐设备微调。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>桌面端 48px 的标题在手机上会占满整屏，需要缩小到 28-32px</li>
+      <li>桌面端 80px 的区块间距在手机上显得太空旷，需要收紧到 40px</li>
+      <li>正确的响应式排版直接影响移动端用户体验和转化率</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>响应式字号设置</h3>
+    <ol>
+      <li>选中 Heading 或 Text Editor Widget</li>
+      <li>在 <strong>Style 标签 → Typography → Size</strong></li>
+      <li>点击数值旁边的<strong>设备图标</strong>（桌面/平板/手机切换器）</li>
+      <li>切换到目标设备后，输入该设备下的字号</li>
+    </ol>
+    <p>常见字号参考：</p>
+    <table style="width:100%; border-collapse:collapse; margin:16px 0; font-size:14px;">
+      <tr style="border-bottom:1px solid var(--border);">
+        <th style="text-align:left; padding:8px; color:var(--text);">元素</th>
+        <th style="text-align:left; padding:8px; color:var(--text);">桌面</th>
+        <th style="text-align:left; padding:8px; color:var(--text);">平板</th>
+        <th style="text-align:left; padding:8px; color:var(--text);">手机</th>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px; color:var(--text2);">Hero 大标题</td>
+        <td style="padding:8px; color:var(--text2);">48-56px</td>
+        <td style="padding:8px; color:var(--text2);">36-42px</td>
+        <td style="padding:8px; color:var(--text2);">28-32px</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px; color:var(--text2);">区块标题</td>
+        <td style="padding:8px; color:var(--text2);">32-36px</td>
+        <td style="padding:8px; color:var(--text2);">26-30px</td>
+        <td style="padding:8px; color:var(--text2);">22-26px</td>
+      </tr>
+      <tr>
+        <td style="padding:8px; color:var(--text2);">正文</td>
+        <td style="padding:8px; color:var(--text2);">16-18px</td>
+        <td style="padding:8px; color:var(--text2);">16px</td>
+        <td style="padding:8px; color:var(--text2);">15-16px</td>
+      </tr>
+    </table>
+
+    <h3>响应式间距设置</h3>
+    <ol>
+      <li>选中 Container 或 Widget</li>
+      <li>在 <strong>Advanced 标签 → Margin / Padding</strong></li>
+      <li>同样点击<strong>设备图标</strong>切换设备</li>
+      <li>为手机端设置更小的间距</li>
+    </ol>
+
+    <h3>批量预览与调整</h3>
+    <p>用底部工具栏切换到手机视图，从头到尾浏览整个页面，发现排版问题后点选元素直接调整。</p>
+    <div class="callout tip">设计原则：<strong>先做桌面版，再逐步调小</strong>。Elementor 的响应式设置是继承关系 — 桌面值自动传给平板，平板值自动传给手机。只需要在有差异的地方覆盖。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>继承关系</strong>：未设置的设备会继承上一级的值。如果只改了手机字号，平板会保持桌面值</li>
+      <li><strong>重置响应式值</strong>：切换到目标设备后，点击设置项旁的<strong>撤销图标</strong>可清除该设备的覆盖值，恢复继承</li>
+      <li><strong>不要所有属性都覆盖</strong>：只修改确实需要调整的值（通常是字号和内外边距），颜色、字体族通常不需要按设备区分</li>
+      <li><strong>真机测试</strong>：编辑器的响应式预览是近似效果，上线前在真实手机上测试最终效果</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-14.html" class="prev"><div class="label">上一篇</div><div class="title">按设备隐藏/显示元素</div></a>
+    <a href="ELE-16.html" class="next"><div class="label">下一篇</div><div class="title">Hero Section（背景图+叠加+标题+CTA）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

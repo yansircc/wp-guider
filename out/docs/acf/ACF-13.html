@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理字段组与字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">管理字段组与字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>管理字段组与字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+  <p style="color: var(--text3); font-size: 13px; margin-bottom: 24px;">本文同时覆盖: ACF-13, ACF-14</p>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>对已创建的字段组和字段进行编辑、删除、重新排序等管理操作。随着项目发展，字段需求可能变化，需要灵活调整。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>需求变更时调整字段结构（添加新字段、修改字段类型、删除废弃字段）</li>
+      <li>优化编辑体验（调整字段顺序、修改说明文字）</li>
+      <li>清理不再使用的字段组</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>查看字段组列表</h3>
+    <p>进入 <strong>ACF → 字段组</strong> 可以看到所有字段组，包括标题、关联的位置规则、字段数量。</p>
+
+    <h3>编辑字段组</h3>
+    <ul>
+      <li>点击字段组标题进入编辑</li>
+      <li>可修改标题、位置规则、显示位置、样式</li>
+      <li>「状态」可设为<strong>非活跃</strong>来暂时禁用字段组（不显示但保留配置）</li>
+    </ul>
+
+    <h3>管理字段</h3>
+    <ul>
+      <li><strong>添加字段</strong>：点击「+ 添加字段」</li>
+      <li><strong>编辑字段</strong>：点击字段名展开编辑面板</li>
+      <li><strong>调整顺序</strong>：拖拽字段上下移动</li>
+      <li><strong>删除字段</strong>：展开字段后，点击底部的「删除」按钮</li>
+      <li><strong>复制字段</strong>：展开字段后，点击「复制」快速创建相似字段</li>
+    </ul>
+
+    <h3>删除字段组</h3>
+    <ol>
+      <li>在字段组列表页，悬停在要删除的字段组上</li>
+      <li>点击<strong>「移到回收站」</strong></li>
+    </ol>
+    <div class="callout warning">删除字段组只移除字段定义，已填写的字段数据仍保留在 <code>wp_postmeta</code> 表中。但编辑界面不再显示这些字段，数据变成"孤立数据"。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>修改字段类型</strong>：更改已有字段的类型（如文本改为数字）不会自动转换已存数据，可能导致显示异常</li>
+      <li><strong>修改 Field Name</strong>：改名后旧数据不会自动迁移，前端调用也需要更新</li>
+      <li><strong>批量操作</strong>：可以勾选多个字段组后批量删除或移到回收站</li>
+      <li><strong>回收站恢复</strong>：误删可在回收站中恢复</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-12.html" class="prev"><div class="label">上一篇</div><div class="title">填写 ACF 字段值</div></a>
+    <a href="ACF-14.html" class="next"><div class="label">下一篇</div><div class="title">添加/修改/删除具体字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WP Guider 知识库</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .kb-header { text-align: center; margin-bottom: 40px; }
+  .kb-header h1 { font-size: 32px; margin-bottom: 8px; }
+  .kb-header p { color: var(--text2); }
+  .kb-stats { display: flex; gap: 24px; justify-content: center; margin-bottom: 32px; }
+  .kb-stats .stat { text-align: center; }
+  .kb-stats .num { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .kb-stats .label { font-size: 12px; color: var(--text2); }
+  .search-wrap { max-width: 560px; margin: 0 auto 40px; }
+  .search-box { width: 100%; padding: 14px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 15px; outline: none; }
+  .search-box:focus { border-color: var(--accent); }
+  .search-box::placeholder { color: var(--text3); }
+  .search-results { max-width: 560px; margin: -24px auto 40px; display: none; }
+  .search-results.active { display: block; }
+  .sr-item { display: block; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-top: none; text-decoration: none; color: var(--text2); font-size: 13px; }
+  .sr-item:first-child { border-top: 1px solid var(--border); border-radius: 10px 10px 0 0; }
+  .sr-item:last-child { border-radius: 0 0 10px 10px; }
+  .sr-item:hover { background: var(--surface2); color: var(--text); }
+  .sr-item .sr-id { color: var(--text3); font-family: monospace; font-size: 11px; }
+  .sr-item .sr-topic { color: var(--accent); font-size: 11px; margin-left: 8px; }
+  .category-section { margin-bottom: 40px; }
+  .category-section h2 { font-size: 20px; margin-bottom: 16px; }
+  .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .topic-card { display: block; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; transition: border-color 0.15s; }
+  .topic-card:hover { border-color: var(--accent); }
+  .tc-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .tc-sub { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
+  .tc-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .tc-count { font-size: 13px; color: var(--accent); font-weight: 600; }
+  .back-link { display: inline-block; margin-bottom: 24px; color: var(--text2); text-decoration: none; font-size: 13px; }
+  .back-link:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container" style="max-width:960px">
+  <a href="../topic-matrix.html" class="back-link">← 返回矩阵视图</a>
+  <div class="kb-header">
+    <h1>WP Guider 知识库</h1>
+    <p>WordPress 培训系统 · 252 篇文档 · 20 个主题</p>
+  </div>
+  <div class="kb-stats">
+    <div class="stat"><div class="num">252</div><div class="label">文档总数</div></div>
+    <div class="stat"><div class="num">20</div><div class="label">知识主题</div></div>
+    <div class="stat"><div class="num">5</div><div class="label">难度等级</div></div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" class="search-box" placeholder="搜索文档… 输入关键词、任务 ID 或主题名" id="search">
+  </div>
+  <div class="search-results" id="results"></div>
+  <div class="category-section"><h2>🌐 基础设施</h2><div class="topic-grid">
+<a href="domain/index.html" class="topic-card">
+  <div class="tc-name">域名管理</div>
+  <div class="tc-sub">注册 · DNS · 迁移</div>
+  <div class="tc-meta"><span class="tc-count">6 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span></div>
+</a>
+<a href="hosting/index.html" class="topic-card">
+  <div class="tc-name">主机空间</div>
+  <div class="tc-sub">Hostinger · 面板 · FTP</div>
+  <div class="tc-meta"><span class="tc-count">6 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+<a href="wp-install/index.html" class="topic-card">
+  <div class="tc-name">WordPress 安装</div>
+  <div class="tc-sub">安装 · 域名绑定 · SSL</div>
+  <div class="tc-meta"><span class="tc-count">8 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+</div></div>
+<div class="category-section"><h2>⚙️ 站点设置</h2><div class="topic-grid">
+<a href="site-settings/index.html" class="topic-card">
+  <div class="tc-name">站点配置</div>
+  <div class="tc-sub">标题 · 时区 · 固定链接</div>
+  <div class="tc-meta"><span class="tc-count">10 篇</span><span class="tag diff d1">L1 入门</span></div>
+</a>
+<a href="user-management/index.html" class="topic-card">
+  <div class="tc-name">用户管理</div>
+  <div class="tc-sub">角色 · 权限 · 个人资料</div>
+  <div class="tc-meta"><span class="tc-count">8 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span></div>
+</a>
+</div></div>
+<div class="category-section"><h2>📝 内容管理</h2><div class="topic-grid">
+<a href="pages/index.html" class="topic-card">
+  <div class="tc-name">页面管理</div>
+  <div class="tc-sub">创建 · 层级 · 模板</div>
+  <div class="tc-meta"><span class="tc-count">9 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span></div>
+</a>
+<a href="posts-taxonomy/index.html" class="topic-card">
+  <div class="tc-name">文章与分类</div>
+  <div class="tc-sub">文章 · 分类 · 标签</div>
+  <div class="tc-meta"><span class="tc-count">6 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span></div>
+</a>
+<a href="media/index.html" class="topic-card">
+  <div class="tc-name">媒体管理</div>
+  <div class="tc-sub">上传 · 图库 · 尺寸</div>
+  <div class="tc-meta"><span class="tc-count">5 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span></div>
+</a>
+<a href="menus-nav/index.html" class="topic-card">
+  <div class="tc-name">菜单与导航</div>
+  <div class="tc-sub">创建 · 排序 · 位置</div>
+  <div class="tc-meta"><span class="tc-count">5 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span></div>
+</a>
+</div></div>
+<div class="category-section"><h2>🎨 外观定制</h2><div class="topic-grid">
+<a href="theme/index.html" class="topic-card">
+  <div class="tc-name">主题定制</div>
+  <div class="tc-sub">选型 · Customizer · Logo</div>
+  <div class="tc-meta"><span class="tc-count">8 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span></div>
+</a>
+<a href="elementor/index.html" class="topic-card">
+  <div class="tc-name">Elementor 建站</div>
+  <div class="tc-sub">布局 · Widget · 模板</div>
+  <div class="tc-meta"><span class="tc-count">56 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+<a href="zeroy/index.html" class="topic-card">
+  <div class="tc-name">ZeroY AI 建站</div>
+  <div class="tc-sub">页面 · 模板 · 交互</div>
+  <div class="tc-meta"><span class="tc-count">39 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+</div></div>
+<div class="category-section"><h2>🔌 插件与扩展</h2><div class="topic-grid">
+<a href="plugins-basic/index.html" class="topic-card">
+  <div class="tc-name">插件管理</div>
+  <div class="tc-sub">安装 · 选型 · 表单</div>
+  <div class="tc-meta"><span class="tc-count">3 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span></div>
+</a>
+<a href="acf/index.html" class="topic-card">
+  <div class="tc-name">ACF 自定义字段</div>
+  <div class="tc-sub">CPT · 分类法 · 字段组</div>
+  <div class="tc-meta"><span class="tc-count">28 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span></div>
+</a>
+<a href="seo/index.html" class="topic-card">
+  <div class="tc-name">SEO 优化</div>
+  <div class="tc-sub">Yoast · 标题 · 描述</div>
+  <div class="tc-meta"><span class="tc-count">12 篇</span><span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+<a href="google-analytics/index.html" class="topic-card">
+  <div class="tc-name">Google 全家桶</div>
+  <div class="tc-sub">GSC · GA4 · 数据分析</div>
+  <div class="tc-meta"><span class="tc-count">7 篇</span><span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+</div></div>
+<div class="category-section"><h2>🛠️ 运维与安全</h2><div class="topic-grid">
+<a href="wp-config/index.html" class="topic-card">
+  <div class="tc-name">wp-config 与数据库</div>
+  <div class="tc-sub">常量 · 文件结构 · SQL</div>
+  <div class="tc-meta"><span class="tc-count">10 篇</span><span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+<a href="security/index.html" class="topic-card">
+  <div class="tc-name">安全加固</div>
+  <div class="tc-sub">登录 · 权限 · 防护</div>
+  <div class="tc-meta"><span class="tc-count">4 篇</span><span class="tag diff d1">L1 入门</span> <span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span></div>
+</a>
+<a href="backup-maintenance/index.html" class="topic-card">
+  <div class="tc-name">备份与维护</div>
+  <div class="tc-sub">备份 · 更新 · Cron</div>
+  <div class="tc-meta"><span class="tc-count">11 篇</span><span class="tag diff d2">L2 基础</span> <span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span></div>
+</a>
+<a href="troubleshooting/index.html" class="topic-card">
+  <div class="tc-name">故障排查</div>
+  <div class="tc-sub">Debug · 冲突 · 白屏</div>
+  <div class="tc-meta"><span class="tc-count">11 篇</span><span class="tag diff d3">L3 进阶</span> <span class="tag diff d4">L4 高级</span> <span class="tag diff d5">L5 专家</span></div>
+</a>
+</div></div>
+
+</div>
+<script>
+const TASKS = [{"id": "SS-1", "topic": "site-settings", "diff": 1, "desc": "修改站点标题"}, {"id": "SS-2", "topic": "site-settings", "diff": 1, "desc": "修改副标题"}, {"id": "SS-3", "topic": "site-settings", "diff": 1, "desc": "关闭注册"}, {"id": "SS-4", "topic": "site-settings", "diff": 1, "desc": "切换语言"}, {"id": "SS-5", "topic": "site-settings", "diff": 1, "desc": "确认仪表盘可用"}, {"id": "SS-6", "topic": "site-settings", "diff": 1, "desc": "修改固定链接"}, {"id": "SS-7", "topic": "site-settings", "diff": 1, "desc": "设置时区"}, {"id": "SS-8", "topic": "site-settings", "diff": 1, "desc": "日期和时间格式"}, {"id": "SS-9", "topic": "site-settings", "diff": 1, "desc": "关闭评论"}, {"id": "SS-10", "topic": "site-settings", "diff": 1, "desc": "每页文章数"}, {"id": "UM-1", "topic": "user-management", "diff": 1, "desc": "修改昵称和显示名"}, {"id": "UM-2", "topic": "user-management", "diff": 1, "desc": "创建编辑用户"}, {"id": "UM-3", "topic": "user-management", "diff": 1, "desc": "修改默认角色"}, {"id": "UM-4", "topic": "user-management", "diff": 1, "desc": "创建作者用户"}, {"id": "UM-5", "topic": "user-management", "diff": 2, "desc": "删除用户并归属内容"}, {"id": "UM-6", "topic": "user-management", "diff": 2, "desc": "修改用户角色"}, {"id": "UM-7", "topic": "user-management", "diff": 3, "desc": "生成 Application Password"}, {"id": "UM-8", "topic": "user-management", "diff": 2, "desc": "用 DoLogin 生成免密登录链接"}, {"id": "PG-1", "topic": "pages", "diff": 1, "desc": "创建三个页面并发布"}, {"id": "PG-2", "topic": "pages", "diff": 2, "desc": "设置静态首页"}, {"id": "PG-3", "topic": "pages", "diff": 2, "desc": "创建子页面"}, {"id": "PG-4", "topic": "pages", "diff": 2, "desc": "修改页面 slug"}, {"id": "PG-5", "topic": "pages", "diff": 2, "desc": "创建私密页面"}, {"id": "PG-6", "topic": "pages", "diff": 2, "desc": "页面状态切换（草稿/待审/发布/回收站/恢复）"}, {"id": "PG-7", "topic": "pages", "diff": 2, "desc": "修改页面作者"}, {"id": "PG-8", "topic": "pages", "diff": 2, "desc": "定时发布页面（⚠️ wp-cron 不稳定，见 backup-maintenance L3/L4）"}, {"id": "PG-9", "topic": "pages", "diff": 2, "desc": "关联 Privacy Policy 页面"}, {"id": "PT-1", "topic": "posts-taxonomy", "diff": 1, "desc": "创建分类目录"}, {"id": "PT-2", "topic": "posts-taxonomy", "diff": 2, "desc": "创建子分类"}, {"id": "PT-3", "topic": "posts-taxonomy", "diff": 2, "desc": "发布文章并归类"}, {"id": "PT-4", "topic": "posts-taxonomy", "diff": 1, "desc": "创建标签"}, {"id": "PT-5", "topic": "posts-taxonomy", "diff": 2, "desc": "文章+标签+摘要"}, {"id": "PT-6", "topic": "posts-taxonomy", "diff": 1, "desc": "重命名默认分类"}, {"id": "MD-1", "topic": "media", "diff": 1, "desc": "上传图片到媒体库"}, {"id": "MD-2", "topic": "media", "diff": 1, "desc": "编辑图片信息"}, {"id": "MD-3", "topic": "media", "diff": 2, "desc": "设置特色图片"}, {"id": "MD-4", "topic": "media", "diff": 2, "desc": "媒体设置（缩略图尺寸）"}, {"id": "MD-5", "topic": "media", "diff": 2, "desc": "处理网站素材（压缩/裁剪/格式转换）"}, {"id": "MN-1", "topic": "menus-nav", "diff": 1, "desc": "创建主导航菜单"}, {"id": "MN-2", "topic": "menus-nav", "diff": 1, "desc": "添加页面到菜单"}, {"id": "MN-3", "topic": "menus-nav", "diff": 2, "desc": "添加自定义链接"}, {"id": "MN-4", "topic": "menus-nav", "diff": 2, "desc": "子菜单层级"}, {"id": "MN-5", "topic": "menus-nav", "diff": 2, "desc": "菜单显示位置"}, {"id": "PB-1", "topic": "plugins-basic", "diff": 1, "desc": "安装并激活插件"}, {"id": "PB-2", "topic": "plugins-basic", "diff": 1, "desc": "停用并删除插件"}, {"id": "SEO-1", "topic": "seo", "diff": 2, "desc": "安装 Yoast SEO + 基础配置向导"}, {"id": "SEO-2", "topic": "seo", "diff": 2, "desc": "Yoast：设置页面 SEO 标题/描述"}, {"id": "SEO-3", "topic": "seo", "diff": 2, "desc": "修改页面 slug 为英文"}, {"id": "SEO-4", "topic": "seo", "diff": 3, "desc": "提交站点地图到 GSC"}, {"id": "SEO-5", "topic": "seo", "diff": 3, "desc": "Yoast：noindex 设置"}, {"id": "SEO-6", "topic": "seo", "diff": 2, "desc": "安装 SEOPress + 基础配置"}, {"id": "SEO-7", "topic": "seo", "diff": 2, "desc": "SEOPress：设置页面 SEO 标题/描述"}, {"id": "SEO-8", "topic": "seo", "diff": 3, "desc": "SEOPress：配置 Google 全局代码（Analytics/Ads）"}, {"id": "SEO-9", "topic": "seo", "diff": 3, "desc": "SEOPress：noindex/nofollow 设置"}, {"id": "SEO-10", "topic": "seo", "diff": 3, "desc": "为 ACF 自定义文章类型配置 SEO 标题模板"}, {"id": "SEO-11", "topic": "seo", "diff": 3, "desc": "为 ACF 分类法（Taxonomy）配置 SEO 标题/描述"}, {"id": "SEO-12", "topic": "seo", "diff": 4, "desc": "CPT 单篇 + 归档页的 SEO 策略（index/noindex 决策）"}, {"id": "BM-1", "topic": "backup-maintenance", "diff": 2, "desc": "UpdraftPlus 备份"}, {"id": "BM-2", "topic": "backup-maintenance", "diff": 3, "desc": "恢复备份"}, {"id": "TH-1", "topic": "theme", "diff": 2, "desc": "响应式预览"}, {"id": "TH-2", "topic": "theme", "diff": 2, "desc": "移动端菜单调整"}, {"id": "TH-3", "topic": "theme", "diff": 2, "desc": "评估主题优劣"}, {"id": "TH-4", "topic": "theme", "diff": 2, "desc": "安装第三方主题"}, {"id": "TH-5", "topic": "theme", "diff": 1, "desc": "Customizer 改站点标题"}, {"id": "TH-6", "topic": "theme", "diff": 2, "desc": "上传 Favicon"}, {"id": "TH-7", "topic": "theme", "diff": 2, "desc": "上传 Logo"}, {"id": "TH-8", "topic": "theme", "diff": 2, "desc": "设置文章页"}, {"id": "PB-3", "topic": "plugins-basic", "diff": 2, "desc": "插件选型方法论"}, {"id": "ACF-1", "topic": "acf", "diff": 1, "desc": "安装 ACF Pro"}, {"id": "ACF-2", "topic": "acf", "diff": 1, "desc": "添加自定义文章类型（如产品）"}, {"id": "ACF-3", "topic": "acf", "diff": 1, "desc": "编辑/查看文章类型设置"}, {"id": "ACF-4", "topic": "acf", "diff": 2, "desc": "开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）"}, {"id": "ACF-5", "topic": "acf", "diff": 2, "desc": "删除文章类型"}, {"id": "ACF-6", "topic": "acf", "diff": 1, "desc": "创建分类法（如产品分类）+ 开启分层"}, {"id": "ACF-7", "topic": "acf", "diff": 1, "desc": "添加/编辑/删除具体分类项"}, {"id": "ACF-8", "topic": "acf", "diff": 2, "desc": "编辑/删除分类法"}, {"id": "ACF-9", "topic": "acf", "diff": 2, "desc": "将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）"}, {"id": "ACF-10", "topic": "acf", "diff": 2, "desc": "在 CPT 文章中使用分类法进行归类"}, {"id": "ACF-11", "topic": "acf", "diff": 2, "desc": "创建字段组 + 添加具体字段"}, {"id": "ACF-12", "topic": "acf", "diff": 2, "desc": "填写 ACF 字段值"}, {"id": "ACF-13", "topic": "acf", "diff": 2, "desc": "编辑/删除/查看字段组"}, {"id": "ACF-14", "topic": "acf", "diff": 2, "desc": "添加/修改/删除具体字段"}, {"id": "ACF-15", "topic": "acf", "diff": 2, "desc": "文本 / 文本区域 / 数字 / URL 字段"}, {"id": "ACF-16", "topic": "acf", "diff": 2, "desc": "图片 / 文件 字段"}, {"id": "ACF-17", "topic": "acf", "diff": 2, "desc": "选择框 / 复选框 / 单选按钮 字段"}, {"id": "ACF-18", "topic": "acf", "diff": 2, "desc": "True/False 开关字段"}, {"id": "ACF-19", "topic": "acf", "diff": 3, "desc": "关系 / 文章对象 字段"}, {"id": "ACF-20", "topic": "acf", "diff": 3, "desc": "日期选择器 / 颜色选择器 字段"}, {"id": "ACF-21", "topic": "acf", "diff": 3, "desc": "位置规则-特定页面"}, {"id": "ACF-22", "topic": "acf", "diff": 3, "desc": "位置规则-文章类型"}, {"id": "ACF-23", "topic": "acf", "diff": 3, "desc": "分类法字段"}, {"id": "ACF-24", "topic": "acf", "diff": 3, "desc": "条件逻辑"}, {"id": "ACF-25", "topic": "acf", "diff": 2, "desc": "导出 ACF JSON"}, {"id": "ACF-26", "topic": "acf", "diff": 2, "desc": "导入 ACF JSON"}, {"id": "ACF-27", "topic": "acf", "diff": 2, "desc": "ACF Playground：可视化拖拽生成 ACF JSON"}, {"id": "ACF-28", "topic": "acf", "diff": 2, "desc": "ACF Helper：用自然语言描述生成 ACF JSON"}, {"id": "SEC-1", "topic": "security", "diff": 2, "desc": "安装 Wordfence + 基础安全扫描"}, {"id": "GA-1", "topic": "google-analytics", "diff": 2, "desc": "注册 Google Search Console + 验证站点所有权"}, {"id": "GA-2", "topic": "google-analytics", "diff": 2, "desc": "提交 Sitemap 到 GSC"}, {"id": "GA-3", "topic": "google-analytics", "diff": 2, "desc": "注册 GA4 + 安装追踪代码（通过 SEO 插件）"}, {"id": "GA-4", "topic": "google-analytics", "diff": 3, "desc": "GA4 基础报告阅读（用户/会话/页面浏览）"}, {"id": "GA-5", "topic": "google-analytics", "diff": 3, "desc": "GSC 性能报告（点击/展示/CTR/排名）"}, {"id": "GA-6", "topic": "google-analytics", "diff": 3, "desc": "GA4 事件追踪（按钮点击/表单提交）"}, {"id": "GA-7", "topic": "google-analytics", "diff": 4, "desc": "GA4 转化目标设置 + Google Ads 联动"}, {"id": "WPC-1", "topic": "wp-config", "diff": 2, "desc": "查看 DB_NAME"}, {"id": "WPC-2", "topic": "wp-config", "diff": 2, "desc": "wp-content 目录结构"}, {"id": "WPC-3", "topic": "wp-config", "diff": 3, "desc": "themes/plugins 目录"}, {"id": "WPC-4", "topic": "wp-config", "diff": 3, "desc": "uploads 目录"}, {"id": "WPC-5", "topic": "wp-config", "diff": 3, "desc": "查看 table_prefix"}, {"id": "WPC-6", "topic": "wp-config", "diff": 3, "desc": "设置 WP_MEMORY_LIMIT"}, {"id": "WPC-7", "topic": "wp-config", "diff": 3, "desc": "设置 WP_DEBUG_DISPLAY"}, {"id": "WPC-8", "topic": "wp-config", "diff": 3, "desc": "wp-cli 查看选项"}, {"id": "WPC-9", "topic": "wp-config", "diff": 4, "desc": "SQL 查询基础"}, {"id": "WPC-10", "topic": "wp-config", "diff": 4, "desc": "修复 siteurl"}, {"id": "BM-3", "topic": "backup-maintenance", "diff": 2, "desc": "备份策略选择"}, {"id": "BM-4", "topic": "backup-maintenance", "diff": 3, "desc": "自动备份计划"}, {"id": "BM-5", "topic": "backup-maintenance", "diff": 2, "desc": "WP Reset 生成快照"}, {"id": "BM-6", "topic": "backup-maintenance", "diff": 2, "desc": "WP Reset 恢复快照"}, {"id": "BM-7", "topic": "backup-maintenance", "diff": 3, "desc": "All-in-One Migration 跨服务器迁移"}, {"id": "SEC-2", "topic": "security", "diff": 1, "desc": "确认注册关闭"}, {"id": "SEC-3", "topic": "security", "diff": 3, "desc": "隐藏登录 URL"}, {"id": "SEC-4", "topic": "security", "diff": 3, "desc": "禁用文件编辑"}, {"id": "BM-8", "topic": "backup-maintenance", "diff": 2, "desc": "更新 WordPress"}, {"id": "BM-9", "topic": "backup-maintenance", "diff": 2, "desc": "更新插件"}, {"id": "BM-10", "topic": "backup-maintenance", "diff": 3, "desc": "wp-cron 检查"}, {"id": "BM-11", "topic": "backup-maintenance", "diff": 4, "desc": "系统 cron 替换"}, {"id": "TS-1", "topic": "troubleshooting", "diff": 3, "desc": "开启 WP_DEBUG"}, {"id": "TS-2", "topic": "troubleshooting", "diff": 3, "desc": "查看 debug.log"}, {"id": "TS-3", "topic": "troubleshooting", "diff": 4, "desc": "插件逐个排查"}, {"id": "TS-4", "topic": "troubleshooting", "diff": 5, "desc": "mu-plugin 故障修复"}, {"id": "TS-5", "topic": "troubleshooting", "diff": 4, "desc": "切换默认主题排查"}, {"id": "TS-6", "topic": "troubleshooting", "diff": 5, "desc": "functions.php 语法错误修复"}, {"id": "TS-7", "topic": "troubleshooting", "diff": 5, "desc": "修复错误 siteurl"}, {"id": "TS-8", "topic": "troubleshooting", "diff": 5, "desc": "综合故障注入-白屏"}, {"id": "TS-9", "topic": "troubleshooting", "diff": 5, "desc": "综合故障注入-数据库"}, {"id": "TS-10", "topic": "troubleshooting", "diff": 5, "desc": "综合故障注入-500"}, {"id": "TS-11", "topic": "troubleshooting", "diff": 5, "desc": "综合故障注入-权限"}, {"id": "ELE-1", "topic": "elementor", "diff": 1, "desc": "安装 Elementor Pro + 激活授权"}, {"id": "ELE-2", "topic": "elementor", "diff": 1, "desc": "创建第一个页面（拖拽编辑器界面认识）"}, {"id": "ELE-3", "topic": "elementor", "diff": 2, "desc": "Container 布局（Flexbox 方向/对齐/间距）"}, {"id": "ELE-4", "topic": "elementor", "diff": 2, "desc": "嵌套 Container（多层布局）"}, {"id": "ELE-5", "topic": "elementor", "diff": 3, "desc": "Grid Container 布局"}, {"id": "ELE-6", "topic": "elementor", "diff": 1, "desc": "标题 / 文本编辑器 / 图片 Widget"}, {"id": "ELE-7", "topic": "elementor", "diff": 1, "desc": "按钮 / 图标 / 间距 Widget"}, {"id": "ELE-8", "topic": "elementor", "diff": 2, "desc": "图标盒子 / 图片盒子 Widget"}, {"id": "ELE-9", "topic": "elementor", "diff": 2, "desc": "视频 / 谷歌地图 Widget"}, {"id": "ELE-10", "topic": "elementor", "diff": 2, "desc": "全局颜色 + 全局字体设置"}, {"id": "ELE-11", "topic": "elementor", "diff": 3, "desc": "Design System Variables（字号/间距/圆角变量）"}, {"id": "ELE-12", "topic": "elementor", "diff": 3, "desc": "CSS Classes 复用样式"}, {"id": "ELE-13", "topic": "elementor", "diff": 2, "desc": "响应式断点（桌面/平板/手机预览切换）"}, {"id": "ELE-14", "topic": "elementor", "diff": 3, "desc": "按设备隐藏/显示元素"}, {"id": "ELE-15", "topic": "elementor", "diff": 3, "desc": "响应式排版（不同设备不同字号/间距）"}, {"id": "ELE-16", "topic": "elementor", "diff": 3, "desc": "Hero Section（背景图+叠加+标题+CTA）"}, {"id": "ELE-17", "topic": "elementor", "diff": 3, "desc": "视频背景 Hero"}, {"id": "ELE-18", "topic": "elementor", "diff": 2, "desc": "Slides 幻灯片 Widget"}, {"id": "ELE-19", "topic": "elementor", "diff": 2, "desc": "Animated Headline 动态标题"}, {"id": "ELE-20", "topic": "elementor", "diff": 2, "desc": "Countdown 倒计时 Widget"}, {"id": "ELE-21", "topic": "elementor", "diff": 2, "desc": "Price Table 价格表 Widget"}, {"id": "ELE-22", "topic": "elementor", "diff": 2, "desc": "Testimonial Carousel 评价轮播"}, {"id": "ELE-23", "topic": "elementor", "diff": 2, "desc": "手风琴 / 标签 / 切换 Widget"}, {"id": "ELE-24", "topic": "elementor", "diff": 2, "desc": "Table of Contents 目录 Widget"}, {"id": "ELE-25", "topic": "elementor", "diff": 3, "desc": "Motion Effects 动效（滚动视差/淡入）"}, {"id": "ELE-26", "topic": "elementor", "diff": 3, "desc": "Lottie 动画 Widget"}, {"id": "ELE-27", "topic": "elementor", "diff": 3, "desc": "Sticky 元素（固定导航/侧边栏）"}, {"id": "ELE-28", "topic": "elementor", "diff": 2, "desc": "Elementor Form（联系表单设计）"}, {"id": "ELE-29", "topic": "elementor", "diff": 3, "desc": "多步骤表单（Multi-step Form）"}, {"id": "ELE-30", "topic": "elementor", "diff": 3, "desc": "表单提交后动作（邮件/重定向/Webhook）"}, {"id": "ELE-31", "topic": "elementor", "diff": 3, "desc": "表单集成（Mailchimp / HubSpot）"}, {"id": "ELE-32", "topic": "elementor", "diff": 2, "desc": "Floating Contact Buttons（WhatsApp/SMS）"}, {"id": "ELE-33", "topic": "elementor", "diff": 3, "desc": "Popup 创建（Modal/Bar/Slide-in）"}, {"id": "ELE-34", "topic": "elementor", "diff": 4, "desc": "Popup 触发条件与显示规则"}, {"id": "ELE-35", "topic": "elementor", "diff": 4, "desc": "Popup 表单集成（询盘弹窗）"}, {"id": "ELE-36", "topic": "elementor", "diff": 3, "desc": "Theme Builder Header（Logo+Nav Menu+搜索）"}, {"id": "ELE-37", "topic": "elementor", "diff": 3, "desc": "Theme Builder Footer"}, {"id": "ELE-38", "topic": "elementor", "diff": 3, "desc": "Single Post 文章模板"}, {"id": "ELE-39", "topic": "elementor", "diff": 4, "desc": "Archive 归档模板（分类/标签/作者）"}, {"id": "ELE-40", "topic": "elementor", "diff": 4, "desc": "Display Conditions 显示条件（不同页面不同模板）"}, {"id": "ELE-41", "topic": "elementor", "diff": 3, "desc": "Search Results 搜索结果页模板"}, {"id": "ELE-42", "topic": "elementor", "diff": 3, "desc": "Error 404 页面模板"}, {"id": "ELE-43", "topic": "elementor", "diff": 3, "desc": "Dynamic Tags 基础（站点标题/文章标题/特色图）"}, {"id": "ELE-44", "topic": "elementor", "diff": 4, "desc": "ACF + Dynamic Tags（自定义字段动态显示）"}, {"id": "ELE-45", "topic": "elementor", "diff": 4, "desc": "Posts Widget 文章列表（筛选/排序/分页）"}, {"id": "ELE-46", "topic": "elementor", "diff": 4, "desc": "Portfolio Widget 作品集展示"}, {"id": "ELE-47", "topic": "elementor", "diff": 3, "desc": "WooCommerce 产品页模板"}, {"id": "ELE-48", "topic": "elementor", "diff": 4, "desc": "WooCommerce 商店归档 + 购物车/结账页"}, {"id": "ELE-49", "topic": "elementor", "diff": 3, "desc": "Landing Page 设计（单页营销）"}, {"id": "ELE-50", "topic": "elementor", "diff": 4, "desc": "转化优化（CTA 位置/A-B 测试思路）"}, {"id": "ELE-51", "topic": "elementor", "diff": 2, "desc": "保存为模板 + 导入导出"}, {"id": "ELE-52", "topic": "elementor", "diff": 3, "desc": "Cloud Templates 跨站点复用"}, {"id": "ELE-53", "topic": "elementor", "diff": 3, "desc": "Reusable Sections 可复用区块"}, {"id": "ELE-54", "topic": "elementor", "diff": 2, "desc": "Elementor AI 生成文案"}, {"id": "ELE-55", "topic": "elementor", "diff": 3, "desc": "Elementor AI 生成/编辑图片"}, {"id": "ELE-56", "topic": "elementor", "diff": 4, "desc": "Elementor AI 生成自定义 CSS"}, {"id": "ZY-1", "topic": "zeroy", "diff": 1, "desc": "下载并安装 ZeroY 主题 + 编辑器插件"}, {"id": "ZY-2", "topic": "zeroy", "diff": 1, "desc": "配置 API Token（zeroy.app 控制台绑定域名）"}, {"id": "ZY-3", "topic": "zeroy", "diff": 2, "desc": "配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接"}, {"id": "ZY-4", "topic": "zeroy", "diff": 2, "desc": "设计系统：用 AI 生成全局风格（颜色/字体/间距）"}, {"id": "ZY-5", "topic": "zeroy", "diff": 2, "desc": "用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）"}, {"id": "ZY-6", "topic": "zeroy", "diff": 2, "desc": "用选择器选中元素 + AI 局部修改"}, {"id": "ZY-7", "topic": "zeroy", "diff": 2, "desc": "创建关于页（团队/资质/使命）"}, {"id": "ZY-8", "topic": "zeroy", "diff": 3, "desc": "创建服务/产品页（网格布局）"}, {"id": "ZY-9", "topic": "zeroy", "diff": 3, "desc": "创建联系页（表单+联系方式）"}, {"id": "ZY-10", "topic": "zeroy", "diff": 2, "desc": "创建 Thank You 感谢页"}, {"id": "ZY-11", "topic": "zeroy", "diff": 2, "desc": "在编辑器中插入/删除/撤回操作"}, {"id": "ZY-12", "topic": "zeroy", "diff": 1, "desc": "前台预览与后台编辑切换"}, {"id": "ZY-13", "topic": "zeroy", "diff": 2, "desc": "在 ZeroY 中添加/替换素材（图片/图标）"}, {"id": "ZY-14", "topic": "zeroy", "diff": 3, "desc": "创建页眉模板（Logo+多级导航+CTA）"}, {"id": "ZY-15", "topic": "zeroy", "diff": 3, "desc": "创建页脚模板（公司信息+链接+版权）"}, {"id": "ZY-16", "topic": "zeroy", "diff": 3, "desc": "404 错误页模板"}, {"id": "ZY-17", "topic": "zeroy", "diff": 3, "desc": "搜索结果页模板"}, {"id": "ZY-18", "topic": "zeroy", "diff": 4, "desc": "文章列表/分类归档模板"}, {"id": "ZY-19", "topic": "zeroy", "diff": 4, "desc": "单篇文章模板"}, {"id": "ZY-20", "topic": "zeroy", "diff": 2, "desc": "查看表单提交记录（Zeroy → 表单提交）"}, {"id": "ZY-21", "topic": "zeroy", "diff": 2, "desc": "配置感谢页跳转（表单提交 → 设置 → 感谢页 URL）"}, {"id": "ZY-22", "topic": "zeroy", "diff": 3, "desc": "配置邮件通知（启用 wp_mail + 收件人 + 标题）"}, {"id": "ZY-23", "topic": "zeroy", "diff": 3, "desc": "安装 SMTP 插件解决邮件不稳定（⚠️ 常见坑）"}, {"id": "ZY-24", "topic": "zeroy", "diff": 3, "desc": "创建询盘弹窗 Popup（触发条件设置）"}, {"id": "ZY-25", "topic": "zeroy", "diff": 3, "desc": "Google Ads 转化代码：在感谢页埋入事件代码"}, {"id": "ZY-26", "topic": "zeroy", "diff": 3, "desc": "通过 SEO 插件配置 Google 全局代码"}, {"id": "ZY-27", "topic": "zeroy", "diff": 3, "desc": "HTMX 基础：Load More 加载更多"}, {"id": "ZY-28", "topic": "zeroy", "diff": 4, "desc": "HTMX 实时搜索（keyup + 延迟）"}, {"id": "ZY-29", "topic": "zeroy", "diff": 4, "desc": "HTMX 多条件筛选（ACF 分类法/字段）"}, {"id": "ZY-30", "topic": "zeroy", "diff": 4, "desc": "HTMX 分页功能"}, {"id": "ZY-31", "topic": "zeroy", "diff": 4, "desc": "HTMX 无限滚动"}, {"id": "ZY-32", "topic": "zeroy", "diff": 3, "desc": "Swiper 基础轮播（自动播放+导航箭头）"}, {"id": "ZY-33", "topic": "zeroy", "diff": 3, "desc": "Swiper 缩略图画廊（主图+缩略图联动）"}, {"id": "ZY-34", "topic": "zeroy", "diff": 4, "desc": "Swiper 响应式多卡片轮播"}, {"id": "ZY-35", "topic": "zeroy", "diff": 2, "desc": "清除 Hostinger 缓存（页面缓存 + CDN + 对象缓存）"}, {"id": "ZY-36", "topic": "zeroy", "diff": 2, "desc": "CSS 极致压缩（何时开/何时关）"}, {"id": "ZY-37", "topic": "zeroy", "diff": 2, "desc": "网站语言设置对 AI 生成内容的影响"}, {"id": "ZY-38", "topic": "zeroy", "diff": 3, "desc": "排障：表单提交后不跳转/不发邮件（固定链接+SMTP+路径）"}, {"id": "ZY-39", "topic": "zeroy", "diff": 3, "desc": "排障：AI 生成报错（400/401/403 诊断）"}, {"id": "DOM-1", "topic": "domain", "diff": 1, "desc": "在 Namesilo 注册域名"}, {"id": "DOM-2", "topic": "domain", "diff": 1, "desc": "在阿里云注册域名"}, {"id": "DOM-3", "topic": "domain", "diff": 1, "desc": "在 Cloudflare 注册域名"}, {"id": "DOM-4", "topic": "domain", "diff": 2, "desc": "DNS A 记录解析"}, {"id": "DOM-5", "topic": "domain", "diff": 2, "desc": "DNS CNAME 记录"}, {"id": "DOM-6", "topic": "domain", "diff": 2, "desc": "修改 NS 到 Hostinger"}, {"id": "HOST-1", "topic": "hosting", "diff": 1, "desc": "购买 Hostinger 主机"}, {"id": "HOST-2", "topic": "hosting", "diff": 1, "desc": "hPanel 控制面板导航"}, {"id": "HOST-3", "topic": "hosting", "diff": 2, "desc": "添加第二个网站 (多站点管理)"}, {"id": "HOST-4", "topic": "hosting", "diff": 3, "desc": "开启 SSH 访问权限"}, {"id": "HOST-5", "topic": "hosting", "diff": 4, "desc": "SSH 终端操作"}, {"id": "HOST-6", "topic": "hosting", "diff": 4, "desc": "生成 SSH 密钥对 + 免密登录"}, {"id": "INST-1", "topic": "wp-install", "diff": 1, "desc": "Hostinger 一键安装 WP"}, {"id": "INST-2", "topic": "wp-install", "diff": 2, "desc": "手动安装 WordPress"}, {"id": "INST-3", "topic": "wp-install", "diff": 2, "desc": "绑定域名（NS 方式）"}, {"id": "INST-4", "topic": "wp-install", "diff": 2, "desc": "绑定域名（A 记录方式）"}, {"id": "INST-5", "topic": "wp-install", "diff": 2, "desc": "配置 SSL 证书"}, {"id": "INST-6", "topic": "wp-install", "diff": 4, "desc": "网站内容迁移 (插件方式)"}, {"id": "INST-7", "topic": "wp-install", "diff": 4, "desc": "网站内容迁移 (手动数据库+文件)"}, {"id": "INST-8", "topic": "wp-install", "diff": 4, "desc": "已有站点更换域名"}];
+const searchEl = document.getElementById('search');
+const resultsEl = document.getElementById('results');
+searchEl.addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  if (q.length < 2) { resultsEl.className = 'search-results'; resultsEl.innerHTML = ''; return; }
+  const hits = TASKS.filter(t => t.id.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) || t.topic.toLowerCase().includes(q)).slice(0, 15);
+  if (hits.length === 0) { resultsEl.className = 'search-results'; resultsEl.innerHTML = ''; return; }
+  resultsEl.className = 'search-results active';
+  resultsEl.innerHTML = hits.map(t =>
+    `<a class="sr-item" href="${t.topic}/${t.id}.html"><span class="sr-id">${t.id}</span><span class="sr-topic">${t.topic}</span> ${t.desc}</a>`
+  ).join('');
+});
+</script>
+</body>
+</html>

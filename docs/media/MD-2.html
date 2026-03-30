@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>编辑图片信息 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">媒体管理</a>
+  <span class="sep">/</span>
+  <span class="current">编辑图片信息</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>编辑图片信息</h1>
+    <div class="meta">
+      <span class="tag topic">媒体管理</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 媒体库中的每张图片都有附加信息字段：<strong>标题（Title）</strong>、<strong>替代文本（Alt Text）</strong>、<strong>说明（Caption）</strong>、<strong>描述（Description）</strong>。这些信息影响图片在前端的显示方式和搜索引擎的理解。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p><strong>Alt Text</strong> 是最重要的字段 — 搜索引擎通过它理解图片内容（图片 SEO 的核心），屏幕阅读器用它向视障用户描述图片（无障碍访问要求）。图片无法加载时浏览器也会显示 Alt Text。</p>
+    <p>规范编辑图片信息是 SEO 基础功和网站专业度的体现。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>媒体 → 媒体库</strong></li>
+      <li>点击目标图片，打开附件详情页</li>
+      <li>编辑各字段：
+        <ul>
+          <li><strong>替代文本（Alt Text）</strong>：简洁描述图片内容，如"红色跑车停在白色建筑前"。不要堆砌关键词</li>
+          <li><strong>标题（Title）</strong>：鼠标悬停时显示的提示文字，通常与文件名一致即可</li>
+          <li><strong>说明（Caption）</strong>：显示在图片正下方的文字说明，读者可见</li>
+          <li><strong>描述（Description）</strong>：图片附件页面的正文内容，多数主题不显示</li>
+        </ul>
+      </li>
+      <li>修改后自动保存（无需点击按钮）</li>
+    </ol>
+    <p>如果图片已经插入到文章中，也可以在编辑器里点击图片，在右侧面板修改 Alt Text。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Alt Text 是必填项 — 每张有意义的图片都应该有描述性的替代文本</li>
+      <li>纯装饰性图片（分隔线、背景纹理等）的 Alt Text 应留空，这样屏幕阅读器会跳过它</li>
+      <li>上传时 WordPress 会用文件名自动生成标题，所以上传前给图片起好名字（如 <code>red-sports-car.jpg</code> 而非 <code>IMG_2847.jpg</code>）</li>
+      <li>在媒体库中修改 Alt Text 会更新数据库中的默认值，但不会自动更新已插入文章中的图片 — 需要在编辑器中单独修改</li>
+      <li>Caption 会增加图片在页面中的高度，确保主题对 Caption 样式的支持</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="MD-1.html" class="prev"><div class="label">上一篇</div><div class="title">上传图片到媒体库</div></a>
+    <a href="MD-3.html" class="next"><div class="label">下一篇</div><div class="title">设置特色图片</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="MD-3.html">设置特色图片</a>
+    <a href="MD-4.html">媒体设置（缩略图尺寸）</a>
+    <a href="MD-5.html">处理网站素材（压缩/裁剪/格式转换）</a>
+  </div></div>
+</div>
+</body>
+</html>

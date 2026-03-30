@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA4 转化目标设置 + Google Ads 联动 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">Google Analytics</a>
+  <span class="sep">/</span>
+  <span class="current">转化目标 + Google Ads 联动</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>GA4 转化目标设置 + Google Ads 联动</h1>
+    <div class="meta">
+      <span class="tag topic">Google Analytics</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>GA4 中的「关键事件」（Key Event，原称 Conversion）是将某个事件标记为业务转化目标。例如把 <code>form_submit</code> 事件标记为关键事件后，GA4 会单独统计并突出显示这个指标。</p>
+    <p>将 GA4 与 Google Ads 关联后，Ads 可以直接使用 GA4 中的关键事件作为广告转化目标——实现「投广告 → 追踪转化 → 优化投放」的完整闭环。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>没有转化目标，所有流量数据都只是"人来了"，无法衡量"人做了有价值的事"。设置转化目标后，你可以计算转化率、识别高转化页面和渠道。</p>
+    <p>对于投放 Google Ads 的企业，联动 GA4 可以让 Google 的智能出价算法根据实际转化数据自动优化广告投放——知道哪类用户更可能转化，自动将预算倾斜给高价值受众。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 将事件标记为关键事件</h3>
+    <ol>
+      <li>登录 GA4 后台</li>
+      <li>进入 <strong>管理 → 事件</strong></li>
+      <li>找到要标记的事件（如 <code>form_submit</code>、<code>cta_click</code>）</li>
+      <li>将该事件右侧的 <strong>标记为关键事件</strong> 开关打开</li>
+    </ol>
+    <div class="callout tip">事件列表中只显示已经至少触发过一次的事件。如果看不到某个事件，先触发一次（自己提交一次表单），等 24 小时后再标记。</div>
+
+    <h3>2. 关联 GA4 与 Google Ads</h3>
+    <ol>
+      <li>在 GA4 后台，进入 <strong>管理 → 产品关联 → Google Ads 关联</strong></li>
+      <li>点击 <strong>关联</strong></li>
+      <li>选择你的 Google Ads 账户（需使用同一 Google 账号，或已获得管理权限）</li>
+      <li>确认关联设置，点击 <strong>提交</strong></li>
+    </ol>
+
+    <h3>3. 在 Google Ads 中导入转化</h3>
+    <ol>
+      <li>登录 Google Ads 后台</li>
+      <li>进入 <strong>工具和设置 → 衡量 → 转化</strong></li>
+      <li>点击 <strong>+ 新转化操作</strong> → 选择 <strong>导入</strong> → <strong>Google Analytics 4 媒体资源</strong></li>
+      <li>选择要导入的关键事件</li>
+      <li>完成导入后，这些转化可以用于智能出价策略（如目标每次转化费用、尽可能提高转化次数）</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>关键事件不可回溯</strong>：标记为关键事件后，只从标记时间开始计数，不会回溯历史数据</li>
+      <li><strong>Ads 转化数据有延迟</strong>：GA4 关键事件同步到 Ads 可能需要 24-48 小时</li>
+      <li><strong>转化计数方式</strong>：GA4 默认每个会话计数一次。如果每次表单提交都有价值（如电商订单），可以在管理 → 关键事件中改为「每次事件」计数</li>
+      <li><strong>Google Ads 账户权限</strong>：关联需要 GA4 资源的「编辑者」权限 + Google Ads 账户的「管理员」权限</li>
+      <li><strong>不要设太多转化目标</strong>：建议 3-5 个核心转化（如表单提交、电话点击、在线咨询）。目标太多会稀释优化信号，智能出价效果反而变差</li>
+      <li><strong>测试转化不要用真实广告</strong>：关联和测试阶段可以用 GA4 DebugView 验证事件是否正确触发，不必花钱投广告来测试</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="GA-6.html" class="prev"><div class="label">上一篇</div><div class="title">GA4 事件追踪（按钮点击/表单提交）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="GA-4.html">GA4 基础报告阅读（用户/会话/页面浏览）</a>
+    <a href="GA-5.html">GSC 性能报告（点击/展示/CTR/排名）</a>
+    <a href="GA-6.html">GA4 事件追踪（按钮点击/表单提交）</a>
+    <a href="GA-1.html">注册 Google Search Console + 验证站点所有权</a>
+  </div></div>
+</div>
+</body>
+</html>

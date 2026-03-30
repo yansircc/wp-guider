@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNS A 记录解析 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">域名</a>
+  <span class="sep">/</span>
+  <span class="current">DNS A 记录解析</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>DNS A 记录解析</h1>
+    <div class="meta">
+      <span class="tag topic">域名</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>A 记录（Address Record）是 DNS 中最基础的记录类型，作用是将域名指向一个 IPv4 地址。当用户在浏览器输入 <code>example.com</code> 时，DNS 通过 A 记录找到服务器的 IP 地址，然后浏览器连接到该服务器。</p>
+    <p>例如：<code>example.com → 123.45.67.89</code> 就是一条 A 记录。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>将域名绑定到主机服务器是建站必经步骤。如果域名和主机不在同一个服务商（很常见），就需要手动添加 A 记录将域名指向主机的 IP 地址。</p>
+    <p>掌握 A 记录配置是教练的基本功，几乎每个建站项目都会用到。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <p>以 Cloudflare DNS 为例（其他 DNS 服务商操作类似）：</p>
+    <ol>
+      <li>登录 Cloudflare 控制台，选择对应的域名</li>
+      <li>进入 <strong>DNS → Records</strong></li>
+      <li>点击 <strong>Add Record</strong></li>
+      <li>填写：
+        <ul>
+          <li><strong>Type</strong>：A</li>
+          <li><strong>Name</strong>：<code>@</code>（代表根域名）或子域名（如 <code>www</code>）</li>
+          <li><strong>IPv4 address</strong>：主机服务器的 IP 地址</li>
+          <li><strong>TTL</strong>：Auto（或 300 秒）</li>
+          <li><strong>Proxy status</strong>：Proxied（开启 CDN）或 DNS only</li>
+        </ul>
+      </li>
+      <li>点击 <strong>Save</strong></li>
+    </ol>
+    <p>通常需要添加两条 A 记录：<code>@</code>（根域名）和 <code>www</code>，都指向同一个 IP。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>DNS 生效需要时间（TTL 到期后），新记录通常几分钟生效，修改可能需要更长</li>
+      <li>可以用 <code>ping example.com</code> 或在线工具（如 dnschecker.org）验证解析是否生效</li>
+      <li>如果使用 Cloudflare Proxy（橙色云朵），ping 到的是 Cloudflare 的 IP，而非源站 IP，这是正常的</li>
+      <li>IP 地址要从主机服务商后台获取，不要猜测或使用过期 IP</li>
+      <li>添加 A 记录前确认没有冲突的 CNAME 记录（同一名称不能同时有 A 和 CNAME）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="DOM-3.html" class="prev"><div class="label">上一篇</div><div class="title">在 Cloudflare 注册域名</div></a>
+    <a href="DOM-5.html" class="next"><div class="label">下一篇</div><div class="title">DNS CNAME 记录</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="DOM-1.html">在 Namesilo 注册域名</a>
+    <a href="DOM-2.html">在阿里云注册域名</a>
+    <a href="DOM-3.html">在 Cloudflare 注册域名</a>
+  </div></div>
+</div>
+</body>
+</html>

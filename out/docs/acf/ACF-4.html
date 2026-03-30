@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开启 CPT 归档 URL - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">开启 CPT 归档 URL</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>开启 CPT 归档 URL</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>CPT 的<strong>归档页</strong>（Archive Page）是一个列出该文章类型所有内容的列表页面。例如 <code>yoursite.com/product/</code> 会展示所有产品。默认情况下，ACF 创建的 CPT <strong>没有开启归档</strong>，需要手动启用。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>不开归档 = 没有产品列表页，用户无法浏览所有产品</li>
+      <li>归档页是 SEO 的重要入口，搜索引擎可以索引整个内容列表</li>
+      <li>很多主题和页面构建器依赖归档页来展示 CPT 内容</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>ACF → 文章类型</strong>，点击要编辑的 CPT</li>
+      <li>展开 <strong>高级设置</strong>（Advanced Settings）</li>
+      <li>找到 <strong>URL</strong> 分区</li>
+      <li>将 <strong>归档</strong>（Has Archive）设为 <strong>是</strong></li>
+      <li>可选：自定义归档 slug（如 <code>products</code>），默认使用 CPT 的 Key</li>
+      <li>点击<strong>保存更改</strong></li>
+    </ol>
+    <div class="callout danger">这是 ACF CPT 最常见的坑：很多人创建了 CPT 却发现前台没有列表页，就是因为忘记在 <strong>高级 → URL → 归档</strong> 这里开启。</div>
+
+    <h3>保存后刷新固定链接</h3>
+    <p>开启归档后需要刷新 WordPress 的固定链接规则：</p>
+    <ol>
+      <li>进入 <strong>设置 → 固定链接</strong></li>
+      <li>不用改任何东西，直接点击<strong>保存更改</strong></li>
+    </ol>
+    <p>这一步让 WordPress 重新生成 URL 重写规则，否则归档页可能返回 404。</p>
+
+    <h3>验证</h3>
+    <p>访问 <code>yoursite.com/product/</code>（或你设置的 slug），应该能看到该 CPT 的文章列表。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>404 错误</strong>：开启归档后必须重新保存固定链接，否则会 404</li>
+      <li><strong>找不到设置</strong>：归档选项在「高级设置 → URL」下面，不在顶部的基本设置里</li>
+      <li><strong>空归档页</strong>：如果归档页空白，确认该 CPT 下有已发布的文章</li>
+      <li><strong>模板覆盖</strong>：主题可以通过 <code>archive-{cpt_key}.php</code> 自定义归档页模板</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-3.html" class="prev"><div class="label">上一篇</div><div class="title">编辑/查看文章类型设置</div></a>
+    <a href="ACF-5.html" class="next"><div class="label">下一篇</div><div class="title">删除文章类型</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

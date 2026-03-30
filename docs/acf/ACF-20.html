@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日期选择器 / 颜色选择器字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">日期选择器 / 颜色选择器字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>日期选择器 / 颜色选择器字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <ul>
+      <li><strong>日期选择器</strong>（Date Picker）：弹出日历控件选择日期</li>
+      <li><strong>日期时间选择器</strong>（Date Time Picker）：日期 + 时间</li>
+      <li><strong>颜色选择器</strong>（Color Picker）：可视化选色板选择颜色值</li>
+    </ul>
+    <p>这些字段提供专用的输入控件，确保数据格式统一且操作友好。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>日期字段避免格式混乱（「2024/1/1」vs「1月1日」vs「Jan 1」）</li>
+      <li>颜色字段确保输出标准的 hex 值，可直接用于 CSS</li>
+      <li>可视化控件比手动输入更高效、更不容易出错</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>日期选择器</h3>
+    <ol>
+      <li>添加字段，选择类型<strong>「日期选择器」</strong></li>
+      <li>关键配置：
+        <ul>
+          <li><strong>显示格式</strong>：编辑界面看到的格式（如 <code>Y年m月d日</code>）</li>
+          <li><strong>返回格式</strong>：程序获取的格式（如 <code>Y-m-d</code> → <code>2024-03-15</code>）</li>
+          <li><strong>一周开始于</strong>：日历第一列是周一还是周日</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>颜色选择器</h3>
+    <ol>
+      <li>添加字段，选择类型<strong>「颜色选择器」</strong></li>
+      <li>配置：
+        <ul>
+          <li><strong>默认值</strong>：预设颜色（如 <code>#333333</code>）</li>
+          <li><strong>支持 RGBA</strong>：开启后可以选择带透明度的颜色</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>实际例子</h3>
+    <ul>
+      <li><strong>活动开始日期</strong>：日期选择器，返回格式 <code>Y-m-d</code></li>
+      <li><strong>产品标签颜色</strong>：颜色选择器，默认 <code>#3b82f6</code>，用于前端自定义标签样式</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>显示格式 ≠ 返回格式</strong>：编辑者看到的和前端获取的可以不同，返回格式建议用标准格式 <code>Y-m-d</code></li>
+      <li><strong>时区问题</strong>：日期选择器不包含时区信息，结合 WordPress 时区设置使用</li>
+      <li><strong>颜色值</strong>：不开 RGBA 时返回 hex（如 <code>#ff0000</code>），开了返回 rgba（如 <code>rgba(255,0,0,0.5)</code>）</li>
+      <li><strong>日期排序</strong>：如果需要按日期排序查询，返回格式必须用 <code>Ymd</code>（无分隔符），这是 WordPress meta_query 排序的要求</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-19.html" class="prev"><div class="label">上一篇</div><div class="title">关系 / 文章对象 字段</div></a>
+    <a href="ACF-21.html" class="next"><div class="label">下一篇</div><div class="title">位置规则-特定页面</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>保存为模板 + 导入导出 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">模板导入导出</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>保存为模板 + 导入导出</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d2">L2</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor 允许你将设计好的页面或区块（Section/Container）保存为模板，以便在同站复用或导出为 <code>.json</code> 文件分享给其他站点。这是 Elementor 模板管理的基础功能。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>复用设计</strong>：一套设计好的 Hero 区块可以在多个页面中重复使用，不必每次重新搭建</li>
+      <li><strong>跨站迁移</strong>：将 A 站点的设计导出后导入到 B 站点，快速复制设计</li>
+      <li><strong>备份</strong>：导出模板文件作为设计备份，即使站点出问题也能恢复</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>保存整页为模板</h3>
+    <ol>
+      <li>在 Elementor 编辑器中，点击左下角的箭头 → <strong>Save as Template</strong></li>
+      <li>给模板起个名字（如"首页模板 v2"）</li>
+      <li>保存后可以在 <strong>模板 → Saved Templates</strong> 中找到</li>
+    </ol>
+
+    <h3>保存区块为模板</h3>
+    <ol>
+      <li>右键点击某个 Container 或 Section</li>
+      <li>选择 <strong>Save as Template</strong></li>
+      <li>命名后保存（如"Hero 区块 - 蓝色版"）</li>
+    </ol>
+
+    <h3>导出模板</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>模板 → Saved Templates</strong></li>
+      <li>找到目标模板 → 点击 <strong>Export</strong></li>
+      <li>下载 <code>.json</code> 文件</li>
+    </ol>
+
+    <h3>导入模板</h3>
+    <ol>
+      <li><strong>模板 → Saved Templates → Import</strong></li>
+      <li>上传 <code>.json</code> 文件</li>
+      <li>导入后在编辑器中通过模板库插入到页面</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>图片不随模板导出</strong>：模板中的图片引用的是原站 URL，导入到新站后需要重新上传或替换图片</li>
+      <li><strong>字体和颜色</strong>：如果原站设置了全局字体和颜色，导入站点也需要配置相同的全局设定，否则样式可能不一致</li>
+      <li><strong>插件依赖</strong>：如果模板中使用了第三方 Widget（如 JetElements），目标站点也必须安装该插件</li>
+      <li><strong>命名规范</strong>：模板多了以后很难找，建议用统一命名规则，如"类型-名称-版本"（Hero-蓝色-v2）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-50.html" class="prev"><div class="label">上一篇</div><div class="title">转化优化（CTA 位置/A-B 测试思路）</div></a>
+    <a href="ELE-52.html" class="next"><div class="label">下一篇</div><div class="title">Cloud Templates 跨站点复用</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-1.html">安装 Elementor Pro + 激活授权</a>
+    <a href="ELE-2.html">创建第一个页面（拖拽编辑器界面认识）</a>
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-6.html">标题 / 文本编辑器 / 图片 Widget</a>
+  </div></div>
+</div></body></html>

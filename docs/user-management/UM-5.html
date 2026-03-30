@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>删除用户并归属内容 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">删除用户并归属内容</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>删除用户并归属内容</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>当需要移除一个用户时，WordPress 会询问如何处理该用户名下的所有内容（文章、页面、媒体等）。你可以选择将内容归属给另一个用户，或者删除所有内容。</p>
+    <p>这是一个需要谨慎操作的步骤，选错了可能导致内容丢失。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>员工离职、外包结束、测试账号清理等场景都需要删除用户。正确处理内容归属能保证网站内容不丢失、SEO 不受影响。</p>
+    <p>如果直接选择"删除所有内容"，该用户发布的所有文章、上传的所有图片都会被永久删除，无法恢复。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>用户 → 所有用户</strong>（Users → All Users）</li>
+      <li>将鼠标悬停在要删除的用户上，点击 <strong>删除</strong></li>
+      <li>在确认页面，选择 <strong>"将所有内容归属给"</strong>（Attribute all content to），然后从下拉菜单选择接收内容的用户</li>
+      <li>点击 <strong>确认删除</strong></li>
+    </ol>
+    <div class="callout danger">务必选择"归属给"而非"删除所有内容"，除非你确定该用户没有任何有价值的内容。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>你不能删除自己正在使用的管理员账号</li>
+      <li>站点必须至少保留一个管理员账号</li>
+      <li>删除用户后，该用户的评论不会被删除，但评论会标记为匿名或保留原作者名</li>
+      <li>建议在删除前先备份数据库，以防操作失误</li>
+      <li>批量删除用户时同样会弹出内容归属选项，一定要仔细确认</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="UM-4.html" class="prev"><div class="label">上一篇</div><div class="title">创建作者用户</div></a>
+    <a href="UM-6.html" class="next"><div class="label">下一篇</div><div class="title">修改用户角色</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-1.html">修改昵称和显示名</a>
+    <a href="UM-2.html">创建编辑用户</a>
+    <a href="UM-3.html">修改默认角色</a>
+    <a href="UM-4.html">创建作者用户</a>
+  </div></div>
+</div>
+</body>
+</html>

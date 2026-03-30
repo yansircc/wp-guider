@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>清除 Hostinger 缓存（页面缓存 + CDN + 对象缓存） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">清除缓存</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>清除 Hostinger 缓存（页面缓存 + CDN + 对象缓存）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d2">L2</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Hostinger 主机有多层缓存：LiteSpeed 页面缓存、CDN 缓存、对象缓存（Object Cache）。当你修改了页面内容但前台看不到变化时，通常是缓存在作怪。你需要逐层清除缓存才能看到最新内容。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>缓存是最常见的「改了但看不到效果」的原因。尤其在 ZeroY 编辑器中保存修改后，如果前台没有更新，首先要做的就是清缓存。不了解缓存清除流程会浪费大量时间在排查上。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 清除页面缓存（LiteSpeed Cache）</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>LiteSpeed Cache → 工具箱</strong>（Toolbox）</li>
+      <li>点击 <strong>Purge All</strong>（清除全部缓存）</li>
+    </ol>
+
+    <h3>2. 清除 CDN 缓存</h3>
+    <ol>
+      <li>登录 <strong>Hostinger 控制面板</strong>（hPanel）</li>
+      <li>找到 <strong>性能 → CDN</strong> 或 <strong>缓存管理</strong></li>
+      <li>点击清除 CDN 缓存</li>
+    </ol>
+
+    <h3>3. 关闭/清除对象缓存</h3>
+    <ol>
+      <li>Hostinger hPanel → <strong>高级 → 对象缓存</strong></li>
+      <li>如果 LiteSpeed 对象缓存导致问题，<strong>关闭</strong>它</li>
+      <li>或在 LiteSpeed Cache 插件中 → <strong>缓存 → 对象缓存</strong> → 关闭</li>
+    </ol>
+    <div class="callout warning">LiteSpeed 对象缓存有时会和 ZeroY 冲突，如果遇到编辑器异常，优先尝试关闭对象缓存。</div>
+
+    <h3>4. 浏览器强制刷新</h3>
+    <p>清完服务端缓存后，在浏览器中按 <code>Ctrl+Shift+R</code>（Mac 为 <code>Cmd+Shift+R</code>）强制刷新页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>清缓存的顺序</strong>：WordPress 插件缓存 → Hostinger CDN → 浏览器缓存，逐层清除</li>
+      <li><strong>清缓存不会丢失数据</strong>：缓存只是页面快照，清除后系统会重新生成</li>
+      <li><strong>频繁开发时可关闭缓存</strong>：开发调试阶段可以暂时关闭 LiteSpeed Cache 插件，上线后再开启</li>
+      <li><strong>用无痕窗口验证</strong>：无痕窗口没有浏览器缓存，是最快的验证方式</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-34.html" class="prev"><div class="label">上一篇</div><div class="title">Swiper 响应式多卡片轮播</div></a>
+    <a href="ZY-36.html" class="next"><div class="label">下一篇</div><div class="title">CSS 极致压缩（何时开/何时关）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-1.html">下载并安装 ZeroY 主题 + 编辑器插件</a>
+    <a href="ZY-2.html">配置 API Token（zeroy.app 控制台绑定域名）</a>
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+  </div></div>
+</div></body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON 导入导出与 ACF 工具 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">JSON 导入导出与 ACF 工具</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>JSON 导入导出与 ACF 工具</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+  <p style="color: var(--text3); font-size: 13px; margin-bottom: 24px;">本文同时覆盖: ACF-25, ACF-26, ACF-27, ACF-28</p>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF 支持将字段组配置导出为 JSON 文件，也能从 JSON 文件导入字段组。配合两个社区工具（ACF Playground 和 ACF Helper），可以快速生成和复用字段组配置。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 导出 JSON</h2>
+    <ol>
+      <li>进入 <strong>ACF → 工具</strong></li>
+      <li>在<strong>「导出字段组」</strong>区域，勾选要导出的字段组</li>
+      <li>点击<strong>「导出文件」</strong>，下载 JSON 文件</li>
+    </ol>
+    <p>导出的 JSON 包含字段组的完整配置：字段定义、位置规则、显示设置等。不包含字段的实际数据（内容）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 导入 JSON</h2>
+    <ol>
+      <li>进入 <strong>ACF → 工具</strong></li>
+      <li>在<strong>「导入字段组」</strong>区域，选择 JSON 文件</li>
+      <li>点击<strong>「导入文件」</strong></li>
+    </ol>
+    <div class="callout warning">如果导入的字段组 Key 与已有字段组相同，会<strong>覆盖</strong>现有配置。导入前确认不会影响已有数据结构。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🛠️</span> ACF 社区工具</h2>
+
+    <h3>ACF Playground</h3>
+    <p>网址：<code>acf-playground.vercel.app</code></p>
+    <p>可视化拖拽工具，在浏览器中通过拖放操作构建字段组，然后导出为 ACF JSON 格式。适合快速搭建字段结构原型。</p>
+
+    <h3>ACF Helper</h3>
+    <p>网址：<code>acf-helper.vercel.app</code></p>
+    <p>AI 辅助工具，用自然语言描述你需要的字段（如"我需要一个产品字段组，包含名称、价格、描述和产品图片"），自动生成 ACF JSON 配置文件。</p>
+
+    <h3>工作流</h3>
+    <ol>
+      <li>用 ACF Playground 或 ACF Helper 生成 JSON</li>
+      <li>在 WordPress 后台通过 ACF 工具页面导入</li>
+      <li>根据需要微调字段设置</li>
+    </ol>
+    <div class="callout tip">这两个工具对新手特别有用 — 不需要手动一个个添加字段，直接生成后导入即可。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>版本兼容</strong>：JSON 格式与 ACF 版本相关，从旧版导出的 JSON 在新版中导入一般兼容，反之可能有问题</li>
+      <li><strong>只传配置不传数据</strong>：JSON 导入导出只处理字段组的定义（结构），不包含文章中已填写的字段值</li>
+      <li><strong>团队协作</strong>：将 ACF JSON 纳入 Git 版本控制，团队成员可以同步字段组配置</li>
+      <li><strong>工具生成的 JSON 需要检查</strong>：AI 生成的配置可能不完全符合需求，导入后务必在后台验证每个字段的设置</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-24.html" class="prev"><div class="label">上一篇</div><div class="title">条件逻辑</div></a>
+    <a href="ACF-26.html" class="next"><div class="label">下一篇</div><div class="title">导入 ACF JSON</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

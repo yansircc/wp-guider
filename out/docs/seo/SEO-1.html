@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安装 Yoast SEO + 基础配置 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">安装 Yoast SEO + 基础配置</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>安装 Yoast SEO + 基础配置向导</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Yoast SEO 是 WordPress 最流行的 SEO 插件之一，提供 SEO 标题/描述管理、站点地图自动生成、搜索引擎可见性控制等功能。安装后通过配置向导完成基础设置。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>WordPress 默认不生成 SEO 标题/描述 meta 标签，搜索引擎展示效果差</li>
+      <li>自动生成 XML 站点地图，方便搜索引擎抓取</li>
+      <li>统一管理全站 SEO 设置，避免逐页手动添加</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>安装</h3>
+    <ol>
+      <li>进入<strong>插件 → 安装插件</strong></li>
+      <li>搜索 <code>Yoast SEO</code></li>
+      <li>点击<strong>「现在安装」</strong>，然后<strong>「启用」</strong></li>
+    </ol>
+
+    <h3>运行配置向导</h3>
+    <p>启用后会出现提示，点击进入<strong>首次配置向导</strong>（也可从 <strong>Yoast SEO → 常规 → 首次配置</strong> 进入）：</p>
+    <ol>
+      <li><strong>SEO 数据优化</strong>：点击「开始 SEO 数据优化」，等待完成</li>
+      <li><strong>站点表示</strong>：选择「组织」或「个人」，填写站点名称</li>
+      <li><strong>社交资料</strong>：可选，填写社交媒体链接</li>
+      <li><strong>个人偏好</strong>：建议开启「追踪」以帮助 Yoast 改进</li>
+      <li>完成向导</li>
+    </ol>
+    <div class="callout tip">向导中的设置后续都可以在 Yoast SEO 菜单中单独修改，不必一次全部配置完美。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>与 SEOPress 冲突</strong>：同一站点不要同时启用两个 SEO 插件，会导致重复的 meta 标签和站点地图</li>
+      <li><strong>站点地图自动生成</strong>：Yoast 启用后自动在 <code>/sitemap_index.xml</code> 生成站点地图</li>
+      <li><strong>免费版足够</strong>：对于大多数站点，Yoast 免费版功能已经够用</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="SEO-2.html" class="next"><div class="label">下一篇</div><div class="title">Yoast：设置页面 SEO 标题/描述</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-4.html">提交站点地图到 GSC</a>
+    <a href="SEO-5.html">Yoast：noindex 设置</a>
+    <a href="SEO-8.html">SEOPress：配置 Google 全局代码（Analytics/Ads）</a>
+    <a href="SEO-9.html">SEOPress：noindex/nofollow 设置</a>
+  </div></div>
+</div>
+</body>
+</html>

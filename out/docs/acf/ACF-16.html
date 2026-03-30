@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片 / 文件字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">图片 / 文件字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>图片 / 文件字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF 的媒体类字段让你为文章关联图片和文件附件：</p>
+    <ul>
+      <li><strong>图片</strong>（Image）：从媒体库选择或上传图片，支持预览</li>
+      <li><strong>文件</strong>（File）：上传任意文件类型（PDF、文档、压缩包等）</li>
+    </ul>
+    <p>与直接在正文插入图片不同，ACF 图片字段是结构化数据，可以在模板的任意位置精确调用。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>产品主图、团队头像、案例封面等需要独立于正文的图片字段</li>
+      <li>产品规格书、下载资料等需要文件字段</li>
+      <li>结构化的图片/文件字段可以在不同模板位置调用，比正文更灵活</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>图片字段设置</h3>
+    <ol>
+      <li>添加字段时选择类型<strong>「图片」</strong></li>
+      <li>关键配置：
+        <ul>
+          <li><strong>返回格式</strong>：
+            <ul>
+              <li><strong>图片数组</strong>（推荐）— 返回完整信息（URL、尺寸、alt 等）</li>
+              <li><strong>图片 URL</strong> — 只返回 URL 字符串</li>
+              <li><strong>图片 ID</strong> — 只返回附件 ID</li>
+            </ul>
+          </li>
+          <li><strong>预览尺寸</strong>：编辑界面显示的缩略图大小</li>
+          <li><strong>限制文件类型</strong>：如 <code>jpg, png, webp</code></li>
+          <li><strong>尺寸限制</strong>：可设置最小/最大宽高</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>文件字段设置</h3>
+    <ol>
+      <li>添加字段时选择类型<strong>「文件」</strong></li>
+      <li>关键配置：
+        <ul>
+          <li><strong>返回格式</strong>：文件数组、URL 或 ID</li>
+          <li><strong>限制文件类型</strong>：如 <code>pdf, doc, docx</code></li>
+          <li><strong>文件大小限制</strong>：避免上传过大文件</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>实际例子</h3>
+    <p>产品目录中添加<strong>产品主图</strong>：</p>
+    <ul>
+      <li>字段标签：产品主图</li>
+      <li>字段类型：图片</li>
+      <li>返回格式：图片数组</li>
+      <li>限制类型：jpg, png, webp</li>
+      <li>最小尺寸：800×600</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>返回格式选择</strong>：如果前端需要 alt 文字和多种尺寸，选「图片数组」；如果只需要 URL 嵌入，选「图片 URL」</li>
+      <li><strong>上传限制</strong>：WordPress 默认上传大小受服务器 PHP 配置限制（<code>upload_max_filesize</code>）</li>
+      <li><strong>图片优化</strong>：建议上传前压缩图片，ACF 不会自动压缩</li>
+      <li><strong>必填图片</strong>：设为必填后，编辑者必须上传图片才能发布文章</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-15.html" class="prev"><div class="label">上一篇</div><div class="title">文本 / 文本区域 / 数字 / URL 字段</div></a>
+    <a href="ACF-17.html" class="next"><div class="label">下一篇</div><div class="title">选择框 / 复选框 / 单选按钮 字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

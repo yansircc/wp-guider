@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Popup 表单集成（询盘弹窗） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">询盘弹窗</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Popup 表单集成（询盘弹窗）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>将 Elementor Form Widget 嵌入 Popup 中，创建一个弹窗式询盘表单。用户点击页面上的 CTA 按钮（如"获取报价"）时弹出表单，填写后提交。这比跳转到独立联系页的体验更好——用户不离开当前页面就能完成询盘。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>降低流失</strong>：跳转到联系页会丢失部分用户（离开当前页面 = 失去兴趣），弹窗表单在当前页面内完成</li>
+      <li><strong>提升转化</strong>：弹窗创造紧迫感和专注感，用户更容易完成提交</li>
+      <li><strong>灵活触发</strong>：可以在产品页、服务页、博客文章等任何页面的 CTA 按钮上绑定同一个询盘弹窗</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：创建 Popup</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>模板 → Popup → 新建</strong></li>
+      <li>选择一个 Popup 模板或从空白开始</li>
+      <li>拖入 <strong>Form Widget</strong>，配置表单字段（姓名、邮箱、电话、需求描述等）</li>
+      <li>配置 <strong>Actions After Submit</strong>：
+        <ul>
+          <li>Email 通知发送到业务邮箱</li>
+          <li>Redirect 到感谢页（可选）</li>
+          <li>或显示成功消息（在 Additional Options 中配置 Success Message）</li>
+        </ul>
+      </li>
+      <li>发布 Popup</li>
+    </ol>
+
+    <h3>第二步：设置触发（点击 CTA 弹出）</h3>
+    <ol>
+      <li>在 Popup 的 Advanced Rules 中，选择触发方式 <strong>On Click</strong></li>
+      <li>或者：在页面编辑器中，选中 CTA 按钮</li>
+      <li>在按钮的 <strong>Link → Dynamic → Action → Popup</strong> 中选择刚创建的 Popup</li>
+      <li>或者直接在按钮链接中输入 <code>#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3D...</code> 格式的 Action URL</li>
+    </ol>
+
+    <h3>第三步：设置显示条件</h3>
+    <ul>
+      <li>由于是点击触发，Display Conditions 设为 <strong>Entire Site</strong>（全站可用）</li>
+      <li>Triggers 中不需要勾选 On Page Load 等自动触发选项</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Popup 表单和页面表单独立</strong>：Popup 中的表单是独立的 Form Widget 实例，和页面上的表单不共享配置</li>
+      <li><strong>关闭按钮要明显</strong>：确保 Popup 有清晰的关闭按钮（X），不要让用户感觉被困住</li>
+      <li><strong>移动端适配</strong>：Popup 宽度在手机上要自适应，字段不能溢出屏幕</li>
+      <li><strong>提交后关闭弹窗</strong>：如果不做重定向，可以在 Additional Options 中设置提交后自动关闭 Popup</li>
+      <li><strong>多个 CTA 复用同一 Popup</strong>：不同页面的 CTA 按钮可以绑定同一个 Popup，无需重复创建</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-34.html" class="prev"><div class="label">上一篇</div><div class="title">Popup 触发条件与显示规则</div></a>
+    <a href="ELE-36.html" class="next"><div class="label">下一篇</div><div class="title">Theme Builder Header（Logo+Nav Menu+搜索）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

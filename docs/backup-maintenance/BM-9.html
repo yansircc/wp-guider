@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新插件 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">备份与维护</a>
+  <span class="sep">/</span>
+  <span class="current">更新插件</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>更新插件</h1>
+    <div class="meta">
+      <span class="tag topic">备份与维护</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 插件需要定期更新，以获取新功能、修复 Bug 和安全补丁。当插件有可用更新时，后台会在「插件」菜单和仪表盘中显示通知标记。</p>
+    <p>更新插件本质上是用新版本的文件替换旧版本。WordPress 会自动下载、解压并替换插件目录中的文件，然后触发插件的升级脚本（如果有的话）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>不更新插件是 WordPress 网站被攻击的首要原因。已知漏洞会被公开披露，攻击者专门扫描运行旧版本插件的网站。</p>
+    <p>但更新也不是无风险的——新版本可能引入兼容性问题，破坏现有功能。因此更新前备份、更新后验证是标准流程。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>安全更新流程</h3>
+    <ol>
+      <li><strong>更新前备份</strong>：创建 WP Reset 快照或 UpdraftPlus 备份</li>
+      <li>进入 <strong>插件 → 已安装的插件</strong></li>
+      <li>有更新的插件顶部会出现黄色提示条</li>
+      <li>点击提示中的 <strong>现在更新</strong>（update now）链接</li>
+      <li>等待更新完成（显示「已更新」）</li>
+      <li><strong>更新后验证</strong>：检查网站前台和相关功能是否正常</li>
+    </ol>
+
+    <h3>批量更新</h3>
+    <ol>
+      <li>进入 <strong>仪表盘 → 更新</strong></li>
+      <li>在「插件」区域勾选要更新的插件</li>
+      <li>点击 <strong>更新插件</strong></li>
+    </ol>
+
+    <div class="callout warning"><strong>逐个更新还是批量更新？</strong>逐个更新更安全——如果出问题可以精确定位是哪个插件导致的。批量更新更快但出问题时排查困难。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>更新前必须备份</strong>：这是铁律。如果更新导致白屏，可以通过恢复快照回退</li>
+      <li><strong>更新失败/卡住</strong>：可能是服务器超时或磁盘空间不足。不要刷新页面，等待完成或通过 FTP 手动替换插件文件</li>
+      <li><strong>更新后白屏</strong>：可能是插件与当前 WordPress 版本或其他插件不兼容。通过 FTP 将问题插件的目录重命名来禁用它</li>
+      <li><strong>自动更新</strong>：WordPress 支持为每个插件单独开启自动更新。在插件列表中点击「启用自动更新」链接即可。对于关键站点，建议只对安全类插件开启自动更新</li>
+      <li><strong>付费插件</strong>：部分付费插件需要有效的许可证才能接收更新通知</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-8.html" class="prev"><div class="label">上一篇</div><div class="title">更新 WordPress</div></a>
+    <a href="BM-10.html" class="next"><div class="label">下一篇</div><div class="title">wp-cron 检查</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-2.html">恢复备份</a>
+    <a href="BM-4.html">自动备份计划</a>
+    <a href="BM-7.html">All-in-One Migration 跨服务器迁移</a>
+    <a href="BM-10.html">wp-cron 检查</a>
+  </div></div>
+</div>
+</body>
+</html>

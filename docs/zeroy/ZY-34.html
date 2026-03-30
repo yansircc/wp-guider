@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Swiper 响应式多卡片轮播 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">多卡片轮播</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Swiper 响应式多卡片轮播</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>多卡片轮播是在一个视口内同时显示多张卡片（如 3-4 张），用户可以左右滑动查看更多卡片。不同于基础轮播一次只展示一张，多卡片轮播信息密度更高，且根据屏幕宽度自动调整显示数量（响应式）。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>适合展示客户评价、合作伙伴 Logo、团队成员、相关产品推荐等需要同时展示多个同类项目的场景。响应式设计确保在桌面端显示 4 张、平板 2 张、手机 1 张，适配所有设备。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>在 ZeroY 编辑器中调用 AI 助手描述：
+        <ul>
+          <li>"创建一个响应式多卡片 Swiper 轮播，展示 6 个客户评价卡片。桌面端每行显示 3 张、平板 2 张、手机 1 张。每张卡片包含客户头像、评价内容、客户名字和公司名。自动播放，有导航箭头"</li>
+        </ul>
+      </li>
+      <li>AI 会生成带 breakpoints 配置的 Swiper 结构</li>
+      <li>替换占位内容为真实评价</li>
+      <li>保存并在不同屏幕宽度下测试</li>
+    </ol>
+
+    <h3>响应式断点参考</h3>
+    <ul>
+      <li><strong>手机</strong>（&lt;768px）：<code>slidesPerView: 1</code></li>
+      <li><strong>平板</strong>（768-1024px）：<code>slidesPerView: 2</code></li>
+      <li><strong>桌面</strong>（&gt;1024px）：<code>slidesPerView: 3</code> 或 <code>4</code></li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>卡片高度统一</strong>：多卡片并排时高度不一致会很难看，确保每张卡片内容长度相近或设置固定高度</li>
+      <li><strong>spaceBetween</strong>：卡片之间的间距建议 20-30px，太紧凑看着拥挤</li>
+      <li><strong>loop 模式</strong>：如果卡片数量大于每行显示数量，可以开启 loop 无限循环</li>
+      <li><strong>卡片数量</strong>：确保卡片总数大于最大 slidesPerView，否则轮播没有滑动意义</li>
+      <li><strong>使用浏览器开发工具测试</strong>：F12 → 切换设备视图，测试各断点下的显示效果</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-33.html" class="prev"><div class="label">上一篇</div><div class="title">Swiper 缩略图画廊（主图+缩略图联动）</div></a>
+    <a href="ZY-35.html" class="next"><div class="label">下一篇</div><div class="title">清除 Hostinger 缓存（页面缓存 + CDN + 对象缓存）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+    <a href="ZY-14.html">创建页眉模板（Logo+多级导航+CTA）</a>
+    <a href="ZY-15.html">创建页脚模板（公司信息+链接+版权）</a>
+  </div></div>
+</div></body></html>

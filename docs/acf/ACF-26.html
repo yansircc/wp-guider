@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>导入 ACF JSON - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">导入 ACF JSON</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>导入 ACF JSON</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF 支持从 JSON 文件导入字段组配置，将字段组的完整结构（字段定义、位置规则、显示设置）一次性导入到 WordPress 站点中。这是团队协作和站点迁移的核心功能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>在新站点快速复制已有的字段组结构</li>
+      <li>团队成员间同步 ACF 配置</li>
+      <li>导入由 ACF Playground 或 ACF Helper 工具生成的配置</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>ACF → 工具</strong></li>
+      <li>找到<strong>「导入字段组」</strong>区域</li>
+      <li>点击<strong>选择文件</strong>，选择 <code>.json</code> 文件</li>
+      <li>点击<strong>「导入文件」</strong></li>
+      <li>成功后页面会提示导入了哪些字段组</li>
+    </ol>
+
+    <h3>验证</h3>
+    <p>导入后进入 <strong>ACF → 字段组</strong>，确认新字段组出现在列表中。点击进入检查字段定义和位置规则是否正确。</p>
+    <div class="callout warning">如果导入的字段组 Key 与已有字段组相同，会<strong>覆盖</strong>现有配置。导入前检查 JSON 文件中的 <code>"key"</code> 字段，确认不会意外覆盖。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>只导入结构不导入数据</strong>：JSON 包含字段组定义，不包含文章中已填写的字段值</li>
+      <li><strong>版本兼容</strong>：从高版本 ACF 导出的 JSON 在低版本中导入可能不兼容</li>
+      <li><strong>位置规则检查</strong>：导入后检查位置规则引用的文章类型或页面是否在当前站点存在</li>
+      <li><strong>批量导入</strong>：一个 JSON 文件可以包含多个字段组，一次导入全部</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-25.html" class="prev"><div class="label">上一篇</div><div class="title">导出 ACF JSON</div></a>
+    <a href="ACF-27.html" class="next"><div class="label">下一篇</div><div class="title">ACF Playground：可视化拖拽生成 ACF JSON</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customizer 改站点标题 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">theme</a>
+  <span class="sep">/</span>
+  <span class="current">Customizer 改站点标题</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>Customizer 改站点标题</h1>
+    <div class="meta">
+      <span class="tag topic">theme</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress Customizer（自定义工具）是一个可视化设置界面，左侧是设置面板，右侧是站点实时预览。修改设置后可以立即看到效果，确认满意后再点击「发布」生效。</p>
+    <p>站点标题（Site Title）和副标题（Tagline）是站点最基本的品牌信息，显示在浏览器标题栏、搜索引擎结果和页面头部。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>Customizer 是 WordPress 主题设置的标准入口，Astra 主题的大量外观选项都在这里配置。学会使用 Customizer 是主题操作的基础技能。</p>
+    <p>站点标题影响 SEO（搜索引擎会读取它）和品牌识别（用户看到的第一个信息）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 进入 Customizer</h3>
+    <p>后台 → <strong>外观 → 自定义</strong>。或在前台页面顶部管理栏点击「自定义」。</p>
+
+    <h3>2. 修改站点标题</h3>
+    <ol>
+      <li>左侧面板点击 <strong>站点标识</strong>（Site Identity）</li>
+      <li>修改<strong>站点标题</strong>（Site Title）字段</li>
+      <li>修改<strong>副标题</strong>（Tagline）字段（可选）</li>
+      <li>右侧预览区实时显示修改效果</li>
+      <li>满意后点击顶部<strong>发布</strong>按钮</li>
+    </ol>
+
+    <div class="callout tip">Customizer 中的所有修改在点击「发布」前都不会生效。可以放心实验，不满意直接关闭即可。</div>
+
+    <h3>WP-CLI 验证</h3>
+    <pre><code>locwp wp wp-train -- option get blogname
+locwp wp wp-train -- option get blogdescription</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>站点标题也可在<strong>设置 → 常规</strong>中修改，效果完全相同——Customizer 的优势是实时预览</li>
+      <li>Astra 主题中，如果上传了 Logo，站点标题默认不在页面头部显示（被 Logo 替代），但仍用于 SEO</li>
+      <li>可以在站点标识中勾选/取消「显示站点标题和副标题」来控制是否在页头展示文字</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TH-4.html" class="prev"><div class="label">上一篇</div><div class="title">安装第三方主题</div></a>
+    <a href="TH-6.html" class="next"><div class="label">下一篇</div><div class="title">上传 Favicon</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TH-1.html">响应式预览</a>
+    <a href="TH-2.html">移动端菜单调整</a>
+    <a href="TH-3.html">评估主题优劣</a>
+    <a href="TH-4.html">安装第三方主题</a>
+  </div></div>
+</div>
+</body>
+</html>

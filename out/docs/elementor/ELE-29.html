@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>多步骤表单（Multi-step Form） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">多步骤表单</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>多步骤表单（Multi-step Form）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>多步骤表单将一个长表单拆分为多个步骤（Step），每步只展示几个字段，用户逐步填写。Elementor Pro 的 Form Widget 内置 Step 字段类型，可以在表单中添加分步分隔符来实现。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>降低用户压力</strong>：一次看到 10+ 个字段会吓跑用户，分成 3 步每步 3-4 个字段，心理负担小很多</li>
+      <li><strong>提高完成率</strong>：研究表明多步骤表单的完成率比长表单高 20%-30%</li>
+      <li><strong>适合复杂询盘</strong>：外贸/B2B 场景需要收集详细信息（产品型号、数量、交货期），分步收集体验更好</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>拖入 <strong>Form Widget</strong> 到页面</li>
+      <li>在 Content Tab → Form Fields 中添加字段</li>
+      <li>在需要分步的位置，添加一个 <strong>Step</strong> 类型的字段</li>
+      <li>每个 Step 字段就是一个分隔符，它上面的字段属于前一步，下面的字段属于下一步</li>
+      <li>配置 Step 字段的属性：
+        <ul>
+          <li><strong>Label</strong>：步骤标题（如 "基本信息"、"产品需求"、"联系方式"）</li>
+          <li><strong>Previous/Next Button</strong>：上一步/下一步按钮的文字</li>
+          <li><strong>Icon</strong>：步骤指示器图标</li>
+        </ul>
+      </li>
+      <li>在 Style Tab 中自定义步骤指示器（Step Indicator）的样式</li>
+      <li>预览表单流程 → 发布</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>步骤不宜超过 4 步</strong>：步骤太多反而比长表单更让人烦躁</li>
+      <li><strong>最后一步放提交按钮</strong>：确保 Submit 按钮在最后一个步骤中</li>
+      <li><strong>必填字段验证</strong>：每步中的必填字段会在点击"下一步"时验证，未填写不会放行</li>
+      <li><strong>进度指示器</strong>：确保步骤指示器可见且清晰，让用户知道当前进度和总步骤数</li>
+      <li><strong>移动端测试</strong>：多步骤表单在手机上的体验要单独测试，确保按钮和字段不拥挤</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-28.html" class="prev"><div class="label">上一篇</div><div class="title">Elementor Form（联系表单设计）</div></a>
+    <a href="ELE-30.html" class="next"><div class="label">下一篇</div><div class="title">表单提交后动作（邮件/重定向/Webhook）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

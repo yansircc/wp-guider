@@ -7,6 +7,11 @@ cd "$(dirname "$0")/.."
 echo ":: 编译 wp-train ..."
 go build -o out/.claude/scripts/wp-train ./cmd/wp-train/
 
+echo ":: 同步知识库文档 ..."
+rsync -a --delete docs/ out/docs/
+cp topic-matrix.html out/topic-matrix.html
+cp docs-tasks.json out/docs-tasks.json
+
 echo ":: 校验产物完整性 ..."
 MISSING=0
 
@@ -40,6 +45,12 @@ done
 # 课纲
 check "out/.claude/skills/wp-train/references/curriculum.md"
 
+# 知识库
+check "out/topic-matrix.html"
+check "out/docs-tasks.json"
+check "out/docs/style.css"
+check "out/docs/index.html"
+
 if [ "$MISSING" -gt 0 ]; then
   echo ":: $MISSING 个文件缺失或为空"
   exit 1
@@ -61,10 +72,12 @@ for f in os.listdir('$TASK_DIR'):
 print(total)
 ")
 SKILL_COUNT=$(ls -d out/.claude/skills/*/SKILL.md 2>/dev/null | wc -l | tr -d ' ')
+DOC_COUNT=$(find out/docs -name "*.html" -not -name "index.html" 2>/dev/null | wc -l | tr -d ' ')
 
 echo ""
 echo ":: 构建完成"
 echo "   二进制: $BIN_SIZE"
 echo "   题库: $TASK_FILES 个文件, $TASK_COUNT 题"
 echo "   Skills: $SKILL_COUNT 个"
+echo "   知识库: $DOC_COUNT 篇文档"
 echo "   产物: out/.claude/"

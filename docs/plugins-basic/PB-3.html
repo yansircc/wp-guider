@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>插件选型方法论 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">插件基础</a>
+  <span class="sep">/</span>
+  <span class="current">插件选型方法论</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>插件选型方法论</h1>
+    <div class="meta">
+      <span class="tag topic">插件基础</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>插件选型是在需要某个功能时，从数万个 WordPress 插件中选出最合适那个的决策过程。好的选型能避免后期的兼容性问题、性能拖累和安全风险；错误的选型可能需要推倒重来。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>WordPress 官方插件库有超过 60,000 个插件，同一个功能往往有几十个选择。随意安装会导致：插件冲突、站点变慢、安全漏洞、付费后发现不合适等问题。</p>
+    <p>教练需要建立系统的评估框架，而不是靠"看起来评分高"就安装。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>五维评估法</h3>
+    <p>评估一个插件时，按以下五个维度打分：</p>
+    <ol>
+      <li><strong>活跃度</strong>：最后更新时间（超过 6 个月未更新要警惕）、是否兼容当前 WordPress 和 PHP 版本、Change Log 更新频率</li>
+      <li><strong>用户基数</strong>：活跃安装量（<code>10,000+</code> 以上比较安全）、评分和评价数量、评价中的具体问题描述</li>
+      <li><strong>支持响应</strong>：开发者在支持论坛的回复速度和质量、未解决问题的比例</li>
+      <li><strong>性能影响</strong>：是否加载额外的 CSS/JS、是否有已知的性能问题、是否提供按需加载选项</li>
+      <li><strong>可替代性</strong>：如果将来弃用，数据是否可以迁移、是否使用标准数据格式</li>
+    </ol>
+    <h3>决策流程</h3>
+    <ol>
+      <li>明确需求 — 用一句话描述你需要什么功能</li>
+      <li>搜索候选 — 在 wordpress.org/plugins 搜索，列出 3-5 个候选</li>
+      <li>五维评估 — 逐一打分，淘汰不达标的</li>
+      <li>测试环境验证 — 在本地或临时站点安装测试，不要直接装生产站</li>
+      <li>确认选择 — 功能符合、性能可接受、无冲突后正式安装</li>
+    </ol>
+    <h3>红线指标（出现任一项直接淘汰）</h3>
+    <ul>
+      <li>超过 1 年未更新</li>
+      <li>不兼容当前 WordPress 大版本</li>
+      <li>活跃安装量低于 1,000 且无知名开发者背书</li>
+      <li>支持论坛中有大量未回复的兼容性或安全问题</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>评分高不等于适合你 — 一个 5 星评分的 SEO 插件可能功能远超你的需求，反而拖慢站点</li>
+      <li>"Pro 版"不一定比免费版好 — 先确认免费版是否满足需求，避免不必要的付费</li>
+      <li>多合一插件（all-in-one）虽然方便，但功能耦合严重，后期难以替换单个功能</li>
+      <li>安装前搜索 "<code>插件名 + conflict</code>" 或 "<code>插件名 + slow</code>"，看看是否有已知问题</li>
+      <li>同一类功能尽量只装一个插件（如不要同时装两个 SEO 插件），减少冲突风险</li>
+      <li>商业插件注意授权方式 — 按站点数授权的和按年订阅的成本差异很大</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PB-2.html" class="prev"><div class="label">上一篇</div><div class="title">停用并删除插件</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PB-1.html">安装并激活插件</a>
+    <a href="PB-2.html">停用并删除插件</a>
+  </div></div>
+</div>
+</body>
+</html>

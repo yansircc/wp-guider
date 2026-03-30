@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>编辑/删除分类法 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">编辑/删除分类法</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>编辑/删除分类法</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>对已有的自定义分类法进行修改或移除。当分类法的标签、绑定关系或层级设置需要调整时，可以编辑；当分类法不再需要时，可以删除整个分类法注册。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>项目演进过程中可能需要调整分类法的名称或绑定的文章类型</li>
+      <li>清理不再使用的分类法，保持后台简洁</li>
+      <li>修改分层设置（从扁平改为分层或反之）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>编辑分类法</h3>
+    <ol>
+      <li>进入 <strong>ACF → 分类法</strong></li>
+      <li>点击要编辑的分类法名称</li>
+      <li>可修改的内容包括：
+        <ul>
+          <li>标签（复数/单数名称）</li>
+          <li>绑定的文章类型</li>
+          <li>分层设置</li>
+          <li>高级设置（URL slug、是否公开、是否在 REST API 中可用等）</li>
+        </ul>
+      </li>
+      <li>修改完成后点击<strong>保存更改</strong></li>
+    </ol>
+    <div class="callout warning">分类法 Key 创建后不可更改。如需更改 Key，只能删除并重新创建，已有分类项数据会丢失关联。</div>
+
+    <h3>删除分类法</h3>
+    <ol>
+      <li>进入 <strong>ACF → 分类法</strong></li>
+      <li>悬停在要删除的分类法上，点击<strong>「移到回收站」</strong></li>
+    </ol>
+    <p>删除分类法注册后，该分类法下的分类项数据仍保留在数据库中（<code>wp_terms</code> 和 <code>wp_term_taxonomy</code> 表），但后台和前台都无法访问。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>修改 Slug 后</strong>：记得去 设置 → 固定链接 保存一次，刷新 URL 规则</li>
+      <li><strong>改分层设置</strong>：从分层改为扁平后，已有的父子关系不会自动处理，需手动调整</li>
+      <li><strong>恢复已删除的分类法</strong>：用相同 Key 重建即可恢复关联数据</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-7.html" class="prev"><div class="label">上一篇</div><div class="title">添加/编辑/删除具体分类项</div></a>
+    <a href="ACF-9.html" class="next"><div class="label">下一篇</div><div class="title">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

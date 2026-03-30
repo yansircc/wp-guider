@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>安装 SMTP 插件解决邮件不稳定 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">SMTP 插件</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>安装 SMTP 插件解决邮件不稳定</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 默认用 PHP <code>wp_mail()</code> 函数发送邮件，依赖服务器的 sendmail 服务。很多主机（尤其是共享主机）的 sendmail 不可靠，邮件经常进垃圾箱或根本发不出去。SMTP 插件让 WordPress 通过专业邮件服务商发信，从根本上解决邮件不稳定问题。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>ZeroY 表单提交后的邮件通知如果收不到，你就无法及时跟进客户询盘。这是外贸网站的致命问题——客户提交了询盘但你不知道，白白丢失商机。SMTP 是解决这个问题的行业标准方案。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：安装 Fluent SMTP 插件</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>插件 → 安装插件</strong></li>
+      <li>搜索 <strong>FluentSMTP</strong></li>
+      <li>安装 → 启用</li>
+    </ol>
+
+    <h3>第二步：配置 SMTP 连接</h3>
+    <ol>
+      <li>进入 <strong>设置 → FluentSMTP</strong></li>
+      <li>选择邮件服务商（支持 Gmail、Outlook、Amazon SES、自定义 SMTP 等）</li>
+      <li>填写发件人邮箱（From Email）和发件人名称</li>
+      <li>根据选择的服务商填入 SMTP 服务器地址、端口、用户名、密码或 API Key</li>
+      <li>保存连接设置</li>
+    </ol>
+
+    <h3>第三步：发送测试邮件</h3>
+    <ol>
+      <li>在 FluentSMTP 设置页找到<strong>发送测试邮件</strong></li>
+      <li>填入你的收件邮箱 → 发送</li>
+      <li>检查是否收到测试邮件（也检查垃圾箱）</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>推荐 FluentSMTP</strong>：免费、轻量、支持多种服务商，是目前最受欢迎的 SMTP 插件之一</li>
+      <li><strong>Gmail 有每日发送限额</strong>：免费 Gmail 每天 500 封，Google Workspace 每天 2000 封。外贸网站建议用专业邮件服务</li>
+      <li><strong>发件人邮箱要和域名匹配</strong>：用 <code>info@yourdomain.com</code> 而非个人 Gmail 作为发件人，否则更容易进垃圾箱</li>
+      <li><strong>SPF/DKIM 记录</strong>：在域名 DNS 中配置 SPF 和 DKIM 记录，进一步提升邮件送达率</li>
+      <li><strong>邮件日志</strong>：FluentSMTP 自带发送日志，可以在后台查看每封邮件的发送状态，方便排障</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-22.html" class="prev"><div class="label">上一篇</div><div class="title">配置邮件通知（启用 wp_mail + 收件人 + 标题）</div></a>
+    <a href="ZY-24.html" class="next"><div class="label">下一篇</div><div class="title">创建询盘弹窗 Popup（触发条件设置）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网站迁移与域名更换 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">WordPress 安装</a>
+  <span class="sep">/</span>
+  <span class="current">网站迁移与域名更换</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>网站迁移与域名更换</h1>
+    <div class="meta">
+      <span class="tag topic">WordPress 安装</span>
+      <span class="tag diff d4">L4</span>
+      <span class="tag new">本文同时覆盖: INST-6, INST-7, INST-8</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>网站迁移是将 WordPress 站点从一个服务器搬到另一个服务器的过程。域名更换则是在同一服务器上将站点的访问地址从旧域名改为新域名。两者经常同时发生，技术核心是相同的：文件转移 + 数据库转移 + URL 替换。</p>
+    <p>迁移方式分为插件方式（简单）和手动方式（可控）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>更换主机</strong>：服务器性能不足、价格调整、服务商跑路等</li>
+      <li><strong>更换域名</strong>：品牌升级、域名过期被抢注、从临时域名切换到正式域名</li>
+      <li><strong>开发到上线</strong>：从本地/暂存环境迁移到生产服务器</li>
+    </ul>
+    <p>这是建站服务商的核心技能之一，几乎每个项目都会涉及。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+
+    <h3>方式一：插件迁移（推荐新手）</h3>
+    <p>使用 <strong>All-in-One WP Migration</strong> 插件：</p>
+    <ol>
+      <li>在<strong>源站</strong>安装并激活 All-in-One WP Migration 插件</li>
+      <li>进入 <strong>All-in-One WP Migration → 导出</strong></li>
+      <li>选择 <strong>导出到 → 文件</strong>，下载 <code>.wpress</code> 备份文件</li>
+      <li>在<strong>目标站</strong>安装全新的 WordPress 并激活同一插件</li>
+      <li>进入 <strong>All-in-One WP Migration → 导入</strong></li>
+      <li>上传 <code>.wpress</code> 文件，等待导入完成</li>
+      <li>导入后需要重新设置固定链接（设置 → 固定链接 → 直接保存）</li>
+    </ol>
+    <div class="callout tip">如果更换了域名，插件会自动执行搜索替换，将旧域名替换为新域名。</div>
+
+    <h3>方式二：手动迁移（数据库 + 文件）</h3>
+    <ol>
+      <li><strong>导出数据库</strong>：通过 phpMyAdmin 或 <code>wp db export</code> 导出 SQL 文件</li>
+      <li><strong>打包文件</strong>：将整个 WordPress 目录打包下载（或通过 SSH <code>tar -czf</code>）</li>
+      <li><strong>上传文件</strong>：将文件上传到目标服务器并解压</li>
+      <li><strong>创建数据库</strong>：在目标服务器创建新的 MySQL 数据库和用户</li>
+      <li><strong>修改 wp-config.php</strong>：更新数据库名、用户名、密码、主机</li>
+      <li><strong>导入数据库</strong>：通过 phpMyAdmin 或 <code>wp db import</code> 导入 SQL 文件</li>
+      <li><strong>搜索替换 URL</strong>：使用 WP-CLI 替换域名
+        <pre><code>wp search-replace 'https://old-domain.com' 'https://new-domain.com' --all-tables</code></pre>
+      </li>
+      <li><strong>更新固定链接</strong>：后台设置 → 固定链接 → 保存（刷新 .htaccess）</li>
+    </ol>
+
+    <h3>方式三：已有站点仅更换域名</h3>
+    <ol>
+      <li>将新域名的 DNS 指向同一服务器</li>
+      <li>在主机控制面板中添加新域名</li>
+      <li>使用 WP-CLI 搜索替换：
+        <pre><code>wp search-replace 'old-domain.com' 'new-domain.com' --all-tables
+wp cache flush</code></pre>
+      </li>
+      <li>在旧域名配置 301 重定向到新域名（保持 SEO 权重）</li>
+      <li>更新 Google Search Console 和 GA 中的域名设置</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>迁移前必须备份</strong>：源站和目标站都要备份，出问题可以回滚</li>
+      <li>All-in-One WP Migration 免费版有上传大小限制（通常 256MB），超过需要购买插件或手动迁移</li>
+      <li>WordPress 数据库中的 URL 是序列化存储的（serialized），不能用简单的文本替换，必须用 WP-CLI 的 <code>search-replace</code> 或专用工具</li>
+      <li>迁移后如果图片显示异常，检查 <code>wp-content/uploads/</code> 目录是否完整转移</li>
+      <li>更换域名后，旧域名至少保留 6-12 个月做 301 重定向，否则 SEO 排名会断崖式下跌</li>
+      <li>迁移后登录密码是源站的密码，不是目标站安装时设置的密码</li>
+      <li>Elementor 有自己的 URL 替换工具（Elementor → 工具 → 替换 URL），迁移后需要额外执行</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="INST-5.html" class="prev"><div class="label">上一篇</div><div class="title">配置 SSL 证书</div></a>
+    <a href="INST-7.html" class="next"><div class="label">下一篇</div><div class="title">网站内容迁移 (手动数据库+文件)</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="INST-2.html">手动安装 WordPress</a>
+    <a href="INST-3.html">绑定域名（NS 方式）</a>
+    <a href="INST-4.html">绑定域名（A 记录方式）</a>
+    <a href="INST-5.html">配置 SSL 证书</a>
+  </div></div>
+</div>
+</body>
+</html>

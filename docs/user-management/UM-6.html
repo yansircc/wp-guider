@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改用户角色 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">修改用户角色</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>修改用户角色</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 允许管理员随时修改已有用户的角色。角色决定了用户在后台能做什么、不能做什么。常见场景包括将投稿者提升为作者，或将编辑降级为订阅者。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>随着项目进展，人员职责会变化。比如一个外包写手完成工作后，可以将其角色从"作者"改为"订阅者"，限制其后台权限，而不必删除账号。</p>
+    <p>也可能需要临时给某人更高权限来处理紧急事务，事后再改回来。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：逐个修改</h3>
+    <ol>
+      <li>进入 <strong>用户 → 所有用户</strong></li>
+      <li>点击目标用户进入编辑页面</li>
+      <li>在 <strong>角色</strong>（Role）下拉菜单中选择新角色</li>
+      <li>点击 <strong>更新用户</strong></li>
+    </ol>
+    <h3>方法二：批量修改</h3>
+    <ol>
+      <li>在用户列表页勾选需要修改的用户</li>
+      <li>在 <strong>更改角色为</strong>（Change role to）下拉菜单中选择目标角色</li>
+      <li>点击 <strong>更改</strong></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>不能修改自己的角色（防止管理员把自己降级锁在门外）</li>
+      <li>降级用户角色是即时生效的，该用户下次刷新页面就会失去原有权限</li>
+      <li>修改角色不会影响该用户已发布的内容</li>
+      <li>如果站点只有一个管理员，要谨慎操作，避免所有管理员都被降级</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="UM-5.html" class="prev"><div class="label">上一篇</div><div class="title">删除用户并归属内容</div></a>
+    <a href="UM-7.html" class="next"><div class="label">下一篇</div><div class="title">生成 Application Password</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-1.html">修改昵称和显示名</a>
+    <a href="UM-2.html">创建编辑用户</a>
+    <a href="UM-3.html">修改默认角色</a>
+    <a href="UM-4.html">创建作者用户</a>
+  </div></div>
+</div>
+</body>
+</html>

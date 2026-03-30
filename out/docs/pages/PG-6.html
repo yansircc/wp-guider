@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>页面状态切换与修改作者 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">页面管理</a>
+  <span class="sep">/</span>
+  <span class="current">页面状态切换与修改作者</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>页面状态切换与修改作者</h1>
+    <div class="meta">
+      <span class="tag topic">页面管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 页面有多种状态，构成完整的内容生命周期：</p>
+    <ul>
+      <li><strong>草稿</strong>（Draft）：尚未发布，仅作者和管理员可见</li>
+      <li><strong>待审</strong>（Pending Review）：内容已完成，等待编辑或管理员审核后发布</li>
+      <li><strong>已发布</strong>（Published）：对所有访客公开可见</li>
+      <li><strong>回收站</strong>（Trash）：已删除但未永久清除，可恢复</li>
+    </ul>
+    <p>页面可以在这些状态之间自由切换。同时，每个页面都有一个「作者」属性，管理员可以将页面的归属从一个用户转移给另一个用户。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>在多人协作的网站中，内容发布需要走审核流程：作者写草稿 → 提交待审 → 编辑审核 → 发布。掌握状态切换可以避免误操作，不小心发布的内容可以快速回退为草稿，误删的页面可以从回收站恢复。</p>
+    <p>修改作者则用于人员变动场景——当某人离职或职责调整时，需要将其名下的页面转移给接手的同事，确保内容管理的连续性。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>切换页面状态</h3>
+    <ol>
+      <li>编辑页面，在右侧面板找到 <strong>状态</strong>（Status）选项</li>
+      <li>点击当前状态，在下拉菜单中选择新状态（草稿/待审/已发布）</li>
+      <li>点击 <strong>更新</strong> 保存</li>
+    </ol>
+    <h3>移入回收站与恢复</h3>
+    <ol>
+      <li>在 <strong>页面 → 所有页面</strong> 列表中，悬停页面名称</li>
+      <li>点击 <strong>回收站</strong> 链接移入回收站</li>
+      <li>切换到「回收站」视图，点击 <strong>恢复</strong> 可将页面恢复为草稿状态</li>
+    </ol>
+    <h3>修改页面作者</h3>
+    <ol>
+      <li>编辑目标页面，在右侧面板的「页面」选项卡中找到 <strong>作者</strong>（Author）字段</li>
+      <li>点击作者名称，在下拉列表中选择新作者</li>
+      <li>点击 <strong>更新</strong> 保存</li>
+    </ol>
+    <p>也可以在 <strong>页面 → 所有页面</strong> 中使用 <strong>快速编辑</strong>，在「作者」下拉菜单中直接切换。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>回收站自动清理</strong>：回收站中的内容默认 30 天后永久删除，不可恢复</li>
+      <li><strong>待审状态需要权限</strong>：「作者」角色只能提交待审，「编辑」和「管理员」才能发布</li>
+      <li><strong>已发布改为草稿</strong>：该页面的 URL 会立即返回 404，如有外部链接指向它需注意</li>
+      <li><strong>修改作者的权限</strong>：只有管理员和编辑角色可以修改页面作者</li>
+      <li><strong>作者下拉列表</strong>：只显示有发布权限的用户（投稿者、订阅者不会出现）</li>
+      <li><strong>删除用户时</strong>：WordPress 会提示将该用户内容转移给其他用户，务必选择目标用户而非直接删除</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PG-5.html" class="prev"><div class="label">上一篇</div><div class="title">创建私密页面</div></a>
+    <a href="PG-7.html" class="next"><div class="label">下一篇</div><div class="title">修改页面作者</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PG-1.html">创建三个页面并发布</a>
+  </div></div>
+</div>
+</body>
+</html>

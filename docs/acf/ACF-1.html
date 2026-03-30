@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安装 ACF Pro - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">安装 ACF Pro</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>安装 ACF Pro</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><strong>Advanced Custom Fields Pro</strong>（ACF Pro）是 WordPress 最常用的自定义字段插件。Pro 版额外提供自定义文章类型（CPT）、分类法（Taxonomy）注册、重复器字段、灵活内容等高级功能。从 2023 年起 ACF 归属 WP Engine，Pro 版需要订阅授权。</p>
+    <p>注意：我们使用的是 <strong>ACF Pro</strong>，不是免费版。免费版不包含 CPT/Taxonomy 注册功能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>后续的自定义文章类型、分类法、字段组操作都依赖 ACF Pro</li>
+      <li>ACF Pro 提供可视化界面来创建 CPT 和 Taxonomy，无需写代码</li>
+      <li>几乎所有中大型 WordPress 项目都会用到自定义字段，ACF 是行业标准</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：上传 zip 安装</h3>
+    <ol>
+      <li>从 ACF 官网（advancedcustomfields.com）下载 Pro 版 zip 文件</li>
+      <li>进入 WordPress 后台 → <strong>插件 → 安装插件 → 上传插件</strong></li>
+      <li>选择下载的 zip 文件，点击<strong>立即安装</strong></li>
+      <li>安装完成后点击<strong>启用插件</strong></li>
+    </ol>
+    <h3>方法二：通过授权码激活</h3>
+    <ol>
+      <li>安装完成后进入 <strong>ACF → 更新</strong></li>
+      <li>输入 License Key 激活，确保可以接收后续更新</li>
+    </ol>
+    <h3>验证安装成功</h3>
+    <p>安装成功后，WordPress 后台左侧菜单会出现 <strong>ACF</strong> 主菜单，展开后可以看到：</p>
+    <ul>
+      <li><strong>字段组</strong>（Field Groups）</li>
+      <li><strong>文章类型</strong>（Post Types）— 仅 Pro 版</li>
+      <li><strong>分类法</strong>（Taxonomies）— 仅 Pro 版</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>免费版 vs Pro 版</strong>：如果菜单里没有「文章类型」和「分类法」选项，说明装的是免费版，需要升级</li>
+      <li><strong>PHP 版本</strong>：ACF Pro 最新版要求 PHP 7.4+，确保主机环境满足</li>
+      <li><strong>与 CPT UI 的区别</strong>：ACF Pro 自带 CPT 注册功能，不需要另外安装 CPT UI 插件</li>
+      <li><strong>激活问题</strong>：每个 License Key 有站点数量限制，超出需要在 ACF 官网管理已激活站点</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="ACF-2.html" class="next"><div class="label">下一篇</div><div class="title">添加自定义文章类型（如产品）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

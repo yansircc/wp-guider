@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Theme Builder 主题构建器 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Theme Builder 主题构建器</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Theme Builder 主题构建器</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3-L4</span></div><p class="merge-note">本文同时覆盖: ELE-36, ELE-37, ELE-38, ELE-39, ELE-40, ELE-41, ELE-42</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Theme Builder 是 Elementor Pro 的核心功能，让你用可视化方式设计网站的"结构层"——Header、Footer、文章模板、归档页、搜索结果页、404 页面等。不再受主题代码限制，完全掌控整站每个部分的设计。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>完全控制</strong>：不需要写 PHP 或修改主题文件，就能自定义网站每个结构部分</li>
+      <li><strong>一致性</strong>：所有页面共享同一套 Header/Footer，修改一处全站更新</li>
+      <li><strong>差异化</strong>：通过 Display Conditions，不同类型的页面可以使用不同模板</li>
+      <li><strong>脱离主题依赖</strong>：使用 Hello Elementor + Theme Builder，你的设计完全不依赖第三方主题</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>Header 页头（L3）</h3>
+    <ol>
+      <li>进入 <strong>Templates → Theme Builder → Header → 添加新模板</strong></li>
+      <li>典型 Header 结构：
+        <ul>
+          <li>一个水平 Container（Row 方向，Justify: space-between）</li>
+          <li>左侧：<strong>Site Logo Widget</strong></li>
+          <li>中间：<strong>Nav Menu Widget</strong>（选择 WordPress 菜单）</li>
+          <li>右侧：Search Widget + 按钮（CTA）</li>
+        </ul>
+      </li>
+      <li>设置 Sticky Header：给 Header Container 添加 <strong>Sticky → Top</strong></li>
+      <li>移动端汉堡菜单自动生成（Nav Menu Widget 内置响应式行为）</li>
+    </ol>
+
+    <h3>Footer 页脚（L3）</h3>
+    <ol>
+      <li><strong>Theme Builder → Footer → 添加新模板</strong></li>
+      <li>典型 Footer 结构：
+        <ul>
+          <li>主区域：3-4 列 Container，分别放置公司信息、快速链接、联系方式、社交媒体</li>
+          <li>底部栏：版权信息 + 隐私政策链接</li>
+        </ul>
+      </li>
+      <li>常用 Widget：Heading、Icon List（带图标列表）、Social Icons、Shortcode</li>
+    </ol>
+
+    <h3>Single Post 文章模板（L3）</h3>
+    <ol>
+      <li><strong>Theme Builder → Single Post → 添加新模板</strong></li>
+      <li>使用 <strong>Post 专属 Widget</strong>：
+        <ul>
+          <li>Post Title（文章标题）</li>
+          <li>Featured Image（特色图）</li>
+          <li>Post Content（文章内容）</li>
+          <li>Post Info（日期/作者/分类）</li>
+          <li>Author Box（作者介绍框）</li>
+          <li>Post Navigation（上一篇/下一篇）</li>
+          <li>Post Comments（评论区）</li>
+          <li>Related Posts（相关文章）</li>
+        </ul>
+      </li>
+      <li>这些 Widget 会自动拉取当前文章的数据（动态内容）</li>
+    </ol>
+
+    <h3>Archive 归档模板（L4）</h3>
+    <ol>
+      <li><strong>Theme Builder → Archive → 添加新模板</strong></li>
+      <li>核心 Widget：<strong>Archive Title</strong>（自动显示分类名/标签名）+ <strong>Archive Posts</strong>（文章列表）</li>
+      <li>Archive Posts 设置：
+        <ul>
+          <li>布局：Classic（图+标题+摘要）/ Cards（卡片式）/ Full Content</li>
+          <li>列数、每页文章数</li>
+          <li>元数据显示（日期/作者/分类/评论数）</li>
+          <li>分页样式</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Display Conditions 显示条件（L4）</h3>
+    <p>每个模板都需要设置"在哪里使用"：</p>
+    <ul>
+      <li><strong>Entire Site</strong>：全站应用（Header/Footer 通常选这个）</li>
+      <li><strong>All Posts / All Pages</strong>：所有文章/所有页面</li>
+      <li><strong>Posts in Category "X"</strong>：特定分类下的文章</li>
+      <li><strong>Specific Post/Page</strong>：指定某个页面</li>
+      <li><strong>优先级规则</strong>：更具体的条件优先级更高。例如"所有文章用模板 A"+"产品分类用模板 B"，产品分类下的文章会使用模板 B</li>
+    </ul>
+
+    <h3>Search Results 搜索结果页（L3）</h3>
+    <ul>
+      <li><strong>Theme Builder → Archive → 添加新模板</strong>，Display Condition 选 <strong>Search Results</strong></li>
+      <li>与 Archive 模板类似，使用 Archive Posts Widget 展示搜索结果</li>
+      <li>添加 Search Form Widget 方便用户修改搜索词</li>
+    </ul>
+
+    <h3>404 页面（L3）</h3>
+    <ul>
+      <li><strong>Theme Builder → Error 404 → 添加新模板</strong></li>
+      <li>典型内容：友好的提示信息、搜索框、热门页面链接、返回首页按钮</li>
+      <li>设计应保持品牌一致性，让用户知道仍在你的网站上</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>显示条件冲突</strong>：如果两个模板的 Display Condition 重叠，更具体的条件优先。在 Theme Builder 面板中可以看到哪些模板生效</li>
+      <li><strong>预览问题</strong>：编辑 Single Post 模板时，点击底部工具栏的"眼睛"图标选择一个真实文章来预览，否则看到的是默认占位内容</li>
+      <li><strong>主题兼容</strong>：使用 Theme Builder 需要主题支持。Hello Elementor 是最佳搭配；部分主题会与 Theme Builder 冲突</li>
+      <li><strong>全站计划</strong>：建议先画出站点结构图（哪些页面需要什么模板），再动手创建，避免返工</li>
+      <li><strong>Nav Menu</strong>：在 WordPress 后台 <strong>外观 → 菜单</strong> 中先创建菜单，然后 Nav Menu Widget 才能选到</li>
+      <li><strong>404 测试</strong>：发布后访问一个不存在的 URL（如 /asdfgh）来验证 404 页面是否生效</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-35.html" class="prev"><div class="label">上一篇</div><div class="title">Popup 表单集成（询盘弹窗）</div></a>
+    <a href="ELE-37.html" class="next"><div class="label">下一篇</div><div class="title">Theme Builder Footer</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ACF + Dynamic Tags - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">ACF + Dynamic Tags</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>ACF + Dynamic Tags（自定义字段动态显示）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF（Advanced Custom Fields）为 WordPress 添加自定义字段，Elementor 的 Dynamic Tags 可以直接读取这些字段并显示在前端。两者结合，可以实现"后台填数据、前端自动展示"的动态内容系统。</p>
+    <p>例如：给产品文章添加 ACF 字段"价格"、"规格"、"交付时间"，然后在 Elementor 模板中用 Dynamic Tags 调用这些字段，每篇产品文章自动显示各自的信息。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>结构化数据</strong>：将信息拆分为独立字段，而非全部塞在文章正文里，方便管理和展示</li>
+      <li><strong>前后端分离</strong>：内容编辑者只需在后台填写字段值，无需关心前端样式</li>
+      <li><strong>灵活展示</strong>：同一个 ACF 字段可以在不同位置、以不同样式展示</li>
+      <li><strong>实战必备</strong>：企业站、产品站、房产站等几乎所有商业项目都需要自定义字段</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>前提条件</h3>
+    <ul>
+      <li>已安装 ACF（免费版或 Pro）并创建了字段组</li>
+      <li>已安装 Elementor Pro</li>
+    </ul>
+
+    <h3>在 Elementor 中调用 ACF 字段</h3>
+    <ol>
+      <li>在 Theme Builder 中编辑 Single Post 模板（或任何需要显示 ACF 数据的模板）</li>
+      <li>添加一个 Widget（如 Heading 显示文本字段，Image 显示图片字段）</li>
+      <li>点击 <strong>Dynamic Tags 图标</strong></li>
+      <li>在 Dynamic Tags 面板中找到 <strong>ACF</strong> 分组</li>
+      <li>选择对应的 ACF 字段</li>
+    </ol>
+
+    <h3>不同字段类型的对应关系</h3>
+    <ul>
+      <li><strong>Text / Number / Email / URL</strong> → Heading、Text Editor、Button（链接）等文本类 Widget</li>
+      <li><strong>Image</strong> → Image Widget 或 Section 背景图</li>
+      <li><strong>True/False</strong> → 用于 Conditions 控制元素是否显示（需配合插件如 Dynamic Visibility）</li>
+      <li><strong>Repeater</strong> → 需要 Elementor Pro 的 Loop Builder 或第三方插件（如 Dynamic Content for Elementor）</li>
+      <li><strong>Gallery</strong> → Gallery Widget 或 Image Carousel</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>如果 Dynamic Tags 面板中看不到 ACF 字段，确认 ACF 字段组的"位置规则"包含了当前正在编辑的 Post Type</li>
+      <li>ACF Repeater 字段不能直接用 Dynamic Tags 读取子字段，需要额外处理</li>
+      <li>在编辑器中 ACF 字段可能显示为空（因为模板没有实际文章上下文），在 Preview Settings 中指定一篇有数据的文章来预览</li>
+      <li>ACF 字段输出的内容是纯数据，样式完全由 Elementor Widget 控制 — 这是正确的前后端分离</li>
+      <li>给 ACF 字段设置合理的默认值，避免前端出现空白区域</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-43.html" class="prev"><div class="label">上一篇</div><div class="title">Dynamic Tags 基础（站点标题/文章标题/特色图）</div></a>
+    <a href="ELE-45.html" class="next"><div class="label">下一篇</div><div class="title">Posts Widget 文章列表（筛选/排序/分页）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

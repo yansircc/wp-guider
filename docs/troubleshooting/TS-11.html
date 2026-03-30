@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>综合故障注入 — 权限 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">故障排查</a>
+  <span class="sep">/</span>
+  <span class="current">综合故障注入 — 权限</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>综合故障注入 — 权限问题排查</h1>
+    <div class="meta">
+      <span class="tag topic">故障排查</span>
+      <span class="tag diff d5">L5</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>权限问题是 WordPress 最常见也最隐蔽的故障之一。它涉及两个层面：</p>
+    <ul>
+      <li><strong>文件系统权限</strong> — Linux/macOS 的文件/目录读写执行权限（<code>chmod</code>）。权限不正确会导致 WordPress 无法写入上传目录、无法更新插件/主题、无法生成缩略图等</li>
+      <li><strong>WordPress 用户角色权限</strong> — WordPress 内建的角色能力系统（Capabilities）。角色权限不当会导致用户无法执行应有的操作（如编辑者无法发布、作者无法上传媒体）</li>
+    </ul>
+    <p>本练习通过故意制造权限问题，训练学员从现象出发定位根因的能力。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>权限问题的症状往往与权限无关："图片上传失败"、"插件更新卡住"、"页面保存不了"——这些现象背后都可能是权限问题。能够识别并修复权限问题，是 WordPress 运维的核心技能。</p>
+    <p>通过故障注入（主动制造问题）来训练排查能力，比等真实故障发生时手忙脚乱要好得多。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>场景一：文件系统权限故障</h3>
+    <p><strong>注入方式</strong>：修改 uploads 目录权限使其不可写</p>
+    <pre><code># 制造故障：移除 uploads 写入权限
+chmod 555 wp-content/uploads</code></pre>
+    <p><strong>现象</strong>：上传图片时报错 "Unable to create directory" 或 "The uploaded file could not be moved"</p>
+    <p><strong>排查思路</strong>：</p>
+    <ol>
+      <li>看到上传错误 → 检查 debug.log 中的具体错误信息</li>
+      <li>日志指向 <code>wp_mkdir_p()</code> 或 <code>move_uploaded_file()</code> 失败</li>
+      <li>检查目录权限：<code>ls -la wp-content/uploads</code></li>
+      <li>确认 Web 服务器用户（通常是 <code>www-data</code>）没有写入权限</li>
+    </ol>
+    <p><strong>修复</strong>：</p>
+    <pre><code># 恢复正确权限
+chmod 755 wp-content/uploads</code></pre>
+
+    <h3>场景二：WordPress 角色权限故障</h3>
+    <p><strong>注入方式</strong>：将用户角色从"编辑"降为"投稿者"</p>
+    <p><strong>现象</strong>：用户登录后看不到「页面」菜单，无法发布文章（只能提交待审）</p>
+    <p><strong>排查思路</strong>：</p>
+    <ol>
+      <li>用户报告"看不到某些功能" → 在 <strong>用户 → 所有用户</strong> 中检查该用户的角色</li>
+      <li>确认角色与预期不符</li>
+      <li>核对 WordPress 角色权限表：管理员 > 编辑 > 作者 > 投稿者 > 订阅者</li>
+    </ol>
+    <p><strong>修复</strong>：在用户编辑页面将角色改回正确值。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>WordPress 标准目录权限</strong>：目录 <code>755</code>，文件 <code>644</code>。<code>wp-config.php</code> 建议 <code>600</code> 或 <code>640</code></li>
+      <li><strong>不要用 777</strong>：<code>chmod 777</code> 虽然能解决所有权限报错，但会让任何用户都能读写执行，是严重的安全隐患</li>
+      <li><strong>所有者（Owner）也很重要</strong>：即使权限是 755，如果文件所有者不是 Web 服务器用户，也可能无法写入。用 <code>ls -la</code> 同时检查权限和所有者</li>
+      <li><strong>WordPress 角色表</strong>：
+        <ul>
+          <li>管理员 — 完全控制</li>
+          <li>编辑 — 管理所有文章和页面</li>
+          <li>作者 — 发布和管理自己的文章</li>
+          <li>投稿者 — 写文章但不能发布</li>
+          <li>订阅者 — 只能管理自己的资料</li>
+        </ul>
+      </li>
+      <li><strong>排查黄金法则</strong>：先看日志（debug.log）→ 再检查文件权限（<code>ls -la</code>）→ 最后检查用户角色。不要凭猜测修改</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-10.html" class="prev"><div class="label">上一篇</div><div class="title">综合故障注入-500</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-3.html">插件逐个排查</a>
+    <a href="TS-5.html">切换默认主题排查</a>
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+  </div></div>
+</div>
+</body>
+</html>

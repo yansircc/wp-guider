@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用 DoLogin 生成免密登录链接 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">用 DoLogin 生成免密登录链接</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>用 DoLogin 生成免密登录链接</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>DoLogin Security 是一款 WordPress 插件，核心功能之一是生成临时的免密登录链接（Magic Login Link）。点击链接即可自动登录指定的 WordPress 用户账号，无需输入密码。</p>
+    <p>链接可以设置有效期和使用次数限制，过期后自动失效。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>在建站外包和培训场景中，经常需要让客户或学员快速登录后台，而不想每次都传递明文密码。免密链接更安全、更方便：</p>
+    <ul>
+      <li>给客户一个一次性链接查看网站后台，不必泄露密码</li>
+      <li>培训时让学员快速进入指定账号开始操作</li>
+      <li>远程协助时分享给技术支持人员</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>安装并激活 <strong>DoLogin Security</strong> 插件（插件 → 安装插件 → 搜索 "DoLogin"）</li>
+      <li>进入 <strong>用户 → 所有用户</strong></li>
+      <li>在目标用户的操作列中，找到 <strong>DoLogin Link</strong> 或类似按钮</li>
+      <li>点击后会生成一个包含 token 的 URL</li>
+      <li>复制该链接发送给需要登录的人</li>
+    </ol>
+    <p>也可以通过插件设置页面批量生成和管理登录链接。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>链接默认有有效期限制，过期后点击无效，需要重新生成</li>
+      <li>不要在公开渠道（如社交媒体）分享免密链接，应通过私信或邮件传递</li>
+      <li>管理员账号的免密链接更要谨慎使用，建议限制为一次性使用</li>
+      <li>如果链接失效或无法登录，检查插件设置中的过期时间和使用次数限制</li>
+      <li>部分安全插件可能拦截免密登录行为，需要在白名单中排除</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="UM-7.html" class="prev"><div class="label">上一篇</div><div class="title">生成 Application Password</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-1.html">修改昵称和显示名</a>
+    <a href="UM-2.html">创建编辑用户</a>
+    <a href="UM-3.html">修改默认角色</a>
+    <a href="UM-4.html">创建作者用户</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改昵称和显示名 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">修改昵称和显示名</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>修改昵称和显示名</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 用户有多个名称字段：用户名（登录名，不可修改）、昵称（Nickname）、公开显示名称（Display name）。前台显示的作者名是"公开显示名称"，而非用户名。</p>
+    <p>默认情况下，公开显示名称与用户名相同，出于安全考虑应立即修改，避免暴露登录用户名。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>WordPress 的登录用户名一旦暴露，攻击者只需要猜密码即可尝试暴力登录。如果前台作者页显示的就是登录用户名，等于把一半的登录凭证公开了。</p>
+    <p>修改显示名称为昵称或真实姓名，既能保护安全，又能让前台显示更专业。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>用户 → 我的个人资料</strong>（Users → Profile）</li>
+      <li>在 <strong>昵称</strong>（Nickname）字段中输入一个不同于用户名的名字</li>
+      <li>在 <strong>公开显示为</strong>（Display name publicly as）下拉菜单中选择刚设置的昵称</li>
+      <li>滚动到底部，点击 <strong>更新个人资料</strong></li>
+    </ol>
+    <p>如果要修改其他用户的显示名，进入 <strong>用户 → 所有用户</strong>，点击该用户进行编辑。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>用户名（Username）创建后无法修改，只能通过创建新用户再删旧用户来变更</li>
+      <li>公开显示名称会出现在文章作者栏、评论区、作者归档页等位置</li>
+      <li>建议所有管理员账号在建站后第一时间修改显示名称</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="UM-2.html" class="next"><div class="label">下一篇</div><div class="title">创建编辑用户</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-5.html">删除用户并归属内容</a>
+    <a href="UM-6.html">修改用户角色</a>
+    <a href="UM-8.html">用 DoLogin 生成免密登录链接</a>
+    <a href="UM-7.html">生成 Application Password</a>
+  </div></div>
+</div>
+</body>
+</html>

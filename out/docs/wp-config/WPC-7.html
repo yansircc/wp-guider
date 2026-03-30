@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设置 WP_DEBUG_DISPLAY - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">wp-config</a>
+  <span class="sep">/</span>
+  <span class="current">设置 WP_DEBUG_DISPLAY</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>设置 WP_DEBUG_DISPLAY</h1>
+    <div class="meta">
+      <span class="tag topic">wp-config</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>WP_DEBUG_DISPLAY</code> 控制是否将 PHP 错误/警告直接显示在网页上。它是 WordPress 调试三件套之一：</p>
+    <ul>
+      <li><code>WP_DEBUG</code> — 总开关，是否启用调试模式</li>
+      <li><code>WP_DEBUG_LOG</code> — 是否将错误写入 <code>wp-content/debug.log</code></li>
+      <li><code>WP_DEBUG_DISPLAY</code> — 是否在页面上显示错误</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>开发调试时，推荐的组合是：开启 <code>WP_DEBUG</code> 和 <code>WP_DEBUG_LOG</code>，但关闭 <code>WP_DEBUG_DISPLAY</code>。这样错误信息会记录到日志文件，而不会暴露给前台访客。</p>
+    <p>在生产环境中显示 PHP 错误信息是严重的安全风险——它可能泄露文件路径、数据库结构、甚至敏感配置。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>推荐的调试配置</h3>
+    <pre><code># 开启调试模式
+locwp wp wp-train -- config set WP_DEBUG true --raw
+
+# 记录到日志文件
+locwp wp wp-train -- config set WP_DEBUG_LOG true --raw
+
+# 不在页面上显示
+locwp wp wp-train -- config set WP_DEBUG_DISPLAY false --raw</code></pre>
+
+    <p>对应的 <code>wp-config.php</code> 内容：</p>
+    <pre><code>define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );</code></pre>
+
+    <h3>查看当前设置</h3>
+    <pre><code>locwp wp wp-train -- config get WP_DEBUG_DISPLAY</code></pre>
+
+    <h3>查看日志文件</h3>
+    <pre><code># 查看最新的错误日志
+tail -50 wp-content/debug.log</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>三个常量必须配合使用：只设 <code>WP_DEBUG_DISPLAY</code> 为 false 但没开 <code>WP_DEBUG</code>，没有任何效果</li>
+      <li>生产环境务必关闭 <code>WP_DEBUG_DISPLAY</code>，防止信息泄露</li>
+      <li>Local 开发环境可以都设为 true 方便调试，但养成好习惯：日志优先于页面显示</li>
+      <li><code>debug.log</code> 文件会持续增长，定期清理或设置 logrotate</li>
+      <li>部分主机面板会覆盖 <code>display_errors</code> 的 PHP 设置，导致 WordPress 配置不生效</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="WPC-6.html" class="prev"><div class="label">上一篇</div><div class="title">设置 WP_MEMORY_LIMIT</div></a>
+    <a href="WPC-8.html" class="next"><div class="label">下一篇</div><div class="title">wp-cli 查看选项</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="WPC-1.html">查看 DB_NAME</a>
+    <a href="WPC-2.html">wp-content 目录结构</a>
+    <a href="WPC-9.html">SQL 查询基础</a>
+    <a href="WPC-10.html">修复 siteurl</a>
+  </div></div>
+</div>
+</body>
+</html>

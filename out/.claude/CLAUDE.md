@@ -32,6 +32,7 @@
 | `.claude/scripts/wp-train checkpoint list` | 列出所有快照 |
 
 题库: `.claude/references/tasks/` (按 Layer 分文件)
+知识库: `docs/` (252 篇 HTML 文档) + `topic-matrix.html` (矩阵总览)
 数据库: `~/.locwp/sites/wp-train/training/wp-guider.db`
 
 ## 故障注入（Layer 8 排障训练）

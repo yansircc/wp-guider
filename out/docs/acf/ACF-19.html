@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关系 / 文章对象字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">关系 / 文章对象字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>关系 / 文章对象字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF 的关联类字段让你在文章之间建立关系：</p>
+    <ul>
+      <li><strong>关系</strong>（Relationship）：选择多个关联文章，双栏界面（左侧可选，右侧已选）</li>
+      <li><strong>文章对象</strong>（Post Object）：选择单个或多个文章，下拉搜索界面</li>
+    </ul>
+    <p>例如：产品页面关联「相关产品」，案例页面关联「使用的产品」。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>在不同内容类型之间建立有意义的关联（产品 ↔ 案例、文章 ↔ 作者）</li>
+      <li>前端可以展示「相关内容」、「推荐产品」等模块</li>
+      <li>比手动复制链接更可靠，数据跟随文章更新</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>关系字段（Relationship）</h3>
+    <ol>
+      <li>添加字段，选择类型<strong>「关系」</strong></li>
+      <li>关键配置：
+        <ul>
+          <li><strong>筛选文章类型</strong>：限制可选的文章类型（如只显示「产品」）</li>
+          <li><strong>筛选分类法</strong>：可按分类缩小范围</li>
+          <li><strong>最少/最多选择</strong>：限制关联数量</li>
+          <li><strong>筛选器</strong>：开启搜索、文章类型、分类法筛选器</li>
+        </ul>
+      </li>
+    </ol>
+    <p>编辑时展示为双栏：左侧搜索和浏览可选文章，右侧显示已选文章，可拖拽排序。</p>
+
+    <h3>文章对象字段（Post Object）</h3>
+    <ol>
+      <li>添加字段，选择类型<strong>「文章对象」</strong></li>
+      <li>关键配置：
+        <ul>
+          <li><strong>筛选文章类型</strong>：限制可选范围</li>
+          <li><strong>允许多选</strong>：是否可以选多个</li>
+          <li><strong>返回格式</strong>：文章对象或文章 ID</li>
+        </ul>
+      </li>
+    </ol>
+    <p>编辑时显示为搜索式下拉菜单，输入关键词即可搜索。</p>
+
+    <h3>如何选择</h3>
+    <ul>
+      <li>需要选多个且要排序 → <strong>关系</strong>（双栏拖拽更直观）</li>
+      <li>只选一个或少量 → <strong>文章对象</strong>（下拉搜索更快捷）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>单向关系</strong>：ACF 关联是单向的。产品 A 关联了产品 B，不代表 B 也关联了 A</li>
+      <li><strong>删除关联文章</strong>：如果被关联的文章被删除，字段值会变为无效引用</li>
+      <li><strong>性能</strong>：文章数量很大时，关系字段加载可能较慢，建议限制可选文章类型</li>
+      <li><strong>返回格式</strong>：选「文章对象」返回格式可以直接获取标题、链接等信息</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-18.html" class="prev"><div class="label">上一篇</div><div class="title">True/False 开关字段</div></a>
+    <a href="ACF-20.html" class="next"><div class="label">下一篇</div><div class="title">日期选择器 / 颜色选择器 字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

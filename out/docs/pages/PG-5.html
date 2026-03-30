@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建私密页面 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">页面管理</a>
+  <span class="sep">/</span>
+  <span class="current">创建私密页面</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>创建私密页面</h1>
+    <div class="meta">
+      <span class="tag topic">页面管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 提供两种限制页面可见性的方式：<strong>私密</strong>（Private）和<strong>密码保护</strong>（Password Protected）。</p>
+    <p>私密页面仅对已登录且具有编辑权限的用户可见（管理员和编辑角色），普通访客和低权限用户无法看到。密码保护页面则对所有人可见，但需要输入密码才能查看内容。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>某些页面内容不适合公开展示，例如内部团队信息、客户专属资料、正在审核的内容等。使用可见性设置可以精确控制谁能看到什么内容。</p>
+    <p>在网站建设过程中，「私密」状态也常被用来隐藏正在施工的页面，等内容完善后再切换为公开发布。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：设置为私密</h3>
+    <ol>
+      <li>编辑目标页面，在右侧面板找到 <strong>可见性</strong>（Visibility）选项</li>
+      <li>点击「公开」旁边的链接，弹出可见性选项</li>
+      <li>选择 <strong>私密</strong>，然后点击确认</li>
+      <li>点击 <strong>更新</strong>（如果是新页面则直接发布）</li>
+    </ol>
+    <h3>方法二：设置密码保护</h3>
+    <ol>
+      <li>同样在可见性选项中，选择 <strong>密码保护</strong></li>
+      <li>输入一个密码</li>
+      <li>点击确认并更新/发布页面</li>
+    </ol>
+    <p>密码保护的页面在前台会显示标题前缀「受保护：」，并展示一个密码输入框。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>私密 ≠ 完全安全</strong>：私密页面依赖 WordPress 的用户权限系统，不适合存放高度敏感信息（如密码、密钥）</li>
+      <li><strong>密码保护页面的密码是明文 cookie</strong>：浏览器会将密码存在 cookie 中，关闭浏览器后需重新输入</li>
+      <li><strong>搜索引擎不会收录私密页面</strong>：但密码保护页面的标题和 URL 可能仍然可见</li>
+      <li><strong>私密页面在菜单中不显示</strong>：即使你手动把私密页面添加到菜单，未登录用户也看不到对应菜单项</li>
+      <li><strong>批量设置</strong>：在「所有页面」列表中，勾选多个页面，使用「批量操作 → 编辑」可以批量修改可见性</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PG-4.html" class="prev"><div class="label">上一篇</div><div class="title">修改页面 slug</div></a>
+    <a href="PG-6.html" class="next"><div class="label">下一篇</div><div class="title">页面状态切换（草稿/待审/发布/回收站/恢复）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PG-1.html">创建三个页面并发布</a>
+  </div></div>
+</div>
+</body>
+</html>

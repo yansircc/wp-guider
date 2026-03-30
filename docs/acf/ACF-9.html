@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>将分类法绑定到自定义文章类型 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">将分类法绑定到自定义文章类型</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>将分类法绑定到自定义文章类型</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+  <p style="color: var(--text3); font-size: 13px; margin-bottom: 24px;">本文同时覆盖: ACF-9, ACF-10</p>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>分类法（Taxonomy）需要<strong>绑定</strong>到文章类型才能使用。绑定后，在编辑该文章类型的内容时，侧边栏会出现分类法的选择面板，方便对内容进行分类管理。</p>
+    <p>例如：将「产品分类」分类法绑定到「产品」CPT，这样每个产品都可以归入一个或多个分类。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>不绑定 = 分类法不会出现在 CPT 的编辑界面中</li>
+      <li>绑定后才能在文章编辑时选择分类，实现内容的结构化组织</li>
+      <li>前台的分类归档页也依赖正确的绑定关系</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：创建分类法时绑定</h3>
+    <p>在 <strong>ACF → 分类法 → 新建/编辑分类法</strong> 时，底部有<strong>「文章类型」</strong>多选框，勾选要绑定的 CPT 即可。</p>
+
+    <h3>方法二：编辑已有分类法添加绑定</h3>
+    <ol>
+      <li>进入 <strong>ACF → 分类法</strong></li>
+      <li>点击要修改的分类法</li>
+      <li>在<strong>文章类型</strong>区域勾选需要绑定的 CPT</li>
+      <li>保存更改</li>
+    </ol>
+
+    <h3>在 CPT 文章中使用分类</h3>
+    <p>绑定成功后，编辑文章时：</p>
+    <ul>
+      <li><strong>区块编辑器</strong>：右侧面板会出现分类法选择区域（类似「分类目录」面板）</li>
+      <li><strong>分层分类法</strong>：显示为复选框树形结构，可以勾选多个</li>
+      <li><strong>扁平分类法</strong>：显示为标签输入框，可以输入或从已有项中选择</li>
+    </ul>
+    <p>选择分类后发布文章，文章就归入了该分类下。前台访问分类归档页（如 <code>/product_cat/electronics/</code>）可以看到所有属于该分类的文章。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>编辑器看不到分类面板</strong>：确认分类法已绑定到当前文章类型，且 CPT 的「支持」设置中启用了自定义字段</li>
+      <li><strong>一个分类法可绑定多个 CPT</strong>：例如「行业」分类法可以同时绑定「案例」和「新闻」</li>
+      <li><strong>分类归档 404</strong>：检查固定链接是否已刷新（设置 → 固定链接 → 保存）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-8.html" class="prev"><div class="label">上一篇</div><div class="title">编辑/删除分类法</div></a>
+    <a href="ACF-10.html" class="next"><div class="label">下一篇</div><div class="title">在 CPT 文章中使用分类法进行归类</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

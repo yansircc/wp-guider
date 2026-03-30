@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改页面作者 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">页面管理</a>
+  <span class="sep">/</span>
+  <span class="current">修改页面作者</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>修改页面作者</h1>
+    <div class="meta">
+      <span class="tag topic">页面管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 每个页面都有一个"作者"属性，记录是谁创建了这个页面。修改页面作者是指将页面的归属从一个用户转移到另一个用户，这个操作不会改变页面内容。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>常见场景：员工离职后需要将其创建的页面归属转移；管理员用临时账号创建的内容需要归到正式账号；多人协作时需要重新分配内容所有权。</p>
+    <p>某些主题会在页面上显示作者名，修改作者可以确保显示信息准确。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：通过页面编辑器（古腾堡）</h3>
+    <ol>
+      <li>进入 <strong>页面 → 所有页面</strong>，找到目标页面并点击编辑</li>
+      <li>在右侧设置面板，点击 <strong>页面</strong> 标签</li>
+      <li>找到 <strong>作者</strong> 下拉菜单（如果没看到，点击面板顶部的"页面"标签展开）</li>
+      <li>从下拉列表中选择新作者</li>
+      <li>点击 <strong>更新</strong> 保存</li>
+    </ol>
+    <h3>方法二：通过快速编辑</h3>
+    <ol>
+      <li>进入 <strong>页面 → 所有页面</strong></li>
+      <li>将鼠标悬停在目标页面标题上，点击 <strong>快速编辑</strong></li>
+      <li>在展开的编辑面板中找到 <strong>作者</strong> 下拉菜单</li>
+      <li>选择新作者，点击 <strong>更新</strong></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>只有管理员和编辑角色可以修改页面作者，作者和投稿者角色无此权限</li>
+      <li>下拉菜单中只会显示有权发布页面的用户（管理员、编辑、作者）</li>
+      <li>修改作者不会影响页面的创建时间和修改时间</li>
+      <li>如果需要批量修改多个页面的作者，可以在页面列表中勾选多个页面，使用"批量操作 → 编辑"一次性修改</li>
+      <li>删除用户时，WordPress 会提示将其内容归属到其他用户，不要选择"删除所有内容"</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PG-6.html" class="prev"><div class="label">上一篇</div><div class="title">页面状态切换（草稿/待审/发布/回收站/恢复）</div></a>
+    <a href="PG-8.html" class="next"><div class="label">下一篇</div><div class="title">定时发布页面（⚠️ wp-cron 不稳定，见 backup-maintenance L3/L4）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PG-1.html">创建三个页面并发布</a>
+  </div></div>
+</div>
+</body>
+</html>

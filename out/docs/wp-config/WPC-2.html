@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wp-content 目录结构 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">wp-config</a>
+  <span class="sep">/</span>
+  <span class="current">wp-content 目录结构</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>wp-content 目录结构</h1>
+    <div class="meta">
+      <span class="tag topic">wp-config</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>wp-content</code> 是 WordPress 安装中最重要的自定义目录。WordPress 核心文件在更新时会被覆盖，但 <code>wp-content</code> 中的内容会被保留。</p>
+    <p>这个目录存放所有非核心的自定义内容：主题、插件、上传的媒体文件等。理解这个结构是 WordPress 文件管理的基础。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>排障时需要知道文件在哪。插件冲突？去 <code>plugins/</code> 看。上传的图片丢了？去 <code>uploads/</code> 查。主题出问题？去 <code>themes/</code> 改。</p>
+    <p>理解目录结构也是备份策略的基础——你需要知道哪些目录包含不可重建的数据（如 <code>uploads</code>），哪些可以通过重新安装恢复（如 <code>plugins</code>）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <p><code>wp-content</code> 的标准子目录：</p>
+    <pre><code>wp-content/
+├── themes/        # 主题文件
+├── plugins/       # 插件文件
+├── uploads/       # 媒体上传（按年/月组织）
+├── mu-plugins/    # 必须使用的插件（自动激活）
+├── languages/     # 翻译文件
+└── upgrade/       # 更新时的临时目录</code></pre>
+
+    <h3>用 WP-CLI 查看</h3>
+    <pre><code># 查看已安装主题
+locwp wp wp-train -- theme list
+
+# 查看已安装插件
+locwp wp wp-train -- plugin list
+
+# 查看 wp-content 路径
+locwp wp wp-train -- eval "echo WP_CONTENT_DIR;"</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><code>uploads/</code> 是唯一包含用户不可重建数据的目录，备份时必须包含</li>
+      <li><code>mu-plugins/</code> 目录中的插件无法从后台停用，只能通过文件操作管理</li>
+      <li>不要手动修改 <code>wp-content</code> 以外的 WordPress 核心文件，更新时会被覆盖</li>
+      <li>某些插件会在 <code>wp-content</code> 下创建自己的目录（如 <code>cache/</code>、<code>w3tc-config/</code>）</li>
+      <li><code>wp-config.php</code> 中可以通过 <code>WP_CONTENT_DIR</code> 常量自定义此目录位置，但不建议修改</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="WPC-1.html" class="prev"><div class="label">上一篇</div><div class="title">查看 DB_NAME</div></a>
+    <a href="WPC-3.html" class="next"><div class="label">下一篇</div><div class="title">themes/plugins 目录</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="WPC-3.html">themes/plugins 目录</a>
+    <a href="WPC-4.html">uploads 目录</a>
+    <a href="WPC-5.html">查看 table_prefix</a>
+    <a href="WPC-6.html">设置 WP_MEMORY_LIMIT</a>
+  </div></div>
+</div>
+</body>
+</html>

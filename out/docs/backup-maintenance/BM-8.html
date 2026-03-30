@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新 WordPress 与插件 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">备份与维护</a>
+  <span class="sep">/</span>
+  <span class="current">更新 WordPress 与插件</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>更新 WordPress 与插件</h1>
+    <div class="meta">
+      <span class="tag topic">备份与维护</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+  <p style="color: var(--cyan); font-size: 14px; margin-bottom: 24px;">本文同时覆盖: BM-8, BM-9</p>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 核心、插件和主题都需要定期更新。更新通常包含安全修复、bug 修复和新功能。WordPress 后台的"更新"页面集中显示所有可用更新。</p>
+    <p>更新分为两类：</p>
+    <ul>
+      <li><strong>小版本更新</strong>（如 6.4.1 → 6.4.2）— 安全/bug 修复，WordPress 默认自动执行</li>
+      <li><strong>大版本更新</strong>（如 6.4 → 6.5）— 包含新功能，需要手动确认</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>过期的 WordPress 和插件是被黑客入侵的头号原因。已知漏洞一旦公开，攻击者会立即开始大规模扫描未更新的站点。</p>
+    <p>更新 WordPress 不是"有空再做"的事，而是安全维护的核心任务。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>更新前：备份</h3>
+    <pre><code># 用 WP Reset 创建快照（训练环境）
+# 或用 UpdraftPlus 做完整备份（生产环境）</code></pre>
+
+    <h3>更新 WordPress 核心</h3>
+    <pre><code># 查看当前版本
+locwp wp wp-train -- core version
+
+# 检查是否有更新
+locwp wp wp-train -- core check-update
+
+# 执行更新
+locwp wp wp-train -- core update</code></pre>
+
+    <h3>更新插件</h3>
+    <pre><code># 查看需要更新的插件
+locwp wp wp-train -- plugin list --update=available
+
+# 更新所有插件
+locwp wp wp-train -- plugin update --all
+
+# 更新指定插件
+locwp wp wp-train -- plugin update wordfence</code></pre>
+
+    <h3>更新主题</h3>
+    <pre><code># 更新所有主题
+locwp wp wp-train -- theme update --all</code></pre>
+
+    <h3>更新后：验证</h3>
+    <ol>
+      <li>检查前台页面是否正常显示</li>
+      <li>检查后台功能是否正常</li>
+      <li>检查关键功能（表单、支付等）</li>
+      <li>查看 <code>debug.log</code> 是否有新错误</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>先更新插件，再更新核心</strong>——这样出问题时更容易定位原因</li>
+      <li>不要在流量高峰期执行更新</li>
+      <li>更新可能导致插件兼容性问题，特别是大版本更新时</li>
+      <li>如果更新后站点崩溃，用备份恢复，然后逐个更新排查是哪个造成问题</li>
+      <li>长期不维护的插件（超过 1 年没更新）应该考虑替换，而不是继续使用</li>
+      <li>生产环境建议先在测试站点上验证更新后再应用到正式站点</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-7.html" class="prev"><div class="label">上一篇</div><div class="title">All-in-One Migration 跨服务器迁移</div></a>
+    <a href="BM-9.html" class="next"><div class="label">下一篇</div><div class="title">更新插件</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-2.html">恢复备份</a>
+    <a href="BM-4.html">自动备份计划</a>
+    <a href="BM-7.html">All-in-One Migration 跨服务器迁移</a>
+    <a href="BM-10.html">wp-cron 检查</a>
+  </div></div>
+</div>
+</body>
+</html>

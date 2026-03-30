@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>条件逻辑 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">条件逻辑</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>条件逻辑</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF 的<strong>条件逻辑</strong>（Conditional Logic）让字段可以根据其他字段的值来动态显示或隐藏。例如：只有当「是否推荐」开关打开时，才显示「推荐理由」输入框。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>减少编辑界面的复杂度 — 只显示当前情况下需要填写的字段</li>
+      <li>引导编辑者按逻辑顺序填写内容</li>
+      <li>避免填写不必要的字段，减少数据冗余</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>编辑字段组，点击需要设置条件的字段将其展开</li>
+      <li>找到<strong>「条件逻辑」</strong>选项，开启它</li>
+      <li>设置条件：
+        <ul>
+          <li>选择<strong>触发字段</strong>（同一字段组中的另一个字段）</li>
+          <li>选择<strong>运算符</strong>（等于、不等于、有值、无值等）</li>
+          <li>设置<strong>目标值</strong></li>
+        </ul>
+      </li>
+      <li>保存字段组</li>
+    </ol>
+
+    <h3>实战示例</h3>
+    <p>场景：产品字段组中，只有选择了「有促销」时才显示「促销价格」字段。</p>
+    <ol>
+      <li>创建 True/False 字段 <code>has_sale</code>（是否促销）</li>
+      <li>创建数字字段 <code>sale_price</code>（促销价格）</li>
+      <li>在 <code>sale_price</code> 的条件逻辑中设置：<strong>has_sale 等于 1</strong></li>
+    </ol>
+    <p>效果：编辑者打开「是否促销」开关后，「促销价格」输入框才会出现。</p>
+
+    <h3>多条件</h3>
+    <p>可以添加多个条件，条件之间是 <strong>and</strong> 关系（全部满足才显示）或 <strong>or</strong> 关系（满足任一即显示），通过「添加规则」和「添加规则组」来区分。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>只能引用同组字段</strong>：条件逻辑只能引用同一个字段组内的字段</li>
+      <li><strong>隐藏 ≠ 清空</strong>：字段被隐藏后，已填入的值仍然保留在数据库中。如果需要清空，需要手动处理</li>
+      <li><strong>支持的触发字段类型</strong>：True/False、选择框、复选框、单选按钮等有明确值的字段才能作为触发条件</li>
+      <li><strong>嵌套条件</strong>：可以串联（A 控制 B，B 控制 C），但不建议超过两层，否则编辑体验变差</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-23.html" class="prev"><div class="label">上一篇</div><div class="title">分类法字段</div></a>
+    <a href="ACF-25.html" class="next"><div class="label">下一篇</div><div class="title">导出 ACF JSON</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网站内容迁移 (手动数据库+文件) - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">WordPress 安装</a>
+  <span class="sep">/</span>
+  <span class="current">网站内容迁移 (手动数据库+文件)</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>网站内容迁移 (手动数据库+文件)</h1>
+    <div class="meta">
+      <span class="tag topic">WordPress 安装</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>手动迁移是指直接导出源站的数据库和 WordPress 文件，然后在目标主机上手动恢复。不依赖任何迁移插件，完全通过 phpMyAdmin（或命令行）和文件管理器（或 FTP/SSH）完成。</p>
+    <p>这是最底层的迁移方式，理解它有助于排查插件迁移失败时的问题。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>插件迁移虽然方便，但在以下场景可能失败或不可用：大文件超过服务器上传限制、PHP 执行超时、插件不兼容、主机限制等。手动迁移没有这些限制，且能完全控制每个步骤。</p>
+    <p>作为教练，掌握手动迁移方法是排错和应急的必备技能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：导出源站数据库</h3>
+    <ol>
+      <li>登录源站主机的 <strong>phpMyAdmin</strong></li>
+      <li>选择 WordPress 使用的数据库</li>
+      <li>点击 <strong>Export → Quick → Format: SQL</strong></li>
+      <li>点击 <strong>Go</strong>，下载 <code>.sql</code> 文件</li>
+    </ol>
+    <h3>第二步：下载源站 WordPress 文件</h3>
+    <ol>
+      <li>通过文件管理器或 FTP 进入 WordPress 根目录</li>
+      <li>打包下载整个目录，重点是：
+        <ul>
+          <li><code>wp-content/</code>（主题、插件、上传文件）</li>
+          <li><code>wp-config.php</code>（数据库配置，需修改）</li>
+        </ul>
+      </li>
+    </ol>
+    <h3>第三步：在目标主机恢复</h3>
+    <ol>
+      <li>在目标主机创建新的 MySQL 数据库和用户</li>
+      <li>通过 phpMyAdmin <strong>Import</strong> 导入 <code>.sql</code> 文件</li>
+      <li>将 WordPress 文件上传到目标主机的网站根目录</li>
+      <li>修改 <code>wp-config.php</code> 中的数据库信息：
+        <pre><code>define('DB_NAME', '新数据库名');
+define('DB_USER', '新用户名');
+define('DB_PASSWORD', '新密码');
+define('DB_HOST', 'localhost');</code></pre>
+      </li>
+    </ol>
+    <h3>第四步：更新 URL（如域名变更）</h3>
+    <p>如果新站域名不同，需要在数据库中替换旧域名。在 phpMyAdmin 的 SQL 标签页执行：</p>
+    <pre><code>UPDATE wp_options SET option_value = 'https://新域名' WHERE option_name = 'siteurl';
+UPDATE wp_options SET option_value = 'https://新域名' WHERE option_name = 'home';</code></pre>
+    <p>内容中的旧域名需要用搜索替换工具（如 Better Search Replace 插件）批量替换。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>导入数据库时如果报错文件过大，可以用命令行导入：<code>mysql -u 用户名 -p 数据库名 &lt; backup.sql</code></li>
+      <li><code>wp-config.php</code> 的数据库表前缀（<code>$table_prefix</code>）必须与导入的数据库一致</li>
+      <li>上传文件后检查文件权限：目录 <code>755</code>，文件 <code>644</code></li>
+      <li>迁移后如果出现白屏，检查 <code>wp-config.php</code> 中的数据库连接信息是否正确</li>
+      <li>不要直接在数据库中用 SQL REPLACE 替换 URL，因为 WordPress 有序列化数据，建议用 WP-CLI 或专用插件</li>
+      <li>迁移完成后清除所有缓存，包括浏览器缓存和服务器端缓存</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="INST-6.html" class="prev"><div class="label">上一篇</div><div class="title">网站内容迁移 (插件方式)</div></a>
+    <a href="INST-8.html" class="next"><div class="label">下一篇</div><div class="title">已有站点更换域名</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="INST-2.html">手动安装 WordPress</a>
+    <a href="INST-3.html">绑定域名（NS 方式）</a>
+    <a href="INST-4.html">绑定域名（A 记录方式）</a>
+    <a href="INST-5.html">配置 SSL 证书</a>
+  </div></div>
+</div>
+</body>
+</html>

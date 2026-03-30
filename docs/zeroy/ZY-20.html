@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>表单提交记录与感谢页跳转 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">表单提交与感谢页</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>查看表单提交记录 + 配置感谢页跳转</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d2">L2</span></div><p>本文同时覆盖: ZY-20, ZY-21</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 内置表单系统会将访客提交的询盘数据保存在 WordPress 后台。你可以在"表单提交"面板中查看所有提交记录。同时，你可以配置感谢页 URL，让用户提交表单后自动跳转到感谢页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>查看提交记录是了解客户询盘情况的基本操作。配置感谢页跳转则服务两个目的：一是给用户明确的"提交成功"反馈，二是为 Google Ads 等广告平台提供转化追踪的触发点。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>查看表单提交记录</h3>
+    <ol>
+      <li>进入 WordPress 后台 → <strong>ZeroY 模块 → 表单提交（Form Submissions）</strong></li>
+      <li>查看提交列表，包含提交时间、提交者信息和表单内容</li>
+      <li>点击某条记录查看详细信息</li>
+    </ol>
+
+    <h3>配置感谢页跳转</h3>
+    <ol>
+      <li>首先确保已创建好感谢页（参见 ZY.2-f），记下其 URL（如 <code>/thank-you/</code>）</li>
+      <li>进入 WordPress 后台 → <strong>ZeroY 模块 → 表单提交 → 设置</strong></li>
+      <li>找到<strong>感谢页 URL</strong>（Thank You Page URL）输入框</li>
+      <li>填入感谢页的完整路径或 URL</li>
+      <li>保存设置</li>
+      <li>测试：在前台提交一次表单，确认自动跳转到感谢页</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>提交后不跳转</strong>：检查固定链接格式是否设为"文章名"（设置 → 固定链接），REST API 需要该格式才能正常工作</li>
+      <li><strong>URL 格式</strong>：感谢页 URL 可以用相对路径（如 <code>/thank-you/</code>）或完整 URL</li>
+      <li><strong>提交记录不丢失</strong>：即使未配置感谢页跳转，表单数据仍然会保存到后台</li>
+      <li><strong>定期检查</strong>：养成定期查看提交记录的习惯，及时回复客户询盘</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-19.html" class="prev"><div class="label">上一篇</div><div class="title">单篇文章模板</div></a>
+    <a href="ZY-21.html" class="next"><div class="label">下一篇</div><div class="title">配置感谢页跳转（表单提交 → 设置 → 感谢页 URL）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-1.html">下载并安装 ZeroY 主题 + 编辑器插件</a>
+    <a href="ZY-2.html">配置 API Token（zeroy.app 控制台绑定域名）</a>
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+  </div></div>
+</div></body></html>

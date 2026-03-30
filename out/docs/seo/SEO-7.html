@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOPress：设置页面 SEO 标题与描述 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">SEOPress：页面 SEO 标题与描述</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>SEOPress：设置页面 SEO 标题与描述</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d2">L2</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>与 Yoast 类似，SEOPress 也允许为每个页面/文章单独设置 SEO 标题（Title Tag）和描述（Meta Description），控制该页面在搜索结果中的展示内容。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>编辑任意页面或文章</li>
+      <li>滚动到编辑器下方的 <strong>SEOPress</strong> 面板</li>
+      <li>在<strong>「标题」</strong>输入框中填写 SEO 标题（建议 50-60 字符）</li>
+      <li>在<strong>「描述」</strong>输入框中填写页面摘要（建议 120-155 字符）</li>
+      <li>观察下方的<strong>Google 预览</strong>区域，确认展示效果</li>
+      <li>保存/更新页面</li>
+    </ol>
+
+    <h3>使用动态变量</h3>
+    <p>SEOPress 支持动态变量，点击输入框右侧的<strong>「标签」</strong>按钮可插入：</p>
+    <ul>
+      <li><code>%%post_title%%</code> — 文章标题</li>
+      <li><code>%%sitetitle%%</code> — 站点名称</li>
+      <li><code>%%sep%%</code> — 分隔符</li>
+      <li><code>%%post_excerpt%%</code> — 文章摘要</li>
+    </ul>
+    <div class="callout tip">可以混用固定文字和变量，如 <code>%%post_title%% - 产品中心 | %%sitetitle%%</code>。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>全局标题模板</strong>：进入 <strong>SEOPress → 标题与 Metas → 文章类型</strong> 可设置各类型的默认标题模板，单个页面的设置会覆盖全局模板</li>
+      <li><strong>与 Yoast 的区别</strong>：SEOPress 的变量语法是 <code>%%variable%%</code>，Yoast 也用相同格式但变量名可能不同</li>
+      <li><strong>首页设置</strong>：进入 <strong>SEOPress → 标题与 Metas → 首页</strong> 单独设置首页 SEO</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-6.html" class="prev"><div class="label">上一篇</div><div class="title">安装 SEOPress + 基础配置</div></a>
+    <a href="SEO-8.html" class="next"><div class="label">下一篇</div><div class="title">SEOPress：配置 Google 全局代码（Analytics/Ads）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-4.html">提交站点地图到 GSC</a>
+    <a href="SEO-5.html">Yoast：noindex 设置</a>
+    <a href="SEO-8.html">SEOPress：配置 Google 全局代码（Analytics/Ads）</a>
+    <a href="SEO-9.html">SEOPress：noindex/nofollow 设置</a>
+  </div></div>
+</div>
+</body>
+</html>

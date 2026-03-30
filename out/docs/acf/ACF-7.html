@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>添加、编辑与删除分类项 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">添加、编辑与删除分类项</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>添加、编辑与删除分类项</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d1">L1</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>创建好分类法（Taxonomy）后，需要在其中添加具体的分类项（Term）。例如「产品分类」下添加「电子产品」「家居用品」等具体分类。分类项是内容归类的基本单位。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>添加分类项</h3>
+    <ol>
+      <li>在后台左侧菜单找到 CPT 下的分类法入口（如 <strong>产品 → 产品分类</strong>）</li>
+      <li>在左侧「添加新分类」表单中填写：
+        <ul>
+          <li><strong>名称</strong>：分类项显示名（如「电子产品」）</li>
+          <li><strong>别名（Slug）</strong>：URL 中使用的英文标识（如 <code>electronics</code>）</li>
+          <li><strong>父级分类</strong>：选择上级分类可创建层级结构（仅分层分类法支持）</li>
+          <li><strong>描述</strong>：可选，部分主题会在分类归档页显示</li>
+        </ul>
+      </li>
+      <li>点击<strong>「添加新分类」</strong>按钮</li>
+    </ol>
+
+    <h3>编辑分类项</h3>
+    <p>在右侧分类项列表中，悬停在目标项上点击<strong>「编辑」</strong>进入编辑页面，可修改名称、别名、父级和描述。</p>
+
+    <h3>删除分类项</h3>
+    <p>悬停在分类项上点击<strong>「删除」</strong>。已归类到该项下的文章不会被删除，但会失去该分类标记。</p>
+    <div class="callout tip">别名（Slug）建议用英文小写 + 短横线格式（如 <code>home-appliances</code>），这会直接出现在 URL 中，对 SEO 友好。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>批量操作</strong>：勾选多个分类项后可批量删除</li>
+      <li><strong>默认分类</strong>：WordPress 内建分类（如「未分类」）无法删除，但可以重命名</li>
+      <li><strong>空分类</strong>：没有文章的分类项默认仍会保留，部分主题可设置隐藏空分类</li>
+      <li><strong>层级结构</strong>：合理利用父子分类（如「电子产品 → 手机 → iPhone」），但不建议超过 3 层</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-6.html" class="prev"><div class="label">上一篇</div><div class="title">创建分类法（如产品分类）+ 开启分层</div></a>
+    <a href="ACF-8.html" class="next"><div class="label">下一篇</div><div class="title">编辑/删除分类法</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

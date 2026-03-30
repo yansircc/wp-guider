@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dynamic Tags 基础 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Dynamic Tags 基础</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Dynamic Tags 基础（站点标题/文章标题/特色图）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Dynamic Tags 是 Elementor Pro 的动态内容功能。它允许 Widget 的内容不再是固定文字或图片，而是从 WordPress 数据库动态拉取 — 站点标题、文章标题、特色图、作者名、发布日期、自定义字段等。</p>
+    <p>Dynamic Tags 是 Theme Builder 的基础 — 正是因为有了 Dynamic Tags，一个 Single Post 模板才能自动适配所有文章。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>自动化</strong>：无需手动为每篇文章或页面重复输入信息</li>
+      <li><strong>一处修改全站生效</strong>：修改站点标题后，所有使用了 Dynamic Tag 的地方自动更新</li>
+      <li><strong>模板前提</strong>：没有 Dynamic Tags 就无法创建真正的动态模板</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>插入 Dynamic Tag</h3>
+    <ol>
+      <li>选中一个 Widget（如 Heading）</li>
+      <li>在内容输入框旁找到 <strong>Dynamic Tags 图标</strong>（数据库/堆栈图标）</li>
+      <li>点击后弹出 Dynamic Tags 选择面板</li>
+      <li>选择数据源，常用的有：
+        <ul>
+          <li><strong>Site</strong>：Site Title（站点标题）、Site Tagline（副标题）、Site Logo</li>
+          <li><strong>Post</strong>：Post Title（文章标题）、Post Excerpt（摘要）、Post Date、Featured Image</li>
+          <li><strong>Author</strong>：Author Name、Author Bio、Author Profile Picture</li>
+          <li><strong>Archive</strong>：Archive Title、Archive Description</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Dynamic Tags 可用于哪些属性</h3>
+    <p>不只是内容，Dynamic Tags 还可以用于：</p>
+    <ul>
+      <li><strong>链接</strong>：按钮的 URL 动态指向文章链接</li>
+      <li><strong>图片</strong>：Image Widget 动态显示特色图或 ACF 图片字段</li>
+      <li><strong>背景图</strong>：Section 背景动态使用特色图</li>
+      <li><strong>颜色 / 数字</strong>：部分属性支持动态颜色或数值</li>
+    </ul>
+
+    <h3>Fallback 设置</h3>
+    <p>点击 Dynamic Tag 后可以设置 <strong>Fallback</strong>（回退值）。当动态数据为空时（如文章没有特色图），显示 Fallback 指定的默认内容。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Dynamic Tags 是 <strong>Elementor Pro 功能</strong>，免费版没有</li>
+      <li>在 Theme Builder 模板中，Dynamic Tags 会根据当前页面上下文自动取值。在普通页面编辑器中，Dynamic Tags 取的是当前页面的数据</li>
+      <li>设置 Fallback 是好习惯 — 避免数据缺失时页面出现空白区域</li>
+      <li>不是所有 Widget 属性都支持 Dynamic Tags，支持的属性旁边会显示 Dynamic 图标</li>
+      <li>Dynamic Tags 的值在编辑器中可能显示为占位符，需要在前端预览或已发布页面中查看实际效果</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-42.html" class="prev"><div class="label">上一篇</div><div class="title">Error 404 页面模板</div></a>
+    <a href="ELE-44.html" class="next"><div class="label">下一篇</div><div class="title">ACF + Dynamic Tags（自定义字段动态显示）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

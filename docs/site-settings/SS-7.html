@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设置时区 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">站点设置</a>
+  <span class="sep">/</span>
+  <span class="current">设置时区</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>设置时区</h1>
+    <div class="meta">
+      <span class="tag topic">站点设置</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 的时区设置决定了站点中所有时间相关功能使用的基准时区，包括文章发布时间、定时发布、评论时间戳、wp-cron 计划任务等。</p>
+    <p>该设置位于 <strong>设置 → 常规</strong> 页面。可以选择具体城市（如 Shanghai）或 UTC 偏移量。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>如果时区设置不正确，定时发布的文章会在错误的时间上线，后台显示的时间也会与实际不符。对于面向中国客户的站点，应设置为 <code>Asia/Shanghai</code>（UTC+8）。</p>
+    <p>外贸站通常根据目标市场设置时区，比如面向美国客户设置为美东时间。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 常规</strong>（Settings → General）</li>
+      <li>找到 <strong>时区</strong>（Timezone）下拉菜单</li>
+      <li>选择对应的城市，如 <strong>Shanghai</strong>（位于 Asia 分类下）</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <p>保存后页面下方会显示当前本地时间和 UTC 时间，用于验证设置是否正确。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>建议选择城市名称而非 UTC 偏移量，因为城市名称会自动处理夏令时</li>
+      <li>时区设置错误会导致 wp-cron 任务（如自动备份、定时发布）在错误时间执行</li>
+      <li>修改时区不会影响已发布文章的时间戳显示</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SS-6.html" class="prev"><div class="label">上一篇</div><div class="title">修改固定链接</div></a>
+    <a href="SS-8.html" class="next"><div class="label">下一篇</div><div class="title">日期和时间格式</div></a>
+  </div>
+</div>
+</body>
+</html>

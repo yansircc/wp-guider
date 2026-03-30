@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>动效、Lottie 与 Sticky - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">动效、Lottie 与 Sticky</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>动效、Lottie 与 Sticky</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div><p class="merge-note">本文同时覆盖: ELE-25, ELE-26, ELE-27</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><strong>Motion Effects</strong> 为元素添加滚动触发的动画效果（视差、淡入、缩放等）。<strong>Lottie</strong> 是一种轻量级的 JSON 动画格式，可以替代 GIF 实现更流畅的矢量动画。<strong>Sticky</strong> 让元素在滚动时固定在屏幕上（如固定导航栏、侧边栏 CTA）。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>视觉吸引力</strong>：适度的动效让页面更有活力，引导用户注意力</li>
+      <li><strong>品牌质感</strong>：Lottie 动画可以展现品牌个性（加载动画、空状态、微交互）</li>
+      <li><strong>实用功能</strong>：Sticky 导航提升长页面的导航体验；Sticky CTA 提升转化</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>Motion Effects 动效</h3>
+    <ol>
+      <li>选中任意 Widget 或 Container</li>
+      <li>进入 <strong>Advanced Tab → Motion Effects</strong></li>
+      <li><strong>Entrance Animation（入场动画）</strong>：
+        <ul>
+          <li>Fade In / Fade In Up / Fade In Left 等</li>
+          <li>设置动画持续时间和延迟</li>
+        </ul>
+      </li>
+      <li><strong>Scrolling Effects（滚动效果，Pro）</strong>：
+        <ul>
+          <li>Vertical Scroll：视差效果（元素滚动速度与页面不同）</li>
+          <li>Horizontal Scroll：水平位移</li>
+          <li>Transparency：滚动时渐变透明度</li>
+          <li>Blur / Rotate / Scale：滚动触发的模糊/旋转/缩放</li>
+        </ul>
+      </li>
+      <li><strong>Mouse Effects（Pro）</strong>：元素跟随鼠标移动或产生 3D 倾斜效果</li>
+    </ol>
+
+    <h3>Lottie 动画</h3>
+    <ol>
+      <li>到 <a href="https://lottiefiles.com" target="_blank">LottieFiles</a> 下载或制作 JSON 动画文件</li>
+      <li>拖入 <strong>Lottie Widget</strong>（Pro 功能）</li>
+      <li>上传 JSON 文件或输入 LottieFiles URL</li>
+      <li>设置触发方式：
+        <ul>
+          <li><strong>Auto Play</strong>：自动循环播放</li>
+          <li><strong>On Scroll</strong>：根据滚动进度播放（滚动到 50% 时播放到 50%）</li>
+          <li><strong>On Hover / On Click</strong>：鼠标交互触发</li>
+        </ul>
+      </li>
+      <li>调整播放速度和循环次数</li>
+    </ol>
+
+    <h3>Sticky 元素</h3>
+    <ol>
+      <li>选中要固定的 Container 或 Widget</li>
+      <li><strong>Advanced Tab → Motion Effects → Sticky</strong></li>
+      <li>选择固定位置：<strong>Top</strong>（固定在顶部）或 <strong>Bottom</strong></li>
+      <li>设置 <strong>Offset</strong>（距离顶部/底部的偏移量）</li>
+      <li>设置 <strong>Stay in Column</strong>：开启后元素只在其父 Container 范围内固定，滚出父容器后取消固定</li>
+      <li>设置 <strong>Effects Offset</strong>：滚动多少距离后才触发固定</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>动效适度</strong>：页面上有 1-3 个关键动效即可，满屏都在动会分散注意力、降低专业感</li>
+      <li><strong>性能影响</strong>：Scrolling Effects 和 Mouse Effects 会增加渲染负担，手机端建议关闭复杂动效</li>
+      <li><strong>Lottie 大小</strong>：单个 Lottie JSON 文件建议控制在 100KB 以内</li>
+      <li><strong>Sticky 层级</strong>：Sticky 元素需要设置较高的 Z-Index（如 100），避免被其他内容遮挡</li>
+      <li><strong>Sticky + Header</strong>：如果页面有 Sticky Header，下方的 Sticky 元素需要增加 Offset 值，避免重叠</li>
+      <li><strong>可及性</strong>：有些用户对动画敏感（前庭障碍），应尊重系统的 <code>prefers-reduced-motion</code> 设置</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-24.html" class="prev"><div class="label">上一篇</div><div class="title">Table of Contents 目录 Widget</div></a>
+    <a href="ELE-26.html" class="next"><div class="label">下一篇</div><div class="title">Lottie 动画 Widget</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Elementor AI 生成自定义 CSS - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Elementor AI 生成自定义 CSS</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Elementor AI 生成自定义 CSS</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor Pro 允许在 Widget、Container 或页面级别添加自定义 CSS。<strong>Elementor AI</strong> 将这一能力进一步降低门槛：你只需要用自然语言描述想要的视觉效果，AI 自动生成对应的 CSS 代码并填入 Custom CSS 区域。</p>
+    <p>这让不会写 CSS 的用户也能实现渐变边框、悬停动画、打字机效果、玻璃拟态等高级样式。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>突破面板限制</strong>：Elementor 的 Style 面板已经很强，但部分高级效果（如文字渐变、复杂动画、伪元素装饰）必须靠 CSS 实现</li>
+      <li><strong>零 CSS 基础可用</strong>：用中文或英文描述效果即可，不需要记忆属性名和语法</li>
+      <li><strong>原位编辑</strong>：在 Elementor 编辑器内直接完成，不需要去主题文件或额外插件中写 CSS</li>
+      <li><strong>快速迭代</strong>：不满意就修改 Prompt 重新生成，比手动调试 CSS 快得多</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>打开 Custom CSS + AI</h3>
+    <ol>
+      <li>选中目标 Widget 或 Container</li>
+      <li>打开 <strong>Advanced</strong> 选项卡，滚动到底部找到 <strong>Custom CSS</strong>（Pro 功能）</li>
+      <li>点击 CSS 输入框旁的 <strong>AI 图标</strong>（星号/魔法棒），打开 AI 面板</li>
+      <li>输入自然语言描述你想要的效果</li>
+      <li>AI 生成 CSS 代码后，自动填入编辑框，实时预览效果</li>
+      <li>如需微调，可以继续对话 AI 或手动编辑代码</li>
+    </ol>
+
+    <h3>常见 Prompt 示例</h3>
+    <ul>
+      <li><strong>悬停放大</strong>："鼠标悬停时元素平滑放大到 1.05 倍，添加浮起阴影"</li>
+      <li><strong>渐变边框</strong>："给这个容器添加从蓝色到紫色的渐变边框，圆角 12px"</li>
+      <li><strong>文字渐变</strong>："标题文字使用从 #3b82f6 到 #8b5cf6 的渐变色"</li>
+      <li><strong>打字机效果</strong>："给标题添加打字机动画效果，逐个字母显示"</li>
+      <li><strong>玻璃拟态</strong>："背景半透明模糊效果（玻璃拟态风格），白色 20% 透明度"</li>
+      <li><strong>下划线动画</strong>："链接悬停时底部出现从左到右的下划线动画"</li>
+      <li><strong>脉冲效果</strong>："给 CTA 按钮添加持续脉冲闪烁动画吸引注意"</li>
+    </ul>
+
+    <h3>selector 关键字</h3>
+    <p>Custom CSS 中使用 <code>selector</code> 关键字指代当前元素：</p>
+    <pre><code>/* 悬停放大效果 */
+selector {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+selector:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* 文字渐变 */
+selector .elementor-heading-title {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}</code></pre>
+
+    <h3>页面级 Custom CSS</h3>
+    <p>除了 Widget 级别，还可以在 <strong>Page Settings → Advanced → Custom CSS</strong> 中添加整页 CSS。这里 <code>selector</code> 指代 <code>&lt;body&gt;</code> 标签。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>AI 生成需验证</strong>：AI 生成的 CSS 偶尔有语法错误或使用了过新的属性。应用后务必在前端预览检查效果，特别是移动端</li>
+      <li><strong>selector 嵌套</strong>：如果要精确定位子元素，需要用 <code>selector .具体class</code>。可以通过浏览器开发者工具（F12）查看元素的 class 名称</li>
+      <li><strong>优先级问题</strong>：Custom CSS 的优先级高于 Elementor 面板设置。如果面板中的样式不生效，检查是否被 Custom CSS 覆盖</li>
+      <li><strong>性能注意</strong>：避免在 Custom CSS 中使用高消耗的属性（如 <code>filter: blur()</code>）在大量元素上，可能导致页面卡顿</li>
+      <li><strong>AI 额度</strong>：每次 AI 生成 CSS 消耗 Elementor AI 积分。简单的 CSS 不妨直接手写或复制常用代码片段</li>
+      <li><strong>响应式 CSS</strong>：Custom CSS 区域不支持直接写媒体查询，但可以在不同断点下分别设置不同的 Custom CSS。需要媒体查询时可在页面级 CSS 中添加</li>
+      <li><strong>调试技巧</strong>：如果 AI 生成的 CSS 不生效，先用浏览器 F12 检查元素是否匹配了 selector，以及是否被其他样式覆盖（查看 Computed 面板）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-55.html" class="prev"><div class="label">上一篇</div><div class="title">Elementor AI 生成/编辑图片</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

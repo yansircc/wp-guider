@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐藏登录 URL - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">security</a>
+  <span class="sep">/</span>
+  <span class="current">隐藏登录 URL</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>隐藏登录 URL</h1>
+    <div class="meta">
+      <span class="tag topic">security</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WPS Hide Login 是一个轻量级 WordPress 插件，可以将默认的登录地址 <code>/wp-admin</code> 和 <code>/wp-login.php</code> 替换为你自定义的路径。安装后，原有的登录入口会返回 404，只有知道新地址的人才能访问登录页面。</p>
+    <p>这种做法属于 <strong>Security through Obscurity</strong>（隐蔽式安全）。它不是万能的防护手段，但作为整体安全策略的一层，能有效减少自动化攻击的噪音。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>互联网上大量的自动化攻击脚本会扫描 <code>/wp-login.php</code> 并发起暴力破解。这些机器人不会去猜测自定义路径，因此隐藏默认入口就能过滤掉绝大多数自动化攻击。</p>
+    <p>好处不仅是安全性：大量失败的登录尝试会消耗服务器资源、撑大日志文件。隐藏登录 URL 后，服务器负载和日志噪音都会明显降低。</p>
+    <div class="callout tip">隐藏登录 URL 应与强密码、双因素认证（2FA）、Wordfence 等措施配合使用，不要作为唯一的防护手段。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 安装并激活插件</h3>
+    <pre><code>locwp wp wp-train -- plugin install wps-hide-login --activate</code></pre>
+
+    <h3>2. 配置自定义登录路径</h3>
+    <ol>
+      <li>登录后台，进入 <strong>设置 → WPS Hide Login</strong></li>
+      <li>在 <strong>Login url</strong> 字段中输入自定义路径，例如 <code>my-secret-login</code></li>
+      <li>设置 <strong>Redirection url</strong> 为 <code>404</code>（访问原 wp-admin 时显示 404 页面）</li>
+      <li>点击保存更改</li>
+    </ol>
+
+    <h3>3. 验证配置</h3>
+    <ul>
+      <li>访问 <code>http://your-site.local/my-secret-login</code> — 应正常显示登录页</li>
+      <li>访问 <code>http://your-site.local/wp-admin</code> — 应返回 404</li>
+      <li>访问 <code>http://your-site.local/wp-login.php</code> — 应返回 404</li>
+    </ul>
+
+    <h3>4. 忘记自定义 URL 的恢复方法</h3>
+    <p>如果忘记了新的登录地址，有两种恢复方式：</p>
+    <pre><code># 方法一：WP-CLI 直接停用插件
+locwp wp wp-train -- plugin deactivate wps-hide-login
+
+# 方法二：通过数据库查看当前设置
+locwp wp wp-train -- option get whl_page</code></pre>
+    <p>停用插件后，默认的 <code>/wp-login.php</code> 会立即恢复。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>务必记住自定义 URL</strong>，建议用密码管理器保存。忘记 URL 等于锁了自己的门</li>
+      <li>自定义路径不要用常见词（如 <code>login</code>、<code>admin</code>、<code>signin</code>），否则还是容易被猜到</li>
+      <li>部分缓存插件可能缓存 404 页面，导致新旧 URL 行为异常。修改后清除缓存再测试</li>
+      <li>如果同时使用了安全插件（如 Wordfence），确认两者的登录保护规则不冲突</li>
+      <li>WPS Hide Login 只修改了前端入口，WP-CLI 和 REST API 的认证不受影响</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEC-2.html" class="prev"><div class="label">上一篇</div><div class="title">确认注册关闭</div></a>
+    <a href="SEC-4.html" class="next"><div class="label">下一篇</div><div class="title">禁用文件编辑</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEC-1.html">安装 Wordfence + 基础安全扫描</a>
+    <a href="SEC-2.html">确认注册关闭</a>
+  </div></div>
+</div>
+</body>
+</html>

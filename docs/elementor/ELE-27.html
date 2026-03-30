@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sticky 元素（固定导航/侧边栏） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Sticky 元素</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Sticky 元素（固定导航 / 侧边栏）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Sticky（粘性定位）让某个元素在页面滚动时固定在屏幕的指定位置。最常见的用法是固定导航栏（用户向下滚动时 Header 始终可见）和固定侧边栏（如目录、CTA 按钮）。Elementor Pro 的 Motion Effects 提供了内置的 Sticky 选项。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>导航始终可达</strong>：固定 Header 让用户在任何位置都能快速导航，不必滚回顶部</li>
+      <li><strong>提升转化</strong>：固定 CTA 按钮或联系方式在视口中，增加用户触达概率</li>
+      <li><strong>阅读辅助</strong>：长文章页固定目录（TOC）方便读者跳转章节</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>固定导航栏（Header Sticky）</h3>
+    <ol>
+      <li>用 Theme Builder 编辑 Header 模板</li>
+      <li>选中 Header 最外层的 <strong>Container</strong></li>
+      <li>左侧面板 → <strong>Advanced Tab → Motion Effects</strong></li>
+      <li>找到 <strong>Sticky</strong> 选项，设为 <strong>Top</strong></li>
+      <li>可选：设置 <strong>Offset</strong>（距顶部偏移量）和 <strong>Effects Offset</strong>（触发距离）</li>
+    </ol>
+
+    <h3>固定侧边栏 / CTA</h3>
+    <ol>
+      <li>选中侧边栏 Container 或 CTA Widget</li>
+      <li><strong>Advanced → Motion Effects → Sticky → Top</strong></li>
+      <li>设置 <strong>Stay in Column</strong>：打开此选项让元素只在其所在列内固定，滚出列范围后自动脱离</li>
+    </ol>
+    <div class="callout tip">Sticky 支持按设备类型开关：可以在桌面端开启固定导航，但在手机端关闭（因为手机屏幕小，固定 Header 占空间）。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>z-index 冲突</strong>：Sticky 元素固定后可能被其他元素遮挡，需要在 Advanced → Z-Index 中设置较高的值（如 999）</li>
+      <li><strong>背景透明问题</strong>：Header 固定后如果背景透明，文字会和页面内容重叠。务必给 Sticky Header 设置不透明背景色</li>
+      <li><strong>高度跳动</strong>：Header 变为 Sticky 后脱离文档流，页面内容可能突然上移。Elementor 通常自动补偿，但需要预览确认</li>
+      <li><strong>移动端测试</strong>：固定 Header 在小屏设备上占据大量空间，建议手机端使用更紧凑的 Sticky Header 或关闭</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-26.html" class="prev"><div class="label">上一篇</div><div class="title">Lottie 动画 Widget</div></a>
+    <a href="ELE-28.html" class="next"><div class="label">下一篇</div><div class="title">Elementor Form（联系表单设计）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>通过 SEO 插件配置 Google 全局代码 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Google 全局代码</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>通过 SEO 插件配置 Google 全局代码</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Google Ads 和 Google Analytics 需要在网站每个页面的 <code>&lt;head&gt;</code> 中嵌入一段全局跟踪代码（Global Site Tag / gtag.js）。通过 SEOPress 等 SEO 插件的「头部代码注入」功能，可以在不修改主题文件的情况下全站注入这段代码。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>全局代码是 Google Ads 转化追踪和再营销的基础。没有它，Google 无法识别你的网站访客，转化代码（如感谢页事件）也无法生效。通过 SEO 插件注入比直接改主题文件更安全，主题更新后也不会丢失。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：获取 Google 全局代码</h3>
+    <ol>
+      <li>登录 <strong>Google Ads</strong> 后台</li>
+      <li>进入 <strong>工具与设置 → 转化</strong></li>
+      <li>找到你的转化操作，点击「代码设置」</li>
+      <li>复制 <strong>全局网站代码</strong>（以 <code>&lt;script async src="https://www.googletagmanager.com/gtag/js?id=AW-..."&gt;</code> 开头的代码段）</li>
+    </ol>
+
+    <h3>第二步：通过 SEOPress 注入</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>SEOPress → 高级设置</strong>（或 Advanced）</li>
+      <li>找到「头部代码」（Head section）输入框</li>
+      <li>将全局代码粘贴到输入框中</li>
+      <li>保存设置</li>
+    </ol>
+
+    <h3>第三步：验证安装</h3>
+    <ol>
+      <li>打开网站前台，右键 → 查看页面源代码</li>
+      <li>搜索你的 Google Ads ID（如 <code>AW-123456789</code>），确认代码出现在 <code>&lt;head&gt;</code> 中</li>
+      <li>或使用 <strong>Google Tag Assistant</strong> 浏览器扩展验证</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>全局代码 ≠ 转化代码</strong>：全局代码放全站 head，转化事件代码只放感谢页（参见 ZY.5-a）。两者都需要，缺一不可</li>
+      <li><strong>不要重复安装</strong>：如果已通过 Google Tag Manager 安装了 gtag，不要再通过 SEOPress 重复安装，会导致数据重复计算</li>
+      <li><strong>缓存影响</strong>：安装后如果验证看不到代码，先清除 Hostinger 缓存（参见 ZY.8-a）</li>
+      <li><strong>其他 SEO 插件也行</strong>：Yoast SEO、Rank Math 等都有类似的头部代码注入功能，操作路径大同小异</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-25.html" class="prev"><div class="label">上一篇</div><div class="title">Google Ads 转化代码：在感谢页埋入事件代码</div></a>
+    <a href="ZY-27.html" class="next"><div class="label">下一篇</div><div class="title">HTMX 基础：Load More 加载更多</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

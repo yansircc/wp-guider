@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Price Table 价格表 Widget - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Price Table 价格表 Widget</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Price Table 价格表 Widget</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d2">L2</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Price Table 是 Elementor Pro 的定价表 Widget，用于展示产品或服务的定价方案。每个 Price Table 包含方案名称、价格、功能列表和行动按钮，是 SaaS、服务类网站的标配组件。</p>
+    <p>通常以 2-4 列并排展示不同档位的方案（如基础版/专业版/企业版），用视觉差异引导用户选择推荐方案。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>定价页面是转化漏斗的关键节点——用户在这里做最终的购买决策。清晰的价格对比可以减少决策摩擦，高亮推荐方案可以引导用户选择最有利的选项。</p>
+    <p>用 Price Table Widget 可以快速构建专业的定价对比布局，比手动拼凑 HTML 表格高效得多。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 创建价格表布局</h3>
+    <ol>
+      <li>创建一个 Row 方向的 Container</li>
+      <li>拖入 3 个 <strong>Price Table</strong> Widget（基础/专业/企业）</li>
+      <li>父 Container 设置 Gap 和 Align Items: Stretch</li>
+    </ol>
+
+    <h3>2. 配置每个 Price Table</h3>
+    <p><strong>Content Tab</strong> 分为多个区域：</p>
+    <ul>
+      <li><strong>Header</strong>：方案名称（如「专业版」）</li>
+      <li><strong>Pricing</strong>：价格、货币符号、计费周期（/月、/年）</li>
+      <li><strong>Features</strong>：功能列表，每项可设置图标（勾/叉）表示是否包含</li>
+      <li><strong>Footer</strong>：CTA 按钮（如「立即购买」）</li>
+      <li><strong>Ribbon</strong>：角标/标签（如「最受欢迎」「推荐」）</li>
+    </ul>
+
+    <h3>3. 高亮推荐方案</h3>
+    <ul>
+      <li>给推荐方案开启 <strong>Ribbon</strong>（「推荐」「最受欢迎」）</li>
+      <li>推荐方案使用品牌主色作为 Header 背景</li>
+      <li>可以通过 Advanced Tab 设置推荐方案的上移效果（负 Margin Top）使其视觉突出</li>
+    </ul>
+
+    <div class="callout tip">功能列表中用图标区分「包含」和「不包含」——绿色勾号 vs 灰色叉号，比纯文字更直观。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>价格表数量推荐 3 个（选择悖论：太多选项反而降低转化）</li>
+      <li>功能列表保持对齐——各方案的功能项数量和顺序应一致，方便横向对比</li>
+      <li>移动端 3 列会自动堆叠为纵向排列，确保堆叠后推荐方案在最前面</li>
+      <li>价格数字要醒目——字号至少是正文的 2-3 倍</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-20.html" class="prev"><div class="label">上一篇</div><div class="title">Countdown 倒计时 Widget</div></a>
+    <a href="ELE-22.html" class="next"><div class="label">下一篇</div><div class="title">Testimonial Carousel 评价轮播</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-1.html">安装 Elementor Pro + 激活授权</a>
+    <a href="ELE-2.html">创建第一个页面（拖拽编辑器界面认识）</a>
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-6.html">标题 / 文本编辑器 / 图片 Widget</a>
+  </div></div>
+</div></body></html>

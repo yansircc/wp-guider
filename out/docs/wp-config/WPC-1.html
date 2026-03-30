@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>查看 DB_NAME - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">wp-config</a>
+  <span class="sep">/</span>
+  <span class="current">查看 DB_NAME</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>查看 DB_NAME</h1>
+    <div class="meta">
+      <span class="tag topic">wp-config</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>DB_NAME</code> 是 <code>wp-config.php</code> 中定义的数据库名称常量。WordPress 的所有内容——文章、页面、用户、设置——都存储在这个数据库中。</p>
+    <p><code>wp-config.php</code> 位于 WordPress 根目录，是整个站点的核心配置文件。其中数据库相关常量（<code>DB_NAME</code>、<code>DB_USER</code>、<code>DB_PASSWORD</code>、<code>DB_HOST</code>）决定了 WordPress 连接哪个数据库。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>了解 <code>DB_NAME</code> 是数据库排障的起点。当遇到"Error establishing a database connection"错误时，首先要检查的就是数据库名是否正确。</p>
+    <p>在 Local (localWP) 环境中，每个站点的数据库名称由工具自动生成。知道如何查看 <code>DB_NAME</code>，才能正确连接数据库管理工具（如 Adminer/phpMyAdmin）进行数据操作。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：用 WP-CLI 查看</h3>
+    <pre><code>locwp wp wp-train -- config get DB_NAME</code></pre>
+    <p>输出就是当前站点使用的数据库名，例如 <code>local</code>。</p>
+
+    <h3>方法二：直接查看文件</h3>
+    <pre><code>locwp wp wp-train -- eval "echo ABSPATH;" </code></pre>
+    <p>找到 WordPress 根目录后，打开 <code>wp-config.php</code>，搜索 <code>DB_NAME</code>：</p>
+    <pre><code>define( 'DB_NAME', 'local' );</code></pre>
+
+    <h3>其他数据库常量</h3>
+    <ul>
+      <li><code>DB_USER</code> — 数据库用户名</li>
+      <li><code>DB_PASSWORD</code> — 数据库密码</li>
+      <li><code>DB_HOST</code> — 数据库主机（Local 通常是 <code>localhost:/path/to/mysql.sock</code>）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><code>wp-config.php</code> 包含数据库密码等敏感信息，绝不能公开分享或提交到版本控制</li>
+      <li>Local 环境中数据库名通常是 <code>local</code>，但其他环境可能不同</li>
+      <li>如果 <code>DB_NAME</code> 指向的数据库不存在，WordPress 会报连接错误</li>
+      <li>修改 <code>wp-config.php</code> 前务必备份，一个字符的错误就会导致白屏</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="WPC-2.html" class="next"><div class="label">下一篇</div><div class="title">wp-content 目录结构</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="WPC-3.html">themes/plugins 目录</a>
+    <a href="WPC-4.html">uploads 目录</a>
+    <a href="WPC-5.html">查看 table_prefix</a>
+    <a href="WPC-6.html">设置 WP_MEMORY_LIMIT</a>
+  </div></div>
+</div>
+</body>
+</html>

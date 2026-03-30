@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生成 Application Password - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">生成 Application Password</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>生成 Application Password</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Application Password（应用密码）是 WordPress 5.6 引入的功能，允许为第三方应用或脚本生成专用密码，通过 REST API 访问 WordPress，而无需使用主密码。</p>
+    <p>每个应用密码是独立的，可以随时吊销，不影响用户的主登录密码。这是 WordPress REST API 认证的推荐方式。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>在 WP Guider 训练系统中，Claude Code 通过 REST API 验证教练的操作结果。Application Password 让 AI agent 能够安全地读取站点数据，用于自动化检查。</p>
+    <p>相比直接使用登录密码，Application Password 更安全：权限范围相同但可以单独吊销，泄露后不影响主密码。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>用户 → 我的个人资料</strong>（Users → Profile）</li>
+      <li>滚动到页面底部，找到 <strong>Application Passwords</strong> 区域</li>
+      <li>在 <strong>New Application Password Name</strong> 中输入描述名称（如 "WP Guider Agent"）</li>
+      <li>点击 <strong>Add New Application Password</strong></li>
+      <li>系统生成一个密码（格式如 <code>xxxx xxxx xxxx xxxx xxxx xxxx</code>），<strong>立即复制保存</strong></li>
+    </ol>
+    <div class="callout danger">密码只会显示一次！关闭页面后无法再次查看。如果忘记了，只能删除重新生成。</div>
+    <h3>使用方式</h3>
+    <p>通过 HTTP Basic Auth 调用 REST API：</p>
+    <pre><code>curl -u "username:xxxx xxxx xxxx xxxx xxxx xxxx" \
+  https://your-site.com/wp-json/wp/v2/posts</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Application Password 要求站点使用 HTTPS，HTTP 站点无法使用</li>
+      <li>如果看不到 Application Passwords 区域，可能是被安全插件禁用了（如 iThemes Security）</li>
+      <li>密码中的空格可以保留也可以去掉，都能正常使用</li>
+      <li>每个 Application Password 的权限与其关联用户相同，管理员的应用密码拥有管理员权限</li>
+      <li>定期检查不再使用的应用密码并 <strong>Revoke</strong>（吊销）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="UM-6.html" class="prev"><div class="label">上一篇</div><div class="title">修改用户角色</div></a>
+    <a href="UM-8.html" class="next"><div class="label">下一篇</div><div class="title">用 DoLogin 生成免密登录链接</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-5.html">删除用户并归属内容</a>
+    <a href="UM-6.html">修改用户角色</a>
+    <a href="UM-8.html">用 DoLogin 生成免密登录链接</a>
+    <a href="UM-1.html">修改昵称和显示名</a>
+  </div></div>
+</div>
+</body>
+</html>

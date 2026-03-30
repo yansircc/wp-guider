@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>响应式设计 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">响应式设计</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>响应式设计</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d2">L2-L3</span></div><p class="merge-note">本文同时覆盖: ELE-13, ELE-14, ELE-15</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>响应式设计让你的页面在不同设备（桌面、平板、手机）上都有良好的展示效果。Elementor 提供三个预设断点，允许你针对每种设备分别调整布局、字号、间距和可见性。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>移动优先</strong>：超过 60% 的网页流量来自移动端，手机体验差直接损失客户</li>
+      <li><strong>SEO 要求</strong>：Google 使用移动端体验作为排名因素（Mobile-First Indexing）</li>
+      <li><strong>用户体验</strong>：桌面上看起来完美的三栏布局，在手机上可能挤成一团</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>断点预览切换（L2）</h3>
+    <ol>
+      <li>在编辑器底部工具栏点击 <strong>响应式模式图标</strong>（电脑/平板/手机图标）</li>
+      <li>默认断点：Desktop（>1024px）、Tablet（768-1024px）、Mobile（<768px）</li>
+      <li>可在 <strong>Site Settings → Layout → Breakpoints</strong> 自定义断点值</li>
+      <li>切换到不同设备后，编辑器画布会模拟该设备宽度</li>
+    </ol>
+
+    <h3>按设备隐藏/显示元素（L3）</h3>
+    <ol>
+      <li>选中任意 Widget 或 Container</li>
+      <li>进入 <strong>Advanced Tab → Responsive</strong></li>
+      <li>开启 <strong>Hide on Desktop / Hide on Tablet / Hide on Mobile</strong></li>
+      <li>典型用法：桌面显示详细表格，手机端隐藏表格、改用卡片式列表</li>
+    </ol>
+
+    <h3>响应式排版（L3）</h3>
+    <p>大多数数值属性都支持按设备设置不同值：</p>
+    <ol>
+      <li>在属性旁看到 <strong>设备切换图标</strong>（🖥️📱）</li>
+      <li>点击切换到目标设备</li>
+      <li>设置该设备的专属值，例如：
+        <ul>
+          <li>标题字号：Desktop 48px → Tablet 36px → Mobile 28px</li>
+          <li>Container padding：Desktop 60px → Mobile 20px</li>
+          <li>列宽：Desktop 33.3% → Mobile 100%</li>
+        </ul>
+      </li>
+      <li>值只在设定的设备上生效，不影响其他设备</li>
+    </ol>
+
+    <h3>响应式 Flexbox 技巧</h3>
+    <ul>
+      <li>Container 方向：Desktop 设为 Row（水平），Mobile 改为 Column（垂直堆叠）</li>
+      <li>Container Wrap：Desktop 设 No Wrap，Tablet 改为 Wrap 自动换行</li>
+      <li>子元素顺序：通过 Advanced → Custom Ordering 调整 Mobile 下的排列顺序</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>从桌面到手机</strong>：Elementor 采用"桌面优先"的继承方式——如果你只设了 Desktop 值，Tablet 和 Mobile 会继承它。只需要在需要调整的设备上设置不同值</li>
+      <li><strong>实机测试</strong>：编辑器的响应式预览是近似的，上线前务必用真实手机测试</li>
+      <li><strong>隐藏≠不加载</strong>：Hide on Mobile 只是 CSS <code>display: none</code>，内容仍然被加载。大量隐藏内容会影响手机性能</li>
+      <li><strong>字号规范</strong>：手机端正文不小于 16px，避免浏览器自动缩放导致布局错乱</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-12.html" class="prev"><div class="label">上一篇</div><div class="title">CSS Classes 复用样式</div></a>
+    <a href="ELE-14.html" class="next"><div class="label">下一篇</div><div class="title">按设备隐藏/显示元素</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-1.html">安装 Elementor Pro + 激活授权</a>
+    <a href="ELE-2.html">创建第一个页面（拖拽编辑器界面认识）</a>
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-6.html">标题 / 文本编辑器 / 图片 Widget</a>
+  </div></div>
+</div></body></html>

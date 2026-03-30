@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>配置 API Token（绑定域名） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">配置 API Token</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>配置 API Token（zeroy.app 控制台绑定域名）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d1">L1</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>API Token 是 ZeroY 云端服务的身份凭证。你需要在 zeroy.app 控制台绑定网站域名，获取 Token，然后在 WordPress 后台填入，才能打通本地 WordPress 与 ZeroY 编辑器云端功能的通道。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>没有正确配置 Token，ZeroY 编辑器无法连接云端服务，所有页面编辑、AI 生成、模板创建功能都会失败。这是安装 ZeroY 后必须完成的第一步配置。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：绑定域名（关键前置步骤）</h3>
+    <ol>
+      <li>访问 <strong>zeroy.app</strong>，登录你的账户</li>
+      <li>进入控制台，找到域名绑定设置</li>
+      <li>添加你的 WordPress 站点域名（如 <code>example.com</code>）</li>
+      <li>确认绑定状态显示为成功</li>
+    </ol>
+    <div class="callout warning">必须先绑定域名再填 Token。如果域名未绑定，Token 验证会失败。</div>
+
+    <h3>第二步：复制 API Token</h3>
+    <ol>
+      <li>在 zeroy.app 控制台找到 API Token 区域</li>
+      <li>点击复制按钮，完整复制 Token 字符串</li>
+    </ol>
+
+    <h3>第三步：填入 WordPress 后台</h3>
+    <ol>
+      <li>回到 WordPress 后台 → <strong>ZeroY 模块</strong></li>
+      <li>将 API Token 粘贴到对应输入框</li>
+      <li>点击<strong>保存</strong></li>
+      <li>页面应提示连接成功</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Token 泄露风险</strong>：API Token 等同于账户凭证，不要分享或提交到代码仓库</li>
+      <li><strong>域名要完全匹配</strong>：绑定时填写的域名必须和 WordPress 站点地址一致，注意 www 与非 www 的区别</li>
+      <li><strong>多站点场景</strong>：每个站点需要单独绑定域名、单独配置 Token</li>
+      <li><strong>Token 失效</strong>：如果之后突然无法使用编辑器，回 zeroy.app 检查 Token 是否过期或被重置</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-1.html" class="prev"><div class="label">上一篇</div><div class="title">下载并安装 ZeroY 主题 + 编辑器插件</div></a>
+    <a href="ZY-3.html" class="next"><div class="label">下一篇</div><div class="title">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

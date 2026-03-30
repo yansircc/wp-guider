@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mu-plugin 故障修复 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">troubleshooting</a>
+  <span class="sep">/</span>
+  <span class="current">mu-plugin 故障修复</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>mu-plugin 故障修复</h1>
+    <div class="meta">
+      <span class="tag topic">troubleshooting</span>
+      <span class="tag diff d5">L5</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>mu-plugins（Must-Use Plugins，必须使用的插件）位于 <code>wp-content/mu-plugins/</code> 目录。与普通插件不同，mu-plugins 有三个关键特征：</p>
+    <ul>
+      <li><strong>自动激活</strong> — 放进目录就生效，无需在后台激活</li>
+      <li><strong>无法从后台停用</strong> — 后台没有"停用"按钮</li>
+      <li><strong>最先加载</strong> — 在所有普通插件之前执行</li>
+    </ul>
+    <p>这意味着 mu-plugin 的错误会在最早阶段触发，可能导致整个 WordPress 无法启动。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>mu-plugin 故障特别棘手：后台可能完全无法访问，普通的"停用所有插件"也不会影响 mu-plugins。如果不知道 mu-plugins 的存在，可能会在常规排障中浪费大量时间。</p>
+    <p>常见场景：主机提供商通过 mu-plugin 注入功能（如缓存、安全规则），这些插件出问题时用户往往不知道它们的存在。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 检查 mu-plugins 目录</h3>
+    <pre><code># 列出 mu-plugins
+ls -la wp-content/mu-plugins/
+
+# 用 WP-CLI 查看
+locwp wp wp-train -- plugin list --status=must-use</code></pre>
+
+    <h3>2. 定位问题 mu-plugin</h3>
+    <pre><code># 查看 debug.log 中的错误路径
+grep "mu-plugins" wp-content/debug.log</code></pre>
+    <p>如果日志指向 <code>mu-plugins/problem-file.php</code>，那就是它。</p>
+
+    <h3>3. 修复方法</h3>
+    <pre><code># 方法一：移除问题文件（最快）
+mv wp-content/mu-plugins/problem-file.php wp-content/mu-plugins/problem-file.php.bak
+
+# 方法二：移走整个 mu-plugins 目录
+mv wp-content/mu-plugins wp-content/mu-plugins.bak
+mkdir wp-content/mu-plugins
+
+# 确认问题消失后，逐个移回排查
+mv wp-content/mu-plugins.bak/good-file.php wp-content/mu-plugins/</code></pre>
+
+    <h3>4. 排障流程</h3>
+    <ol>
+      <li>查看 <code>debug.log</code> 是否指向 mu-plugins</li>
+      <li>如果不确定，先移走整个 mu-plugins 目录</li>
+      <li>问题消失 → 逐个移回文件确定罪魁祸首</li>
+      <li>问题依然 → 不是 mu-plugin 的锅，继续排查其他方向</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>mu-plugins 目录可能不存在——这是正常的，WordPress 不会自动创建它</li>
+      <li>mu-plugins 不支持子目录中的文件（除非有 loader），只有根目录下的 PHP 文件会被加载</li>
+      <li>部分主机提供商的 mu-plugins 删除后会自动重建，需要联系主机解决</li>
+      <li>恢复 mu-plugin 时注意文件权限，确保 Web 服务器可读</li>
+      <li>WP Reset 快照只恢复数据库，不会影响 mu-plugins 文件——这是好事也是限制</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-3.html" class="prev"><div class="label">上一篇</div><div class="title">插件逐个排查</div></a>
+    <a href="TS-5.html" class="next"><div class="label">下一篇</div><div class="title">切换默认主题排查</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-3.html">插件逐个排查</a>
+    <a href="TS-5.html">切换默认主题排查</a>
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+  </div></div>
+</div>
+</body>
+</html>

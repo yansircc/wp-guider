@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改默认角色 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">修改默认角色</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>修改默认角色</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 的"新用户默认角色"决定了通过注册页面注册的新用户会被分配什么角色。默认值是"订阅者"（Subscriber），这是权限最低的角色。</p>
+    <p>此设置位于 <strong>设置 → 常规</strong> 页面，与用户注册开关在同一区域。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>如果站点需要开放注册（如会员站、论坛），需要确认默认角色设置正确。将默认角色设为"订阅者"是最安全的选择，因为订阅者只能管理自己的个人资料。</p>
+    <p>如果不小心将默认角色设为"管理员"或"编辑"，任何注册用户都会获得高级权限，后果非常严重。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 常规</strong>（Settings → General）</li>
+      <li>找到 <strong>新用户默认角色</strong>（New User Default Role）下拉菜单</li>
+      <li>确认设置为 <strong>订阅者</strong>（Subscriber）</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <h3>WordPress 内置角色权限一览</h3>
+    <ul>
+      <li><strong>管理员</strong>（Administrator）— 完全控制权</li>
+      <li><strong>编辑</strong>（Editor）— 管理所有文章和页面</li>
+      <li><strong>作者</strong>（Author）— 发布和管理自己的文章</li>
+      <li><strong>投稿者</strong>（Contributor）— 写文章但不能发布</li>
+      <li><strong>订阅者</strong>（Subscriber）— 只能管理个人资料</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>即使关闭了注册功能，也建议将默认角色保持为"订阅者"，作为安全兜底</li>
+      <li>部分安全漏洞可能绕过注册开关创建用户，低权限的默认角色可以减轻风险</li>
+      <li>此设置不影响管理员手动创建用户时选择的角色</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="UM-2.html" class="prev"><div class="label">上一篇</div><div class="title">创建编辑用户</div></a>
+    <a href="UM-4.html" class="next"><div class="label">下一篇</div><div class="title">创建作者用户</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-5.html">删除用户并归属内容</a>
+    <a href="UM-6.html">修改用户角色</a>
+    <a href="UM-8.html">用 DoLogin 生成免密登录链接</a>
+    <a href="UM-7.html">生成 Application Password</a>
+  </div></div>
+</div>
+</body>
+</html>

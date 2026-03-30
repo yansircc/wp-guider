@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>WooCommerce 商店归档 + 购物车/结账页 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">WooCommerce 归档与结账</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>WooCommerce 商店归档 + 购物车 / 结账页</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor Pro + WooCommerce 结合后，可以用 Theme Builder 完全自定义商店的三大核心页面：商品归档页（Shop / Category 页）、购物车页（Cart）、结账页（Checkout）。你可以用 Elementor 的可视化方式替代 WooCommerce 默认模板，获得更自由的设计控制。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>品牌统一</strong>：默认 WooCommerce 模板风格固定且与品牌脱节，自定义后整站视觉一致</li>
+      <li><strong>转化优化</strong>：优化购物车和结账页的布局可显著降低弃购率</li>
+      <li><strong>灵活展示</strong>：归档页可以自定义筛选器、排序方式、卡片样式，突出产品卖点</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>商品归档页（Shop / Category）</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>模板 → Theme Builder → Product Archive</strong></li>
+      <li>新建模板 → 选择 Elementor 编辑</li>
+      <li>使用 WooCommerce 专用 Widget：
+        <ul>
+          <li><strong>Archive Products</strong>：产品网格（控制列数、卡片样式、每页数量）</li>
+          <li><strong>Archive Title</strong>：当前分类名称</li>
+          <li><strong>Archive Description</strong>：分类描述</li>
+          <li><strong>Products Filter</strong>：价格/属性/分类筛选（如果可用）</li>
+        </ul>
+      </li>
+      <li>配置 Display Conditions：应用于 Shop 页面 + 所有产品分类页</li>
+    </ol>
+
+    <h3>购物车页（Cart）</h3>
+    <ol>
+      <li>Theme Builder → 新建 <strong>Cart</strong> 类型模板</li>
+      <li>使用 <strong>Cart Widget</strong>（Elementor 封装的购物车表格）</li>
+      <li>自定义按钮样式、配色、空购物车提示文案</li>
+      <li>添加交叉销售（Cross-sells）Widget 推荐相关产品</li>
+    </ol>
+
+    <h3>结账页（Checkout）</h3>
+    <ol>
+      <li>Theme Builder → 新建 <strong>Checkout</strong> 类型模板</li>
+      <li>使用 <strong>Checkout Widget</strong> 布局表单字段</li>
+      <li>可以用两列布局：左侧账单信息，右侧订单摘要</li>
+      <li>自定义"下单"按钮样式和位置</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>需要 Elementor Pro</strong>：WooCommerce Theme Builder 是 Pro 功能</li>
+      <li><strong>支付网关兼容性</strong>：自定义结账页后要测试所有启用的支付方式是否正常工作</li>
+      <li><strong>不要删除默认页面</strong>：WooCommerce 的 Shop / Cart / Checkout 页面必须存在，Elementor 模板是覆盖它们的展示层</li>
+      <li><strong>优惠券区域</strong>：确保自定义结账页保留了优惠券输入框，否则用户无法使用折扣码</li>
+      <li><strong>测试完整购买流程</strong>：自定义后必须走一遍完整流程——添加购物车 → 查看购物车 → 结账 → 支付 → 订单完成</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-47.html" class="prev"><div class="label">上一篇</div><div class="title">WooCommerce 产品页模板</div></a>
+    <a href="ELE-49.html" class="next"><div class="label">下一篇</div><div class="title">Landing Page 设计（单页营销）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

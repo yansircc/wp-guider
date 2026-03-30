@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>基础与进阶 Widget - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">基础与进阶 Widget</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>基础与进阶 Widget</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d1">L1-L2</span></div><p class="merge-note">本文同时覆盖: ELE-6, ELE-7, ELE-8, ELE-9</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Widget 是 Elementor 的内容构件，每个 Widget 负责呈现一种内容类型。拖拽到画布后，通过 Content / Style / Advanced 三个 Tab 来配置内容、外观和高级属性。</p>
+    <p>基础 Widget 包括标题、文本、图片、按钮、图标、间距等；进阶 Widget 包括图标盒子、图片盒子、视频嵌入和地图等。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>核心构件</strong>：这些 Widget 是搭建任何页面的基础，80% 的页面内容由它们组成</li>
+      <li><strong>统一操作模式</strong>：掌握这些 Widget 的操作方式后，使用其他 Widget 会非常快上手</li>
+      <li><strong>设计表达</strong>：组合使用这些基础 Widget，就能实现大多数常见的页面设计效果</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>基础 Widget（L1）</h3>
+
+    <h4>Heading 标题</h4>
+    <ul>
+      <li>拖入画布后在 Content Tab 输入文字</li>
+      <li>选择 HTML 标签（H1-H6）——H1 用于页面主标题，每页只用一次</li>
+      <li>Style Tab：字体、大小、颜色、对齐方式</li>
+    </ul>
+
+    <h4>Text Editor 文本编辑器</h4>
+    <ul>
+      <li>富文本编辑器，支持段落、加粗、列表、链接等</li>
+      <li>可切换到"文本"模式直接编写 HTML</li>
+      <li>Style Tab：排版、文字颜色、行高</li>
+    </ul>
+
+    <h4>Image 图片</h4>
+    <ul>
+      <li>上传或从媒体库选择图片</li>
+      <li>设置尺寸（Thumbnail / Medium / Large / Full / 自定义）</li>
+      <li>添加链接和灯箱效果（点击放大）</li>
+    </ul>
+
+    <h4>Button 按钮</h4>
+    <ul>
+      <li>Content：文字、链接、图标</li>
+      <li>Style：类型（填充/描边/文字）、颜色、圆角、悬停效果</li>
+      <li>Size：XS / SM / MD / LG / XL</li>
+    </ul>
+
+    <h4>Icon 图标 / Spacer 间距 / Divider 分割线</h4>
+    <ul>
+      <li>Icon：从图标库选择，设置大小和颜色</li>
+      <li>Spacer：控制垂直间距，不同设备可设不同值</li>
+      <li>Divider：水平分割线，可调样式（实线/虚线/双线）和宽度</li>
+    </ul>
+
+    <h3>进阶 Widget（L2）</h3>
+
+    <h4>Icon Box 图标盒子 / Image Box 图片盒子</h4>
+    <ul>
+      <li>将图标/图片与标题、描述组合为一个整体</li>
+      <li>常用于服务介绍、特色展示区块</li>
+      <li>支持设置图标/图片位置（左侧/顶部/右侧）</li>
+    </ul>
+
+    <h4>Video 视频</h4>
+    <ul>
+      <li>支持 YouTube、Vimeo、Dailymotion 及自托管视频</li>
+      <li>可设置封面图（Image Overlay）和播放图标</li>
+      <li>自动播放、静音、循环等播放选项</li>
+    </ul>
+
+    <h4>Google Maps 谷歌地图</h4>
+    <ul>
+      <li>输入地址自动定位</li>
+      <li>设置缩放级别和地图高度</li>
+      <li>注意：需要 Google Maps API Key（在 Elementor → Settings → Integrations 中配置）</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>三 Tab 规律</strong>：所有 Widget 都遵循 Content → Style → Advanced 的设置结构，养成从左到右配置的习惯</li>
+      <li><strong>图片优化</strong>：上传前压缩图片（推荐 WebP 格式），大图会拖慢页面加载速度</li>
+      <li><strong>语义化标题</strong>：H1 用于页面主标题，H2 用于区块标题，H3 用于子标题，不要因为字号需求而乱用标题层级</li>
+      <li><strong>按钮链接</strong>：按钮的 Link 可以设为页面链接、锚点（#section-id）、电话（tel:）或邮件（mailto:）</li>
+      <li><strong>视频性能</strong>：嵌入视频会增加页面加载时间，建议使用封面图 + 点击播放模式</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-5.html" class="prev"><div class="label">上一篇</div><div class="title">Grid Container 布局</div></a>
+    <a href="ELE-7.html" class="next"><div class="label">下一篇</div><div class="title">按钮 / 图标 / 间距 Widget</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

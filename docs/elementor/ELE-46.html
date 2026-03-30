@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Portfolio Widget 作品集展示 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Portfolio Widget 作品集展示</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Portfolio Widget 作品集展示</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Portfolio Widget 是 Elementor Pro 的作品集展示组件，以网格形式展示文章或自定义 Post Type 的特色图，并提供分类标签筛选（Filter Bar）功能。用户可以点击标签快速切换显示不同分类的内容，无需刷新页面。</p>
+    <p>它本质上是 Posts Widget 的变体，专门针对视觉展示场景优化 — 强调图片，弱化文字。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>视觉展示</strong>：设计公司、摄影师、建筑事务所等需要以图片为主的作品展示方式</li>
+      <li><strong>即时筛选</strong>：Filter Bar 让用户无需跳转页面即可按分类浏览不同类型的作品</li>
+      <li><strong>响应式网格</strong>：自动适配不同屏幕尺寸，保持视觉效果</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>拖入 <strong>Portfolio</strong> Widget 到画布</li>
+      <li>在 <strong>Query</strong> 中设置数据源（通常是文章或自定义 Post Type 如"作品"）</li>
+      <li>配置显示选项：
+        <ul>
+          <li><strong>Columns</strong>：列数（通常 3 或 4 列）</li>
+          <li><strong>Posts Per Page</strong>：显示数量</li>
+          <li><strong>Image Ratio</strong>：图片宽高比（如 1:1 正方形、3:2 横向、4:3 等）</li>
+          <li><strong>Item Gap</strong>：项目间距</li>
+        </ul>
+      </li>
+      <li>开启 <strong>Filter Bar</strong>：
+        <ul>
+          <li><strong>Taxonomy</strong>：选择用哪个分类法做筛选标签（如 Category、Tag 或自定义 Taxonomy）</li>
+          <li>Filter Bar 会自动生成当前内容涉及的所有分类标签</li>
+        </ul>
+      </li>
+      <li>在 <strong>Style</strong> Tab 中设置悬停效果（Overlay）、标题样式、Filter Bar 样式等</li>
+    </ol>
+
+    <h3>悬停效果（Overlay）</h3>
+    <p>Portfolio Widget 支持鼠标悬停时显示 Overlay 层，可以包含文章标题和分类信息。在 Style → Overlay 中设置背景色、透明度和动画效果。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Portfolio Widget 要求所有文章都有 <strong>特色图</strong>，没有特色图的文章会显示空白占位</li>
+      <li>Filter Bar 的筛选是前端 JavaScript 实现的（隐藏/显示），不是 AJAX 请求，所以所有文章其实已经加载了 — 文章过多会影响性能</li>
+      <li>如果作品数量超过 30 个，考虑分页或使用 Posts Widget + 自定义筛选方案替代</li>
+      <li>Portfolio Widget 在 Elementor 较新版本中可能被标记为"Legacy"，官方推荐使用 Loop Grid + Loop Carousel 作为替代方案</li>
+      <li>特色图的尺寸和比例尽量统一，否则网格会参差不齐</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-45.html" class="prev"><div class="label">上一篇</div><div class="title">Posts Widget 文章列表（筛选/排序/分页）</div></a>
+    <a href="ELE-47.html" class="next"><div class="label">下一篇</div><div class="title">WooCommerce 产品页模板</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

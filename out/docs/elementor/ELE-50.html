@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>转化优化（CTA 位置/A-B 测试思路） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">转化优化</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>转化优化（CTA 位置 / A-B 测试思路）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>转化优化（Conversion Rate Optimization, CRO）是通过调整页面元素（CTA 按钮位置、文案、颜色、布局）来提高用户完成目标行为（询盘、购买、注册）的比例。A/B 测试是 CRO 的核心方法——创建两个版本的页面，分流量对比哪个效果更好。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>流量不变，收入增长</strong>：转化率从 2% 提升到 4% = 同样的广告支出获得双倍询盘</li>
+      <li><strong>数据驱动决策</strong>：不再凭直觉猜"红色按钮好还是蓝色好"，用数据说话</li>
+      <li><strong>持续改进</strong>：CRO 是一个持续迭代的过程，每次小优化都能积累长期效果</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>CTA 位置优化原则</h3>
+    <ul>
+      <li><strong>首屏必须有 CTA</strong>：用户不滚动也能看到行动按钮</li>
+      <li><strong>长页面重复 CTA</strong>：每 2-3 个内容区块后放一个 CTA，减少用户回滚</li>
+      <li><strong>Sticky CTA</strong>：移动端可用固定底部的浮动按钮（参见 ELE.7-e）</li>
+      <li><strong>表单位置</strong>：在页面底部放表单的同时，在首屏放一个「跳到表单」的锚点按钮</li>
+    </ul>
+
+    <h3>CTA 文案优化</h3>
+    <ul>
+      <li>避免通用文案（"提交"、"点击这里"），使用价值导向文案（"获取免费报价"、"立即咨询专家"）</li>
+      <li>按钮文案用第一人称效果更好："获取我的报价" vs "获取报价"</li>
+    </ul>
+
+    <h3>A/B 测试思路</h3>
+    <ol>
+      <li><strong>选择测试变量</strong>：一次只测一个变量（按钮颜色、标题文案、表单字段数）</li>
+      <li><strong>创建变体</strong>：
+        <ul>
+          <li>方案 A：复制当前页面作为对照组</li>
+          <li>方案 B：修改单一变量</li>
+        </ul>
+      </li>
+      <li><strong>分流量</strong>：通过 Google Optimize（已停止服务）或其他工具（VWO、Optimizely）将流量均匀分配到两个版本</li>
+      <li><strong>简易替代方案</strong>：在 Google Ads 中创建两个广告，分别指向不同落地页，对比转化数据</li>
+      <li><strong>统计显著性</strong>：至少运行 2 周或收集 100+ 次转化后再下结论</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>不要同时改多个变量</strong>：否则无法判断是哪个改动导致了效果变化</li>
+      <li><strong>样本量要足够</strong>：10 次访问中 3 次 vs 2 次转化没有统计意义</li>
+      <li><strong>季节性影响</strong>：某些行业有淡旺季，对比数据时要考虑时间因素</li>
+      <li><strong>先优化大方向</strong>：页面结构和价值主张的影响远大于按钮颜色，优先测试高影响变量</li>
+      <li><strong>Elementor 复制页面</strong>：在页面列表中可以直接复制页面创建变体，非常方便</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-49.html" class="prev"><div class="label">上一篇</div><div class="title">Landing Page 设计（单页营销）</div></a>
+    <a href="ELE-51.html" class="next"><div class="label">下一篇</div><div class="title">保存为模板 + 导入导出</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

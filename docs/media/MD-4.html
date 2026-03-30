@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>媒体设置（缩略图尺寸） - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">媒体管理</a>
+  <span class="sep">/</span>
+  <span class="current">媒体设置（缩略图尺寸）</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>媒体设置（缩略图尺寸）</h1>
+    <div class="meta">
+      <span class="tag topic">媒体管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>每当你上传一张图片，WordPress 会自动根据「媒体设置」中定义的尺寸生成多个版本的缩略图。默认有三种尺寸：</p>
+    <ul>
+      <li><strong>缩略图</strong>（Thumbnail）：150x150 像素，正方形裁剪</li>
+      <li><strong>中等大小</strong>（Medium）：最大 300x300 像素，等比缩放</li>
+      <li><strong>大尺寸</strong>（Large）：最大 1024x1024 像素，等比缩放</li>
+    </ul>
+    <p>加上原始图片和 WordPress 5.3+ 引入的 scaled 版本（最大 2560 像素宽），一张图片可能在服务器上生成 5-7 个文件。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>不同位置需要不同尺寸的图片。文章列表用小缩略图，文章内容用中等尺寸，全屏 Banner 用大尺寸。WordPress 根据上下文自动选择合适的尺寸，避免加载过大的图片。</p>
+    <p>合理的缩略图尺寸设置直接影响网站性能和视觉效果。尺寸设置过大会浪费带宽，过小会导致图片模糊。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入后台 <strong>设置 → 媒体</strong></li>
+      <li>根据你的主题和设计需求调整三个尺寸：
+        <ul>
+          <li><strong>缩略图尺寸</strong>：宽度和高度，以及是否「将缩略图裁剪为精确尺寸」</li>
+          <li><strong>中等大小</strong>：最大宽度和最大高度</li>
+          <li><strong>大尺寸</strong>：最大宽度和最大高度</li>
+        </ul>
+      </li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <p>注意：修改尺寸设置只影响之后上传的新图片。已上传的图片不会自动重新生成缩略图。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>修改不影响已有图片</strong>：如果需要为已有图片重新生成缩略图，需要使用「Regenerate Thumbnails」插件</li>
+      <li><strong>裁剪 vs 缩放</strong>：缩略图可以选择「裁剪为精确尺寸」（会截掉部分内容），中等和大尺寸只做等比缩放（保持完整画面）</li>
+      <li><strong>设为 0 可禁用</strong>：将某个尺寸的宽度和高度都设为 0，WordPress 就不会生成该尺寸的缩略图，节省磁盘空间</li>
+      <li><strong>主题可能注册额外尺寸</strong>：许多主题和插件会注册自己的图片尺寸，这些无法在媒体设置中修改</li>
+      <li><strong>磁盘空间</strong>：每张上传的图片会生成多个缩略图，大量上传时注意服务器磁盘空间</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="MD-3.html" class="prev"><div class="label">上一篇</div><div class="title">设置特色图片</div></a>
+    <a href="MD-5.html" class="next"><div class="label">下一篇</div><div class="title">处理网站素材（压缩/裁剪/格式转换）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="MD-1.html">上传图片到媒体库</a>
+    <a href="MD-2.html">编辑图片信息</a>
+  </div></div>
+</div>
+</body>
+</html>

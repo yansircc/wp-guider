@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>填写 ACF 字段值 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">填写 ACF 字段值</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>填写 ACF 字段值</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>创建字段组和字段后，在编辑文章时会出现对应的输入区域。填写字段值就是为每篇文章录入结构化数据的过程。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>字段定义了数据结构，但具体的数据需要逐篇填写</li>
+      <li>填写的字段值会被存储在 <code>wp_postmeta</code> 表中，前端可以调用展示</li>
+      <li>内容编辑者的主要日常操作之一</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入文章编辑页面（如 产品 → 添加新产品，或编辑已有产品）</li>
+      <li>在编辑器下方（或侧边栏）可以看到字段组中定义的所有字段</li>
+      <li>根据字段类型填写内容：
+        <ul>
+          <li><strong>文本/数字</strong>：直接输入</li>
+          <li><strong>图片</strong>：点击上传或从媒体库选择</li>
+          <li><strong>选择框</strong>：从下拉菜单选择</li>
+          <li><strong>True/False</strong>：开关切换</li>
+        </ul>
+      </li>
+      <li>填写完毕后，点击<strong>发布</strong>或<strong>更新</strong>保存</li>
+    </ol>
+
+    <h3>字段组的显示位置</h3>
+    <p>字段组可以出现在编辑器的不同位置：</p>
+    <ul>
+      <li><strong>正常</strong>：显示在内容编辑器下方</li>
+      <li><strong>侧边</strong>：显示在右侧发布面板下方</li>
+      <li><strong>高优先级</strong>：显示在内容编辑器上方</li>
+    </ul>
+    <p>位置由字段组设置中的「位置」和「样式」选项决定。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>看不到字段</strong>：确认字段组的位置规则与当前编辑的文章类型匹配</li>
+      <li><strong>必填验证</strong>：标记为必填的字段如果未填写，发布时会报错</li>
+      <li><strong>图片字段</strong>：注意字段设置中的返回格式（图片 ID、URL 或数组），影响前端调用方式</li>
+      <li><strong>数据存储</strong>：ACF 字段值存在 <code>wp_postmeta</code> 表中，字段名前有下划线前缀</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-11.html" class="prev"><div class="label">上一篇</div><div class="title">创建字段组 + 添加具体字段</div></a>
+    <a href="ACF-13.html" class="next"><div class="label">下一篇</div><div class="title">编辑/删除/查看字段组</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

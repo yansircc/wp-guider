@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Single Post 文章模板 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Single Post 文章模板</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Single Post 文章模板</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Single Post 模板控制每篇文章的详情页布局。通过 Theme Builder 创建 Single Post 模板后，所有文章都会使用这个模板来显示，取代主题默认的文章详情页样式。</p>
+    <p>模板中使用 Dynamic Tags 动态拉取每篇文章的标题、内容、特色图、作者、日期等数据，所以只需设计一次，所有文章自动套用。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>统一文章样式</strong>：所有文章页面自动应用同一套设计，保持视觉一致</li>
+      <li><strong>完全自定义</strong>：主题默认文章页的布局通常不可调，Theme Builder 让你控制每个细节</li>
+      <li><strong>动态内容</strong>：模板自动拉取文章数据，无需逐篇编辑</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>Templates → Theme Builder</strong></li>
+      <li>点击 <strong>Single Post</strong> 区域的 <strong>"+"</strong></li>
+      <li>选择预设模板或从空白开始</li>
+      <li>构建文章页布局，常用 Widget：
+        <ul>
+          <li><strong>Post Title</strong>：动态显示文章标题</li>
+          <li><strong>Featured Image</strong>：文章特色图</li>
+          <li><strong>Post Content</strong>：文章正文内容</li>
+          <li><strong>Post Info</strong>：作者、日期、分类、评论数</li>
+          <li><strong>Author Box</strong>：作者头像和简介</li>
+          <li><strong>Post Navigation</strong>：上一篇/下一篇导航</li>
+          <li><strong>Related Posts</strong>：相关文章推荐</li>
+          <li><strong>Post Comments</strong>：评论区</li>
+        </ul>
+      </li>
+      <li>在编辑器底部工具栏点击 <strong>Preview Settings</strong>（眼睛图标），选择一篇具体文章预览效果</li>
+      <li>点击 <strong>Publish</strong> → Display Conditions 选择 <strong>All Singular → Posts</strong></li>
+    </ol>
+
+    <h3>常见布局结构</h3>
+    <p>典型的博客文章模板从上到下：特色图（全宽）→ 标题 + Meta 信息 → 正文内容 → 标签 → 作者简介 → 上下篇导航 → 相关文章 → 评论区。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Post Content</strong> Widget 是必需的 — 没有它文章正文不会显示</li>
+      <li>预览时要切换不同文章查看效果，确保长短内容、有无特色图的文章都显示正常</li>
+      <li>Display Conditions 设为 "Posts" 只影响文章，不影响页面（Page）。如果也要控制页面模板，需要单独创建 Single Page 模板</li>
+      <li>如果某些文章需要特殊布局，可以创建多个 Single Post 模板，通过 Display Conditions 指定不同分类使用不同模板</li>
+      <li>文章页的侧边栏需要在模板中手动添加 Sidebar Widget，Theme Builder 模板默认不包含侧边栏</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-37.html" class="prev"><div class="label">上一篇</div><div class="title">Theme Builder Footer</div></a>
+    <a href="ELE-39.html" class="next"><div class="label">下一篇</div><div class="title">Archive 归档模板（分类/标签/作者）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

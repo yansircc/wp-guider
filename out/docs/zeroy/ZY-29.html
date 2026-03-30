@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HTMX 多条件筛选（ACF 分类法/字段） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">HTMX 多条件筛选</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>HTMX 多条件筛选（ACF 分类法/字段）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>多条件筛选允许用户通过多个维度（如分类、标签、ACF 自定义字段）同时过滤内容列表。结合 HTMX，筛选操作无需刷新页面，选择条件后列表自动更新。典型场景如产品按"行业 + 价格区间 + 材质"组合筛选。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>当内容数量多且属性丰富时，单一分类无法满足用户的筛选需求。多条件筛选让用户精准定位目标内容，减少无效浏览时间，特别适合产品目录、案例展示等场景。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>确保已在 WordPress 中创建好分类法（Taxonomy）和 ACF 自定义字段</li>
+      <li>在 ZeroY 编辑器中创建筛选区域：
+        <ul>
+          <li>多个下拉菜单或复选框组（每组对应一个筛选维度）</li>
+          <li>结果展示列表容器</li>
+        </ul>
+      </li>
+      <li>为每个筛选控件配置 HTMX 属性：
+        <ul>
+          <li>触发方式：<code>change</code>（选择变更时触发）</li>
+          <li>请求端点：<code>/wp-json/zeroy/v1/htmx/execute/current?block_id=...</code></li>
+          <li>目标：结果列表容器</li>
+          <li>参数：将所有筛选控件的当前值一起发送</li>
+        </ul>
+      </li>
+      <li>保存并测试：选择不同筛选条件组合，确认列表正确更新</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>参数同步</strong>：切换某个筛选条件时，必须把所有筛选条件的当前值一起发送，否则其他条件会被重置</li>
+      <li><strong>空结果处理</strong>：组合筛选可能导致无匹配结果，需要显示友好的"暂无匹配"提示</li>
+      <li><strong>URL 同步</strong>：高级用法可以将筛选状态同步到 URL 参数，让用户可以分享带筛选条件的链接</li>
+      <li><strong>ACF 字段类型</strong>：确保 ACF 字段的类型与筛选控件匹配（如选择字段用下拉菜单，true/false 字段用复选框）</li>
+      <li><strong>查询性能</strong>：多条件组合查询可能较慢，确保数据库有适当索引</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-28.html" class="prev"><div class="label">上一篇</div><div class="title">HTMX 实时搜索（keyup + 延迟）</div></a>
+    <a href="ZY-30.html" class="next"><div class="label">下一篇</div><div class="title">HTMX 分页功能</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+    <a href="ZY-14.html">创建页眉模板（Logo+多级导航+CTA）</a>
+    <a href="ZY-15.html">创建页脚模板（公司信息+链接+版权）</a>
+  </div></div>
+</div></body></html>

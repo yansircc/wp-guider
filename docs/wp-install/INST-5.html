@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配置 SSL 证书 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">WordPress 安装</a>
+  <span class="sep">/</span>
+  <span class="current">配置 SSL 证书</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>配置 SSL 证书</h1>
+    <div class="meta">
+      <span class="tag topic">WordPress 安装</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>SSL 证书为网站启用 HTTPS 加密连接，将 <code>http://</code> 升级为 <code>https://</code>。浏览器通过 SSL 证书验证网站身份并加密传输数据，防止中间人窃听或篡改。</p>
+    <p>没有 SSL 的网站在 Chrome 中会被标记为"不安全"，严重影响用户信任和 SEO 排名。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>SSL 是现代网站的必备配置，Google 已将 HTTPS 作为排名因素。没有 SSL 的网站：浏览器显示警告、表单数据明文传输、搜索排名受损、Application Password 无法使用。</p>
+    <p>Hostinger 提供免费的 Let's Encrypt SSL 证书，没有理由不开启。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>在 Hostinger 上配置 SSL</h3>
+    <ol>
+      <li>登录 Hostinger hPanel</li>
+      <li>选择目标网站</li>
+      <li>进入 <strong>Security → SSL</strong></li>
+      <li>选择域名，点击 <strong>Install SSL</strong>（或 Setup）</li>
+      <li>等待证书签发（通常几分钟内完成）</li>
+      <li>开启 <strong>Force HTTPS</strong>（强制 HTTPS 跳转）</li>
+    </ol>
+
+    <h3>WordPress 端配置</h3>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 常规</strong></li>
+      <li>将 <strong>WordPress 地址 (URL)</strong> 和 <strong>站点地址 (URL)</strong> 都改为 <code>https://</code> 开头</li>
+      <li>保存更改</li>
+    </ol>
+    <div class="callout warning">修改 URL 后会自动退出登录，用 https:// 版本重新登录即可。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>SSL 证书签发需要域名 DNS 已生效并指向服务器，DNS 未生效时无法安装证书</li>
+      <li>Let's Encrypt 证书有效期 90 天，Hostinger 会自动续期，无需手动操作</li>
+      <li>开启 HTTPS 后，如果页面出现"混合内容"警告（锁图标有警告），说明页面中有 http:// 资源，需要替换为 https://</li>
+      <li>可以使用 Really Simple SSL 插件一键修复混合内容问题</li>
+      <li>如果使用 Cloudflare，SSL 模式必须设为 <strong>Full (Strict)</strong>，否则可能出现重定向循环</li>
+      <li>修改 WordPress URL 前确保 SSL 已经生效，否则会导致站点无法访问</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="INST-4.html" class="prev"><div class="label">上一篇</div><div class="title">绑定域名（A 记录方式）</div></a>
+    <a href="INST-6.html" class="next"><div class="label">下一篇</div><div class="title">网站内容迁移 (插件方式)</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="INST-1.html">Hostinger 一键安装 WP</a>
+    <a href="INST-6.html">网站内容迁移 (插件方式)</a>
+    <a href="INST-7.html">网站内容迁移 (手动数据库+文件)</a>
+    <a href="INST-8.html">已有站点更换域名</a>
+  </div></div>
+</div>
+</body>
+</html>

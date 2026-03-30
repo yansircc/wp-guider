@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Reusable Sections 可复用区块 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">可复用区块</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Reusable Sections 可复用区块</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>可复用区块是将常用的页面区块（如 CTA 横幅、FAQ 区块、联系信息区）保存为独立模板，然后通过 <strong>Template Widget</strong> 在多个页面中引用。关键区别：引用的是同一个模板实例，修改一次所有引用处同步更新。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>维护一处，全站同步</strong>：CTA 区块出现在 10 个页面中，修改一次模板 10 个页面同时更新</li>
+      <li><strong>保持一致性</strong>：避免手动复制导致不同页面的同一区块出现细微差异</li>
+      <li><strong>效率提升</strong>：新页面直接插入已有模板，不必从零搭建重复区块</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>创建可复用区块</h3>
+    <ol>
+      <li>在 Elementor 编辑器中设计好目标区块</li>
+      <li>右键点击区块的 Container → <strong>Save as Template</strong></li>
+      <li>命名（如 "CTA-底部横幅"）→ 保存</li>
+    </ol>
+
+    <h3>在其他页面引用</h3>
+    <ol>
+      <li>编辑目标页面</li>
+      <li>从左侧搜索 <strong>Template Widget</strong>（或 "Saved Template"）</li>
+      <li>拖到需要的位置</li>
+      <li>在 Content Tab 的下拉菜单中选择之前保存的模板</li>
+    </ol>
+
+    <h3>修改模板（全局同步）</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>模板 → Saved Templates</strong></li>
+      <li>找到目标模板 → 用 Elementor 编辑</li>
+      <li>修改内容 → 更新</li>
+      <li>所有引用该模板的页面自动更新（可能需要清除缓存才能看到变化）</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Template Widget vs 复制粘贴</strong>：复制粘贴创建的是独立副本，修改不会同步。Template Widget 是引用，全局同步。根据需求选择</li>
+      <li><strong>嵌套限制</strong>：不要在模板中再嵌套 Template Widget，会导致递归加载问题</li>
+      <li><strong>样式隔离</strong>：模板中的样式可能和宿主页面产生冲突（如字号、边距），插入后检查一下</li>
+      <li><strong>缓存影响</strong>：修改模板后如果前台未更新，清除 LiteSpeed/Elementor 缓存</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-52.html" class="prev"><div class="label">上一篇</div><div class="title">Cloud Templates 跨站点复用</div></a>
+    <a href="ELE-54.html" class="next"><div class="label">下一篇</div><div class="title">Elementor AI 生成文案</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

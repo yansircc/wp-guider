@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Archive 归档模板（分类/标签/作者）- WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Archive 归档模板（分类/标签/作者）</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Archive 归档模板（分类/标签/作者）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Archive 模板控制 WordPress 归档页面的布局 — 包括分类页、标签页、作者页、日期归档页等。这些页面的共同特征是：展示一组符合条件的文章列表。</p>
+    <p>通过 Theme Builder 创建 Archive 模板，可以完全自定义文章列表的展示方式（网格、列表、卡片等），替代主题默认的归档页布局。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>提升浏览体验</strong>：默认归档页通常只是简单的文章列表，自定义模板可以加入特色图、摘要、分类标签等丰富信息</li>
+      <li><strong>品牌统一</strong>：分类页和标签页是用户常访问的入口，需要和首页保持一致的设计语言</li>
+      <li><strong>差异化展示</strong>：不同分类可以使用不同的归档模板（如"产品"分类用网格布局，"博客"分类用列表布局）</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>Templates → Theme Builder</strong></li>
+      <li>点击 <strong>Archive</strong> 区域的 <strong>"+"</strong></li>
+      <li>选择预设模板或从空白开始</li>
+      <li>构建归档页布局：
+        <ul>
+          <li><strong>Archive Title</strong>：动态显示当前归档名称（如分类名、标签名）</li>
+          <li><strong>Archive Posts</strong>：核心 Widget，显示当前归档下的文章列表</li>
+        </ul>
+      </li>
+      <li>配置 Archive Posts Widget：
+        <ul>
+          <li><strong>Skin</strong>：Classic（经典列表）/ Cards（卡片）/ Full Content（全文）</li>
+          <li><strong>Columns</strong>：列数（1-6 列）</li>
+          <li><strong>Image Position</strong>：图片位置（上方/左侧/右侧）</li>
+          <li><strong>Pagination</strong>：分页方式（数字分页/上一页下一页/无限滚动）</li>
+          <li><strong>Meta Data</strong>：显示哪些元信息（日期、作者、评论数等）</li>
+        </ul>
+      </li>
+      <li>Preview Settings 中选择一个具体分类预览效果</li>
+      <li>Publish → Display Conditions 选择 <strong>All Archives</strong>（或指定特定分类）</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Archive Posts Widget 会自动根据当前归档页的上下文显示对应文章，不需要手动指定查询条件</li>
+      <li>如果归档页显示的是全站文章而非当前分类的文章，检查是否误用了 Posts Widget（手动查询）而非 Archive Posts Widget（自动上下文查询）</li>
+      <li>设置"无限滚动"分页时注意 SEO — 搜索引擎可能无法抓取所有内容，建议配合数字分页</li>
+      <li>归档页的 SEO 标题和描述通常由 SEO 插件（如 Yoast/Rank Math）控制，不在 Elementor 模板中设置</li>
+      <li>为不同分类设置不同模板时，Display Conditions 优先级：越具体的条件优先级越高</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-38.html" class="prev"><div class="label">上一篇</div><div class="title">Single Post 文章模板</div></a>
+    <a href="ELE-40.html" class="next"><div class="label">下一篇</div><div class="title">Display Conditions 显示条件（不同页面不同模板）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

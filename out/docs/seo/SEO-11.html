@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>为分类法配置 SEO 标题与描述 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">为分类法配置 SEO 标题与描述</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>为 ACF 分类法配置 SEO 标题与描述</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d3">L3</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>用 ACF 注册的自定义分类法（Taxonomy）会自动生成归档页（如 <code>/product-category/electronics/</code>）。这些归档页也需要设置 SEO 标题和描述模板，否则搜索引擎展示效果会很差。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>Yoast SEO</h3>
+    <ol>
+      <li>进入 <strong>Yoast SEO → 搜索外观 → 分类法</strong></li>
+      <li>找到目标分类法（如「产品分类」）</li>
+      <li>设置<strong>「SEO 标题」</strong>模板：如 <code>%%term_title%% %%sep%% 产品分类 %%sep%% %%sitename%%</code></li>
+      <li>设置<strong>「Meta 描述」</strong>模板：如 <code>%%term_description%%</code>（取分类项的描述字段）</li>
+      <li>保存更改</li>
+    </ol>
+
+    <h3>SEOPress</h3>
+    <ol>
+      <li>进入 <strong>SEOPress → 标题与 Metas → 分类法</strong></li>
+      <li>找到目标分类法</li>
+      <li>设置标题和描述模板</li>
+      <li>保存更改</li>
+    </ol>
+
+    <h3>单个分类项的 SEO</h3>
+    <p>编辑具体分类项时，底部也有 SEO 插件面板，可以为单个分类项设置独立的 SEO 标题和描述（覆盖模板）。</p>
+    <div class="callout tip">重要分类（如主要产品线）建议手动设置 SEO 标题和描述，次要分类用模板自动生成即可。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>分类描述很重要</strong>：添加分类项时填写「描述」字段，这样 <code>%%term_description%%</code> 变量才有内容可用</li>
+      <li><strong>空分类页</strong>：没有文章的分类归档页内容为空，建议 noindex 或确保每个分类下至少有一篇文章</li>
+      <li><strong>分类法不出现在设置中</strong>：确认分类法的「公开可见」已开启</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-10.html" class="prev"><div class="label">上一篇</div><div class="title">为 ACF 自定义文章类型配置 SEO 标题模板</div></a>
+    <a href="SEO-12.html" class="next"><div class="label">下一篇</div><div class="title">CPT 单篇 + 归档页的 SEO 策略（index/noindex 决策）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-1.html">安装 Yoast SEO + 基础配置向导</a>
+    <a href="SEO-2.html">Yoast：设置页面 SEO 标题/描述</a>
+    <a href="SEO-3.html">修改页面 slug 为英文</a>
+    <a href="SEO-6.html">安装 SEOPress + 基础配置</a>
+  </div></div>
+</div>
+</body>
+</html>

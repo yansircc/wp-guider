@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoast：noindex 设置 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">Yoast：noindex 设置</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>Yoast：noindex 设置</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>noindex</code> 是一个 meta 标签指令，告诉搜索引擎<strong>不要将该页面收录到搜索结果</strong>中。Yoast 提供页面级和全局级两种 noindex 设置方式。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>防止低质量页面（感谢页、测试页、内部页）出现在搜索结果中</li>
+      <li>避免重复内容稀释 SEO 权重</li>
+      <li>网站开发期间阻止搜索引擎收录未完成的内容</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>单个页面 noindex</h3>
+    <ol>
+      <li>编辑目标页面/文章</li>
+      <li>在 Yoast SEO 面板中，点击<strong>「高级」</strong>标签</li>
+      <li>找到<strong>「允许搜索引擎在搜索结果中显示此页面」</strong></li>
+      <li>选择<strong>「否」</strong></li>
+      <li>保存页面</li>
+    </ol>
+
+    <h3>全局批量 noindex</h3>
+    <p>可以按内容类型批量设置：</p>
+    <ol>
+      <li>进入 <strong>Yoast SEO → 搜索外观</strong></li>
+      <li>选择对应标签页（如「分类法」「文章类型」）</li>
+      <li>找到目标类型，将<strong>「在搜索结果中显示」</strong>设为<strong>「否」</strong></li>
+    </ol>
+    <div class="callout danger">全局设置会影响该类型下的所有内容。如果只想隐藏个别页面，用单个页面的 noindex 设置。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>noindex ≠ 不可访问</strong>：设置 noindex 后页面仍然可以通过 URL 直接访问，只是不出现在搜索结果中</li>
+      <li><strong>全站 noindex</strong>：<strong>设置 → 阅读 → 搜索引擎可见性</strong> 中的「建议搜索引擎不索引本站」会 noindex 整站，上线前务必关闭</li>
+      <li><strong>生效需要时间</strong>：设置 noindex 后，已收录的页面不会立刻从搜索结果消失，可能需要几天到几周</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-4.html" class="prev"><div class="label">上一篇</div><div class="title">提交站点地图到 GSC</div></a>
+    <a href="SEO-6.html" class="next"><div class="label">下一篇</div><div class="title">安装 SEOPress + 基础配置</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-1.html">安装 Yoast SEO + 基础配置向导</a>
+    <a href="SEO-2.html">Yoast：设置页面 SEO 标题/描述</a>
+    <a href="SEO-3.html">修改页面 slug 为英文</a>
+    <a href="SEO-6.html">安装 SEOPress + 基础配置</a>
+  </div></div>
+</div>
+</body>
+</html>

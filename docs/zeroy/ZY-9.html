@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>创建联系页（表单+联系方式） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">创建联系页</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>创建联系页（表单+联系方式）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>联系页（Contact Us）是网站访客与企业建立联系的核心入口，通常包含在线询盘表单、公司地址、电话、邮箱等联系方式，有时还嵌入地图。ZeroY 可以用 AI 快速生成包含表单的联系页。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>联系页是网站转化的关键环节。没有便捷的联系方式，潜在客户可能直接流失。在线表单降低了联系门槛，让访客无需打电话或发邮件就能提交询盘。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>WordPress 后台 → <strong>页面 → 新增</strong>，标题 "Contact Us" 或 "联系我们" → <strong>发布</strong></li>
+      <li>用 ZeroY 编辑器打开</li>
+      <li>调用 AI 助手描述需求：
+        <ul>
+          <li>"创建一个联系页，左侧是询盘表单（姓名、邮箱、电话、公司名、消息），右侧是公司联系信息（地址、电话、邮箱、工作时间）"</li>
+        </ul>
+      </li>
+      <li>AI 生成后插入编辑器</li>
+      <li>替换联系信息为真实内容</li>
+      <li>确认表单字段满足业务需求</li>
+      <li>预览 → 保存</li>
+    </ol>
+    <p><strong>提示</strong>：表单提交的数据会进入 ZeroY 的表单提交记录，后续可配置邮件通知和感谢页跳转（参见 ZY.4 系列文档）。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>表单提交路径</strong>：ZeroY 表单必须使用 <code>/wp-json/zeroy/v1/submissions</code> 端点，AI 生成时通常已自动配置</li>
+      <li><strong>固定链接格式</strong>：表单提交需要"文章名"固定链接格式，否则 REST API 不可用（设置 → 固定链接 → 文章名）</li>
+      <li><strong>测试提交</strong>：创建完成后务必自己提交一次测试，确认数据能正常进入后台</li>
+      <li><strong>必填字段</strong>：建议至少将邮箱或电话设为必填，确保有回联方式</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-8.html" class="prev"><div class="label">上一篇</div><div class="title">创建服务/产品页（网格布局）</div></a>
+    <a href="ZY-10.html" class="next"><div class="label">下一篇</div><div class="title">创建 Thank You 感谢页</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

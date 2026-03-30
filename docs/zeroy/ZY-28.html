@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HTMX 实时搜索（keyup + 延迟） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">HTMX 实时搜索</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>HTMX 实时搜索（keyup + 延迟）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>HTMX 实时搜索是一种用户输入时自动搜索并展示结果的交互模式。当用户在搜索框中输入文字（keyup 事件），系统在短暂延迟（如 500ms）后自动发送请求并更新结果列表，无需点击搜索按钮。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>实时搜索提供即时反馈，用户一边输入一边就能看到匹配结果，体验类似 Google 搜索建议。对于产品目录、知识库等内容丰富的网站，实时搜索能显著提升用户找到目标内容的效率。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>在 ZeroY 编辑器中创建搜索区域：搜索输入框 + 结果展示容器</li>
+      <li>为搜索输入框配置 HTMX 属性：
+        <ul>
+          <li>触发方式：<code>keyup</code></li>
+          <li>延迟：<code>500ms</code>（changed，防抖——用户停止输入 500ms 后才发送请求）</li>
+          <li>请求端点：<code>/wp-json/zeroy/v1/htmx/execute/current?block_id=...</code></li>
+          <li>目标：结果展示容器</li>
+        </ul>
+      </li>
+      <li>配置结果区块的模板（标题、摘要、链接）</li>
+      <li>保存并测试：输入关键词，等待 500ms 后结果应自动刷新</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>延迟很重要</strong>：500ms 的 debounce 延迟能避免每次按键都发送请求，减轻服务器压力</li>
+      <li><strong>空输入处理</strong>：当搜索框清空时，应显示默认列表或提示文字，而不是空白</li>
+      <li><strong>最少字符数</strong>：建议至少输入 2-3 个字符才触发搜索，避免过于宽泛的查询</li>
+      <li><strong>加载状态</strong>：搜索期间可以显示加载动画（HTMX 内置 <code>htmx-request</code> class），告知用户正在搜索中</li>
+      <li><strong>性能</strong>：确保后端查询有索引支持，避免搜索响应过慢影响体验</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-27.html" class="prev"><div class="label">上一篇</div><div class="title">HTMX 基础：Load More 加载更多</div></a>
+    <a href="ZY-29.html" class="next"><div class="label">下一篇</div><div class="title">HTMX 多条件筛选（ACF 分类法/字段）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+    <a href="ZY-14.html">创建页眉模板（Logo+多级导航+CTA）</a>
+    <a href="ZY-15.html">创建页脚模板（公司信息+链接+版权）</a>
+  </div></div>
+</div></body></html>

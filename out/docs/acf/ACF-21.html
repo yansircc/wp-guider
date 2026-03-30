@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>位置规则 — 特定页面 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">位置规则 — 特定页面</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>位置规则 — 特定页面</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF 的<strong>位置规则</strong>（Location Rules）决定一个字段组在什么条件下出现在编辑界面。通过设置位置规则，可以让某些字段<strong>只在特定页面</strong>的编辑界面显示，而不是所有页面都出现。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>不同页面需要不同的字段（首页需要轮播图字段，关于页需要团队成员字段）</li>
+      <li>避免不相关的字段出现在编辑器中，造成混乱</li>
+      <li>让编辑者只看到当前页面需要填写的内容</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>ACF → 字段组</strong>，编辑目标字段组</li>
+      <li>滚动到底部的<strong>「设置」</strong>区域，找到<strong>「位置规则」</strong></li>
+      <li>设置条件：
+        <ul>
+          <li>参数选择 <strong>「页面」</strong></li>
+          <li>运算符选择 <strong>「等于」</strong></li>
+          <li>值选择<strong>目标页面</strong>（如「首页」）</li>
+        </ul>
+      </li>
+      <li>点击<strong>保存更改</strong></li>
+    </ol>
+
+    <h3>多页面匹配</h3>
+    <p>如果同一个字段组需要在多个页面显示，点击<strong>「添加规则组」</strong>（or 关系），添加更多页面条件。</p>
+    <div class="callout tip">「and」是同一组内的多个条件（都满足才显示）。「or」是不同规则组之间的关系（满足任一组即显示）。</div>
+
+    <h3>验证</h3>
+    <p>保存后，进入目标页面的编辑界面，字段组应该出现在编辑器下方。其他页面的编辑界面不会显示该字段组。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>页面必须已存在</strong>：位置规则的下拉列表只会显示已创建的页面</li>
+      <li><strong>页面模板</strong>：除了按页面名称匹配，还可以按「页面模板」匹配（适用于多个页面使用同一模板的场景）</li>
+      <li><strong>规则组顺序不影响结果</strong>：多个规则组之间是 or 关系，顺序无所谓</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-20.html" class="prev"><div class="label">上一篇</div><div class="title">日期选择器 / 颜色选择器 字段</div></a>
+    <a href="ACF-22.html" class="next"><div class="label">下一篇</div><div class="title">位置规则-文章类型</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

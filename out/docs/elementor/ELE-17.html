@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>视频背景 Hero - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">视频背景 Hero</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>视频背景 Hero</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>视频背景 Hero 是用视频替代静态图片作为首屏（Hero Section）背景的高级设计手法。视频自动循环播放、静音，上层叠加半透明遮罩和文字内容（标题 + CTA 按钮）。</p>
+    <p>这是高端品牌网站常见的设计模式——比静态图片更有视觉冲击力，能有效传达品牌调性和产品特点。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>首屏是用户对网站的第一印象，决定了用户是否继续浏览。视频背景比静态图片更能抓住注意力——动态内容天然比静态内容更吸引眼球。</p>
+    <p>适合场景：品牌官网、旅游/酒店、活动推广、产品展示等需要视觉冲击的页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 创建 Hero Container</h3>
+    <ol>
+      <li>添加一个全宽 Container</li>
+      <li>设置 <strong>Min Height</strong>：<code>100vh</code>（全屏高度）或 <code>80vh</code></li>
+      <li>设置内容垂直居中：<strong>Justify Content: Center</strong>、<strong>Align Items: Center</strong></li>
+    </ol>
+
+    <h3>2. 设置视频背景</h3>
+    <ol>
+      <li>选中 Container → <strong>Style Tab → Background</strong></li>
+      <li>Background Type 选择 <strong>Video</strong></li>
+      <li>视频来源：YouTube URL 或自托管 MP4 文件</li>
+      <li>设置选项：
+        <ul>
+          <li>勾选 <strong>Loop</strong>（循环播放）</li>
+          <li>勾选 <strong>Play on Mobile</strong>（可选，移动端流量考虑）</li>
+          <li>设置 <strong>Fallback Image</strong>（视频加载前或移动端不播放时的备用图片）</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>3. 添加遮罩层</h3>
+    <p>在 Background 设置中添加 <strong>Background Overlay</strong>：</p>
+    <ul>
+      <li>颜色：黑色，透明度 40-60%</li>
+      <li>或使用渐变遮罩（底部更暗）增加文字可读性</li>
+    </ul>
+
+    <h3>4. 添加前景内容</h3>
+    <p>在 Container 内拖入 Heading + Text Editor + Button，文字设为白色。</p>
+
+    <div class="callout tip">视频应 10-30 秒为佳，文件控制在 5-10MB 以内。过长或过大的视频会严重拖慢页面加载。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>性能</strong>：视频背景是性能杀手——务必压缩视频（推荐 HandBrake 工具），设置 Fallback Image</li>
+      <li><strong>移动端</strong>：部分移动浏览器不支持自动播放视频背景，Fallback Image 是必须的</li>
+      <li><strong>内容</strong>：视频内容应该是氛围性的（环境、品牌、抽象画面），不应包含需要阅读的文字或关键信息</li>
+      <li><strong>音频</strong>：背景视频必须静音——自动播放有声视频会让用户立即关闭页面</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-16.html" class="prev"><div class="label">上一篇</div><div class="title">Hero Section（背景图+叠加+标题+CTA）</div></a>
+    <a href="ELE-18.html" class="next"><div class="label">下一篇</div><div class="title">Slides 幻灯片 Widget</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

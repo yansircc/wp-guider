@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOPress：配置 Google 全局代码 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">SEOPress：配置 Google 全局代码</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>SEOPress：配置 Google 全局代码（Analytics/Ads）</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d3">L3</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>SEOPress 免费版内置了 Google Analytics 代码注入功能，可以直接在插件设置中填入 GA4 测量 ID 或 Google Ads 转化 ID，无需手动编辑主题代码或安装额外插件。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>免费版功能：不需要购买 Pro 版即可配置 Google 代码</li>
+      <li>避免手动编辑 <code>header.php</code>，更安全且主题更新不会丢失</li>
+      <li>一个插件同时管理 SEO 和 Analytics，减少插件数量</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>配置 GA4 追踪代码</h3>
+    <ol>
+      <li>进入 <strong>SEOPress → 分析</strong></li>
+      <li>开启<strong>「Google Analytics」</strong>功能</li>
+      <li>在<strong>「追踪 ID」</strong>中填入 GA4 测量 ID（格式：<code>G-XXXXXXXXXX</code>）</li>
+      <li>保存更改</li>
+    </ol>
+
+    <h3>配置 Google Ads 代码</h3>
+    <ol>
+      <li>同样在 <strong>SEOPress → 分析</strong> 页面</li>
+      <li>向下找到<strong>「自定义追踪」</strong>区域</li>
+      <li>将 Google Ads 全局代码粘贴到 <strong>Head</strong> 区域</li>
+      <li>保存更改</li>
+    </ol>
+
+    <h3>验证安装</h3>
+    <ol>
+      <li>前台打开任意页面，右键「查看页面源代码」</li>
+      <li>搜索 <code>gtag</code> 或你的测量 ID，确认代码已注入</li>
+      <li>或使用 Google Tag Assistant 浏览器扩展验证</li>
+    </ol>
+    <div class="callout tip">SEOPress 还支持 Matomo、Clarity 等其他分析工具的代码注入，都在同一个「分析」页面配置。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>不要重复安装</strong>：如果已通过其他方式（如 Google Site Kit 插件）安装了 GA 代码，不要在 SEOPress 中再次配置，否则数据会重复计算</li>
+      <li><strong>缓存清理</strong>：配置后如果验证看不到代码，清理网站缓存再查看</li>
+      <li><strong>GDPR 合规</strong>：如面向欧盟用户，需要配合 Cookie 同意插件使用，SEOPress 分析设置中有相关选项</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-7.html" class="prev"><div class="label">上一篇</div><div class="title">SEOPress：设置页面 SEO 标题/描述</div></a>
+    <a href="SEO-9.html" class="next"><div class="label">下一篇</div><div class="title">SEOPress：noindex/nofollow 设置</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-1.html">安装 Yoast SEO + 基础配置向导</a>
+    <a href="SEO-2.html">Yoast：设置页面 SEO 标题/描述</a>
+    <a href="SEO-3.html">修改页面 slug 为英文</a>
+    <a href="SEO-6.html">安装 SEOPress + 基础配置</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安装 SEOPress + 基础配置 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">安装 SEOPress + 基础配置</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>安装 SEOPress + 基础配置</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d2">L2</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>SEOPress 是一款轻量级 WordPress SEO 插件，功能与 Yoast SEO 类似，但界面更简洁。免费版即包含 Google Analytics 代码注入、站点地图、SEO 标题/描述管理等核心功能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>SEOPress 免费版功能比 Yoast 免费版更多（如 Google 代码注入）</li>
+      <li>界面无广告干扰，操作更直观</li>
+      <li>作为 Yoast 的替代方案，需要掌握两个主流 SEO 插件</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>安装</h3>
+    <ol>
+      <li>进入<strong>插件 → 安装插件</strong></li>
+      <li>搜索 <code>SEOPress</code></li>
+      <li>点击<strong>「现在安装」</strong>，然后<strong>「启用」</strong></li>
+    </ol>
+
+    <h3>基础配置</h3>
+    <p>启用后进入 <strong>SEOPress → 仪表盘</strong>，运行配置向导：</p>
+    <ol>
+      <li><strong>站点信息</strong>：选择「组织」或「个人」，填写站点名称和 Logo</li>
+      <li><strong>社交媒体</strong>：可选填社交账号链接</li>
+      <li><strong>站点地图</strong>：默认已开启 XML 站点地图</li>
+      <li>完成向导</li>
+    </ol>
+
+    <h3>确认站点地图</h3>
+    <p>访问 <code>你的域名/sitemaps.xml</code> 确认站点地图正常生成。</p>
+    <div class="callout warning">如果之前安装过 Yoast SEO，<strong>必须先停用 Yoast 再启用 SEOPress</strong>。两个 SEO 插件同时运行会产生重复 meta 标签和站点地图冲突。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>从 Yoast 迁移</strong>：SEOPress 内置迁移工具，进入 <strong>SEOPress → 工具 → 导入/导出</strong>，可一键导入 Yoast 的 SEO 数据</li>
+      <li><strong>PRO 版</strong>：高级功能（结构化数据、重定向管理）需要 PRO 版，基础 SEO 免费版足够</li>
+      <li><strong>站点地图 URL 不同</strong>：SEOPress 的站点地图是 <code>sitemaps.xml</code>，Yoast 是 <code>sitemap_index.xml</code>，切换后记得更新 GSC 中的提交</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-5.html" class="prev"><div class="label">上一篇</div><div class="title">Yoast：noindex 设置</div></a>
+    <a href="SEO-7.html" class="next"><div class="label">下一篇</div><div class="title">SEOPress：设置页面 SEO 标题/描述</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-4.html">提交站点地图到 GSC</a>
+    <a href="SEO-5.html">Yoast：noindex 设置</a>
+    <a href="SEO-8.html">SEOPress：配置 Google 全局代码（Analytics/Ads）</a>
+    <a href="SEO-9.html">SEOPress：noindex/nofollow 设置</a>
+  </div></div>
+</div>
+</body>
+</html>

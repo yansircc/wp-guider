@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Popup 触发条件与显示规则 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Popup 触发与规则</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Popup 触发条件与显示规则</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor Popup Builder 不仅能设计弹窗内容，还能精确控制<strong>何时</strong>弹出（触发条件）和<strong>在哪些页面</strong>弹出（显示规则）。触发条件包括页面加载延迟、滚动深度、退出意图、点击特定元素等；显示规则控制弹窗出现在全站还是特定页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>精准营销</strong>：在用户即将离开时弹出挽留窗口（Exit Intent），而非一进来就骚扰</li>
+      <li><strong>页面级控制</strong>：产品页弹询盘表单、博客页弹订阅框，不同页面不同弹窗</li>
+      <li><strong>频率控制</strong>：避免同一用户反复看到相同弹窗（设置 X 天内只显示一次）</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>设置触发条件（Triggers）</h3>
+    <p>编辑 Popup → 左下角齿轮 → <strong>Advanced Rules</strong> Tab：</p>
+    <ul>
+      <li><strong>On Page Load</strong>：页面加载后 N 秒弹出（常用于欢迎/公告）</li>
+      <li><strong>On Scroll</strong>：用户滚动到页面的 N% 位置时弹出</li>
+      <li><strong>On Scroll to Element</strong>：滚动到指定 CSS 选择器的元素时弹出</li>
+      <li><strong>On Click</strong>：用户点击指定元素（按钮/链接）时弹出</li>
+      <li><strong>After Inactivity</strong>：用户无操作 N 秒后弹出</li>
+      <li><strong>On Exit Intent</strong>（桌面端）：鼠标移向浏览器关闭按钮时弹出</li>
+    </ul>
+
+    <h3>设置显示规则（Conditions）</h3>
+    <p>发布 Popup 时配置 Display Conditions：</p>
+    <ul>
+      <li><strong>Entire Site</strong>：全站显示</li>
+      <li><strong>Specific Pages</strong>：仅在指定页面显示</li>
+      <li><strong>Post Type / Category</strong>：仅在特定文章类型或分类下显示</li>
+      <li><strong>Exclude</strong>：排除特定页面不显示</li>
+    </ul>
+
+    <h3>频率控制（Advanced Rules）</h3>
+    <ul>
+      <li><strong>Show up to X times</strong>：每位用户最多看到 N 次</li>
+      <li><strong>Don't show again for X days</strong>：用户关闭后 N 天内不再显示</li>
+      <li><strong>Show on devices</strong>：限定桌面端/手机端/平板</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Exit Intent 仅桌面端有效</strong>：手机端没有"鼠标移出"概念，移动端建议用滚动触发或延迟触发替代</li>
+      <li><strong>触发时机不宜过早</strong>：页面加载 0 秒就弹窗会极大伤害用户体验，建议至少延迟 5-10 秒</li>
+      <li><strong>频率控制很重要</strong>：不设频率限制 = 用户每次访问都弹窗 = 很快被讨厌</li>
+      <li><strong>多个 Popup 冲突</strong>：如果同一页面配置了多个 Popup，注意它们的触发条件不要重叠导致同时弹出</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-33.html" class="prev"><div class="label">上一篇</div><div class="title">Popup 创建（Modal/Bar/Slide-in）</div></a>
+    <a href="ELE-35.html" class="next"><div class="label">下一篇</div><div class="title">Popup 表单集成（询盘弹窗）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

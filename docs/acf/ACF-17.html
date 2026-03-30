@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>选择框 / 复选框 / 单选按钮字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">选择框 / 复选框 / 单选按钮字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>选择框 / 复选框 / 单选按钮字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ACF 的选择类字段用于从预定义选项中选择值：</p>
+    <ul>
+      <li><strong>选择框</strong>（Select）：下拉菜单，可选单选或多选</li>
+      <li><strong>复选框</strong>（Checkbox）：多个选项同时勾选</li>
+      <li><strong>单选按钮</strong>（Radio Button）：只能选一个选项</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>限定输入范围，确保数据一致性（避免编辑者自由输入造成格式混乱）</li>
+      <li>选项固定时比文本输入更高效、更不容易出错</li>
+      <li>便于前端按选项值进行筛选和分类展示</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>选项格式</h3>
+    <p>三种字段的选项设置方式相同，每行一个选项：</p>
+    <pre><code>red : 红色
+blue : 蓝色
+green : 绿色</code></pre>
+    <p>冒号左边是<strong>存储值</strong>（英文），右边是<strong>显示标签</strong>（中文）。如果不用冒号，存储值和标签相同。</p>
+
+    <h3>选择框（Select）</h3>
+    <ul>
+      <li>适合选项较多（5+）的场景</li>
+      <li>可开启<strong>多选</strong>（Allow Multiple）</li>
+      <li>可开启 <strong>AJAX 搜索</strong>（选项很多时提升性能）</li>
+      <li>可设<strong>空值提示</strong>（如「请选择...」）</li>
+    </ul>
+
+    <h3>复选框（Checkbox）</h3>
+    <ul>
+      <li>适合需要多选且选项较少（2-8）的场景</li>
+      <li>所有选项直接展示，勾选即可</li>
+      <li>可设<strong>布局</strong>：垂直或水平排列</li>
+      <li>可设「全选」切换按钮</li>
+    </ul>
+
+    <h3>单选按钮（Radio）</h3>
+    <ul>
+      <li>适合必须且只能选一个的场景</li>
+      <li>可设<strong>布局</strong>：垂直或水平</li>
+      <li>可设「其他」选项让用户自由输入</li>
+    </ul>
+
+    <h3>实际例子</h3>
+    <p>产品状态字段（单选按钮）：</p>
+    <pre><code>in_stock : 有货
+pre_order : 预售
+out_of_stock : 缺货</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>选哪种</strong>：单选用 Radio 或 Select，多选用 Checkbox 或 Select（多选模式）</li>
+      <li><strong>存储值用英文</strong>：方便程序处理和国际化，显示标签用中文</li>
+      <li><strong>修改选项</strong>：修改存储值后，已有数据不会自动更新，旧值变成无效选项</li>
+      <li><strong>默认值</strong>：可以设置默认选中的选项</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-16.html" class="prev"><div class="label">上一篇</div><div class="title">图片 / 文件 字段</div></a>
+    <a href="ACF-18.html" class="next"><div class="label">下一篇</div><div class="title">True/False 开关字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

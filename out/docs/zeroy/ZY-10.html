@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>创建 Thank You 感谢页 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">创建感谢页</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>创建 Thank You 感谢页</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d2">L2</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>感谢页（Thank You Page）是用户提交表单后自动跳转到的页面，用来确认提交成功、告知后续流程，同时也是 Google Ads 转化追踪的关键触发页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>没有感谢页，用户提交表单后会停留在原页面，不确定是否提交成功。感谢页不仅提升用户体验，更重要的是作为广告转化追踪的锚点——Google Ads 通过检测用户是否到达感谢页来统计转化数量。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>WordPress 后台 → <strong>页面 → 新增</strong>，标题 "Thank You" 或 "感谢提交" → <strong>发布</strong></li>
+      <li>用 ZeroY 编辑器打开</li>
+      <li>调用 AI 助手描述需求：
+        <ul>
+          <li>"创建一个简洁的感谢页，包含感谢标题、提交成功说明、预计回复时间、返回首页按钮"</li>
+        </ul>
+      </li>
+      <li>AI 生成后插入编辑器 → 保存</li>
+      <li>记下该页面的 URL（如 <code>/thank-you/</code>），后续配置表单跳转时需要用到</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>不要被搜索引擎索引</strong>：感谢页不需要 SEO 流量，建议在 SEO 设置中将其设为 noindex</li>
+      <li><strong>URL Slug 要简洁</strong>：建议用 <code>thank-you</code> 作为固定链接别名，方便后续配置</li>
+      <li><strong>Google Ads 转化代码</strong>：如果要做广告追踪，需要在感谢页底部埋入事件代码（参见 ZY.5-a）</li>
+      <li><strong>感谢页创建后要配置跳转</strong>：仅创建感谢页不够，还需要在表单设置中配置跳转 URL（参见 ZY.4-b）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-9.html" class="prev"><div class="label">上一篇</div><div class="title">创建联系页（表单+联系方式）</div></a>
+    <a href="ZY-11.html" class="next"><div class="label">下一篇</div><div class="title">在编辑器中插入/删除/撤回操作</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-1.html">下载并安装 ZeroY 主题 + 编辑器插件</a>
+    <a href="ZY-2.html">配置 API Token（zeroy.app 控制台绑定域名）</a>
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+  </div></div>
+</div></body></html>

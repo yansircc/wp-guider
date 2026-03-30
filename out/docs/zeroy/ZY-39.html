@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>排障：AI 生成报错（400/401/403 诊断） - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">AI 生成报错诊断</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>排障：AI 生成报错（400/401/403 诊断）</h1>
+    <div class="meta">
+      <span class="tag topic">ZeroY AI 建站</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 的 AI 内容生成功能依赖后端 API 调用。当 AI 生成失败时，浏览器控制台或页面上会出现 HTTP 错误码。三种最常见的错误：</p>
+    <ul>
+      <li><strong>400 Bad Request</strong> — 请求格式错误，通常是参数缺失或无效</li>
+      <li><strong>401 Unauthorized</strong> — 认证失败，API 密钥无效或过期</li>
+      <li><strong>403 Forbidden</strong> — 有认证但没有权限，通常是配额耗尽或被限流</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>AI 生成是 ZeroY 建站的核心能力。如果 AI 不可用，用户要么手动写所有内容（低效），要么无法继续建站（阻塞）。快速诊断错误类型并修复是保证建站效率的关键。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+
+    <h3>第一步：获取错误信息</h3>
+    <ol>
+      <li>打开浏览器开发者工具（F12）→ <strong>Network</strong> 面板</li>
+      <li>触发 AI 生成操作</li>
+      <li>找到失败的请求（红色标记），查看：
+        <ul>
+          <li><strong>Status Code</strong>：400 / 401 / 403</li>
+          <li><strong>Response Body</strong>：具体的错误描述</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>400 Bad Request 排查</h3>
+    <ul>
+      <li><strong>原因</strong>：发送给 AI API 的参数格式不正确</li>
+      <li><strong>常见场景</strong>：prompt 为空、内容超出长度限制、请求体 JSON 格式错误</li>
+      <li><strong>解决</strong>：检查请求的 Request Body 内容，确认必要字段都已填写。如果是 prompt 为空，确保页面描述字段不为空后重试</li>
+    </ul>
+
+    <h3>401 Unauthorized 排查</h3>
+    <ul>
+      <li><strong>原因</strong>：API 密钥（API Key）无效、过期或未配置</li>
+      <li><strong>解决步骤</strong>：
+        <ol>
+          <li>进入 ZeroY 后台设置 → API 配置</li>
+          <li>检查 API 密钥是否已填写且完整（没有多余空格或截断）</li>
+          <li>到 API 提供商后台确认密钥状态（是否被吊销或过期）</li>
+          <li>重新生成密钥并粘贴到 ZeroY 配置中</li>
+        </ol>
+      </li>
+    </ul>
+
+    <h3>403 Forbidden 排查</h3>
+    <ul>
+      <li><strong>原因</strong>：认证通过但被拒绝访问，通常是配额或限流问题</li>
+      <li><strong>常见场景</strong>：
+        <ul>
+          <li>API 调用配额用完（免费额度耗尽）</li>
+          <li>短时间内请求过多被限流（Rate Limit）</li>
+          <li>账户欠费或被暂停</li>
+        </ul>
+      </li>
+      <li><strong>解决</strong>：登录 API 提供商后台查看用量和账户状态。如果是限流，等几分钟后重试。如果是配额，充值或升级计划</li>
+    </ul>
+
+    <div class="callout tip">看错误码就够定位方向：400 查请求内容、401 查密钥、403 查配额。不用盲目排查。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>API 密钥不要暴露</strong>：不要将 API 密钥发到群里、截图中或提交到 Git。泄露的密钥可能被滥用产生高额费用</li>
+      <li><strong>429 Too Many Requests</strong>：这是 403 的近亲，表示限流。等待 1-2 分钟后重试即可</li>
+      <li><strong>网络环境因素</strong>：如果在中国大陆直连海外 API，可能因网络不稳定导致超时。查看是否有代理或加速配置</li>
+      <li><strong>debug.log 也有线索</strong>：ZeroY 可能将 API 调用错误写入 WordPress 的 debug.log，两个日志源对照查看效果更好</li>
+      <li><strong>多次重试无效时</strong>：记录完整的错误信息（状态码 + Response Body + 时间戳），联系 ZeroY 技术支持</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-38.html" class="prev"><div class="label">上一篇</div><div class="title">排障：表单提交后不跳转/不发邮件（固定链接+SMTP+路径）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div>
+</body>
+</html>

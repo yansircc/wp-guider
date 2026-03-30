@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自定义链接、子菜单与显示位置 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">菜单与导航</a>
+  <span class="sep">/</span>
+  <span class="current">自定义链接、子菜单与显示位置</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <p class="merge-note">本文同时覆盖: MN-3, MN-4, MN-5</p>
+    <h1>自定义链接、子菜单与显示位置</h1>
+    <div class="meta">
+      <span class="tag topic">菜单与导航</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 菜单系统不仅支持添加站内页面，还支持三个进阶功能：</p>
+    <ul>
+      <li><strong>自定义链接</strong>：添加任意 URL 作为菜单项，可指向外部网站</li>
+      <li><strong>子菜单层级</strong>：通过拖拽缩进创建下拉子菜单，形成层级导航</li>
+      <li><strong>菜单显示位置</strong>：将菜单分配到主题提供的位置（如顶部主导航、页脚、侧边栏等）</li>
+    </ul>
+    <p>这三个功能结合使用，可以构建出功能完整的网站导航体系。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p><strong>自定义链接</strong>让你可以在菜单中添加外部资源（如社交媒体主页、合作伙伴网站），或创建不指向具体页面的「占位」父菜单项。</p>
+    <p><strong>子菜单</strong>让你在有限的导航栏空间内组织大量页面。例如「服务」下拉显示「网站建设」「SEO 优化」「品牌设计」等子项。</p>
+    <p><strong>显示位置</strong>决定了菜单在前台的呈现方式。同一网站通常需要多个菜单：顶部主导航、页脚链接、移动端菜单等，各自承担不同的导航职责。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>添加自定义链接</h3>
+    <ol>
+      <li>在 <strong>外观 → 菜单</strong> 左侧，展开 <strong>自定义链接</strong> 面板</li>
+      <li>输入 <strong>URL</strong>（如 <code>https://twitter.com/yourname</code>）</li>
+      <li>输入 <strong>链接文字</strong>（如「Twitter」）</li>
+      <li>点击 <strong>添加到菜单</strong></li>
+    </ol>
+
+    <h3>创建子菜单层级</h3>
+    <ol>
+      <li>在菜单结构区域，用鼠标<strong>拖拽</strong>菜单项向右缩进</li>
+      <li>缩进的菜单项会变成上方菜单项的子项（前面出现「子项目」标识）</li>
+      <li>可以创建多级子菜单，但建议不超过 2 层</li>
+      <li>点击 <strong>保存菜单</strong></li>
+    </ol>
+    <p><strong>占位父菜单的技巧</strong>：如果父菜单项不需要指向任何页面（仅用于展开子菜单），添加一个自定义链接，URL 填 <code>#</code>，文字填你想显示的名称。</p>
+
+    <h3>设置菜单显示位置</h3>
+    <ol>
+      <li>在菜单编辑页面底部，找到 <strong>菜单设置</strong> 区域</li>
+      <li>在「显示位置」中勾选要分配的位置（如 Primary Menu、Footer Menu）</li>
+      <li>可用的位置取决于当前主题，不同主题提供不同的位置选项</li>
+      <li>点击 <strong>保存菜单</strong></li>
+    </ol>
+    <p>也可以在 <strong>外观 → 菜单 → 管理位置</strong> 选项卡中，统一查看和管理所有位置的菜单分配。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>外部链接安全</strong>：指向外部网站的自定义链接，建议在菜单项详情中勾选「在新标签页中打开」，避免用户离开你的网站</li>
+      <li><strong>子菜单在移动端的表现</strong>：下拉子菜单在桌面端体验良好，但在移动端可能难以操作。确保主题的响应式设计支持触摸展开子菜单</li>
+      <li><strong># 占位链接的问题</strong>：URL 为 <code>#</code> 的菜单项点击后页面会跳到顶部。部分主题会在悬停时显示子菜单，但触屏设备可能需要点击才能展开</li>
+      <li><strong>切换主题后菜单位置可能丢失</strong>：不同主题注册的菜单位置名称不同。切换主题后需要重新分配菜单到新主题的位置</li>
+      <li><strong>一个位置只能分配一个菜单</strong>：但一个菜单可以分配到多个位置</li>
+      <li><strong>菜单项不显示</strong>：最常见的原因是忘记分配显示位置，或分配到了主题未在前台渲染的位置</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="MN-2.html" class="prev"><div class="label">上一篇</div><div class="title">添加页面到菜单</div></a>
+    <a href="MN-4.html" class="next"><div class="label">下一篇</div><div class="title">子菜单层级</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="MN-1.html">创建主导航菜单</a>
+    <a href="MN-2.html">添加页面到菜单</a>
+  </div></div>
+</div>
+</body>
+</html>

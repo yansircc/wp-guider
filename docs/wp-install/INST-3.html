@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绑定域名（NS 方式与 A 记录方式） - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">WordPress 安装</a>
+  <span class="sep">/</span>
+  <span class="current">绑定域名</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>绑定域名（NS 方式与 A 记录方式）</h1>
+    <div class="meta">
+      <span class="tag topic">WordPress 安装</span>
+      <span class="tag diff d2">L2</span>
+      <span class="tag new">本文同时覆盖: INST-3, INST-4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>将域名绑定到主机上有两种主要方式：修改 NS（Nameserver）和添加 A 记录。两种方式效果相同 — 都能让域名指向你的服务器 — 但实现路径和适用场景不同。</p>
+    <ul>
+      <li><strong>NS 方式</strong>：把域名的 DNS 管理权整体交给主机商，由主机商自动配置所有记录</li>
+      <li><strong>A 记录方式</strong>：保持域名在原 DNS 服务（如 Cloudflare），只添加一条指向服务器 IP 的记录</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>WordPress 安装完成后，需要通过正式域名访问。绑定域名让用户通过 <code>yourdomain.com</code> 而非临时域名访问网站。</p>
+    <p>选择哪种方式取决于你的 DNS 管理需求：如果只有一个主机、不需要 Cloudflare CDN，用 NS 方式最简单；如果需要 Cloudflare 的 CDN/安全功能，或同一域名有多个子域名指向不同服务，用 A 记录方式。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方式一：NS 方式（简单，适合新手）</h3>
+    <ol>
+      <li>在 Hostinger hPanel 中找到 NS 地址（通常在域名设置页面）</li>
+      <li>登录域名注册商后台（Namesilo / 阿里云等）</li>
+      <li>进入域名管理 → Nameservers</li>
+      <li>将默认 NS 替换为 Hostinger 的 NS 地址</li>
+      <li>保存，等待 24-48 小时生效</li>
+    </ol>
+
+    <h3>方式二：A 记录方式（灵活，推荐进阶用户）</h3>
+    <ol>
+      <li>在 Hostinger hPanel 中找到服务器 IP 地址</li>
+      <li>登录 DNS 管理平台（如 Cloudflare）</li>
+      <li>添加两条 A 记录：
+        <ul>
+          <li><code>@</code> → 服务器 IP（根域名）</li>
+          <li><code>www</code> → 服务器 IP（www 版本）</li>
+        </ul>
+      </li>
+      <li>在 Hostinger hPanel → Domains 中添加该域名</li>
+      <li>等待 DNS 生效（通常几分钟到几小时）</li>
+    </ol>
+
+    <h3>对比表</h3>
+    <ul>
+      <li><strong>NS 方式</strong>：设置简单 / 生效慢（24-48h）/ DNS 由主机商管理 / 不兼容 Cloudflare CDN</li>
+      <li><strong>A 记录方式</strong>：设置稍复杂 / 生效快（分钟级）/ 保留原 DNS 控制权 / 兼容 Cloudflare</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>NS 方式会覆盖原有的所有 DNS 记录（邮箱 MX、验证 TXT 等），切换前务必备份</li>
+      <li>A 记录方式需要在 Hostinger 后台也添加域名，否则服务器不会响应该域名的请求</li>
+      <li>绑定域名后，WordPress 后台的 <strong>设置 → 常规</strong> 中的 URL 也需要更新为正式域名</li>
+      <li>如果使用 Cloudflare + A 记录，建议同时开启 SSL（Full Strict 模式）</li>
+      <li>域名绑定后如果仍无法访问，用 <code>ping yourdomain.com</code> 检查 DNS 解析是否正确</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="INST-2.html" class="prev"><div class="label">上一篇</div><div class="title">手动安装 WordPress</div></a>
+    <a href="INST-4.html" class="next"><div class="label">下一篇</div><div class="title">绑定域名（A 记录方式）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="INST-1.html">Hostinger 一键安装 WP</a>
+    <a href="INST-6.html">网站内容迁移 (插件方式)</a>
+    <a href="INST-7.html">网站内容迁移 (手动数据库+文件)</a>
+    <a href="INST-8.html">已有站点更换域名</a>
+  </div></div>
+</div>
+</body>
+</html>

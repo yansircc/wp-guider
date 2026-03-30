@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Swiper 缩略图画廊（主图+缩略图联动） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Swiper 缩略图画廊</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Swiper 缩略图画廊（主图 + 缩略图联动）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>缩略图画廊是一种常见的产品展示模式：上方是大图展示区，下方是一排小缩略图。点击缩略图切换主图，主图左右滑动时缩略图也同步高亮。ZeroY 内置 Swiper v11，通过 thumbs 模块实现两个 Swiper 实例的联动。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>产品详情页需要展示多角度照片。缩略图画廊比纯轮播更直观——用户能一眼看到所有图片并快速跳转到目标图，常见于电商、产品展示、案例集等场景。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>HTML 结构</h3>
+    <p>需要两个独立的 Swiper 容器：一个主图轮播，一个缩略图轮播。</p>
+    <pre><code>&lt;!-- 主图 --&gt;
+&lt;div class="swiper main-swiper"&gt;
+  &lt;div class="swiper-wrapper"&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="product-1.jpg" alt="..."&gt;&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="product-2.jpg" alt="..."&gt;&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="product-3.jpg" alt="..."&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 缩略图 --&gt;
+&lt;div class="swiper thumb-swiper"&gt;
+  &lt;div class="swiper-wrapper"&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="product-1-thumb.jpg" alt="..."&gt;&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="product-2-thumb.jpg" alt="..."&gt;&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;&lt;img src="product-3-thumb.jpg" alt="..."&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>关键配置</h3>
+    <ul>
+      <li>主图 Swiper 的 <code>thumbs.swiper</code> 指向缩略图 Swiper 实例</li>
+      <li>缩略图设置 <code>slidesPerView: 4</code>（或更多），让多张缩略图同时可见</li>
+      <li>当前激活的缩略图会自动添加 <code>swiper-slide-thumb-active</code> 类名，可用 CSS 高亮</li>
+    </ul>
+    <div class="callout tip">ZeroY 内置 Swiper v11，只要 HTML 中存在 <code>swiper-wrapper</code> 类名，框架会自动加载 Swiper 库，无需手动引入。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>两个 Swiper 必须分开初始化</strong>：先初始化缩略图 Swiper，再将其传入主图 Swiper 的 thumbs 配置</li>
+      <li><strong>缩略图尺寸要统一</strong>：不同尺寸的缩略图会导致布局错乱，建议统一裁切</li>
+      <li><strong>图片数量建议 3-8 张</strong>：太少没必要用画廊，太多会导致缩略图过小难以辨认</li>
+      <li><strong>移动端适配</strong>：缩略图在手机上可能显示太小，考虑在小屏幕下减少 slidesPerView 或隐藏缩略图改为点指示器</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-32.html" class="prev"><div class="label">上一篇</div><div class="title">Swiper 基础轮播（自动播放+导航箭头）</div></a>
+    <a href="ZY-34.html" class="next"><div class="label">下一篇</div><div class="title">Swiper 响应式多卡片轮播</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

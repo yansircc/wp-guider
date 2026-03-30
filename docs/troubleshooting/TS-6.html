@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>functions.php 语法错误修复 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">troubleshooting</a>
+  <span class="sep">/</span>
+  <span class="current">functions.php 语法错误修复</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>functions.php 语法错误修复</h1>
+    <div class="meta">
+      <span class="tag topic">troubleshooting</span>
+      <span class="tag diff d5">L5</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>functions.php</code> 是 WordPress 主题中的核心文件，相当于"主题专属的插件"。它在每次页面加载时执行，用于注册菜单、加载样式、添加自定义功能等。</p>
+    <p>由于 <code>functions.php</code> 是 PHP 代码，任何语法错误（缺少分号、括号不匹配、拼写错误）都会导致 WordPress 完全崩溃——白屏或 500 错误。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>这是 WordPress 排障中的经典场景：用户在后台"主题编辑器"中编辑了 <code>functions.php</code>，保存后整个站点白屏，后台也进不去了。</p>
+    <p>知道如何从文件系统层面修复 PHP 语法错误，是 WordPress 运维的救命技能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 定位错误</h3>
+    <pre><code># 查看 debug.log
+tail -20 wp-content/debug.log</code></pre>
+    <p>典型的语法错误日志：</p>
+    <pre><code>[30-Mar-2026 10:30:00 UTC] PHP Parse error:
+  syntax error, unexpected '}', expecting ';'
+  in /app/public/wp-content/themes/astra/functions.php on line 58</code></pre>
+
+    <h3>2. 用 PHP 检查语法</h3>
+    <pre><code># 检查文件是否有语法错误
+php -l wp-content/themes/astra/functions.php</code></pre>
+    <p>输出 <code>No syntax errors detected</code> 表示语法正确。</p>
+
+    <h3>3. 修复错误</h3>
+    <p>根据错误提示定位到具体行号，常见的语法错误：</p>
+    <ul>
+      <li><strong>缺少分号</strong> — <code>echo "hello"</code> → <code>echo "hello";</code></li>
+      <li><strong>括号不匹配</strong> — 检查 <code>{</code> 和 <code>}</code> 是否成对</li>
+      <li><strong>引号不匹配</strong> — 检查字符串中的引号是否闭合</li>
+      <li><strong>函数名拼写错误</strong> — <code>add_acton</code> → <code>add_action</code></li>
+    </ul>
+
+    <h3>4. 紧急恢复（无法修复时）</h3>
+    <pre><code># 方法一：用 WP-CLI 切换主题（绕过 functions.php）
+locwp wp wp-train -- theme activate twentytwentyfour
+
+# 方法二：重命名主题目录
+mv wp-content/themes/astra wp-content/themes/astra.bak</code></pre>
+
+    <h3>5. 验证修复</h3>
+    <pre><code># 语法检查通过
+php -l wp-content/themes/astra/functions.php
+
+# 切回主题
+locwp wp wp-train -- theme activate astra
+
+# 检查前后台是否正常</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>这就是为什么建议启用 <code>DISALLOW_FILE_EDIT</code> — 防止从后台直接编辑 PHP 文件</li>
+      <li>修改 <code>functions.php</code> 前务必先创建快照或备份</li>
+      <li>如果是第三方主题，不要直接修改 <code>functions.php</code>——使用子主题，否则主题更新会覆盖你的修改</li>
+      <li>PHP 的错误提示行号可能不完全准确——实际错误可能在提示行的前几行</li>
+      <li><code>functions.php</code> 文件末尾不要有多余的空行或 <code>?&gt;</code> 闭合标签，这可能导致"headers already sent"错误</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-5.html" class="prev"><div class="label">上一篇</div><div class="title">切换默认主题排查</div></a>
+    <a href="TS-7.html" class="next"><div class="label">下一篇</div><div class="title">修复错误 siteurl</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-3.html">插件逐个排查</a>
+    <a href="TS-5.html">切换默认主题排查</a>
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+  </div></div>
+</div>
+</body>
+</html>

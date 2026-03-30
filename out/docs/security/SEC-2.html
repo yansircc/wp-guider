@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>确认注册关闭 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">security</a>
+  <span class="sep">/</span>
+  <span class="current">确认注册关闭</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>确认注册关闭</h1>
+    <div class="meta">
+      <span class="tag topic">security</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 默认允许任何人注册账号（取决于安装时的设置）。"任何人都可以注册"这个选项在 <strong>设置 → 常规</strong> 中控制。</p>
+    <p>对于大多数企业/展示型网站，不需要开放注册。只有管理员手动创建的账号才应该存在。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>开放注册是最常见的安全隐患之一。垃圾注册机器人会在几小时内创建数百个虚假账号，用于发送垃圾评论、尝试权限提升攻击，或者简单地占用数据库空间。</p>
+    <p>关闭注册是建站后最基本的安全措施——除非站点确实需要用户注册功能（如社区、会员站）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：后台操作</h3>
+    <ol>
+      <li>登录后台，进入 <strong>设置 → 常规</strong></li>
+      <li>找到 <strong>成员资格</strong>（Membership）选项</li>
+      <li>确认 <strong>"任何人都可以注册"</strong> 未勾选</li>
+      <li>保存更改</li>
+    </ol>
+
+    <h3>方法二：WP-CLI</h3>
+    <pre><code># 查看当前状态（0 = 关闭，1 = 开启）
+locwp wp wp-train -- option get users_can_register
+
+# 关闭注册
+locwp wp wp-train -- option update users_can_register 0</code></pre>
+
+    <h3>验证</h3>
+    <p>访问 <code>http://your-site.local/wp-login.php?action=register</code>，应该显示"注册已关闭"或重定向到登录页。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>即使关闭了注册，已有的用户账号不会被删除</li>
+      <li>部分插件（如 WooCommerce、BuddyPress）有自己的注册系统，需要单独关闭</li>
+      <li>如果必须开放注册，务必将默认角色设为"订阅者"（Subscriber），并安装验证码插件</li>
+      <li>定期检查用户列表，删除可疑的注册账号</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEC-1.html" class="prev"><div class="label">上一篇</div><div class="title">安装 Wordfence + 基础安全扫描</div></a>
+    <a href="SEC-3.html" class="next"><div class="label">下一篇</div><div class="title">隐藏登录 URL</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEC-1.html">安装 Wordfence + 基础安全扫描</a>
+    <a href="SEC-3.html">隐藏登录 URL</a>
+    <a href="SEC-4.html">禁用文件编辑</a>
+  </div></div>
+</div>
+</body>
+</html>

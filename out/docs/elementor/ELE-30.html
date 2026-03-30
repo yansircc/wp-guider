@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>表单提交后动作（邮件/重定向/Webhook） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">表单提交后动作</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>表单提交后动作（邮件 / 重定向 / Webhook）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor Form Widget 的 "Actions After Submit"（提交后动作）让你定义用户提交表单后自动执行的一系列操作。常见动作包括发送邮件通知、重定向到感谢页、发送 Webhook 到第三方系统等。一次提交可以触发多个动作。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>邮件通知</strong>：第一时间收到询盘通知，不漏客户</li>
+      <li><strong>感谢页重定向</strong>：给用户明确反馈 + 用于 Google Ads 转化追踪</li>
+      <li><strong>Webhook</strong>：将表单数据推送到 CRM（如 HubSpot）、消息系统（如 Slack）或自定义 API</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>选中页面上的 Form Widget</li>
+      <li>在 Content Tab 找到 <strong>Actions After Submit</strong></li>
+      <li>点击 <strong>+ Add Action</strong> 添加动作</li>
+    </ol>
+
+    <h3>动作一：Email（邮件通知）</h3>
+    <ul>
+      <li><strong>To</strong>：收件人邮箱（如 <code>sales@example.com</code>）</li>
+      <li><strong>Subject</strong>：邮件主题（支持动态字段，如 <code>[field id="name"] 的询盘</code>）</li>
+      <li><strong>Message</strong>：邮件正文（使用 <code>[all-fields]</code> 输出所有字段内容）</li>
+      <li><strong>From</strong>：发件人邮箱和名称</li>
+    </ul>
+
+    <h3>动作二：Redirect（重定向）</h3>
+    <ul>
+      <li>填入感谢页 URL（如 <code>/thank-you/</code>）</li>
+      <li>提交成功后自动跳转</li>
+    </ul>
+
+    <h3>动作三：Webhook</h3>
+    <ul>
+      <li>填入 Webhook URL（接收端提供的 API 地址）</li>
+      <li>表单数据会以 JSON 格式 POST 到该 URL</li>
+      <li>可在 Advanced 中自定义字段映射</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>动作执行顺序</strong>：动作按列表顺序依次执行。建议先 Email、再 Webhook、最后 Redirect</li>
+      <li><strong>邮件不稳定</strong>：Elementor 邮件也依赖 <code>wp_mail()</code>，同样建议安装 SMTP 插件</li>
+      <li><strong>Redirect 要放最后</strong>：重定向后用户离开当前页面，如果在 Redirect 之后还有其他动作可能不会执行</li>
+      <li><strong>Webhook 调试</strong>：先用 webhook.site 或 requestbin.com 测试，确认数据格式正确后再接入正式系统</li>
+      <li><strong>可添加多个 Email</strong>：如果需要通知多人，可以添加多个 Email 动作</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-29.html" class="prev"><div class="label">上一篇</div><div class="title">多步骤表单（Multi-step Form）</div></a>
+    <a href="ELE-31.html" class="next"><div class="label">下一篇</div><div class="title">表单集成（Mailchimp / HubSpot）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

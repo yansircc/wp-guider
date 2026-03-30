@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>插件逐个排查 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">troubleshooting</a>
+  <span class="sep">/</span>
+  <span class="current">插件逐个排查</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>插件逐个排查</h1>
+    <div class="meta">
+      <span class="tag topic">troubleshooting</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>插件冲突是 WordPress 最常见的故障原因。"插件逐个排查"是一种系统性方法：先停用所有插件确认问题消失，再逐个启用找出罪魁祸首。</p>
+    <p>这不是猜测——这是二分法排障。每次操作都在缩小搜索范围。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>WordPress 的插件生态是开放的，任何人都能写插件。不同插件可能修改同一个功能（如 <code>wp_head</code> 输出、REST API 端点），产生不可预见的冲突。</p>
+    <p>当遇到白屏、功能异常、JS 报错等问题时，如果 debug.log 没有明确指向某个插件，就需要用排查法定位。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：WP-CLI（推荐）</h3>
+    <pre><code># 第一步：停用所有插件
+locwp wp wp-train -- plugin deactivate --all
+
+# 确认问题是否消失
+# 如果消失，说明是插件问题
+
+# 第二步：逐个启用
+locwp wp wp-train -- plugin activate plugin-a
+# 测试... 正常？继续
+
+locwp wp wp-train -- plugin activate plugin-b
+# 测试... 问题复现！plugin-b 是嫌疑人
+
+# 第三步：确认是单独问题还是冲突
+# 只启用 plugin-b，问题是否复现？
+# 如果复现 → plugin-b 自身有 bug
+# 如果不复现 → plugin-b 与之前某个插件冲突</code></pre>
+
+    <h3>方法二：二分法（插件多时更高效）</h3>
+    <pre><code># 停用所有插件
+locwp wp wp-train -- plugin deactivate --all
+
+# 启用前一半插件
+locwp wp wp-train -- plugin activate plugin-a plugin-b plugin-c
+
+# 测试：问题在这一半吗？
+# 是 → 对这一半继续二分
+# 否 → 问题在另一半，启用另一半继续排查</code></pre>
+
+    <h3>方法三：文件系统级别（后台无法访问时）</h3>
+    <pre><code># 重命名整个 plugins 目录（停用所有插件）
+mv wp-content/plugins wp-content/plugins.bak
+
+# 创建空的 plugins 目录
+mkdir wp-content/plugins
+
+# 确认问题消失后，逐个把插件目录移回来
+mv wp-content/plugins.bak/plugin-a wp-content/plugins/</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>排查前务必先创建 WP Reset 快照，方便随时恢复</li>
+      <li>停用所有插件后问题仍然存在？那不是插件问题——检查主题或 wp-config.php</li>
+      <li>部分插件停用后不会自动清理（如缓存插件），可能需要手动清除缓存</li>
+      <li>WooCommerce 等核心插件停用会影响站点功能，在生产环境要谨慎</li>
+      <li>记录每一步操作和结果，方便后续分析和复现</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-2.html" class="prev"><div class="label">上一篇</div><div class="title">查看 debug.log</div></a>
+    <a href="TS-4.html" class="next"><div class="label">下一篇</div><div class="title">mu-plugin 故障修复</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+    <a href="TS-4.html">mu-plugin 故障修复</a>
+    <a href="TS-6.html">functions.php 语法错误修复</a>
+  </div></div>
+</div>
+</body>
+</html>

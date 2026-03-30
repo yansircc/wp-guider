@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>安装 ZeroY 并配置 API Token - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">安装 ZeroY 并配置 API Token</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>安装 ZeroY 并配置 API Token</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d1">L1</span></div><p>本文同时覆盖: ZY-1, ZY-2</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 是一款 AI 驱动的 WordPress 主题 + 可视化编辑器插件。安装后，你可以用自然语言描述需求，AI 帮你生成完整的网页布局和内容。API Token 是 ZeroY 云端服务的身份凭证，必须正确配置才能使用编辑器功能。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>ZeroY 是整个建站流程的基础工具。主题提供全站框架，编辑器插件提供可视化操作能力，API Token 则打通本地 WordPress 与 ZeroY 云端 AI 服务的通道。没有正确安装和配置，后续所有页面编辑、模板创建、AI 生成功能都无法使用。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：下载安装包</h3>
+    <ol>
+      <li>访问 <strong>zeroy.app</strong>，登录账户</li>
+      <li>在控制台下载 ZeroY 主题文件（.zip）和编辑器插件文件（.zip）</li>
+    </ol>
+
+    <h3>第二步：安装主题</h3>
+    <ol>
+      <li>进入 WordPress 后台 → <strong>外观 → 主题 → 安装主题 → 上传主题</strong></li>
+      <li>选择下载的主题 .zip 文件 → 安装 → <strong>启用</strong></li>
+    </ol>
+
+    <h3>第三步：安装编辑器插件</h3>
+    <ol>
+      <li>进入 WordPress 后台 → <strong>插件 → 安装插件 → 上传插件</strong></li>
+      <li>选择下载的编辑器插件 .zip 文件 → 安装 → <strong>启用</strong></li>
+    </ol>
+
+    <h3>第四步：绑定域名（关键前置步骤）</h3>
+    <ol>
+      <li>回到 <strong>zeroy.app 控制台</strong></li>
+      <li>找到域名绑定设置，添加你的 WordPress 站点域名</li>
+      <li>确认绑定成功后再进行下一步</li>
+    </ol>
+
+    <h3>第五步：配置 API Token</h3>
+    <ol>
+      <li>在 zeroy.app 控制台复制你的 API Token</li>
+      <li>回到 WordPress 后台 → <strong>ZeroY 模块</strong></li>
+      <li>将 API Token 粘贴到对应输入框 → 保存</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>必须先绑定域名再填 Token</strong>：如果域名未绑定，Token 验证会失败，编辑器无法连接云端服务</li>
+      <li><strong>主题和插件都要装</strong>：只装主题没有编辑器功能，只装插件没有主题框架，两者缺一不可</li>
+      <li><strong>注意版本匹配</strong>：主题和插件版本需要匹配，建议同时从 zeroy.app 下载最新版</li>
+      <li><strong>Token 泄露风险</strong>：API Token 等同于账户凭证，不要分享给他人或提交到代码仓库</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="ZY-2.html" class="next"><div class="label">下一篇</div><div class="title">配置 API Token（zeroy.app 控制台绑定域名）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

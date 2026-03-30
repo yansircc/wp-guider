@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wp-cron 检查 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">备份与维护</a>
+  <span class="sep">/</span>
+  <span class="current">wp-cron 检查</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>wp-cron 检查</h1>
+    <div class="meta">
+      <span class="tag topic">备份与维护</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>wp-cron 是 WordPress 内建的定时任务系统。它负责执行计划发布文章、自动备份、插件定时任务等周期性工作。</p>
+    <p><strong>关键问题：</strong>wp-cron 不是真正的 cron。它是"伪 cron"——只有在有人访问站点时才会检查并执行到期的任务。如果没人访问，任务就不会执行。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>wp-cron 的"伪 cron"机制会导致几个问题：</p>
+    <ul>
+      <li>定时发布的文章可能延迟发布（没有访客触发 cron）</li>
+      <li>自动备份不按时执行</li>
+      <li>每次页面加载都要检查 cron 队列，增加响应时间</li>
+      <li>高流量站点可能触发 cron 过于频繁，导致任务重复执行</li>
+    </ul>
+    <p>理解 wp-cron 的工作原理，才能判断是否需要用系统 cron 替代。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>查看 cron 事件列表</h3>
+    <pre><code># 列出所有计划任务
+locwp wp wp-train -- cron event list</code></pre>
+    <p>输出会显示每个任务的钩子名、下次执行时间和执行频率。</p>
+
+    <h3>手动触发 cron</h3>
+    <pre><code># 执行所有到期的 cron 事件
+locwp wp wp-train -- cron event run --due-now</code></pre>
+
+    <h3>检查 wp-cron 状态</h3>
+    <pre><code># 检查 DISABLE_WP_CRON 常量
+locwp wp wp-train -- config get DISABLE_WP_CRON 2>/dev/null || echo "未设置（wp-cron 启用中）"</code></pre>
+
+    <h3>常见的 cron 任务</h3>
+    <ul>
+      <li><code>wp_version_check</code> — 检查 WordPress 更新</li>
+      <li><code>wp_update_plugins</code> — 检查插件更新</li>
+      <li><code>wp_scheduled_delete</code> — 清理回收站中的内容</li>
+      <li><code>updraft_backup</code> — UpdraftPlus 自动备份（如已配置）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>wp-cron 依赖页面访问触发，低流量站点可能出现任务积压</li>
+      <li>不要手动删除 cron 事件，除非你确定知道它是什么——很多插件依赖 cron 工作</li>
+      <li>如果 cron 事件列表中有大量"过期"事件（过了执行时间但未执行），说明 wp-cron 可能被禁用或有问题</li>
+      <li>某些安全插件或缓存插件可能会干扰 wp-cron 的正常执行</li>
+      <li>对于需要准时执行的任务（如定时发布），建议配置系统 cron</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-9.html" class="prev"><div class="label">上一篇</div><div class="title">更新插件</div></a>
+    <a href="BM-11.html" class="next"><div class="label">下一篇</div><div class="title">系统 cron 替换</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-1.html">UpdraftPlus 备份</a>
+    <a href="BM-3.html">备份策略选择</a>
+    <a href="BM-5.html">WP Reset 生成快照</a>
+    <a href="BM-6.html">WP Reset 恢复快照</a>
+  </div></div>
+</div>
+</body>
+</html>

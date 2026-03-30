@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上传图片与编辑图片信息 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">媒体管理</a>
+  <span class="sep">/</span>
+  <span class="current">上传图片与编辑图片信息</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <p class="merge-note">本文同时覆盖: MD-1, MD-2</p>
+    <h1>上传图片与编辑图片信息</h1>
+    <div class="meta">
+      <span class="tag topic">媒体管理</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>媒体库（Media Library）是 WordPress 集中管理所有上传文件的地方，包括图片、视频、PDF、音频等。上传图片到媒体库是向网站添加视觉内容的第一步。</p>
+    <p>上传后的图片存储在服务器的 <code>wp-content/uploads/</code> 目录中，按年月自动分类。WordPress 会为每张图片自动生成多种尺寸的缩略图。</p>
+    <p>每张图片都有一组元数据可以编辑，其中最重要的是<strong>替代文本（Alt Text）</strong>——图片无法加载时显示的描述，也是屏幕阅读器和搜索引擎理解图片内容的唯一依据。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>图片是网页内容的重要组成部分。产品展示、文章配图、Banner 横幅都需要通过媒体库上传。通过媒体库管理图片，可以在网站任何位置重复使用同一张图片。</p>
+    <p>Alt Text 的重要性常被忽视。视障用户依靠屏幕阅读器浏览网页，Alt Text 是他们「看到」图片的唯一方式。搜索引擎也依赖 Alt Text 理解图片含义，有助于图片出现在搜索结果中。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>上传图片</h3>
+    <ol>
+      <li>进入后台 <strong>媒体 → 添加新文件</strong></li>
+      <li>将图片文件拖拽到上传区域，或点击 <strong>选择文件</strong> 浏览本地文件</li>
+      <li>支持批量上传：可以同时选择多个文件</li>
+    </ol>
+    <p>也可以在编辑文章时，点击 <strong>+</strong> 添加「图片」区块，选择 <strong>上传</strong> 直接添加。</p>
+    <h3>编辑图片信息</h3>
+    <ol>
+      <li>进入 <strong>媒体 → 媒体库</strong>，点击目标图片</li>
+      <li>在附件详情面板中填写：
+        <ul>
+          <li><strong>替代文本</strong>：简洁描述图片内容，如「团队成员在会议室讨论方案」</li>
+          <li><strong>标题</strong>：图片标题，鼠标悬停时可能显示</li>
+          <li><strong>说明</strong>：图片下方的可见说明文字</li>
+          <li><strong>描述</strong>：可选，更详细的描述</li>
+        </ul>
+      </li>
+      <li>修改会自动保存</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>文件大小限制</strong>：默认取决于服务器配置（通常 2MB-128MB）。上传失败时检查 php.ini 的 <code>upload_max_filesize</code></li>
+      <li><strong>支持的格式</strong>：默认支持 JPG、PNG、GIF、WebP。SVG 需要额外插件</li>
+      <li><strong>文件命名</strong>：上传前改为英文描述性名称（如 <code>homepage-banner.jpg</code>），避免中文或特殊字符</li>
+      <li><strong>Alt Text 不要堆砌关键词</strong>：应自然描述图片内容。装饰性图片（分隔线等）的 Alt Text 可留空</li>
+      <li><strong>媒体库 vs 编辑器修改</strong>：媒体库中修改 Alt Text 更新全局默认值；编辑器中修改只影响当前文章中该图片实例</li>
+      <li><strong>图片尺寸</strong>：上传前建议压缩到合适尺寸，避免 5000x3000 像素的原始照片浪费带宽</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="MD-2.html" class="next"><div class="label">下一篇</div><div class="title">编辑图片信息</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="MD-3.html">设置特色图片</a>
+    <a href="MD-4.html">媒体设置（缩略图尺寸）</a>
+    <a href="MD-5.html">处理网站素材（压缩/裁剪/格式转换）</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>修改 NS 到 Hostinger - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">域名</a>
+  <span class="sep">/</span>
+  <span class="current">修改 NS 到 Hostinger</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>修改 NS 到 Hostinger</h1>
+    <div class="meta">
+      <span class="tag topic">域名</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>NS（Name Server）记录指定由哪台 DNS 服务器来管理域名的 DNS 解析。修改 NS 到 Hostinger 意味着将域名的 DNS 管理权交给 Hostinger，之后所有 DNS 记录（A、CNAME、MX 等）都在 Hostinger 后台配置。</p>
+    <p>这是一种将域名绑定到主机的方式，替代手动添加 A 记录的方法。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>当域名在第三方注册商（如 Namesilo、阿里云）购买，但主机使用 Hostinger 时，修改 NS 是最简单的绑定方式。Hostinger 会自动配置好所有需要的 DNS 记录。</p>
+    <p>与手动添加 A 记录相比，NS 方式让 Hostinger 全权管理 DNS，省去逐条配置的麻烦，适合新手。但代价是失去对 DNS 的精细控制。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 Hostinger hPanel，找到需要绑定的网站</li>
+      <li>在 <strong>域名</strong> 或 <strong>网站设置</strong> 中找到 Hostinger 的 NS 地址，通常是：
+        <ul>
+          <li><code>ns1.dns-parking.com</code></li>
+          <li><code>ns2.dns-parking.com</code></li>
+        </ul>
+        <p>（具体以 Hostinger 后台显示为准）</p>
+      </li>
+      <li>登录域名注册商后台（如 Namesilo）</li>
+      <li>找到域名管理 → <strong>Nameservers</strong> 设置</li>
+      <li>将默认 NS 替换为 Hostinger 提供的两条 NS 地址</li>
+      <li>保存更改</li>
+    </ol>
+    <div class="callout warning">NS 修改需要 24-48 小时全球生效，期间网站可能间歇性无法访问。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>NS 修改生效时间较长（最多 48 小时），比 A 记录慢得多</li>
+      <li>修改 NS 后，原来在旧 DNS 上配置的所有记录（邮箱 MX、验证 TXT 等）都会失效，需要在 Hostinger 重新配置</li>
+      <li>如果域名已经在 Cloudflare 管理 DNS，不建议改 NS 到 Hostinger，因为会失去 Cloudflare 的 CDN 和安全功能</li>
+      <li>修改前建议截图保存当前所有 DNS 记录，方便迁移后重新配置</li>
+      <li>可以用 <code>nslookup -type=NS example.com</code> 验证 NS 是否已更新</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="DOM-5.html" class="prev"><div class="label">上一篇</div><div class="title">DNS CNAME 记录</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="DOM-1.html">在 Namesilo 注册域名</a>
+    <a href="DOM-2.html">在阿里云注册域名</a>
+    <a href="DOM-3.html">在 Cloudflare 注册域名</a>
+  </div></div>
+</div>
+</body>
+</html>

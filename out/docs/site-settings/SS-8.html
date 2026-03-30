@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日期和时间格式 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">站点设置</a>
+  <span class="sep">/</span>
+  <span class="current">日期和时间格式</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>日期和时间格式</h1>
+    <div class="meta">
+      <span class="tag topic">站点设置</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 允许自定义日期和时间的显示格式。这些格式会应用于前台文章发布日期、评论时间、归档页等所有时间显示的位置。</p>
+    <p>格式使用 PHP 的日期格式字符，如 <code>Y-m-d</code> 表示 2024-01-15，<code>F j, Y</code> 表示 January 15, 2024。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>不同地区对日期格式有不同的习惯。中文站通常使用 <code>Y年n月j日</code>，英文站用 <code>F j, Y</code>，而 ISO 格式 <code>Y-m-d</code> 适合国际化站点。</p>
+    <p>选择合适的日期格式能提升用户体验，让访客一眼看懂发布时间。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 常规</strong>（Settings → General）</li>
+      <li>找到 <strong>日期格式</strong>（Date Format）区域，选择预设格式或输入自定义格式</li>
+      <li>找到 <strong>时间格式</strong>（Time Format）区域，选择 12 小时制或 24 小时制</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <h3>常用格式参考</h3>
+    <ul>
+      <li><code>Y-m-d</code> → 2024-01-15（推荐，国际通用）</li>
+      <li><code>Y年n月j日</code> → 2024年1月15日（中文站）</li>
+      <li><code>F j, Y</code> → January 15, 2024（英文站）</li>
+      <li><code>H:i</code> → 14:30（24小时制）</li>
+      <li><code>g:i a</code> → 2:30 pm（12小时制）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>某些主题有自己的日期格式设置，可能会覆盖这里的全局设置</li>
+      <li>格式字符区分大小写：<code>m</code> 是月份（01-12），<code>M</code> 是月份缩写（Jan-Dec）</li>
+      <li>修改格式只影响显示，不影响数据库中存储的时间数据</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SS-7.html" class="prev"><div class="label">上一篇</div><div class="title">设置时区</div></a>
+    <a href="SS-9.html" class="next"><div class="label">下一篇</div><div class="title">关闭评论</div></a>
+  </div>
+</div>
+</body>
+</html>

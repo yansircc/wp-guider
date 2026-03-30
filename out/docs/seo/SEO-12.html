@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPT SEO 策略：index/noindex 决策 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">CPT SEO 策略</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>CPT 单篇 + 归档页的 SEO 策略</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d4">L4</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>自定义文章类型有两种页面：<strong>单篇页</strong>（如 <code>/product/iphone/</code>）和<strong>归档页</strong>（如 <code>/products/</code>）。需要根据业务场景决定哪些页面该被收录（index）、哪些不该（noindex）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>不是所有 CPT 页面都适合出现在搜索结果中</li>
+      <li>错误的 index 策略会导致低质量页面稀释网站 SEO 权重</li>
+      <li>归档页和单篇页可能存在内容重复问题</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 决策框架</h2>
+    <h3>单篇页（Single）</h3>
+    <ul>
+      <li><strong>index（收录）</strong>：内容丰富、有独立价值的页面 — 产品详情页、案例展示页、FAQ 单篇</li>
+      <li><strong>noindex（不收录）</strong>：内容薄弱或仅用于内部管理的页面 — 如 CPT 只是用于后台管理数据而非前端展示</li>
+    </ul>
+
+    <h3>归档页（Archive）</h3>
+    <ul>
+      <li><strong>index</strong>：归档页有独立价值（如产品列表页，用户会搜索「XX品牌产品」）</li>
+      <li><strong>noindex</strong>：归档页内容与单篇页高度重复，或内容太少（只有标题列表）</li>
+    </ul>
+
+    <h3>常见组合策略</h3>
+    <table style="width:100%; border-collapse:collapse; margin:16px 0; font-size:14px;">
+      <tr style="border-bottom:1px solid var(--border);">
+        <th style="text-align:left; padding:8px; color:var(--text);">CPT 类型</th>
+        <th style="text-align:left; padding:8px; color:var(--text);">单篇</th>
+        <th style="text-align:left; padding:8px; color:var(--text);">归档</th>
+        <th style="text-align:left; padding:8px; color:var(--text);">说明</th>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px; color:var(--text2);">产品</td>
+        <td style="padding:8px; color:var(--green);">index</td>
+        <td style="padding:8px; color:var(--green);">index</td>
+        <td style="padding:8px; color:var(--text2);">两者都有搜索价值</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px; color:var(--text2);">团队成员</td>
+        <td style="padding:8px; color:var(--green);">index</td>
+        <td style="padding:8px; color:var(--yellow);">noindex</td>
+        <td style="padding:8px; color:var(--text2);">单篇有价值，列表页意义不大</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px; color:var(--text2);">弹窗/横幅</td>
+        <td style="padding:8px; color:var(--yellow);">noindex</td>
+        <td style="padding:8px; color:var(--yellow);">noindex</td>
+        <td style="padding:8px; color:var(--text2);">纯内部管理用途</td>
+      </tr>
+      <tr>
+        <td style="padding:8px; color:var(--text2);">FAQ</td>
+        <td style="padding:8px; color:var(--green);">index</td>
+        <td style="padding:8px; color:var(--green);">index</td>
+        <td style="padding:8px; color:var(--text2);">常见问题有搜索流量</td>
+      </tr>
+    </table>
+    <div class="callout tip">原则：如果用户可能直接搜索到这个页面 → index；如果页面只是为网站内部组织服务 → noindex。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>归档页需要先开启</strong>：ACF 创建 CPT 时需在<strong>高级 → URL → 归档</strong>中开启归档，否则根本没有归档页可言</li>
+      <li><strong>分类法归档也要考虑</strong>：自定义分类法的归档页（如 <code>/product-category/xxx/</code>）也需要做 index/noindex 决策</li>
+      <li><strong>分页问题</strong>：归档页的第 2、3...N 页建议 noindex（SEO 插件通常自动处理）</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-11.html" class="prev"><div class="label">上一篇</div><div class="title">为 ACF 分类法（Taxonomy）配置 SEO 标题/描述</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-4.html">提交站点地图到 GSC</a>
+    <a href="SEO-5.html">Yoast：noindex 设置</a>
+    <a href="SEO-8.html">SEOPress：配置 Google 全局代码（Analytics/Ads）</a>
+    <a href="SEO-9.html">SEOPress：noindex/nofollow 设置</a>
+  </div></div>
+</div>
+</body>
+</html>

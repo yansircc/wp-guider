@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>表单集成（Mailchimp / HubSpot） - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">表单集成</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>表单集成（Mailchimp / HubSpot）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor Pro 的 Form Widget 原生集成了多种营销和 CRM 平台，包括 Mailchimp（邮件营销）、HubSpot（CRM）、ActiveCampaign、ConvertKit 等。集成后，表单提交的数据会自动同步到这些平台，无需手动导入。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>自动化线索管理</strong>：询盘数据自动进入 CRM，销售团队即时跟进</li>
+      <li><strong>邮件营销自动化</strong>：新订阅者自动加入 Mailchimp 列表，触发欢迎邮件序列</li>
+      <li><strong>消除人工操作</strong>：不再需要手动从 WordPress 导出 CSV 再导入到营销平台</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>集成 Mailchimp</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>Elementor → Settings → Integrations</strong></li>
+      <li>找到 Mailchimp 区域，填入 <strong>API Key</strong>（从 Mailchimp 账户 → Extras → API Keys 获取）</li>
+      <li>保存并验证连接</li>
+      <li>编辑表单 → Actions After Submit → 添加 <strong>Mailchimp</strong> 动作</li>
+      <li>选择目标 <strong>Audience</strong>（列表）和 <strong>Group</strong>（分组）</li>
+      <li>映射表单字段到 Mailchimp 字段（Email、First Name、Last Name 等）</li>
+    </ol>
+
+    <h3>集成 HubSpot</h3>
+    <ol>
+      <li>Elementor → Settings → Integrations → HubSpot</li>
+      <li>点击 <strong>Connect</strong> 授权 HubSpot 账户</li>
+      <li>编辑表单 → Actions After Submit → 添加 <strong>HubSpot</strong> 动作</li>
+      <li>映射字段：将表单字段对应到 HubSpot 的 Contact Properties</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>字段映射是关键</strong>：Email 字段必须映射，否则无法创建联系人记录</li>
+      <li><strong>双重确认（Double Opt-in）</strong>：Mailchimp 默认开启双重确认，用户提交后还需要在邮箱中点击确认链接才会入列表</li>
+      <li><strong>API Key 权限</strong>：确保 API Key 有足够的读写权限</li>
+      <li><strong>测试提交</strong>：集成配置完后，用测试邮箱提交一次表单，确认数据正确同步到了对应平台</li>
+      <li><strong>GDPR 合规</strong>：收集用户邮箱用于营销需要征得同意，建议在表单中加一个同意勾选框</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-30.html" class="prev"><div class="label">上一篇</div><div class="title">表单提交后动作（邮件/重定向/Webhook）</div></a>
+    <a href="ELE-32.html" class="next"><div class="label">下一篇</div><div class="title">Floating Contact Buttons（WhatsApp/SMS）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

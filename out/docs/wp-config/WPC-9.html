@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SQL 查询基础 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">wp-config</a>
+  <span class="sep">/</span>
+  <span class="current">SQL 查询基础</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>SQL 查询基础</h1>
+    <div class="meta">
+      <span class="tag topic">wp-config</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 的所有数据都存在 MySQL/MariaDB 数据库中。WP-CLI 的 <code>db query</code> 命令可以直接执行 SQL 语句，进行数据查询和修改。</p>
+    <p>WordPress 默认有 12 张核心表：<code>posts</code>、<code>postmeta</code>、<code>options</code>、<code>users</code>、<code>usermeta</code>、<code>comments</code>、<code>commentmeta</code>、<code>terms</code>、<code>termmeta</code>、<code>term_taxonomy</code>、<code>term_relationships</code>、<code>links</code>。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>部分 WordPress 问题只能通过数据库层面解决。例如：重置管理员密码、批量修改文章状态、清理垃圾数据、排查性能瓶颈等。</p>
+    <p>WP-CLI 虽然封装了大部分常用操作，但有时直接写 SQL 更高效、更精确。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>进入数据库交互模式</h3>
+    <pre><code>locwp wp wp-train -- db cli</code></pre>
+
+    <h3>常用查询示例</h3>
+    <pre><code># 查看所有表
+locwp wp wp-train -- db query "SHOW TABLES;"
+
+# 查看 options 表结构
+locwp wp wp-train -- db query "DESCRIBE wp_options;"
+
+# 查询站点 URL
+locwp wp wp-train -- db query "SELECT option_value FROM wp_options WHERE option_name = 'siteurl';"
+
+# 查看最近 5 篇文章
+locwp wp wp-train -- db query "SELECT ID, post_title, post_status FROM wp_posts WHERE post_type='post' ORDER BY ID DESC LIMIT 5;"
+
+# 统计各状态的文章数
+locwp wp wp-train -- db query "SELECT post_status, COUNT(*) as cnt FROM wp_posts WHERE post_type='post' GROUP BY post_status;"</code></pre>
+
+    <h3>数据修改（谨慎操作）</h3>
+    <pre><code># 修改站点 URL（修复白屏时使用）
+locwp wp wp-train -- db query "UPDATE wp_options SET option_value='http://correct-url.local' WHERE option_name='siteurl';"</code></pre>
+    <div class="callout danger">UPDATE 和 DELETE 语句一旦执行无法撤销。务必先用 SELECT 确认要修改的数据，并在操作前创建数据库快照。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>SQL 查询区分表前缀，确认用 <code>wp_</code> 还是自定义前缀</li>
+      <li>WordPress 大量使用序列化数据（如 <code>active_plugins</code>），不能直接用 SQL 修改序列化字段</li>
+      <li>执行 UPDATE/DELETE 前先 SELECT 确认影响范围</li>
+      <li>操作前务必做数据库备份：<code>locwp wp wp-train -- db export backup.sql</code></li>
+      <li>WP-CLI 的 <code>search-replace</code> 命令比手写 SQL 更安全，会正确处理序列化数据</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="WPC-8.html" class="prev"><div class="label">上一篇</div><div class="title">wp-cli 查看选项</div></a>
+    <a href="WPC-10.html" class="next"><div class="label">下一篇</div><div class="title">修复 siteurl</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="WPC-3.html">themes/plugins 目录</a>
+    <a href="WPC-4.html">uploads 目录</a>
+    <a href="WPC-5.html">查看 table_prefix</a>
+    <a href="WPC-6.html">设置 WP_MEMORY_LIMIT</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Theme Builder Footer - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Theme Builder Footer</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Theme Builder Footer</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor Theme Builder 的 Footer 模板功能，允许你用可视化拖拽方式设计全站页脚，替代主题默认的 Footer。你可以在 Footer 中放置公司信息、导航链接、社交图标、版权声明等任意内容。</p>
+    <p>Footer 模板创建后会自动应用到全站所有页面，也可以通过 Display Conditions 指定只在特定页面显示。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>品牌一致性</strong>：统一全站页脚设计，确保每个页面底部信息一致</li>
+      <li><strong>灵活布局</strong>：主题默认 Footer 通常只能改文字和颜色，Theme Builder 可以做任意布局</li>
+      <li><strong>多 Footer 方案</strong>：不同页面可以使用不同的 Footer（如首页用大 Footer，内页用精简版）</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>Templates → Theme Builder</strong></li>
+      <li>点击 <strong>Footer</strong> 区域的 <strong>"+"</strong> 按钮（或 Add New → Footer）</li>
+      <li>选择一个预设模板或从空白开始</li>
+      <li>设计 Footer 内容，常见元素：
+        <ul>
+          <li><strong>Container</strong>：创建多列布局（通常 3-4 列）</li>
+          <li><strong>Heading / Text Editor</strong>：公司名称、简介、版权声明</li>
+          <li><strong>Nav Menu</strong>：页脚导航链接（关于我们、隐私政策等）</li>
+          <li><strong>Social Icons</strong>：社交媒体链接图标</li>
+          <li><strong>Site Logo</strong>：品牌 Logo</li>
+        </ul>
+      </li>
+      <li>设置 Footer 背景色（通常深色）和内边距</li>
+      <li>点击 <strong>Publish</strong>，在弹出的 Display Conditions 中选择 <strong>Entire Site</strong></li>
+    </ol>
+
+    <h3>版权声明动态年份</h3>
+    <p>在 Text Editor 中使用 Elementor 的 Dynamic Tags 插入当前年份，避免每年手动改：</p>
+    <p>点击文本框中的 Dynamic 图标 → 选择 <strong>Current Date Time</strong> → 格式设为 <code>Y</code>（只显示年份）。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>创建 Footer 模板后，主题原有的 Footer 会被完全替代</li>
+      <li>如果页面底部出现两个 Footer，检查是否同时有主题 Footer 和 Elementor Footer 在生效</li>
+      <li>Footer 中的导航链接建议使用 Nav Menu Widget 而非手动写链接，方便后期维护</li>
+      <li>移动端记得检查 Footer 的响应式布局，多列布局在手机上通常需要改为单列</li>
+      <li>Footer 设计保持简洁 — 信息过多的 Footer 反而降低用户体验</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-36.html" class="prev"><div class="label">上一篇</div><div class="title">Theme Builder Header（Logo+Nav Menu+搜索）</div></a>
+    <a href="ELE-38.html" class="next"><div class="label">下一篇</div><div class="title">Single Post 文章模板</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

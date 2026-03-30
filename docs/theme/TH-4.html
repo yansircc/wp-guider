@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安装第三方主题 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">theme</a>
+  <span class="sep">/</span>
+  <span class="current">安装第三方主题</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>安装第三方主题</h1>
+    <div class="meta">
+      <span class="tag topic">theme</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 预装了 Twenty 系列默认主题，但实际项目中通常需要安装更适合业务需求的第三方主题。安装来源有两种：WordPress.org 官方仓库（后台直接搜索安装）和第三方来源（上传 ZIP 文件安装）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>默认主题是演示用途，缺少商业站点所需的布局选项、设计灵活性和性能优化。选择并安装一个高质量的第三方主题（如 Astra）是建站的第一步。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>方法一：从官方仓库安装</h3>
+    <p>后台 → <strong>外观 → 主题 → 添加新主题</strong> → 搜索主题名称 → 点击<strong>安装</strong> → 安装完成后点击<strong>启用</strong>。</p>
+
+    <h3>方法二：上传 ZIP 文件</h3>
+    <p>后台 → <strong>外观 → 主题 → 添加新主题 → 上传主题</strong> → 选择 <code>.zip</code> 文件 → 点击<strong>现在安装</strong> → 启用。</p>
+
+    <h3>方法三：WP-CLI</h3>
+    <pre><code># 从官方仓库安装并激活
+locwp wp wp-train -- theme install astra --activate
+
+# 查看已安装主题
+locwp wp wp-train -- theme list
+
+# 查看当前活跃主题
+locwp wp wp-train -- theme list --status=active</code></pre>
+
+    <div class="callout warning">只从可信来源下载主题：WordPress.org、主题官方网站、正规市场（ThemeForest）。盗版/破解主题几乎 100% 包含恶意代码（后门、SEO 垃圾链接注入等）。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>安装新主题后，之前主题的菜单位置、Widget 和主题特有设置可能需要重新配置</li>
+      <li>安装但未启用的主题仍占磁盘空间，且可能存在安全风险——不用的主题应该删除，只保留一个备用默认主题</li>
+      <li>付费主题通常需要输入 License Key 才能获得更新推送</li>
+      <li>安装主题前建议先用 WP Reset 创建快照，方便回滚</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TH-3.html" class="prev"><div class="label">上一篇</div><div class="title">评估主题优劣</div></a>
+    <a href="TH-5.html" class="next"><div class="label">下一篇</div><div class="title">Customizer 改站点标题</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TH-5.html">Customizer 改站点标题</a>
+  </div></div>
+</div>
+</body>
+</html>

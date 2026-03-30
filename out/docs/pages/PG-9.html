@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关联 Privacy Policy 页面 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">页面管理</a>
+  <span class="sep">/</span>
+  <span class="current">关联 Privacy Policy 页面</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>关联 Privacy Policy 页面</h1>
+    <div class="meta">
+      <span class="tag topic">页面管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 内置了隐私政策页面（Privacy Policy Page）功能。这个功能允许你指定一个页面作为网站的官方隐私政策页面，WordPress 会在登录页面和注册页面的底部自动显示指向该页面的链接。</p>
+    <p>WordPress 还提供了一个隐私政策模板草稿，包含常见的隐私声明条款，你可以在此基础上修改。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>隐私政策是网站的法律必备文件。GDPR（欧洲通用数据保护条例）、CCPA（加州消费者隐私法）等法规要求收集用户数据的网站必须公开隐私政策。</p>
+    <p>即使你的网站面向中国市场，隐私政策也是合规运营的基本要求。WordPress 的登录/注册表单会收集用户信息，因此需要关联隐私政策页面。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入后台 <strong>设置 → 隐私</strong></li>
+      <li>如果还没有隐私政策页面：
+        <ul>
+          <li>点击 <strong>创建新页面</strong> 按钮，WordPress 会自动创建一个包含模板内容的草稿页面</li>
+          <li>编辑该页面，根据你的网站实际情况修改内容</li>
+          <li>发布该页面</li>
+        </ul>
+      </li>
+      <li>如果已有隐私政策页面：
+        <ul>
+          <li>在「更改您的隐私政策页面」下拉菜单中选择该页面</li>
+          <li>点击 <strong>使用此页面</strong></li>
+        </ul>
+      </li>
+      <li>关联后，登录页面底部会自动出现「隐私政策」链接</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>仅关联不等于完成</strong>：WordPress 提供的模板只是框架，你必须根据网站实际收集的数据类型（表单、Cookie、分析工具等）修改隐私政策内容</li>
+      <li><strong>页面必须是已发布状态</strong>：草稿状态的页面虽然可以被关联，但访客无法查看</li>
+      <li><strong>模板内容需要本地化</strong>：默认模板是英文或通用中文，需要根据目标用户所在地区的法规调整</li>
+      <li><strong>定期更新</strong>：当网站功能变化（添加了新表单、新的第三方服务集成）时，隐私政策也需要同步更新</li>
+      <li><strong>页脚链接</strong>：大多数主题不会自动在页脚添加隐私政策链接，你需要手动将其添加到菜单或使用小工具显示</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PG-8.html" class="prev"><div class="label">上一篇</div><div class="title">定时发布页面（⚠️ wp-cron 不稳定，见 backup-maintenance L3/L4）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PG-1.html">创建三个页面并发布</a>
+  </div></div>
+</div>
+</body>
+</html>

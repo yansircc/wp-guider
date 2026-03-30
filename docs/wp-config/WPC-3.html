@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>themes/plugins 目录 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">wp-config</a>
+  <span class="sep">/</span>
+  <span class="current">themes/plugins 目录</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>themes/plugins 目录</h1>
+    <div class="meta">
+      <span class="tag topic">wp-config</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>wp-content/themes/</code> 存放所有已安装的主题，<code>wp-content/plugins/</code> 存放所有已安装的插件。每个主题或插件是一个独立的子目录，包含 PHP、CSS、JS 等文件。</p>
+    <p>WordPress 通过扫描这些目录来发现可用的主题和插件。一个目录 = 一个主题/插件。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>理解这两个目录的结构，是手动排障的必备技能。当后台无法访问时（如白屏），你需要直接操作文件系统来停用问题插件或切换主题。</p>
+    <p>例如：将 <code>plugins/problem-plugin</code> 重命名为 <code>plugins/problem-plugin.bak</code>，WordPress 就会自动停用该插件。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>查看主题目录</h3>
+    <pre><code># 列出所有主题
+locwp wp wp-train -- theme list
+
+# 查看当前激活的主题
+locwp wp wp-train -- theme list --status=active</code></pre>
+    <p>主题目录中的关键文件：</p>
+    <ul>
+      <li><code>style.css</code> — 包含主题元信息（名称、版本、作者）</li>
+      <li><code>functions.php</code> — 主题功能定义，类似于主题专属的插件</li>
+      <li><code>templates/</code> — 页面模板文件</li>
+    </ul>
+
+    <h3>查看插件目录</h3>
+    <pre><code># 列出所有插件
+locwp wp wp-train -- plugin list
+
+# 只看激活的
+locwp wp wp-train -- plugin list --status=active</code></pre>
+    <p>每个插件至少包含一个主 PHP 文件，文件头部有插件元信息注释。</p>
+
+    <h3>文件级别停用插件</h3>
+    <pre><code># 重命名即停用
+mv plugins/problem-plugin plugins/problem-plugin.bak
+
+# 恢复
+mv plugins/problem-plugin.bak plugins/problem-plugin</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>删除主题/插件目录会永久移除它们，包括所有自定义修改</li>
+      <li>WordPress 至少需要一个主题存在，否则前台会报错</li>
+      <li>通过文件系统停用插件不会触发插件的 deactivation hook，部分插件可能留下残余数据</li>
+      <li>不要直接修改第三方主题/插件的文件，更新时会被覆盖。应使用子主题或自定义插件</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="WPC-2.html" class="prev"><div class="label">上一篇</div><div class="title">wp-content 目录结构</div></a>
+    <a href="WPC-4.html" class="next"><div class="label">下一篇</div><div class="title">uploads 目录</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="WPC-1.html">查看 DB_NAME</a>
+    <a href="WPC-2.html">wp-content 目录结构</a>
+    <a href="WPC-9.html">SQL 查询基础</a>
+    <a href="WPC-10.html">修复 siteurl</a>
+  </div></div>
+</div>
+</body>
+</html>

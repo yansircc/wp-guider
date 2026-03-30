@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WP Guider — Topic × Difficulty 矩阵</title>
+<style>
+  :root {
+    --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+    --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b;
+    --accent: #3b82f6; --green: #22c55e; --yellow: #eab308;
+    --orange: #f97316; --red: #ef4444; --purple: #a855f7;
+    --blue-dim: #1e3a5f; --green-dim: #14532d; --new: #06b6d4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); padding: 24px; line-height: 1.5; }
+
+  /* Header */
+  .header { text-align: center; margin-bottom: 32px; }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header p { color: var(--text2); font-size: 14px; }
+
+  /* Stats bar */
+  .stats { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap; }
+  .stat { background: var(--surface); border-radius: 12px; padding: 16px 24px; text-align: center; min-width: 120px; }
+  .stat .num { font-size: 32px; font-weight: 700; }
+  .stat .label { font-size: 12px; color: var(--text2); margin-top: 4px; }
+  .stat.total .num { color: var(--accent); }
+  .stat.existing .num { color: var(--green); }
+  .stat.new .num { color: var(--new); }
+  .stat.topics .num { color: var(--yellow); }
+  .stat.coverage .num { color: var(--purple); }
+
+  /* Difficulty legend */
+  .legend { display: flex; gap: 12px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; font-size: 13px; }
+  .legend .item { display: flex; align-items: center; gap: 6px; }
+  .legend .dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  /* Matrix */
+  .matrix-wrap { overflow-x: auto; }
+  .matrix { width: 100%; border-collapse: separate; border-spacing: 2px; }
+  .matrix th { background: var(--surface); padding: 10px 12px; font-size: 13px; font-weight: 600; position: sticky; top: 0; z-index: 2; white-space: nowrap; }
+  .matrix th.topic-header { text-align: left; min-width: 200px; }
+  .matrix th.diff-header { text-align: center; width: 18%; }
+  .matrix th.diff-header .diff-label { font-size: 11px; color: var(--text2); font-weight: 400; }
+
+  /* Category row */
+  .matrix tr.category-row td { background: var(--surface2); font-weight: 700; font-size: 14px; padding: 8px 12px; color: var(--yellow); border-radius: 6px; }
+
+  /* Topic row */
+  .matrix td { padding: 0; vertical-align: top; }
+  .matrix td.topic-name { background: var(--surface); padding: 10px 12px; font-size: 13px; border-radius: 6px 0 0 6px; white-space: nowrap; }
+  .matrix td.topic-name .sub { color: var(--text3); font-size: 11px; }
+
+  /* Cell */
+  .cell { background: var(--surface); border-radius: 4px; min-height: 48px; padding: 6px 8px; position: relative; }
+  .cell.empty { background: rgba(30,41,59,0.4); }
+  .cell.has-tasks { cursor: pointer; transition: background 0.15s; }
+  .cell.has-tasks:hover { background: var(--surface2); }
+  .cell .count { font-size: 18px; font-weight: 700; text-align: center; }
+  .cell .count.c-existing { color: var(--green); }
+  .cell .count.c-new { color: var(--new); }
+  .cell .count.c-mixed { color: var(--accent); }
+  .cell .task-list { display: block; margin-top: 6px; }
+  .cell .task-item { font-size: 11px; color: var(--text2); padding: 3px 0; border-top: 1px solid rgba(255,255,255,0.05); line-height: 1.4; }
+  .cell .task-item:first-child { border-top: none; }
+  .cell .task-item .tid { color: var(--text3); font-family: monospace; font-size: 10px; }
+  .cell .task-item a { color: inherit; text-decoration: none; display: block; } .cell .task-item a:hover { color: var(--accent); }
+
+  /* Diff bar inside cell */
+  .cell .bar { height: 3px; border-radius: 2px; margin-top: 4px; }
+  .cell .bar.b1 { background: var(--green); }
+  .cell .bar.b2 { background: var(--accent); }
+  .cell .bar.b3 { background: var(--yellow); }
+  .cell .bar.b4 { background: var(--orange); }
+  .cell .bar.b5 { background: var(--red); }
+
+  /* Row totals */
+  .matrix td.row-total { background: var(--surface); padding: 10px 8px; text-align: center; font-weight: 600; font-size: 14px; border-radius: 0 6px 6px 0; color: var(--text2); }
+
+  /* Footer */
+  .footer { text-align: center; margin-top: 32px; color: var(--text3); font-size: 12px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body { padding: 12px; }
+    .stats { gap: 8px; }
+    .stat { padding: 12px 16px; min-width: 80px; }
+    .stat .num { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>WP Guider — Topic × Difficulty 矩阵</h1>
+  <p>WordPress 培训题库知识点覆盖全景图 · 点击格子展开题目列表</p>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<div class="legend">
+  <div class="item"><div class="dot" style="background:rgba(30,41,59,0.6)"></div> 暂无题目</div>
+  <div class="item" style="margin-left:24px"><div class="dot" style="background:var(--green);opacity:0.3"></div> L1 入门</div>
+  <div class="item"><div class="dot" style="background:var(--accent)"></div> L2 基础</div>
+  <div class="item"><div class="dot" style="background:var(--yellow)"></div> L3 进阶</div>
+  <div class="item"><div class="dot" style="background:var(--orange)"></div> L4 高级</div>
+  <div class="item"><div class="dot" style="background:var(--red)"></div> L5 专家</div>
+</div>
+
+<div class="matrix-wrap">
+  <table class="matrix" id="matrix"></table>
+</div>
+
+<div class="footer">
+  WP Guider Training System · Topic × Difficulty Matrix · Generated <span id="gen-date"></span>
+</div>
+
+<script>
+// ========== DATA ==========
+
+// Difficulty definitions
+const DIFFS = [
+  { level: 1, label: 'L1 入门', desc: '照着步骤做', color: 'var(--green)' },
+  { level: 2, label: 'L2 基础', desc: '理解概念后操作', color: 'var(--accent)' },
+  { level: 3, label: 'L3 进阶', desc: '需要做选择判断', color: 'var(--yellow)' },
+  { level: 4, label: 'L4 高级', desc: 'CLI + 配置 + 排查', color: 'var(--orange)' },
+  { level: 5, label: 'L5 专家', desc: '架构决策 + 故障修复', color: 'var(--red)' },
+];
+
+// Categories and Topics
+const CATEGORIES = [
+  {
+    name: '🌐 基础设施',
+    topics: [
+      { id: 'domain', name: '域名管理', sub: '注册 · DNS · 迁移' },
+      { id: 'hosting', name: '主机空间', sub: 'Hostinger · 面板 · FTP' },
+      { id: 'wp-install', name: 'WordPress 安装', sub: '安装 · 域名绑定 · SSL' },
+    ]
+  },
+  {
+    name: '⚙️ 站点设置',
+    topics: [
+      { id: 'site-settings', name: '站点配置', sub: '标题 · 时区 · 固定链接' },
+      { id: 'user-management', name: '用户管理', sub: '角色 · 权限 · 个人资料' },
+    ]
+  },
+  {
+    name: '📝 内容管理',
+    topics: [
+      { id: 'pages', name: '页面管理', sub: '创建 · 层级 · 模板' },
+      { id: 'posts-taxonomy', name: '文章与分类', sub: '文章 · 分类 · 标签' },
+      { id: 'media', name: '媒体管理', sub: '上传 · 图库 · 尺寸' },
+      { id: 'menus-nav', name: '菜单与导航', sub: '创建 · 排序 · 位置' },
+    ]
+  },
+  {
+    name: '🎨 外观定制',
+    topics: [
+      { id: 'theme', name: '主题定制', sub: '选型 · Customizer · Logo' },
+      { id: 'elementor', name: 'Elementor 建站', sub: '布局 · Widget · 模板' },
+      { id: 'zeroy', name: 'ZeroY AI 建站', sub: '页面 · 模板 · 交互' },
+    ]
+  },
+  {
+    name: '🔌 插件与扩展',
+    topics: [
+      { id: 'plugins-basic', name: '插件管理', sub: '安装 · 选型 · 表单' },
+      { id: 'acf', name: 'ACF 自定义字段', sub: 'CPT · 分类法 · 字段组' },
+      { id: 'seo', name: 'SEO 优化', sub: 'Yoast · 标题 · 描述' },
+      { id: 'google-analytics', name: 'Google 全家桶', sub: 'GSC · GA4 · 数据分析' },
+    ]
+  },
+  {
+    name: '🛠️ 运维与安全',
+    topics: [
+      { id: 'wp-config', name: 'wp-config 与数据库', sub: '常量 · 文件结构 · SQL' },
+      { id: 'security', name: '安全加固', sub: '登录 · 权限 · 防护' },
+      { id: 'backup-maintenance', name: '备份与维护', sub: '备份 · 更新 · Cron' },
+      { id: 'troubleshooting', name: '故障排查', sub: 'Debug · 冲突 · 白屏' },
+    ]
+  },
+];
+
+// All topics flat
+const ALL_TOPICS = CATEGORIES.flatMap(c => c.topics);
+
+// ========== EXISTING TASKS MAPPED ==========
+// Map old section → new topic + new difficulty
+
+const TASK_MAP = [
+  // L1: 站点设置
+  { id:'SS-1', oldDiff:1, topic:'site-settings', newDiff:1, desc:'修改站点标题', isNew:false },
+  { id:'SS-2', oldDiff:1, topic:'site-settings', newDiff:1, desc:'修改副标题', isNew:false },
+  { id:'SS-3', oldDiff:1, topic:'site-settings', newDiff:1, desc:'关闭注册', isNew:false },
+  { id:'SS-4', oldDiff:1, topic:'site-settings', newDiff:1, desc:'切换语言', isNew:false },
+  { id:'SS-5', oldDiff:1, topic:'site-settings', newDiff:1, desc:'确认仪表盘可用', isNew:false },
+  { id:'SS-6', oldDiff:1, topic:'site-settings', newDiff:1, desc:'修改固定链接', isNew:false },
+  { id:'SS-7', oldDiff:1, topic:'site-settings', newDiff:1, desc:'设置时区', isNew:false },
+  { id:'SS-8', oldDiff:1, topic:'site-settings', newDiff:1, desc:'日期和时间格式', isNew:false },
+  { id:'SS-9', oldDiff:1, topic:'site-settings', newDiff:1, desc:'关闭评论', isNew:false },
+  { id:'SS-10', oldDiff:1, topic:'site-settings', newDiff:1, desc:'每页文章数', isNew:false },
+  // L1.3: 用户管理
+  { id:'UM-1', oldDiff:1, topic:'user-management', newDiff:1, desc:'修改昵称和显示名', isNew:false },
+  { id:'UM-2', oldDiff:1, topic:'user-management', newDiff:1, desc:'创建编辑用户', isNew:false },
+  { id:'UM-3', oldDiff:1, topic:'user-management', newDiff:1, desc:'修改默认角色', isNew:false },
+  { id:'UM-4', oldDiff:1, topic:'user-management', newDiff:1, desc:'创建作者用户', isNew:false },
+  { id:'UM-5', oldDiff:2, topic:'user-management', newDiff:2, desc:'删除用户并归属内容', isNew:false },
+  { id:'UM-6', oldDiff:2, topic:'user-management', newDiff:2, desc:'修改用户角色', isNew:false },
+  { id:'UM-7', oldDiff:0, topic:'user-management', newDiff:3, desc:'生成 Application Password', isNew:true },
+  { id:'UM-8', oldDiff:0, topic:'user-management', newDiff:2, desc:'用 DoLogin 生成免密登录链接', isNew:true },
+
+  // L2.1: 页面
+  { id:'PG-1', oldDiff:1, topic:'pages', newDiff:1, desc:'创建三个页面并发布', isNew:false },
+  { id:'PG-2', oldDiff:1, topic:'pages', newDiff:2, desc:'设置静态首页', isNew:false },
+  { id:'PG-3', oldDiff:2, topic:'pages', newDiff:2, desc:'创建子页面', isNew:false },
+  { id:'PG-4', oldDiff:2, topic:'pages', newDiff:2, desc:'修改页面 slug', isNew:false },
+  { id:'PG-5', oldDiff:2, topic:'pages', newDiff:2, desc:'创建私密页面', isNew:false },
+  { id:'PG-6', oldDiff:0, topic:'pages', newDiff:2, desc:'页面状态切换（草稿/待审/发布/回收站/恢复）', isNew:true },
+  { id:'PG-7', oldDiff:0, topic:'pages', newDiff:2, desc:'修改页面作者', isNew:true },
+  { id:'PG-8', oldDiff:0, topic:'pages', newDiff:2, desc:'定时发布页面（⚠️ wp-cron 不稳定，见 backup-maintenance L3/L4）', isNew:true },
+  { id:'PG-9', oldDiff:0, topic:'pages', newDiff:2, desc:'关联 Privacy Policy 页面', isNew:true },
+
+  // L2.2: 文章与分类
+  { id:'PT-1', oldDiff:1, topic:'posts-taxonomy', newDiff:1, desc:'创建分类目录', isNew:false },
+  { id:'PT-2', oldDiff:2, topic:'posts-taxonomy', newDiff:2, desc:'创建子分类', isNew:false },
+  { id:'PT-3', oldDiff:1, topic:'posts-taxonomy', newDiff:2, desc:'发布文章并归类', isNew:false },
+  { id:'PT-4', oldDiff:1, topic:'posts-taxonomy', newDiff:1, desc:'创建标签', isNew:false },
+  { id:'PT-5', oldDiff:2, topic:'posts-taxonomy', newDiff:2, desc:'文章+标签+摘要', isNew:false },
+  { id:'PT-6', oldDiff:1, topic:'posts-taxonomy', newDiff:1, desc:'重命名默认分类', isNew:false },
+
+  // L2.3: 媒体
+  { id:'MD-1', oldDiff:1, topic:'media', newDiff:1, desc:'上传图片到媒体库', isNew:false },
+  { id:'MD-2', oldDiff:1, topic:'media', newDiff:1, desc:'编辑图片信息', isNew:false },
+  { id:'MD-3', oldDiff:2, topic:'media', newDiff:2, desc:'设置特色图片', isNew:false },
+  { id:'MD-4', oldDiff:2, topic:'media', newDiff:2, desc:'媒体设置（缩略图尺寸）', isNew:false },
+  { id:'MD-5', oldDiff:0, topic:'media', newDiff:2, desc:'处理网站素材（压缩/裁剪/格式转换）', isNew:true },
+
+  // L2.4-2.5: 内容编辑 → Gutenberg 区块编辑器不使用，已移除
+  // （Post 用经典编辑器 + MD 插件，Page 用 Page Builder）
+
+  // L2.6: 菜单
+  { id:'MN-1', oldDiff:1, topic:'menus-nav', newDiff:1, desc:'创建主导航菜单', isNew:false },
+  { id:'MN-2', oldDiff:1, topic:'menus-nav', newDiff:1, desc:'添加页面到菜单', isNew:false },
+  { id:'MN-3', oldDiff:2, topic:'menus-nav', newDiff:2, desc:'添加自定义链接', isNew:false },
+  { id:'MN-4', oldDiff:2, topic:'menus-nav', newDiff:2, desc:'子菜单层级', isNew:false },
+  { id:'MN-5', oldDiff:2, topic:'menus-nav', newDiff:2, desc:'菜单显示位置', isNew:false },
+
+  // L2.7: 插件管理 (basic)
+  { id:'PB-1', oldDiff:1, topic:'plugins-basic', newDiff:1, desc:'安装并激活插件', isNew:false },
+  { id:'PB-2', oldDiff:1, topic:'plugins-basic', newDiff:1, desc:'停用并删除插件', isNew:false },
+
+  // L3.1: SEO（Yoast + SEOPress 双插件）
+  { id:'SEO-1', oldDiff:1, topic:'seo', newDiff:2, desc:'安装 Yoast SEO + 基础配置向导', isNew:false },
+  { id:'SEO-2', oldDiff:2, topic:'seo', newDiff:2, desc:'Yoast：设置页面 SEO 标题/描述', isNew:false },
+  { id:'SEO-3', oldDiff:2, topic:'seo', newDiff:2, desc:'修改页面 slug 为英文', isNew:false },
+  { id:'SEO-4', oldDiff:2, topic:'seo', newDiff:3, desc:'提交站点地图到 GSC', isNew:false },
+  { id:'SEO-5', oldDiff:2, topic:'seo', newDiff:3, desc:'Yoast：noindex 设置', isNew:false },
+  { id:'SEO-6', oldDiff:0, topic:'seo', newDiff:2, desc:'安装 SEOPress + 基础配置', isNew:true },
+  { id:'SEO-7', oldDiff:0, topic:'seo', newDiff:2, desc:'SEOPress：设置页面 SEO 标题/描述', isNew:true },
+  { id:'SEO-8', oldDiff:0, topic:'seo', newDiff:3, desc:'SEOPress：配置 Google 全局代码（Analytics/Ads）', isNew:true },
+  { id:'SEO-9', oldDiff:0, topic:'seo', newDiff:3, desc:'SEOPress：noindex/nofollow 设置', isNew:true },
+  { id:'SEO-10', oldDiff:0, topic:'seo', newDiff:3, desc:'为 ACF 自定义文章类型配置 SEO 标题模板', isNew:true },
+  { id:'SEO-11', oldDiff:0, topic:'seo', newDiff:3, desc:'为 ACF 分类法（Taxonomy）配置 SEO 标题/描述', isNew:true },
+  { id:'SEO-12', oldDiff:0, topic:'seo', newDiff:4, desc:'CPT 单篇 + 归档页的 SEO 策略（index/noindex 决策）', isNew:true },
+
+  // L3.2-3.4: 内容排版 → Gutenberg 排版已移除，Page Builder 在 Elementor/ZeroY topic
+  { id:'BM-1', oldDiff:2, topic:'backup-maintenance', newDiff:2, desc:'UpdraftPlus 备份', isNew:false },
+  { id:'BM-2', oldDiff:2, topic:'backup-maintenance', newDiff:3, desc:'恢复备份', isNew:false },
+  { id:'TH-1', oldDiff:1, topic:'theme', newDiff:2, desc:'响应式预览', isNew:false },
+  { id:'TH-2', oldDiff:2, topic:'theme', newDiff:2, desc:'移动端菜单调整', isNew:false },
+
+  // L3.5: 客户建站 → 拆散归入各 Topic（已分别放入 pages/menus-nav/seo）
+
+  // L4: 主题定制
+  { id:'TH-3', oldDiff:1, topic:'theme', newDiff:2, desc:'评估主题优劣', isNew:false },
+  { id:'TH-4', oldDiff:2, topic:'theme', newDiff:2, desc:'安装第三方主题', isNew:false },
+  { id:'TH-5', oldDiff:1, topic:'theme', newDiff:1, desc:'Customizer 改站点标题', isNew:false },
+  { id:'TH-6', oldDiff:1, topic:'theme', newDiff:2, desc:'上传 Favicon', isNew:false },
+  { id:'TH-7', oldDiff:1, topic:'theme', newDiff:2, desc:'上传 Logo', isNew:false },
+  { id:'TH-8', oldDiff:2, topic:'theme', newDiff:2, desc:'设置文章页', isNew:false },
+  // L4.3: Widget → 不使用，已移除
+
+  // L5: ACF + 插件
+  { id:'PB-3', oldDiff:1, topic:'plugins-basic', newDiff:2, desc:'插件选型方法论', isNew:false },
+  { id:'ACF-1', oldDiff:1, topic:'acf', newDiff:1, desc:'安装 ACF Pro', isNew:false },
+  // ACF - 自定义文章类型 (CPT) CRUD
+  { id:'ACF-2', oldDiff:0, topic:'acf', newDiff:1, desc:'添加自定义文章类型（如产品）', isNew:true },
+  { id:'ACF-3', oldDiff:0, topic:'acf', newDiff:1, desc:'编辑/查看文章类型设置', isNew:true },
+  { id:'ACF-4', oldDiff:0, topic:'acf', newDiff:2, desc:'开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）', isNew:true },
+  { id:'ACF-5', oldDiff:0, topic:'acf', newDiff:2, desc:'删除文章类型', isNew:true },
+  // ACF - 分类法 CRUD
+  { id:'ACF-6', oldDiff:0, topic:'acf', newDiff:1, desc:'创建分类法（如产品分类）+ 开启分层', isNew:true },
+  { id:'ACF-7', oldDiff:0, topic:'acf', newDiff:1, desc:'添加/编辑/删除具体分类项', isNew:true },
+  { id:'ACF-8', oldDiff:0, topic:'acf', newDiff:2, desc:'编辑/删除分类法', isNew:true },
+  // ACF - CPT 与 Taxonomy 关联
+  { id:'ACF-9', oldDiff:0, topic:'acf', newDiff:2, desc:'将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）', isNew:true },
+  { id:'ACF-10', oldDiff:0, topic:'acf', newDiff:2, desc:'在 CPT 文章中使用分类法进行归类', isNew:true },
+  // ACF - 字段组
+  { id:'ACF-11', oldDiff:2, topic:'acf', newDiff:2, desc:'创建字段组 + 添加具体字段', isNew:false },
+  { id:'ACF-12', oldDiff:2, topic:'acf', newDiff:2, desc:'填写 ACF 字段值', isNew:false },
+  { id:'ACF-13', oldDiff:0, topic:'acf', newDiff:2, desc:'编辑/删除/查看字段组', isNew:true },
+  { id:'ACF-14', oldDiff:0, topic:'acf', newDiff:2, desc:'添加/修改/删除具体字段', isNew:true },
+  // ACF - 常用字段类型
+  { id:'ACF-15', oldDiff:0, topic:'acf', newDiff:2, desc:'文本 / 文本区域 / 数字 / URL 字段', isNew:true },
+  { id:'ACF-16', oldDiff:0, topic:'acf', newDiff:2, desc:'图片 / 文件 字段', isNew:true },
+  { id:'ACF-17', oldDiff:0, topic:'acf', newDiff:2, desc:'选择框 / 复选框 / 单选按钮 字段', isNew:true },
+  { id:'ACF-18', oldDiff:0, topic:'acf', newDiff:2, desc:'True/False 开关字段', isNew:true },
+  { id:'ACF-19', oldDiff:0, topic:'acf', newDiff:3, desc:'关系 / 文章对象 字段', isNew:true },
+  { id:'ACF-20', oldDiff:0, topic:'acf', newDiff:3, desc:'日期选择器 / 颜色选择器 字段', isNew:true },
+  // ACF - 进阶功能
+  { id:'ACF-21', oldDiff:2, topic:'acf', newDiff:3, desc:'位置规则-特定页面', isNew:false },
+  { id:'ACF-22', oldDiff:2, topic:'acf', newDiff:3, desc:'位置规则-文章类型', isNew:false },
+  { id:'ACF-23', oldDiff:2, topic:'acf', newDiff:3, desc:'分类法字段', isNew:false },
+  // L5.6/5.9/5.14: 已删除（CPT UI 不再需要、选项页面/进阶实战/数据查询不适用）
+  { id:'ACF-24', oldDiff:2, topic:'acf', newDiff:3, desc:'条件逻辑', isNew:false },
+  { id:'ACF-25', oldDiff:2, topic:'acf', newDiff:2, desc:'导出 ACF JSON', isNew:false },
+  { id:'ACF-26', oldDiff:2, topic:'acf', newDiff:2, desc:'导入 ACF JSON', isNew:false },
+  { id:'ACF-27', oldDiff:0, topic:'acf', newDiff:2, desc:'ACF Playground：可视化拖拽生成 ACF JSON', isNew:true },
+  { id:'ACF-28', oldDiff:0, topic:'acf', newDiff:2, desc:'ACF Helper：用自然语言描述生成 ACF JSON', isNew:true },
+  // WPForms 已删除（不使用）
+  { id:'SEC-1', oldDiff:2, topic:'security', newDiff:2, desc:'安装 Wordfence + 基础安全扫描', isNew:false },
+
+  // Google 全家桶
+  { id:'GA-1', oldDiff:0, topic:'google-analytics', newDiff:2, desc:'注册 Google Search Console + 验证站点所有权', isNew:true },
+  { id:'GA-2', oldDiff:0, topic:'google-analytics', newDiff:2, desc:'提交 Sitemap 到 GSC', isNew:true },
+  { id:'GA-3', oldDiff:0, topic:'google-analytics', newDiff:2, desc:'注册 GA4 + 安装追踪代码（通过 SEO 插件）', isNew:true },
+  { id:'GA-4', oldDiff:0, topic:'google-analytics', newDiff:3, desc:'GA4 基础报告阅读（用户/会话/页面浏览）', isNew:true },
+  { id:'GA-5', oldDiff:0, topic:'google-analytics', newDiff:3, desc:'GSC 性能报告（点击/展示/CTR/排名）', isNew:true },
+  { id:'GA-6', oldDiff:0, topic:'google-analytics', newDiff:3, desc:'GA4 事件追踪（按钮点击/表单提交）', isNew:true },
+  { id:'GA-7', oldDiff:0, topic:'google-analytics', newDiff:4, desc:'GA4 转化目标设置 + Google Ads 联动', isNew:true },
+
+  // L6: wp-config & DB
+  { id:'WPC-1', oldDiff:1, topic:'wp-config', newDiff:2, desc:'查看 DB_NAME', isNew:false },
+  { id:'WPC-2', oldDiff:1, topic:'wp-config', newDiff:2, desc:'wp-content 目录结构', isNew:false },
+  { id:'WPC-3', oldDiff:2, topic:'wp-config', newDiff:3, desc:'themes/plugins 目录', isNew:false },
+  { id:'WPC-4', oldDiff:2, topic:'wp-config', newDiff:3, desc:'uploads 目录', isNew:false },
+  { id:'WPC-5', oldDiff:2, topic:'wp-config', newDiff:3, desc:'查看 table_prefix', isNew:false },
+  { id:'WPC-6', oldDiff:2, topic:'wp-config', newDiff:3, desc:'设置 WP_MEMORY_LIMIT', isNew:false },
+  { id:'WPC-7', oldDiff:2, topic:'wp-config', newDiff:3, desc:'设置 WP_DEBUG_DISPLAY', isNew:false },
+  { id:'WPC-8', oldDiff:2, topic:'wp-config', newDiff:3, desc:'wp-cli 查看选项', isNew:false },
+  { id:'WPC-9', oldDiff:3, topic:'wp-config', newDiff:4, desc:'SQL 查询基础', isNew:false },
+  { id:'WPC-10', oldDiff:3, topic:'wp-config', newDiff:4, desc:'修复 siteurl', isNew:false },
+
+  // L7: 安全 + 维护
+  { id:'BM-3', oldDiff:1, topic:'backup-maintenance', newDiff:2, desc:'备份策略选择', isNew:false },
+  { id:'BM-4', oldDiff:2, topic:'backup-maintenance', newDiff:3, desc:'自动备份计划', isNew:false },
+  { id:'BM-5', oldDiff:0, topic:'backup-maintenance', newDiff:2, desc:'WP Reset 生成快照', isNew:true },
+  { id:'BM-6', oldDiff:0, topic:'backup-maintenance', newDiff:2, desc:'WP Reset 恢复快照', isNew:true },
+  { id:'BM-7', oldDiff:0, topic:'backup-maintenance', newDiff:3, desc:'All-in-One Migration 跨服务器迁移', isNew:true },
+  { id:'SEC-2', oldDiff:1, topic:'security', newDiff:1, desc:'确认注册关闭', isNew:false },
+  { id:'SEC-3', oldDiff:2, topic:'security', newDiff:3, desc:'隐藏登录 URL', isNew:false },
+  { id:'SEC-4', oldDiff:2, topic:'security', newDiff:3, desc:'禁用文件编辑', isNew:false },
+  { id:'BM-8', oldDiff:1, topic:'backup-maintenance', newDiff:2, desc:'更新 WordPress', isNew:false },
+  { id:'BM-9', oldDiff:2, topic:'backup-maintenance', newDiff:2, desc:'更新插件', isNew:false },
+  { id:'BM-10', oldDiff:2, topic:'backup-maintenance', newDiff:3, desc:'wp-cron 检查', isNew:false },
+  { id:'BM-11', oldDiff:3, topic:'backup-maintenance', newDiff:4, desc:'系统 cron 替换', isNew:false },
+
+  // L8: 故障排查
+  { id:'TS-1', oldDiff:1, topic:'troubleshooting', newDiff:3, desc:'开启 WP_DEBUG', isNew:false },
+  { id:'TS-2', oldDiff:2, topic:'troubleshooting', newDiff:3, desc:'查看 debug.log', isNew:false },
+  { id:'TS-3', oldDiff:2, topic:'troubleshooting', newDiff:4, desc:'插件逐个排查', isNew:false },
+  { id:'TS-4', oldDiff:3, topic:'troubleshooting', newDiff:5, desc:'mu-plugin 故障修复', isNew:false },
+  { id:'TS-5', oldDiff:2, topic:'troubleshooting', newDiff:4, desc:'切换默认主题排查', isNew:false },
+  { id:'TS-6', oldDiff:3, topic:'troubleshooting', newDiff:5, desc:'functions.php 语法错误修复', isNew:false },
+  { id:'TS-7', oldDiff:3, topic:'troubleshooting', newDiff:5, desc:'修复错误 siteurl', isNew:false },
+  { id:'TS-8', oldDiff:3, topic:'troubleshooting', newDiff:5, desc:'综合故障注入-白屏', isNew:false },
+  { id:'TS-9', oldDiff:3, topic:'troubleshooting', newDiff:5, desc:'综合故障注入-数据库', isNew:false },
+  { id:'TS-10', oldDiff:3, topic:'troubleshooting', newDiff:5, desc:'综合故障注入-500', isNew:false },
+  { id:'TS-11', oldDiff:3, topic:'troubleshooting', newDiff:5, desc:'综合故障注入-权限', isNew:false },
+
+  // Elementor Pro 建站
+  // ELE.1: 安装与基础
+  { id:'ELE-1', oldDiff:1, topic:'elementor', newDiff:1, desc:'安装 Elementor Pro + 激活授权', isNew:false },
+  { id:'ELE-2', oldDiff:1, topic:'elementor', newDiff:1, desc:'创建第一个页面（拖拽编辑器界面认识）', isNew:false },
+  // ELE.2: 布局系统
+  { id:'ELE-3', oldDiff:1, topic:'elementor', newDiff:2, desc:'Container 布局（Flexbox 方向/对齐/间距）', isNew:false },
+  { id:'ELE-4', oldDiff:2, topic:'elementor', newDiff:2, desc:'嵌套 Container（多层布局）', isNew:false },
+  { id:'ELE-5', oldDiff:0, topic:'elementor', newDiff:3, desc:'Grid Container 布局', isNew:true },
+  // ELE.3: 基础 Widget
+  { id:'ELE-6', oldDiff:1, topic:'elementor', newDiff:1, desc:'标题 / 文本编辑器 / 图片 Widget', isNew:false },
+  { id:'ELE-7', oldDiff:1, topic:'elementor', newDiff:1, desc:'按钮 / 图标 / 间距 Widget', isNew:false },
+  { id:'ELE-8', oldDiff:0, topic:'elementor', newDiff:2, desc:'图标盒子 / 图片盒子 Widget', isNew:true },
+  { id:'ELE-9', oldDiff:0, topic:'elementor', newDiff:2, desc:'视频 / 谷歌地图 Widget', isNew:true },
+  // ELE.4: 全局样式与设计系统
+  { id:'ELE-10', oldDiff:2, topic:'elementor', newDiff:2, desc:'全局颜色 + 全局字体设置', isNew:false },
+  { id:'ELE-11', oldDiff:0, topic:'elementor', newDiff:3, desc:'Design System Variables（字号/间距/圆角变量）', isNew:true },
+  { id:'ELE-12', oldDiff:0, topic:'elementor', newDiff:3, desc:'CSS Classes 复用样式', isNew:true },
+  // ELE.5: 响应式设计
+  { id:'ELE-13', oldDiff:2, topic:'elementor', newDiff:2, desc:'响应式断点（桌面/平板/手机预览切换）', isNew:false },
+  { id:'ELE-14', oldDiff:2, topic:'elementor', newDiff:3, desc:'按设备隐藏/显示元素', isNew:false },
+  { id:'ELE-15', oldDiff:0, topic:'elementor', newDiff:3, desc:'响应式排版（不同设备不同字号/间距）', isNew:true },
+  // ELE.6: Hero & 高级内容
+  { id:'ELE-16', oldDiff:2, topic:'elementor', newDiff:3, desc:'Hero Section（背景图+叠加+标题+CTA）', isNew:false },
+  { id:'ELE-17', oldDiff:2, topic:'elementor', newDiff:3, desc:'视频背景 Hero', isNew:false },
+  { id:'ELE-18', oldDiff:0, topic:'elementor', newDiff:2, desc:'Slides 幻灯片 Widget', isNew:true },
+  { id:'ELE-19', oldDiff:0, topic:'elementor', newDiff:2, desc:'Animated Headline 动态标题', isNew:true },
+  { id:'ELE-20', oldDiff:0, topic:'elementor', newDiff:2, desc:'Countdown 倒计时 Widget', isNew:true },
+  { id:'ELE-21', oldDiff:0, topic:'elementor', newDiff:2, desc:'Price Table 价格表 Widget', isNew:true },
+  { id:'ELE-22', oldDiff:0, topic:'elementor', newDiff:2, desc:'Testimonial Carousel 评价轮播', isNew:true },
+  // ELE.7: 互动元素
+  { id:'ELE-23', oldDiff:2, topic:'elementor', newDiff:2, desc:'手风琴 / 标签 / 切换 Widget', isNew:false },
+  { id:'ELE-24', oldDiff:0, topic:'elementor', newDiff:2, desc:'Table of Contents 目录 Widget', isNew:true },
+  { id:'ELE-25', oldDiff:0, topic:'elementor', newDiff:3, desc:'Motion Effects 动效（滚动视差/淡入）', isNew:true },
+  { id:'ELE-26', oldDiff:0, topic:'elementor', newDiff:3, desc:'Lottie 动画 Widget', isNew:true },
+  { id:'ELE-27', oldDiff:0, topic:'elementor', newDiff:3, desc:'Sticky 元素（固定导航/侧边栏）', isNew:true },
+  // ELE.8: 表单与转化
+  { id:'ELE-28', oldDiff:2, topic:'elementor', newDiff:2, desc:'Elementor Form（联系表单设计）', isNew:false },
+  { id:'ELE-29', oldDiff:0, topic:'elementor', newDiff:3, desc:'多步骤表单（Multi-step Form）', isNew:true },
+  { id:'ELE-30', oldDiff:0, topic:'elementor', newDiff:3, desc:'表单提交后动作（邮件/重定向/Webhook）', isNew:true },
+  { id:'ELE-31', oldDiff:0, topic:'elementor', newDiff:3, desc:'表单集成（Mailchimp / HubSpot）', isNew:true },
+  { id:'ELE-32', oldDiff:0, topic:'elementor', newDiff:2, desc:'Floating Contact Buttons（WhatsApp/SMS）', isNew:true },
+  // ELE.9: Popup Builder
+  { id:'ELE-33', oldDiff:2, topic:'elementor', newDiff:3, desc:'Popup 创建（Modal/Bar/Slide-in）', isNew:false },
+  { id:'ELE-34', oldDiff:3, topic:'elementor', newDiff:4, desc:'Popup 触发条件与显示规则', isNew:false },
+  { id:'ELE-35', oldDiff:0, topic:'elementor', newDiff:4, desc:'Popup 表单集成（询盘弹窗）', isNew:true },
+  // ELE.10: Theme Builder
+  { id:'ELE-36', oldDiff:2, topic:'elementor', newDiff:3, desc:'Theme Builder Header（Logo+Nav Menu+搜索）', isNew:false },
+  { id:'ELE-37', oldDiff:2, topic:'elementor', newDiff:3, desc:'Theme Builder Footer', isNew:false },
+  { id:'ELE-38', oldDiff:2, topic:'elementor', newDiff:3, desc:'Single Post 文章模板', isNew:false },
+  { id:'ELE-39', oldDiff:3, topic:'elementor', newDiff:4, desc:'Archive 归档模板（分类/标签/作者）', isNew:false },
+  { id:'ELE-40', oldDiff:0, topic:'elementor', newDiff:4, desc:'Display Conditions 显示条件（不同页面不同模板）', isNew:true },
+  { id:'ELE-41', oldDiff:0, topic:'elementor', newDiff:3, desc:'Search Results 搜索结果页模板', isNew:true },
+  { id:'ELE-42', oldDiff:0, topic:'elementor', newDiff:3, desc:'Error 404 页面模板', isNew:true },
+  // ELE.11: Dynamic Content
+  { id:'ELE-43', oldDiff:2, topic:'elementor', newDiff:3, desc:'Dynamic Tags 基础（站点标题/文章标题/特色图）', isNew:false },
+  { id:'ELE-44', oldDiff:3, topic:'elementor', newDiff:4, desc:'ACF + Dynamic Tags（自定义字段动态显示）', isNew:false },
+  { id:'ELE-45', oldDiff:0, topic:'elementor', newDiff:4, desc:'Posts Widget 文章列表（筛选/排序/分页）', isNew:true },
+  { id:'ELE-46', oldDiff:0, topic:'elementor', newDiff:4, desc:'Portfolio Widget 作品集展示', isNew:true },
+  // ELE.12: WooCommerce（如果学员有电商需求）
+  { id:'ELE-47', oldDiff:0, topic:'elementor', newDiff:3, desc:'WooCommerce 产品页模板', isNew:true },
+  { id:'ELE-48', oldDiff:0, topic:'elementor', newDiff:4, desc:'WooCommerce 商店归档 + 购物车/结账页', isNew:true },
+  // ELE.13: Landing Page & 转化
+  { id:'ELE-49', oldDiff:2, topic:'elementor', newDiff:3, desc:'Landing Page 设计（单页营销）', isNew:false },
+  { id:'ELE-50', oldDiff:3, topic:'elementor', newDiff:4, desc:'转化优化（CTA 位置/A-B 测试思路）', isNew:false },
+  // ELE.14: 模板管理
+  { id:'ELE-51', oldDiff:1, topic:'elementor', newDiff:2, desc:'保存为模板 + 导入导出', isNew:false },
+  { id:'ELE-52', oldDiff:0, topic:'elementor', newDiff:3, desc:'Cloud Templates 跨站点复用', isNew:true },
+  { id:'ELE-53', oldDiff:0, topic:'elementor', newDiff:3, desc:'Reusable Sections 可复用区块', isNew:true },
+  // ELE.15: AI 功能
+  { id:'ELE-54', oldDiff:0, topic:'elementor', newDiff:2, desc:'Elementor AI 生成文案', isNew:true },
+  { id:'ELE-55', oldDiff:0, topic:'elementor', newDiff:3, desc:'Elementor AI 生成/编辑图片', isNew:true },
+  { id:'ELE-56', oldDiff:0, topic:'elementor', newDiff:4, desc:'Elementor AI 生成自定义 CSS', isNew:true },
+
+  // ZeroY AI 建站
+  // ZY.1: 安装与配置
+  { id:'ZY-1', oldDiff:1, topic:'zeroy', newDiff:1, desc:'下载并安装 ZeroY 主题 + 编辑器插件', isNew:false },
+  { id:'ZY-2', oldDiff:0, topic:'zeroy', newDiff:1, desc:'配置 API Token（zeroy.app 控制台绑定域名）', isNew:true },
+  { id:'ZY-3', oldDiff:0, topic:'zeroy', newDiff:2, desc:'配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接', isNew:true },
+  { id:'ZY-4', oldDiff:0, topic:'zeroy', newDiff:2, desc:'设计系统：用 AI 生成全局风格（颜色/字体/间距）', isNew:true },
+  // ZY.2: 页面创建与编辑
+  { id:'ZY-5', oldDiff:1, topic:'zeroy', newDiff:2, desc:'用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）', isNew:false },
+  { id:'ZY-6', oldDiff:2, topic:'zeroy', newDiff:2, desc:'用选择器选中元素 + AI 局部修改', isNew:true },
+  { id:'ZY-7', oldDiff:2, topic:'zeroy', newDiff:2, desc:'创建关于页（团队/资质/使命）', isNew:false },
+  { id:'ZY-8', oldDiff:2, topic:'zeroy', newDiff:3, desc:'创建服务/产品页（网格布局）', isNew:false },
+  { id:'ZY-9', oldDiff:2, topic:'zeroy', newDiff:3, desc:'创建联系页（表单+联系方式）', isNew:false },
+  { id:'ZY-10', oldDiff:0, topic:'zeroy', newDiff:2, desc:'创建 Thank You 感谢页', isNew:true },
+  { id:'ZY-11', oldDiff:0, topic:'zeroy', newDiff:2, desc:'在编辑器中插入/删除/撤回操作', isNew:true },
+  { id:'ZY-12', oldDiff:0, topic:'zeroy', newDiff:1, desc:'前台预览与后台编辑切换', isNew:true },
+  { id:'ZY-13', oldDiff:0, topic:'zeroy', newDiff:2, desc:'在 ZeroY 中添加/替换素材（图片/图标）', isNew:true },
+  // ZY.3: 动态模板
+  { id:'ZY-14', oldDiff:2, topic:'zeroy', newDiff:3, desc:'创建页眉模板（Logo+多级导航+CTA）', isNew:false },
+  { id:'ZY-15', oldDiff:2, topic:'zeroy', newDiff:3, desc:'创建页脚模板（公司信息+链接+版权）', isNew:false },
+  { id:'ZY-16', oldDiff:2, topic:'zeroy', newDiff:3, desc:'404 错误页模板', isNew:false },
+  { id:'ZY-17', oldDiff:0, topic:'zeroy', newDiff:3, desc:'搜索结果页模板', isNew:true },
+  { id:'ZY-18', oldDiff:3, topic:'zeroy', newDiff:4, desc:'文章列表/分类归档模板', isNew:false },
+  { id:'ZY-19', oldDiff:0, topic:'zeroy', newDiff:4, desc:'单篇文章模板', isNew:true },
+  // ZY.4: 表单与询盘
+  { id:'ZY-20', oldDiff:0, topic:'zeroy', newDiff:2, desc:'查看表单提交记录（Zeroy → 表单提交）', isNew:true },
+  { id:'ZY-21', oldDiff:0, topic:'zeroy', newDiff:2, desc:'配置感谢页跳转（表单提交 → 设置 → 感谢页 URL）', isNew:true },
+  { id:'ZY-22', oldDiff:0, topic:'zeroy', newDiff:3, desc:'配置邮件通知（启用 wp_mail + 收件人 + 标题）', isNew:true },
+  { id:'ZY-23', oldDiff:0, topic:'zeroy', newDiff:3, desc:'安装 SMTP 插件解决邮件不稳定（⚠️ 常见坑）', isNew:true },
+  { id:'ZY-24', oldDiff:0, topic:'zeroy', newDiff:3, desc:'创建询盘弹窗 Popup（触发条件设置）', isNew:true },
+  // ZY.5: 广告追踪
+  { id:'ZY-25', oldDiff:0, topic:'zeroy', newDiff:3, desc:'Google Ads 转化代码：在感谢页埋入事件代码', isNew:true },
+  { id:'ZY-26', oldDiff:0, topic:'zeroy', newDiff:3, desc:'通过 SEO 插件配置 Google 全局代码', isNew:true },
+  // ZY.6: HTMX 动态交互
+  { id:'ZY-27', oldDiff:2, topic:'zeroy', newDiff:3, desc:'HTMX 基础：Load More 加载更多', isNew:false },
+  { id:'ZY-28', oldDiff:0, topic:'zeroy', newDiff:4, desc:'HTMX 实时搜索（keyup + 延迟）', isNew:true },
+  { id:'ZY-29', oldDiff:0, topic:'zeroy', newDiff:4, desc:'HTMX 多条件筛选（ACF 分类法/字段）', isNew:true },
+  { id:'ZY-30', oldDiff:0, topic:'zeroy', newDiff:4, desc:'HTMX 分页功能', isNew:true },
+  { id:'ZY-31', oldDiff:3, topic:'zeroy', newDiff:4, desc:'HTMX 无限滚动', isNew:false },
+  // ZY.7: Swiper 轮播
+  { id:'ZY-32', oldDiff:0, topic:'zeroy', newDiff:3, desc:'Swiper 基础轮播（自动播放+导航箭头）', isNew:true },
+  { id:'ZY-33', oldDiff:0, topic:'zeroy', newDiff:3, desc:'Swiper 缩略图画廊（主图+缩略图联动）', isNew:true },
+  { id:'ZY-34', oldDiff:0, topic:'zeroy', newDiff:4, desc:'Swiper 响应式多卡片轮播', isNew:true },
+  // ZY.8: 运维与排障
+  { id:'ZY-35', oldDiff:0, topic:'zeroy', newDiff:2, desc:'清除 Hostinger 缓存（页面缓存 + CDN + 对象缓存）', isNew:true },
+  { id:'ZY-36', oldDiff:0, topic:'zeroy', newDiff:2, desc:'CSS 极致压缩（何时开/何时关）', isNew:true },
+  { id:'ZY-37', oldDiff:0, topic:'zeroy', newDiff:2, desc:'网站语言设置对 AI 生成内容的影响', isNew:true },
+  { id:'ZY-38', oldDiff:0, topic:'zeroy', newDiff:3, desc:'排障：表单提交后不跳转/不发邮件（固定链接+SMTP+路径）', isNew:true },
+  { id:'ZY-39', oldDiff:0, topic:'zeroy', newDiff:3, desc:'排障：AI 生成报错（400/401/403 诊断）', isNew:true },
+
+  // ========== NEW L0 TASKS ==========
+  // Domain
+  { id:'DOM-1', oldDiff:0, topic:'domain', newDiff:1, desc:'在 Namesilo 注册域名', isNew:true },
+  { id:'DOM-2', oldDiff:0, topic:'domain', newDiff:1, desc:'在阿里云注册域名', isNew:true },
+  { id:'DOM-3', oldDiff:0, topic:'domain', newDiff:1, desc:'在 Cloudflare 注册域名', isNew:true },
+  { id:'DOM-4', oldDiff:0, topic:'domain', newDiff:2, desc:'DNS A 记录解析', isNew:true },
+  { id:'DOM-5', oldDiff:0, topic:'domain', newDiff:2, desc:'DNS CNAME 记录', isNew:true },
+  { id:'DOM-6', oldDiff:0, topic:'domain', newDiff:2, desc:'修改 NS 到 Hostinger', isNew:true },
+  // Hosting
+  { id:'HOST-1', oldDiff:0, topic:'hosting', newDiff:1, desc:'购买 Hostinger 主机', isNew:true },
+  { id:'HOST-2', oldDiff:0, topic:'hosting', newDiff:1, desc:'hPanel 控制面板导航', isNew:true },
+  { id:'HOST-3', oldDiff:0, topic:'hosting', newDiff:2, desc:'添加第二个网站 (多站点管理)', isNew:true },
+  { id:'HOST-4', oldDiff:0, topic:'hosting', newDiff:3, desc:'开启 SSH 访问权限', isNew:true },
+  { id:'HOST-5', oldDiff:0, topic:'hosting', newDiff:4, desc:'SSH 终端操作', isNew:true },
+  { id:'HOST-6', oldDiff:0, topic:'hosting', newDiff:4, desc:'生成 SSH 密钥对 + 免密登录', isNew:true },
+
+  // WP Install
+  { id:'INST-1', oldDiff:0, topic:'wp-install', newDiff:1, desc:'Hostinger 一键安装 WP', isNew:true },
+  { id:'INST-2', oldDiff:0, topic:'wp-install', newDiff:2, desc:'手动安装 WordPress', isNew:true },
+  { id:'INST-3', oldDiff:0, topic:'wp-install', newDiff:2, desc:'绑定域名（NS 方式）', isNew:true },
+  { id:'INST-4', oldDiff:0, topic:'wp-install', newDiff:2, desc:'绑定域名（A 记录方式）', isNew:true },
+  { id:'INST-5', oldDiff:0, topic:'wp-install', newDiff:2, desc:'配置 SSL 证书', isNew:true },
+  { id:'INST-6', oldDiff:0, topic:'wp-install', newDiff:4, desc:'网站内容迁移 (插件方式)', isNew:true },
+  { id:'INST-7', oldDiff:0, topic:'wp-install', newDiff:4, desc:'网站内容迁移 (手动数据库+文件)', isNew:true },
+  { id:'INST-8', oldDiff:0, topic:'wp-install', newDiff:4, desc:'已有站点更换域名', isNew:true },
+];
+
+// ========== RENDER ==========
+
+function render() {
+  const totalAll = TASK_MAP.length;
+  const totalTopics = ALL_TOPICS.length;
+
+  // Count filled cells
+
+  // Stats
+  document.getElementById('stats').innerHTML = `
+    <div class="stat total"><div class="num">${totalAll}</div><div class="label">总题目数</div></div>
+    <div class="stat topics"><div class="num">${totalTopics}</div><div class="label">知识主题</div></div>
+  `;
+
+  // Matrix
+  let html = '<thead><tr>';
+  html += '<th class="topic-header">知识主题 Topic</th>';
+  DIFFS.forEach(d => {
+    html += `<th class="diff-header"><div>${d.label}</div><div class="diff-label">${d.desc}</div></th>`;
+  });
+  html += '<th class="diff-header" style="width:60px">合计</th>';
+  html += '</tr></thead><tbody>';
+
+  CATEGORIES.forEach(cat => {
+    // Category header row
+    html += `<tr class="category-row"><td colspan="${DIFFS.length + 2}">${cat.name}</td></tr>`;
+
+    cat.topics.forEach(topic => {
+      const topicTasks = TASK_MAP.filter(t => t.topic === topic.id);
+      const topicTotal = topicTasks.length;
+
+      html += '<tr>';
+      html += `<td class="topic-name">${topic.name}<div class="sub">${topic.sub}</div></td>`;
+
+      DIFFS.forEach(d => {
+        const cellTasks = topicTasks.filter(t => t.newDiff === d.level);
+        
+        
+        const count = cellTasks.length;
+
+        if (count === 0) {
+          html += '<td><div class="cell empty"></div></td>';
+        } else {
+          const countClass = 'c-existing';
+          let taskListHtml = cellTasks.map(t =>
+            `<div class="task-item "><a href="docs/${t.topic}/${t.id}.html"><span class="tid">${t.id}</span> ${t.desc}</a></div>`
+          ).join('');
+
+          html += `<td><div class="cell has-tasks" onclick="this.classList.toggle('expanded')">
+            <div class="count ${countClass}">${count}</div>
+            <div class="bar b${d.level}" style="width:${Math.min(count * 20, 100)}%"></div>
+            <div class="task-list">${taskListHtml}</div>
+          </div></td>`;
+        }
+      });
+
+      // Row total
+      html += `<td class="row-total">${topicTotal}</td>`;
+      html += '</tr>';
+    });
+  });
+
+  html += '</tbody>';
+  document.getElementById('matrix').innerHTML = html;
+  document.getElementById('gen-date').textContent = new Date().toLocaleDateString('zh-CN');
+}
+
+render();
+</script>
+</body>
+</html>

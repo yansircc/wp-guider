@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>重命名默认分类 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">文章与分类</a>
+  <span class="sep">/</span>
+  <span class="current">重命名默认分类</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>重命名默认分类</h1>
+    <div class="meta">
+      <span class="tag topic">文章与分类</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 安装后会自动创建一个名为「Uncategorized」（中文环境下为「未分类」）的默认分类。所有未指定分类的文章都会自动归入此分类。</p>
+    <p>默认分类不能被删除，但可以重命名为更有意义的名称，也可以将默认分类切换为其他已有分类。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>「未分类」这个名称对访客没有任何信息量，显得不专业。如果网站有大量文章归入默认分类，这些文章在分类归档页中就会显示在「未分类」下，给人一种管理混乱的印象。</p>
+    <p>将默认分类重命名为一个通用但有意义的名称（如「综合资讯」「最新动态」），可以让内容组织看起来更专业。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>重命名默认分类</h3>
+    <ol>
+      <li>进入后台 <strong>文章 → 分类目录</strong></li>
+      <li>在右侧的分类列表中，找到「未分类」</li>
+      <li>点击分类名称或悬停后点击「编辑」</li>
+      <li>修改 <strong>名称</strong> 为你想要的名称，如「综合」</li>
+      <li>修改 <strong>别名</strong>（Slug）为对应英文，如 <code>general</code></li>
+      <li>点击 <strong>更新</strong></li>
+    </ol>
+    <h3>更改默认分类</h3>
+    <ol>
+      <li>进入后台 <strong>设置 → 撰写</strong></li>
+      <li>在「默认文章分类」下拉菜单中选择新的默认分类</li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+    <p>更改默认分类后，原来的「未分类」就变成了普通分类，可以正常删除。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>默认分类不能删除</strong>：只要一个分类被设为默认分类，它就不能被删除。需要先更换默认分类再删除</li>
+      <li><strong>已有文章不受影响</strong>：重命名分类不会影响已归入该分类的文章</li>
+      <li><strong>Slug 变化会改变 URL</strong>：如果修改了别名，对应的分类归档页 URL 也会改变</li>
+      <li><strong>建议在建站初期就处理</strong>：网站内容发布后再改名，可能导致已被搜索引擎收录的分类页面出现 404</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PT-5.html" class="prev"><div class="label">上一篇</div><div class="title">文章+标签+摘要</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PT-2.html">创建子分类</a>
+    <a href="PT-3.html">发布文章并归类</a>
+    <a href="PT-5.html">文章+标签+摘要</a>
+  </div></div>
+</div>
+</body>
+</html>

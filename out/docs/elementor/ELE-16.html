@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hero Section 设计 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Hero Section 设计</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Hero Section 设计</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span></div><p class="merge-note">本文同时覆盖: ELE-16, ELE-17</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Hero Section 是页面最顶部的视觉焦点区域，通常占据首屏（Above the Fold），包含品牌核心信息、标题、副标题和行动按钮（CTA）。背景可以是静态图片、视频或渐变色。</p>
+    <p>一个好的 Hero Section 在 3 秒内告诉访客"你是谁、你做什么、接下来该做什么"。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>第一印象</strong>：Hero 是访客看到的第一个内容，直接决定他们是否继续浏览</li>
+      <li><strong>转化入口</strong>：CTA 按钮是引导用户进入下一步的关键</li>
+      <li><strong>品牌表达</strong>：通过视觉设计传递品牌调性（专业/活泼/科技感等）</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>图片背景 Hero（L3）</h3>
+    <ol>
+      <li>创建一个全宽 Container，设置 <strong>Min Height: 80vh</strong>（占屏幕高度 80%）</li>
+      <li>在 Style Tab → <strong>Background → Classic</strong>，上传背景图</li>
+      <li>设置 <strong>Position: Center Center</strong>，<strong>Size: Cover</strong></li>
+      <li>添加 <strong>Background Overlay</strong>：颜色叠加层（如黑色 50% 透明度），确保文字可读</li>
+      <li>在 Container 内部放置：
+        <ul>
+          <li>Heading Widget（H1，白色，大字号）</li>
+          <li>Text Editor（副标题，白色或浅灰）</li>
+          <li>Button Widget（CTA 按钮，强调色背景）</li>
+        </ul>
+      </li>
+      <li>Container 对齐设为 <strong>Center / Center</strong>（水平垂直居中）</li>
+    </ol>
+
+    <h3>视频背景 Hero（L3）</h3>
+    <ol>
+      <li>同上创建全宽 Container</li>
+      <li>Style Tab → <strong>Background → Video</strong></li>
+      <li>输入 YouTube 链接或上传自托管 MP4</li>
+      <li>设置选项：
+        <ul>
+          <li><strong>Start/End Time</strong>：截取视频片段</li>
+          <li><strong>Play on Mobile</strong>：关闭（手机播放视频耗电耗流量）</li>
+          <li><strong>Fallback Image</strong>：手机端或视频加载前显示的静态图</li>
+        </ul>
+      </li>
+      <li>添加 Overlay 确保文字可读</li>
+      <li>内容结构与图片 Hero 相同</li>
+    </ol>
+
+    <h3>设计要点</h3>
+    <ul>
+      <li>标题控制在 6-10 个字以内，简洁有力</li>
+      <li>CTA 按钮文案用行动词（"免费试用"、"获取报价"、"立即咨询"）</li>
+      <li>文字与背景对比度要高，确保可读性</li>
+      <li>响应式：手机端调小标题字号，按钮改为全宽</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>图片尺寸</strong>：Hero 背景图建议 1920×1080px，压缩后控制在 200KB 以内</li>
+      <li><strong>视频文件</strong>：自托管视频控制在 5MB 以内，超过的用 YouTube 嵌入</li>
+      <li><strong>Overlay 必须</strong>：没有叠加层的情况下，白色文字在浅色背景上几乎看不清</li>
+      <li><strong>移动端视频</strong>：建议关闭移动端视频自动播放，用 Fallback Image 替代</li>
+      <li><strong>100vh 陷阱</strong>：在手机上 100vh 可能包含浏览器地址栏高度，导致滚动体验不佳。建议用 80vh 或固定像素值</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-15.html" class="prev"><div class="label">上一篇</div><div class="title">响应式排版（不同设备不同字号/间距）</div></a>
+    <a href="ELE-17.html" class="next"><div class="label">下一篇</div><div class="title">视频背景 Hero</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

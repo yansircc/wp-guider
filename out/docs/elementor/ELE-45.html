@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Posts Widget 文章列表 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Posts Widget 文章列表</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Posts Widget 文章列表（筛选/排序/分页）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Posts Widget 是 Elementor Pro 的文章列表组件，可以在任意页面展示文章列表。与 Archive Posts Widget 不同，Posts Widget 使用自定义查询条件，你可以精确控制显示哪些文章、按什么排序、显示多少篇。</p>
+    <p>它是构建首页文章模块、推荐文章区、分类展示区等场景的核心 Widget。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>首页内容展示</strong>：首页需要精选文章模块，Posts Widget 可以按分类、标签、日期等条件筛选</li>
+      <li><strong>交叉推荐</strong>：在文章页底部推荐相关分类的文章</li>
+      <li><strong>多样展示</strong>：同一个页面可以放多个 Posts Widget，各自查询不同内容（如"最新文章"、"热门产品"、"公司动态"）</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>基础使用</h3>
+    <ol>
+      <li>拖入 <strong>Posts</strong> Widget 到画布</li>
+      <li>在 <strong>Content</strong> Tab 中选择 Skin：Classic / Cards / Full Content</li>
+      <li>设置 <strong>Columns</strong>（列数）和 <strong>Posts Per Page</strong>（每页文章数）</li>
+    </ol>
+
+    <h3>Query（查询条件）</h3>
+    <p>在 <strong>Query</strong> 面板中设置筛选规则：</p>
+    <ul>
+      <li><strong>Source</strong>：Posts（文章）、Pages（页面）或自定义 Post Type</li>
+      <li><strong>Include / Exclude</strong>：
+        <ul>
+          <li>Include by Term：只显示特定分类/标签的文章</li>
+          <li>Include by Author：只显示特定作者的文章</li>
+          <li>Exclude：排除特定文章或当前文章（避免在文章详情页推荐自己）</li>
+        </ul>
+      </li>
+      <li><strong>Order By</strong>：Date（日期）、Title（标题）、Random（随机）、Menu Order（自定义排序）、Comment Count（评论数）</li>
+      <li><strong>Date Query</strong>：限定时间范围（如只显示最近 30 天的文章）</li>
+    </ul>
+
+    <h3>Pagination（分页）</h3>
+    <ul>
+      <li><strong>None</strong>：不分页，只显示指定数量</li>
+      <li><strong>Numbers</strong>：数字分页导航</li>
+      <li><strong>Previous/Next</strong>：上一页/下一页</li>
+      <li><strong>Numbers + Previous/Next</strong>：数字加上下页</li>
+      <li><strong>Load on Click / Infinite Scroll</strong>：AJAX 加载更多</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Posts Widget vs Archive Posts Widget</strong>：Posts 用于自定义查询（手动指定条件），Archive Posts 用于自动上下文查询（归档页自动匹配）。在归档模板中应该用 Archive Posts，在普通页面中用 Posts</li>
+      <li>如果分页后显示的文章和第一页重复，检查是否有缓存插件干扰 AJAX 请求</li>
+      <li><strong>Exclude Current Post</strong> 在文章模板中使用 Posts Widget 做"相关文章"时必须勾选，否则会出现推荐自己的情况</li>
+      <li>Posts Per Page 设置过大会影响页面加载速度，建议不超过 12 篇</li>
+      <li>Random 排序在有缓存的站点上可能不生效（因为页面被缓存了），需要排除该页面的缓存</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-44.html" class="prev"><div class="label">上一篇</div><div class="title">ACF + Dynamic Tags（自定义字段动态显示）</div></a>
+    <a href="ELE-46.html" class="next"><div class="label">下一篇</div><div class="title">Portfolio Widget 作品集展示</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

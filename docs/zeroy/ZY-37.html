@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网站语言设置对 AI 生成内容的影响 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">语言设置与 AI 生成</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>网站语言设置对 AI 生成内容的影响</h1>
+    <div class="meta">
+      <span class="tag topic">ZeroY AI 建站</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 后台 <strong>设置 → 常规 → 站点语言</strong> 不仅控制后台界面语言，还会影响 ZeroY AI 助手生成内容时使用的语言。当站点语言设为「简体中文」时，AI 默认生成中文内容；设为「English」时则生成英文内容。</p>
+    <p>这个设置还影响 HTML 的 <code>lang</code> 属性、日期格式、以及部分插件的本地化行为。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>如果网站语言设置与目标受众语言不匹配，AI 生成的内容可能是错误的语言。例如做外贸英文站但语言设为中文，AI 会生成中文内容，需要手动改——这完全是浪费时间。</p>
+    <p>正确设置语言是使用 ZeroY AI 建站的前提条件，确保 AI 生成的文案、按钮文字、表单标签等都是目标语言。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>设置站点语言</h3>
+    <ol>
+      <li>进入 <strong>设置 → 常规</strong></li>
+      <li>在 <strong>站点语言</strong> 下拉菜单中选择目标语言：
+        <ul>
+          <li>面向中文用户 → 选择「简体中文」或「繁體中文」</li>
+          <li>面向英文用户 → 选择「English (United States)」</li>
+        </ul>
+      </li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+
+    <h3>语言设置对 AI 的具体影响</h3>
+    <ul>
+      <li><strong>页面内容生成</strong>：AI 用站点语言撰写标题、段落、列表等</li>
+      <li><strong>按钮和 CTA 文字</strong>：如「立即咨询」vs「Contact Us」</li>
+      <li><strong>表单标签</strong>：如「姓名」「邮箱」vs「Name」「Email」</li>
+      <li><strong>SEO 元数据</strong>：AI 生成的 title/description 跟随语言设置</li>
+    </ul>
+
+    <div class="callout tip">如果你需要建多语言站（如中英双语），建站时先用主要语言完成所有页面，再通过翻译插件（如 Polylang、WPML）添加其他语言版本。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>修改语言后已有内容不会自动翻译</strong>：语言设置只影响新生成的内容，已有页面的文字需要手动修改或重新生成</li>
+      <li><strong>后台语言 vs 前台语言</strong>：站点语言同时改变后台界面语言。如果管理员不懂英文但网站面向英文用户，可以安装「User Locale Switcher」插件让管理员单独使用中文后台</li>
+      <li><strong>AI 生成的内容仍需人工审核</strong>：即使语言设置正确，AI 生成的文案可能不完全符合品牌调性，建议生成后做适当调整</li>
+      <li><strong>HTML lang 属性</strong>：语言设置还会影响 <code>&lt;html lang="zh-CN"&gt;</code> 标签，这对 SEO 和无障碍访问都很重要</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-36.html" class="prev"><div class="label">上一篇</div><div class="title">CSS 极致压缩（何时开/何时关）</div></a>
+    <a href="ZY-38.html" class="next"><div class="label">下一篇</div><div class="title">排障：表单提交后不跳转/不发邮件（固定链接+SMTP+路径）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-1.html">下载并安装 ZeroY 主题 + 编辑器插件</a>
+    <a href="ZY-2.html">配置 API Token（zeroy.app 控制台绑定域名）</a>
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+  </div></div>
+</div>
+</body>
+</html>

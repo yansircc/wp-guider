@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建作者用户 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">用户管理</a>
+  <span class="sep">/</span>
+  <span class="current">创建作者用户</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>创建作者用户</h1>
+    <div class="meta">
+      <span class="tag topic">用户管理</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>"作者"（Author）是 WordPress 内置角色之一。作者可以撰写和发布自己的文章、上传媒体文件、编辑和删除自己的已发布文章，但不能修改别人的文章。</p>
+    <p>创建作者用户的流程与创建编辑用户类似，只是在角色选择时选"作者"。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>当客户需要多人撰写内容但互不干扰时，作者角色是最合适的选择。每个作者只能管理自己的文章，不会误操作他人的内容。</p>
+    <p>与编辑角色的区别：编辑可以管理所有人的文章，作者只能管理自己的。根据实际需求选择角色。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台（需管理员权限）</li>
+      <li>进入 <strong>用户 → 添加用户</strong>（Users → Add New User）</li>
+      <li>填写用户名和邮箱</li>
+      <li>设置密码</li>
+      <li>在 <strong>角色</strong>（Role）下拉菜单中选择 <strong>作者</strong>（Author）</li>
+      <li>点击 <strong>添加用户</strong></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>作者可以删除自己已发布的文章，如果不希望作者删除内容，可以改用"投稿者"角色</li>
+      <li>作者可以上传文件到媒体库，投稿者不能</li>
+      <li>作者发布的文章，WordPress 会自动生成该作者的归档页（<code>/author/username/</code>）</li>
+      <li>如果需要更精细的权限控制，可以使用 User Role Editor 插件自定义角色权限</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="UM-3.html" class="prev"><div class="label">上一篇</div><div class="title">修改默认角色</div></a>
+    <a href="UM-5.html" class="next"><div class="label">下一篇</div><div class="title">删除用户并归属内容</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="UM-5.html">删除用户并归属内容</a>
+    <a href="UM-6.html">修改用户角色</a>
+    <a href="UM-8.html">用 DoLogin 生成免密登录链接</a>
+    <a href="UM-7.html">生成 Application Password</a>
+  </div></div>
+</div>
+</body>
+</html>

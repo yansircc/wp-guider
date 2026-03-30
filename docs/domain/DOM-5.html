@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DNS CNAME 记录 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">域名</a>
+  <span class="sep">/</span>
+  <span class="current">DNS CNAME 记录</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>DNS CNAME 记录</h1>
+    <div class="meta">
+      <span class="tag topic">域名</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>CNAME 记录（Canonical Name Record）将一个域名别名指向另一个域名。与 A 记录直接指向 IP 不同，CNAME 是域名到域名的映射。</p>
+    <p>例如：<code>www.example.com → example.com</code> 就是一条 CNAME 记录。当访问 <code>www.example.com</code> 时，DNS 会先解析到 <code>example.com</code>，再通过 A 记录找到最终的 IP。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>CNAME 最常见的用途是让 <code>www</code> 版本指向根域名。此外，很多第三方服务（如邮件服务、CDN、网站验证）要求你添加 CNAME 记录来完成配置。</p>
+    <p>CNAME 的好处是：当目标域名的 IP 变化时，你不需要修改 CNAME 记录，因为它指向的是域名而非固定 IP。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <p>以 Cloudflare DNS 为例：</p>
+    <ol>
+      <li>登录 Cloudflare 控制台，选择对应域名</li>
+      <li>进入 <strong>DNS → Records</strong></li>
+      <li>点击 <strong>Add Record</strong></li>
+      <li>填写：
+        <ul>
+          <li><strong>Type</strong>：CNAME</li>
+          <li><strong>Name</strong>：子域名（如 <code>www</code>、<code>blog</code>、<code>shop</code>）</li>
+          <li><strong>Target</strong>：目标域名（如 <code>example.com</code>）</li>
+          <li><strong>TTL</strong>：Auto</li>
+        </ul>
+      </li>
+      <li>点击 <strong>Save</strong></li>
+    </ol>
+    <h3>常见 CNAME 场景</h3>
+    <ul>
+      <li><code>www</code> → <code>example.com</code>（www 跳转根域名）</li>
+      <li><code>mail</code> → <code>ghs.google.com</code>（Google Workspace 邮箱）</li>
+      <li><code>_acme-challenge</code> → 某值（SSL 证书验证）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>根域名（<code>@</code>）不能设置 CNAME（RFC 限制），只能用 A 记录。Cloudflare 支持根域名 CNAME Flattening 作为例外</li>
+      <li>同一个名称不能同时有 CNAME 和 A 记录，CNAME 具有排他性</li>
+      <li>CNAME 会带来额外的 DNS 查询（先查 CNAME 再查目标的 A 记录），性能略有影响</li>
+      <li>配置第三方服务的 CNAME 时，要完全按照服务商提供的值填写，不要自行修改</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="DOM-4.html" class="prev"><div class="label">上一篇</div><div class="title">DNS A 记录解析</div></a>
+    <a href="DOM-6.html" class="next"><div class="label">下一篇</div><div class="title">修改 NS 到 Hostinger</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="DOM-1.html">在 Namesilo 注册域名</a>
+    <a href="DOM-2.html">在阿里云注册域名</a>
+    <a href="DOM-3.html">在 Cloudflare 注册域名</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Design System Variables - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Design System Variables</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Design System Variables（字号/间距/圆角变量）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor 的 Design System 允许你定义全局变量（Global Colors 和 Global Fonts），以及通过 Site Settings 统一管理字号、间距、圆角等设计参数。修改一处变量，所有引用该变量的元素同步更新。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>一致性</strong>：全站使用统一的字号/间距/颜色系统，避免「每个页面长得不一样」</li>
+      <li><strong>高效修改</strong>：改一个变量 = 改全站，不需要逐页调整</li>
+      <li><strong>团队协作</strong>：设计规范可视化，任何人编辑都能遵循同一套系统</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>全局颜色（Global Colors）</h3>
+    <ol>
+      <li>进入 Elementor 编辑器，点击左上角<strong>汉堡菜单 → Site Settings → Global Colors</strong></li>
+      <li>定义核心色板：
+        <ul>
+          <li><strong>Primary</strong>：主色调（品牌色、CTA 按钮）</li>
+          <li><strong>Secondary</strong>：辅助色</li>
+          <li><strong>Text</strong>：正文文字色</li>
+          <li><strong>Accent</strong>：强调色（链接、hover 状态）</li>
+        </ul>
+      </li>
+      <li>可点击 <strong>+</strong> 添加自定义颜色变量（如 <code>Surface</code>、<code>Border</code>）</li>
+    </ol>
+
+    <h3>全局字体（Global Fonts）</h3>
+    <ol>
+      <li>在 Site Settings 中进入 <strong>Global Fonts</strong></li>
+      <li>定义 4 级字体：Primary / Secondary / Text / Accent</li>
+      <li>每个字体可设置：字体族、字重、大小、行高、字间距</li>
+    </ol>
+
+    <h3>使用变量</h3>
+    <p>选中任意 Widget，在颜色选择器中点击<strong>地球图标</strong>可选择全局颜色；在字体设置中点击<strong>地球图标</strong>可选择全局字体。</p>
+
+    <h3>自定义间距与圆角</h3>
+    <p>Elementor 没有原生的全局间距/圆角变量，但可以通过以下方式实现：</p>
+    <ul>
+      <li><strong>CSS Variables</strong>：在 Site Settings → Custom CSS 中定义 <code>:root { --spacing-sm: 8px; --radius: 12px; }</code>，然后在各元素的 Custom CSS 中引用</li>
+      <li><strong>Theme Style</strong>：在 Site Settings → Theme Style 中设置 Button 默认圆角、Form 字段样式等，统一基础组件</li>
+    </ul>
+    <div class="callout tip">建立变量的投入在初期，回报在后期。3 个页面以上的项目就值得先花 10 分钟建立 Design System。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>解绑变量</strong>：点击颜色/字体选择器中的地球图标再点 X 可以断开全局变量引用，改为本地值</li>
+      <li><strong>默认变量 ≠ 自定义变量</strong>：Elementor 自带 4 个颜色和 4 个字体位置，修改这些会影响所有引用默认样式的元素</li>
+      <li><strong>导出限制</strong>：Global Colors/Fonts 随模板导出，但 Custom CSS 中的变量不会自动迁移到其他站点</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-10.html" class="prev"><div class="label">上一篇</div><div class="title">全局颜色 + 全局字体设置</div></a>
+    <a href="ELE-12.html" class="next"><div class="label">下一篇</div><div class="title">CSS Classes 复用样式</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

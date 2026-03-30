@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Swiper 轮播：基础轮播与缩略图画廊 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Swiper 轮播与画廊</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Swiper 轮播：基础轮播 + 缩略图画廊</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span></div><p>本文同时覆盖: ZY-32, ZY-33</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 内置 Swiper v11 轮播库，当页面中出现 <code>swiper-wrapper</code> class 时自动加载。基础轮播适合 Banner/横幅展示，支持自动播放和导航箭头；缩略图画廊则是主图 + 底部缩略图联动的展示方式，适合产品图片浏览。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>轮播是企业网站最常见的交互元素。首页横幅轮播展示多个核心信息，产品页缩略图画廊让客户浏览多角度产品图片。Swiper 是最流行的轮播库，触控友好且移动端体验出色。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>基础轮播（Banner/横幅）</h3>
+    <ol>
+      <li>在 ZeroY 编辑器中，调用 AI 助手描述：
+        <ul>
+          <li>"创建一个全宽 Swiper 轮播横幅，3 张幻灯片，每张包含背景图、标题、副标题和 CTA 按钮。自动播放间隔 5 秒，带左右导航箭头和底部分页点"</li>
+        </ul>
+      </li>
+      <li>AI 会生成包含 <code>swiper-wrapper</code> 的结构，Swiper 自动初始化</li>
+      <li>替换占位图片和文案</li>
+      <li>保存并测试：确认自动播放、箭头导航和手指滑动都正常</li>
+    </ol>
+
+    <h3>缩略图画廊（产品图片）</h3>
+    <ol>
+      <li>调用 AI 助手描述：
+        <ul>
+          <li>"创建一个 Swiper 缩略图画廊：上方是大图展示区，下方是缩略图导航条。点击缩略图切换大图，支持左右滑动"</li>
+        </ul>
+      </li>
+      <li>这会生成两个联动的 Swiper 实例：主图 Swiper + 缩略图 Swiper</li>
+      <li>上传产品图片替换占位图</li>
+      <li>保存并测试联动效果</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>自动加载</strong>：ZeroY 检测到 <code>swiper-wrapper</code> class 会自动引入 Swiper v11，不需要手动加载 JS/CSS</li>
+      <li><strong>图片尺寸统一</strong>：轮播中所有图片建议保持相同的宽高比，避免跳动</li>
+      <li><strong>自动播放与性能</strong>：自动播放间隔不要太短（建议 4-6 秒），过快会让用户来不及阅读内容</li>
+      <li><strong>移动端触控</strong>：Swiper 原生支持触控滑动，但要确保轮播区域有足够的高度让用户触发滑动手势</li>
+      <li><strong>缩略图数量</strong>：缩略图画廊建议 4-8 张图片，太多会让缩略图条拥挤</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-31.html" class="prev"><div class="label">上一篇</div><div class="title">HTMX 无限滚动</div></a>
+    <a href="ZY-33.html" class="next"><div class="label">下一篇</div><div class="title">Swiper 缩略图画廊（主图+缩略图联动）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

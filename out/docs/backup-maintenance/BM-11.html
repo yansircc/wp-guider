@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系统 cron 替换 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">备份与维护</a>
+  <span class="sep">/</span>
+  <span class="current">系统 cron 替换</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>系统 cron 替换 wp-cron</h1>
+    <div class="meta">
+      <span class="tag topic">备份与维护</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>用 Linux 系统的 cron（或 macOS 的 launchd）定时调用 WordPress 的 cron 端点，替代 WordPress 内建的伪 cron 机制。</p>
+    <p>这样做的效果：wp-cron 不再依赖页面访问触发，而是由操作系统准时触发。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>对于生产环境，系统 cron 替代 wp-cron 有三个优势：</p>
+    <ol>
+      <li><strong>准时执行</strong> — 不依赖访客触发，定时任务准时执行</li>
+      <li><strong>减少前端负担</strong> — 普通页面请求不再需要检查 cron 队列</li>
+      <li><strong>避免重复执行</strong> — 高流量站点不会因为并发访问导致任务多次触发</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>步骤一：禁用 WordPress 内建 wp-cron</h3>
+    <pre><code>locwp wp wp-train -- config set DISABLE_WP_CRON true --raw</code></pre>
+    <p>这会在 <code>wp-config.php</code> 中添加：</p>
+    <pre><code>define( 'DISABLE_WP_CRON', true );</code></pre>
+
+    <h3>步骤二：配置系统 cron（Linux 生产服务器）</h3>
+    <pre><code># 编辑 crontab
+crontab -e
+
+# 每 15 分钟触发一次 WordPress cron
+*/15 * * * * wget -q -O /dev/null https://your-site.com/wp-cron.php?doing_wp_cron >/dev/null 2>&amp;1</code></pre>
+    <p>或者用 <code>curl</code>：</p>
+    <pre><code>*/15 * * * * curl -s https://your-site.com/wp-cron.php?doing_wp_cron >/dev/null 2>&amp;1</code></pre>
+    <p>或者用 WP-CLI（推荐，不依赖 HTTP）：</p>
+    <pre><code>*/15 * * * * cd /path/to/wordpress && wp cron event run --due-now >/dev/null 2>&amp;1</code></pre>
+
+    <h3>Local 环境说明</h3>
+    <p>在 Local (localWP) 训练环境中，不需要配置系统 cron。理解原理即可。可以用 WP-CLI 手动触发来模拟：</p>
+    <pre><code>locwp wp wp-train -- cron event run --due-now</code></pre>
+
+    <h3>验证</h3>
+    <pre><code># 确认 DISABLE_WP_CRON 已设置
+locwp wp wp-train -- config get DISABLE_WP_CRON
+
+# 手动触发后检查事件是否被执行
+locwp wp wp-train -- cron event list</code></pre>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>禁用 wp-cron 后如果忘记配置系统 cron，所有定时任务都不会执行（定时发布、自动备份等）</li>
+      <li>频率建议：每 15 分钟一次是合理的平衡点。不需要每分钟执行</li>
+      <li>使用 WP-CLI 方式比 HTTP 方式更可靠，不受防火墙/WAF 限制</li>
+      <li>多站点环境需要为每个站点配置独立的 cron 任务</li>
+      <li>共享主机可能不允许配置 crontab，此时只能保留 wp-cron</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-10.html" class="prev"><div class="label">上一篇</div><div class="title">wp-cron 检查</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-2.html">恢复备份</a>
+    <a href="BM-4.html">自动备份计划</a>
+    <a href="BM-7.html">All-in-One Migration 跨服务器迁移</a>
+    <a href="BM-10.html">wp-cron 检查</a>
+  </div></div>
+</div>
+</body>
+</html>

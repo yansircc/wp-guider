@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Google Ads 转化代码与全局代码配置 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Google Ads 代码</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Google Ads 转化代码 + 全局代码配置</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span></div><p>本文同时覆盖: ZY-25, ZY-26</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Google Ads 转化追踪需要在网站中放置两段代码：<strong>全局代码（Global Site Tag）</strong>放在每个页面，用于追踪访客行为；<strong>事件代码（Event Snippet）</strong>放在感谢页，用于记录具体的转化动作（如表单提交）。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>没有转化追踪，你投放 Google Ads 就是"盲投"——不知道哪些关键词、广告组、搜索词带来了真实的询盘。正确配置转化追踪后，Google Ads 后台能看到每个广告的转化数据，为优化投放提供依据。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：获取代码</h3>
+    <ol>
+      <li>登录 <strong>Google Ads 后台</strong></li>
+      <li>进入 工具与设置 → <strong>转化</strong> → 新建转化操作 → 网站</li>
+      <li>按提示设置转化名称、类别（如"询盘"）、价值等</li>
+      <li>获取两段代码：全局代码和事件代码</li>
+    </ol>
+
+    <h3>第二步：放置全局代码（通过 SEO 插件）</h3>
+    <ol>
+      <li>进入 WordPress 后台 → <strong>SEOPress → Analytics</strong>（或其他 SEO 插件的对应设置）</li>
+      <li>找到 <strong>Custom Tracking / Header Scripts</strong> 区域</li>
+      <li>将 Google 全局代码（<code>&lt;script&gt;</code> 标签）粘贴到 Header 脚本区域</li>
+      <li>保存</li>
+    </ol>
+
+    <h3>第三步：放置事件代码（在感谢页）</h3>
+    <ol>
+      <li>用 ZeroY 编辑器打开感谢页（Thank You Page）</li>
+      <li>在页面底部添加一个自定义 HTML 区块</li>
+      <li>粘贴 Google Ads 事件代码（Event Snippet）</li>
+      <li>保存页面</li>
+    </ol>
+
+    <h3>第四步：验证</h3>
+    <ol>
+      <li>使用 <strong>Google Tag Assistant</strong> 浏览器扩展检查代码是否正常加载</li>
+      <li>提交一次测试表单，跳转到感谢页后检查 Google Ads 后台是否记录到转化</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>全局代码放 Header，事件代码放感谢页</strong>：两段代码用途不同，不要搞混位置</li>
+      <li><strong>不要重复放置</strong>：如果 SEO 插件已经放了全局代码，不要在主题设置中再放一次，否则会重复计数</li>
+      <li><strong>转化延迟</strong>：Google Ads 后台的转化数据可能有 24-72 小时的延迟，不要着急</li>
+      <li><strong>感谢页 noindex</strong>：感谢页应设为 noindex，但不影响转化追踪代码的执行</li>
+      <li><strong>SEOPress 路径</strong>：SEOPress → Analytics → Custom Tracking，其他 SEO 插件类似功能的位置可能不同</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-24.html" class="prev"><div class="label">上一篇</div><div class="title">创建询盘弹窗 Popup（触发条件设置）</div></a>
+    <a href="ZY-26.html" class="next"><div class="label">下一篇</div><div class="title">通过 SEO 插件配置 Google 全局代码</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

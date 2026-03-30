@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA4 基础报告阅读 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">Google Analytics</a>
+  <span class="sep">/</span>
+  <span class="current">GA4 基础报告阅读</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>GA4 基础报告阅读（用户/会话/页面浏览）</h1>
+    <div class="meta">
+      <span class="tag topic">Google Analytics</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>GA4 的报告是理解网站流量的核心界面。三个最基础的指标：</p>
+    <ul>
+      <li><strong>用户（Users）</strong>：在选定时间范围内访问过网站的独立访客数量（按浏览器/设备去重）</li>
+      <li><strong>会话（Sessions）</strong>：一次完整的访问过程。同一用户可以产生多次会话（如早上访问一次、下午又来一次 = 1 个用户、2 次会话）</li>
+      <li><strong>页面浏览（Views / Pageviews）</strong>：页面被查看的总次数。一次会话中可能浏览多个页面</li>
+    </ul>
+    <p>关系：用户 ≤ 会话 ≤ 页面浏览。理解这三层漏斗是分析流量的起点。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>数据不会自动变成洞察——你需要知道在哪里看、看什么。学会阅读基础报告后，你可以回答：</p>
+    <ul>
+      <li>网站每天/每周有多少访客？趋势是上升还是下降？</li>
+      <li>哪些页面最受欢迎？哪些页面几乎没人看？</li>
+      <li>访客从哪里来？（搜索引擎/社交媒体/直接访问）</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>报告概览</h3>
+    <ol>
+      <li>登录 GA4 后台（analytics.google.com）</li>
+      <li>进入 <strong>报告 → 报告概览</strong>（Reports snapshot）</li>
+      <li>右上角选择时间范围（如「过去 7 天」「过去 28 天」）</li>
+      <li>概览卡片展示用户数、会话数、平均互动时间等核心指标</li>
+    </ol>
+
+    <h3>查看页面热度</h3>
+    <ol>
+      <li>进入 <strong>报告 → 互动 → 页面和屏幕</strong></li>
+      <li>表格列出每个页面的浏览次数、用户数、平均互动时间</li>
+      <li>点击列标题可以排序（如按浏览次数降序）</li>
+    </ol>
+
+    <h3>查看流量来源</h3>
+    <ol>
+      <li>进入 <strong>报告 → 获客 → 流量获取</strong></li>
+      <li>查看各渠道带来的用户和会话：
+        <ul>
+          <li><strong>Organic Search</strong> — 自然搜索（Google/Bing 等）</li>
+          <li><strong>Direct</strong> — 直接访问（输入 URL 或书签）</li>
+          <li><strong>Referral</strong> — 外部网站链接过来</li>
+          <li><strong>Social</strong> — 社交媒体</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="callout tip">养成每周看一次报告的习惯。不需要深入分析，只要关注趋势变化——突然大涨或大跌都值得调查原因。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>自己的访问也会被记录</strong>：你自己访问网站也会产生数据。可以在 GA4 中设置内部流量过滤（管理 → 数据流 → 标记设置 → 定义内部流量）</li>
+      <li><strong>数据有延迟</strong>：GA4 标准报告有 24-48 小时延迟。实时数据看「实时」报告</li>
+      <li><strong>用户数 ≠ 真实人数</strong>：同一人用手机和电脑访问会被计为 2 个用户，除非登录了同一个 Google 账号</li>
+      <li><strong>跳出率已被替代</strong>：GA4 不再使用「跳出率」，改为「互动率」（Engagement rate）。互动率 = 有互动的会话 / 总会话</li>
+      <li><strong>(not set) 数据</strong>：部分维度显示 (not set) 表示 GA4 无法识别，通常是追踪代码未正确触发</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="GA-3.html" class="prev"><div class="label">上一篇</div><div class="title">注册 GA4 + 安装追踪代码（通过 SEO 插件）</div></a>
+    <a href="GA-5.html" class="next"><div class="label">下一篇</div><div class="title">GSC 性能报告（点击/展示/CTR/排名）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="GA-1.html">注册 Google Search Console + 验证站点所有权</a>
+    <a href="GA-2.html">提交 Sitemap 到 GSC</a>
+    <a href="GA-3.html">注册 GA4 + 安装追踪代码（通过 SEO 插件）</a>
+    <a href="GA-7.html">GA4 转化目标设置 + Google Ads 联动</a>
+  </div></div>
+</div>
+</body>
+</html>

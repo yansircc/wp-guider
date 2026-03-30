@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CSS Classes 复用样式 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">CSS Classes 复用样式</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>CSS Classes 复用样式</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d3">L3</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>通过为 Elementor Widget 添加自定义 CSS Class，配合全局样式表，可以实现样式的跨页面复用。比如定义一个 <code>.card-shadow</code> 类，任何 Widget 加上这个 class 就自动获得统一的阴影效果。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>一处修改，全站生效</strong>：改 CSS 类的定义 = 所有使用该类的元素同步更新</li>
+      <li><strong>减少重复工作</strong>：不需要逐个 Widget 调整样式设置</li>
+      <li><strong>弥补 Elementor 的限制</strong>：有些样式效果无法通过面板实现（如复杂 hover 效果、伪元素），CSS Class 是唯一方案</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>Step 1：定义全局 CSS</h3>
+    <p>进入 Elementor 编辑器 → 左上角<strong>汉堡菜单 → Site Settings → Custom CSS</strong>，添加样式：</p>
+    <pre><code>/* 卡片阴影 */
+.card-shadow {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  transition: box-shadow 0.3s;
+}
+.card-shadow:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+/* 文字渐变 */
+.text-gradient {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 统一间距 */
+.section-padding {
+  padding: 80px 0;
+}</code></pre>
+
+    <h3>Step 2：为 Widget 添加 CSS Class</h3>
+    <ol>
+      <li>选中目标 Widget</li>
+      <li>进入<strong> Advanced 标签 → Layout → CSS Classes</strong></li>
+      <li>输入 class 名称（如 <code>card-shadow</code>），多个 class 用空格分隔</li>
+    </ol>
+
+    <h3>Step 3：验证</h3>
+    <p>保存后在前台查看效果。如果不生效，检查 CSS 选择器优先级（可能需要加 <code>!important</code> 或更具体的选择器）。</p>
+    <div class="callout tip">建议 CSS Class 命名用 <code>.ele-xxx</code> 前缀（如 <code>.ele-card</code>、<code>.ele-btn-primary</code>），避免与主题/插件的 class 冲突。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>Site Settings CSS vs Widget CSS</strong>：Site Settings 的 Custom CSS 是全局的；Widget 的 Custom CSS 只作用于该 Widget。复用样式应放在全局</li>
+      <li><strong>Custom CSS 是 Pro 功能</strong>：Widget 级别的 Custom CSS 需要 Elementor Pro；Site Settings 级别的也需要 Pro</li>
+      <li><strong>替代方案</strong>：如果没有 Pro，可以在<strong>外观 → 自定义 → 额外 CSS</strong>（WordPress 自带功能）中添加全局样式</li>
+      <li><strong>不要滥用 !important</strong>：优先通过更具体的选择器（如 <code>.elementor-widget.card-shadow</code>）解决优先级问题</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-11.html" class="prev"><div class="label">上一篇</div><div class="title">Design System Variables（字号/间距/圆角变量）</div></a>
+    <a href="ELE-13.html" class="next"><div class="label">下一篇</div><div class="title">响应式断点（桌面/平板/手机预览切换）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

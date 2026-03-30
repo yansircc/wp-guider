@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HTMX 基础：Load More 加载更多 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">HTMX Load More</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>HTMX 基础：Load More 加载更多</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>HTMX 是 ZeroY 集成的前端交互技术，无需编写 JavaScript 就能实现动态页面效果。"Load More"（加载更多）是最基础的 HTMX 功能：用户点击按钮后，页面自动请求更多内容并追加显示，无需刷新整个页面。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>当文章或产品列表较长时，一次性加载所有内容会导致页面慢且臃肿。Load More 按钮让用户按需加载，既保持首屏加载速度，又提供流畅的浏览体验。比传统分页更符合现代用户习惯。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>在 ZeroY 编辑器中创建文章/产品列表区块</li>
+      <li>为列表区块配置 HTMX 属性，指定数据源端点：
+        <pre><code>/wp-json/zeroy/v1/htmx/execute/current?block_id=你的区块ID</code></pre>
+      </li>
+      <li>在列表下方添加 "加载更多" 按钮</li>
+      <li>为按钮配置 HTMX 点击事件：
+        <ul>
+          <li>触发方式：<code>click</code></li>
+          <li>请求目标：列表容器</li>
+          <li>追加方式：在现有内容后面追加（append/afterend）</li>
+        </ul>
+      </li>
+      <li>设置分页参数（每次加载多少条）</li>
+      <li>保存并测试</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>端点格式</strong>：HTMX 请求的端点必须是 <code>/wp-json/zeroy/v1/htmx/execute/current?block_id=...</code>，不要自行拼接其他路径</li>
+      <li><strong>固定链接</strong>：REST API 依赖"文章名"固定链接格式，否则端点不可用</li>
+      <li><strong>没有更多数据时</strong>：当所有内容加载完毕，按钮应自动隐藏或变为"没有更多了"</li>
+      <li><strong>缓存干扰</strong>：页面缓存可能导致 HTMX 请求返回过期数据，必要时排除 REST API 路径的缓存</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-26.html" class="prev"><div class="label">上一篇</div><div class="title">通过 SEO 插件配置 Google 全局代码</div></a>
+    <a href="ZY-28.html" class="next"><div class="label">下一篇</div><div class="title">HTMX 实时搜索（keyup + 延迟）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

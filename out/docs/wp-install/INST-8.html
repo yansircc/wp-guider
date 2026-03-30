@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>已有站点更换域名 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">WordPress 安装</a>
+  <span class="sep">/</span>
+  <span class="current">已有站点更换域名</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>已有站点更换域名</h1>
+    <div class="meta">
+      <span class="tag topic">WordPress 安装</span>
+      <span class="tag diff d4">L4</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>将已运行的 WordPress 站点从旧域名切换到新域名。涉及 DNS 配置、WordPress 内部 URL 替换、数据库内容批量更新以及旧域名 301 重定向等操作。</p>
+    <p>这不是简单地改个设置，因为 WordPress 会将域名硬编码在数据库的多处位置。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>常见场景包括：品牌升级更换域名、从临时域名切换到正式域名、更换 TLD 后缀（如 <code>.cn</code> 换 <code>.com</code>）、从 HTTP 升级到 HTTPS 等。</p>
+    <p>如果只改了 DNS 而没有更新 WordPress 内部的 URL，站点会出现混合内容、图片加载失败、重定向循环等问题。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：准备工作</h3>
+    <ol>
+      <li>完整备份数据库和文件（必须）</li>
+      <li>新域名的 DNS 已解析到主机 IP（A 记录或 NS 方式）</li>
+      <li>在主机后台绑定新域名</li>
+    </ol>
+    <h3>第二步：修改 WordPress 地址</h3>
+    <p>方法一：通过 <code>wp-config.php</code>（推荐，最安全）</p>
+    <pre><code>define('WP_HOME', 'https://新域名.com');
+define('WP_SITEURL', 'https://新域名.com');</code></pre>
+    <p>方法二：通过数据库直接修改</p>
+    <pre><code>UPDATE wp_options SET option_value = 'https://新域名.com' WHERE option_name = 'siteurl';
+UPDATE wp_options SET option_value = 'https://新域名.com' WHERE option_name = 'home';</code></pre>
+    <h3>第三步：批量替换数据库中的旧域名</h3>
+    <p>WordPress 内容（文章、页面、小工具等）中包含大量旧域名引用。使用 WP-CLI 是最安全的方式：</p>
+    <pre><code>wp search-replace 'https://旧域名.com' 'https://新域名.com' --all-tables</code></pre>
+    <p>如果无法使用 WP-CLI，安装 <strong>Better Search Replace</strong> 插件，在后台执行搜索替换（注意勾选"Dry Run"先预览）。</p>
+    <h3>第四步：设置 301 重定向</h3>
+    <p>在旧域名的服务器或 DNS 配置 301 重定向，将所有流量导向新域名，保留 SEO 权重。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>操作前务必备份！URL 替换出错可能导致站点无法访问</li>
+      <li>不要直接用 SQL 的 <code>REPLACE()</code> 函数，WordPress 有序列化数据，直接替换会破坏数据结构</li>
+      <li>替换后如果登录后台时重定向循环，检查 <code>wp-config.php</code> 中是否有硬编码的旧域名</li>
+      <li>更换域名后需要重新提交 Google Search Console 的站点地图</li>
+      <li>SSL 证书需要为新域名重新签发或更新</li>
+      <li>如果使用了 CDN（如 Cloudflare），记得更新 CDN 中的域名配置</li>
+      <li>Elementor 等页面构建器会在自己的表中存储 URL，确保搜索替换覆盖了 <code>--all-tables</code></li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="INST-7.html" class="prev"><div class="label">上一篇</div><div class="title">网站内容迁移 (手动数据库+文件)</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="INST-2.html">手动安装 WordPress</a>
+    <a href="INST-3.html">绑定域名（NS 方式）</a>
+    <a href="INST-4.html">绑定域名（A 记录方式）</a>
+    <a href="INST-5.html">配置 SSL 证书</a>
+  </div></div>
+</div>
+</body>
+</html>

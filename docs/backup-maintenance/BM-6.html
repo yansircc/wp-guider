@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WP Reset 恢复快照 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">备份与维护</a>
+  <span class="sep">/</span>
+  <span class="current">WP Reset 恢复快照</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>WP Reset 恢复快照</h1>
+    <div class="meta">
+      <span class="tag topic">备份与维护</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WP Reset 插件的「快照」（Snapshot）功能会记录数据库在某一时刻的完整状态。恢复快照会将数据库回滚到创建快照时的状态，所有在快照之后的更改（文章、页面、设置、插件配置等）都会被撤销。</p>
+    <p>快照只备份数据库，不包含文件（主题、插件文件、上传的媒体）。这意味着恢复快照后，文件系统保持当前状态不变。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>在培训和实验环境中，快照是最实用的"后悔药"。做完一轮练习后恢复快照，网站立即回到干净状态，可以重新开始下一轮训练。</p>
+    <p>相比 UpdraftPlus 的完整备份恢复，WP Reset 快照更快（仅操作数据库）、更轻量，适合频繁的回退场景。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>恢复快照</h3>
+    <ol>
+      <li>进入 <strong>工具 → WP Reset</strong></li>
+      <li>切换到 <strong>Snapshots</strong>（快照）选项卡</li>
+      <li>在快照列表中找到目标快照（注意查看创建时间）</li>
+      <li>点击快照右侧的 <strong>Restore snapshot</strong>（恢复快照）按钮</li>
+      <li>在确认对话框中点击 <strong>Restore snapshot</strong></li>
+      <li>等待恢复完成，页面会自动刷新</li>
+    </ol>
+
+    <h3>恢复前确认</h3>
+    <p>恢复快照前，确认以下几点：</p>
+    <ul>
+      <li>你要恢复的是正确的快照（核对时间戳）</li>
+      <li>当前所有未保存的工作已经完成或记录</li>
+      <li>如果有重要的新内容，先创建一个新快照保存当前状态</li>
+    </ul>
+
+    <div class="callout warning">恢复操作不可撤销。如果恢复了错误的快照，只能通过恢复另一个更新的快照来补救——前提是你之前创建过。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>快照只恢复数据库</strong>：已安装的插件/主题文件不会被删除，但它们在数据库中的激活状态和配置会回到快照时的状态</li>
+      <li><strong>恢复后插件报错</strong>：如果在快照后安装了新插件，恢复快照后该插件文件还在但数据库中没有激活记录。进入插件页面手动停用即可</li>
+      <li><strong>恢复后用户密码</strong>：如果快照后修改过密码，恢复后密码会回到快照时的版本</li>
+      <li><strong>快照会占用数据库空间</strong>：太多快照会增大数据库体积，定期清理不再需要的旧快照</li>
+      <li><strong>定期更新基线快照</strong>：完成阶段性配置后，删除旧快照并创建新的基线快照</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-5.html" class="prev"><div class="label">上一篇</div><div class="title">WP Reset 生成快照</div></a>
+    <a href="BM-7.html" class="next"><div class="label">下一篇</div><div class="title">All-in-One Migration 跨服务器迁移</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-2.html">恢复备份</a>
+    <a href="BM-4.html">自动备份计划</a>
+    <a href="BM-7.html">All-in-One Migration 跨服务器迁移</a>
+    <a href="BM-10.html">wp-cron 检查</a>
+  </div></div>
+</div>
+</body>
+</html>

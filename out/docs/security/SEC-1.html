@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安装 Wordfence + 基础安全扫描 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">security</a>
+  <span class="sep">/</span>
+  <span class="current">安装 Wordfence + 基础安全扫描</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>安装 Wordfence + 基础安全扫描</h1>
+    <div class="meta">
+      <span class="tag topic">security</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Wordfence Security 是 WordPress 最流行的安全插件（500 万+活跃安装）。它提供防火墙（WAF）、恶意软件扫描、登录安全和实时流量监控四大核心功能。</p>
+    <p>基础安全扫描会检查 WordPress 核心文件完整性、已知漏洞、恶意代码、过期的插件/主题等安全隐患。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>WordPress 占全球网站的 40%+，是黑客的首要目标。没有安全插件的 WordPress 站点，就像没锁的门——不是会不会被入侵，而是什么时候被入侵。</p>
+    <p>安装 Wordfence 是建站后的第一个安全步骤，定期扫描则能及早发现问题。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 安装并激活</h3>
+    <pre><code>locwp wp wp-train -- plugin install wordfence --activate</code></pre>
+
+    <h3>2. 初始配置</h3>
+    <ol>
+      <li>登录后台，进入 <strong>Wordfence → Dashboard</strong></li>
+      <li>输入邮箱地址接收安全警报</li>
+      <li>免费版选择"Free License"，点击继续</li>
+      <li>在 <strong>Wordfence → Firewall</strong> 中，防火墙会自动进入"Learning Mode"，持续一周后自动切换为"Enabled and Protecting"</li>
+    </ol>
+
+    <h3>3. 运行首次扫描</h3>
+    <ol>
+      <li>进入 <strong>Wordfence → Scan</strong></li>
+      <li>点击 <strong>Start New Scan</strong></li>
+      <li>等待扫描完成，查看结果报告</li>
+    </ol>
+    <p>扫描会检查：</p>
+    <ul>
+      <li>WordPress 核心文件是否被篡改</li>
+      <li>插件/主题是否有已知漏洞</li>
+      <li>是否存在可疑文件或后门代码</li>
+      <li>公开暴露的敏感文件（如 <code>wp-config.php</code> 备份）</li>
+    </ul>
+
+    <h3>4. 处理扫描结果</h3>
+    <p>扫描结果分为 Critical（严重）、Warning（警告）、Info（信息）三级。Critical 必须立即处理，Warning 建议处理。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Local 开发环境中 Wordfence 防火墙可能会误报或影响性能，可以只保留扫描功能</li>
+      <li>免费版已包含基本防火墙和扫描功能，对于训练环境足够使用</li>
+      <li>首次扫描可能需要几分钟，取决于站点大小</li>
+      <li>不要同时安装多个安全插件（如 Wordfence + Sucuri），它们会互相冲突</li>
+      <li>Wordfence 的 WAF 在 Local 环境中可能无法完全工作，因为流量不经过标准 Web 服务器</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="SEC-2.html" class="next"><div class="label">下一篇</div><div class="title">确认注册关闭</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEC-2.html">确认注册关闭</a>
+    <a href="SEC-3.html">隐藏登录 URL</a>
+    <a href="SEC-4.html">禁用文件编辑</a>
+  </div></div>
+</div>
+</body>
+</html>

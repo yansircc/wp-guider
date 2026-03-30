@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>配置感谢页跳转 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">配置感谢页跳转</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>配置感谢页跳转（表单提交 → 设置 → 感谢页 URL）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d2">L2</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>当用户通过 ZeroY 表单提交询盘后，可以自动跳转到一个「感谢页」（Thank You Page）。你需要先创建感谢页面，然后在表单设置中配置跳转 URL。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>感谢页有两大作用：一是给用户明确的「提交成功」反馈，提升体验；二是作为 Google Ads 转化追踪的触发页面——用户到达感谢页 = 完成一次转化。没有感谢页，就无法精确追踪广告效果。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：创建感谢页</h3>
+    <ol>
+      <li>WordPress 后台 → <strong>页面 → 新增</strong></li>
+      <li>标题填 "Thank You" 或 "感谢您的咨询"</li>
+      <li>用 ZeroY 编辑器设计页面内容（感谢文字、下一步引导、返回首页按钮等）</li>
+      <li><strong>发布</strong>页面，记下页面 URL（如 <code>/thank-you/</code>）</li>
+    </ol>
+
+    <h3>第二步：配置表单跳转</h3>
+    <ol>
+      <li>进入需要配置的表单所在页面，用 ZeroY 编辑器打开</li>
+      <li>选中表单元素 → 打开<strong>设置</strong>面板</li>
+      <li>找到「感谢页 URL」或「提交后跳转」选项</li>
+      <li>填入感谢页的完整路径（如 <code>/thank-you/</code>）</li>
+      <li>保存</li>
+    </ol>
+    <div class="callout tip">ZeroY 表单的提交端点是 <code>/wp-json/zeroy/v1/submissions</code>，确保表单 action 指向此路径。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>感谢页必须已发布</strong>：草稿状态的页面无法访问，用户会看到 404</li>
+      <li><strong>URL 要准确</strong>：建议用相对路径（<code>/thank-you/</code>）而非完整域名，避免开发/生产环境域名不同导致跳转失败</li>
+      <li><strong>表单不跳转？</strong>：首先检查固定链接设置（必须是「文章名」格式），再检查表单路径是否正确。详细排障见 ZY-38</li>
+      <li><strong>不要用感谢页做 SEO</strong>：感谢页应该加 <code>noindex</code> 标签，防止被搜索引擎收录</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-20.html" class="prev"><div class="label">上一篇</div><div class="title">查看表单提交记录（Zeroy → 表单提交）</div></a>
+    <a href="ZY-22.html" class="next"><div class="label">下一篇</div><div class="title">配置邮件通知（启用 wp_mail + 收件人 + 标题）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-1.html">下载并安装 ZeroY 主题 + 编辑器插件</a>
+    <a href="ZY-2.html">配置 API Token（zeroy.app 控制台绑定域名）</a>
+    <a href="ZY-8.html">创建服务/产品页（网格布局）</a>
+    <a href="ZY-9.html">创建联系页（表单+联系方式）</a>
+  </div></div>
+</div></body></html>

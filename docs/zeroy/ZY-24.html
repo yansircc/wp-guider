@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>创建询盘弹窗 Popup - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">询盘弹窗 Popup</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>创建询盘弹窗 Popup（触发条件设置）</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>询盘弹窗（Popup）是在特定条件触发时弹出的浮层，通常包含简短的询盘表单或 CTA 引导。ZeroY 支持创建带触发条件的弹窗，如滚动到一定位置、停留一定时间、或打算离开页面时触发。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>弹窗是提升转化率的有效手段。相比被动等待访客找到联系页面，主动弹出询盘表单能显著增加询盘数量。关键是设置合理的触发条件，避免过早弹出影响用户体验。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 ZeroY 编辑器或动态模板管理</li>
+      <li>创建弹窗内容：
+        <ul>
+          <li>调用 AI 助手描述："创建一个询盘弹窗，包含标题'需要帮助？'、简短说明、姓名/邮箱/电话/消息的简短表单、提交按钮和关闭按钮"</li>
+        </ul>
+      </li>
+      <li>设置触发条件：
+        <ul>
+          <li><strong>延迟触发</strong>：用户停留 X 秒后弹出（建议 30-60 秒）</li>
+          <li><strong>滚动触发</strong>：滚动到页面 X% 位置时弹出（建议 50-70%）</li>
+          <li><strong>退出意图</strong>：鼠标移向浏览器关闭按钮时弹出（Exit Intent）</li>
+        </ul>
+      </li>
+      <li>设置显示频率（如每个用户只显示一次，避免重复骚扰）</li>
+      <li>保存并测试</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>不要太早弹出</strong>：访客刚进入页面就弹窗会引起反感，建议至少等 30 秒或滚动过半</li>
+      <li><strong>提供关闭方式</strong>：弹窗必须有明显的关闭按钮，不能强制用户交互</li>
+      <li><strong>手机端注意</strong>：弹窗在手机上可能遮挡整个屏幕，确保移动端表现良好</li>
+      <li><strong>表单提交路径</strong>：弹窗中的表单同样使用 <code>/wp-json/zeroy/v1/submissions</code> 端点</li>
+      <li><strong>Google 惩罚</strong>：Google 对移动端侵入性弹窗（Interstitials）会降权，避免在移动端使用全屏遮挡式弹窗</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-23.html" class="prev"><div class="label">上一篇</div><div class="title">安装 SMTP 插件解决邮件不稳定（⚠️ 常见坑）</div></a>
+    <a href="ZY-25.html" class="next"><div class="label">下一篇</div><div class="title">Google Ads 转化代码：在感谢页埋入事件代码</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

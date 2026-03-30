@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>邮件通知与 SMTP 配置 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">ZeroY AI 建站</a>
+  <span class="sep">/</span>
+  <span class="current">邮件通知与 SMTP</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>配置邮件通知 + 安装 SMTP 插件</h1><div class="meta"><span class="tag topic">ZeroY AI 建站</span><span class="tag diff d3">L3</span></div><p>本文同时覆盖: ZY-22, ZY-23</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>ZeroY 支持在有新表单提交时自动发送邮件通知给指定收件人。默认使用 WordPress 内置的 <code>wp_mail()</code> 函数发送邮件，但这种方式在很多服务器上不稳定，需要安装 SMTP 插件来保证邮件可靠送达。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>如果没有邮件通知，你只能登录 WordPress 后台才能看到新的询盘。配置邮件通知后，每当有人提交表单，你会立即收到邮件提醒，不会错过任何商机。SMTP 则确保邮件不会被丢弃或进入垃圾箱。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：启用邮件通知</h3>
+    <ol>
+      <li>进入 WordPress 后台 → <strong>ZeroY → 设置（Settings）</strong></li>
+      <li>找到邮件通知区域，<strong>启用 wp_mail</strong></li>
+      <li>填写<strong>收件人邮箱</strong>（可以填多个，用逗号分隔）</li>
+      <li>设置<strong>邮件标题</strong>（如"新的网站询盘"）</li>
+      <li>保存设置</li>
+    </ol>
+
+    <h3>第二步：安装 SMTP 插件</h3>
+    <ol>
+      <li>进入 WordPress 后台 → <strong>插件 → 安装插件</strong></li>
+      <li>搜索 <strong>Fluent SMTP</strong>（推荐）或 WP Mail SMTP</li>
+      <li>安装并启用</li>
+    </ol>
+
+    <h3>第三步：配置 SMTP</h3>
+    <ol>
+      <li>进入 SMTP 插件设置页面</li>
+      <li>选择邮件服务商（如 Gmail、Outlook、阿里企业邮、自定义 SMTP 等）</li>
+      <li>填写 SMTP 服务器地址、端口、用户名和密码</li>
+      <li>设置发件人邮箱和名称</li>
+      <li>点击<strong>发送测试邮件</strong>验证配置</li>
+      <li>确认收到测试邮件后保存</li>
+    </ol>
+
+    <h3>第四步：验证完整流程</h3>
+    <ol>
+      <li>在前台提交一次表单</li>
+      <li>确认收到邮件通知</li>
+      <li>检查邮件内容是否包含表单数据</li>
+    </ol>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>wp_mail 不可靠</strong>：这是最常见的坑——很多主机默认的 PHP mail() 函数被禁用或会进垃圾箱，<strong>强烈建议安装 SMTP 插件</strong></li>
+      <li><strong>Gmail SMTP 限制</strong>：Gmail 每天发送限额 500 封，且需要开启"应用专用密码"</li>
+      <li><strong>发件人地址</strong>：SMTP 发件人地址最好与域名一致（如 noreply@yourdomain.com），减少被标记为垃圾邮件的概率</li>
+      <li><strong>密码安全</strong>：SMTP 密码存储在数据库中，确保数据库安全</li>
+      <li><strong>测试邮件必做</strong>：配置完成后一定要发送测试邮件，不要假设配置正确</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ZY-21.html" class="prev"><div class="label">上一篇</div><div class="title">配置感谢页跳转（表单提交 → 设置 → 感谢页 URL）</div></a>
+    <a href="ZY-23.html" class="next"><div class="label">下一篇</div><div class="title">安装 SMTP 插件解决邮件不稳定（⚠️ 常见坑）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ZY-3.html">配置 AI：填写 API Key + API 端点（aihubmix）+ 验证连接</a>
+    <a href="ZY-4.html">设计系统：用 AI 生成全局风格（颜色/字体/间距）</a>
+    <a href="ZY-5.html">用 AI 助手生成页面（描述需求 → 插入编辑器 → 预览 → 保存）</a>
+    <a href="ZY-6.html">用选择器选中元素 + AI 局部修改</a>
+  </div></div>
+</div></body></html>

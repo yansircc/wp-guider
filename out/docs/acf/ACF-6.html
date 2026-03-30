@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建分类法与管理分类项 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">创建分类法与管理分类项</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>创建分类法与管理分类项</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+  <p style="color: var(--text3); font-size: 13px; margin-bottom: 24px;">本文同时覆盖: ACF-6, ACF-7</p>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><strong>分类法</strong>（Taxonomy）是 WordPress 用来对内容进行分组和分类的机制。WordPress 自带「分类目录」（Category）和「标签」（Tag），ACF Pro 让你为自定义文章类型创建专属的分类法，如「产品分类」、「案例行业」等。</p>
+    <p><strong>分类项</strong>（Term）是分类法下的具体条目。例如「产品分类」下的「电子产品」「服装」就是分类项。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>让内容可以按主题、类型、属性进行分组和筛选</li>
+      <li>用户可以点击分类浏览相关内容，改善导航体验</li>
+      <li>分类页面是重要的 SEO 着陆页</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：创建分类法</h3>
+    <ol>
+      <li>进入 <strong>ACF → 分类法</strong></li>
+      <li>点击<strong>「添加新分类法」</strong></li>
+      <li>填写：
+        <ul>
+          <li><strong>复数标签</strong>：如「产品分类」</li>
+          <li><strong>单数标签</strong>：如「产品分类」</li>
+          <li><strong>分类法 Key</strong>：如 <code>product_cat</code>（英文小写 + 下划线）</li>
+        </ul>
+      </li>
+      <li><strong>关键设置 — 分层</strong>（Hierarchical）：设为<strong>是</strong>可以创建父子分类（像「分类目录」），设为<strong>否</strong>则是扁平结构（像「标签」）</li>
+      <li>在<strong>文章类型</strong>处勾选要绑定的 CPT（如「产品」）</li>
+      <li>点击<strong>保存更改</strong></li>
+    </ol>
+
+    <h3>第二步：添加分类项</h3>
+    <ol>
+      <li>创建分类法后，在对应 CPT 的菜单下会出现分类法子菜单（如 产品 → 产品分类）</li>
+      <li>点击进入，填写<strong>名称</strong>（如「电子产品」）和 <strong>Slug</strong>（如 <code>electronics</code>）</li>
+      <li>如果是分层分类法，可以选择<strong>父级分类</strong>来创建子分类</li>
+      <li>点击<strong>添加新分类</strong></li>
+    </ol>
+
+    <h3>编辑和删除分类项</h3>
+    <ul>
+      <li><strong>编辑</strong>：点击分类项名称进入编辑页面，可修改名称、Slug、描述</li>
+      <li><strong>快速编辑</strong>：悬停后点击「快速编辑」可直接修改名称和 Slug</li>
+      <li><strong>删除</strong>：悬停后点击「删除」，删除分类项不会删除关联的文章</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>分层 vs 扁平</strong>：产品分类通常用分层（有父子关系），产品标签用扁平</li>
+      <li><strong>Slug 用英文</strong>：分类项的 Slug 影响 URL，务必填写英文</li>
+      <li><strong>看不到分类法</strong>：确认分类法已绑定到对应的文章类型</li>
+      <li><strong>删除分类项</strong>：文章不会被删除，只是解除了分类关联</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-5.html" class="prev"><div class="label">上一篇</div><div class="title">删除文章类型</div></a>
+    <a href="ACF-7.html" class="next"><div class="label">下一篇</div><div class="title">添加/编辑/删除具体分类项</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>提交站点地图到 Google Search Console - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">SEO</a>
+  <span class="sep">/</span>
+  <span class="current">提交站点地图到 GSC</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>提交站点地图到 Google Search Console</h1>
+    <div class="meta">
+      <span class="tag topic">SEO</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>XML 站点地图（Sitemap）列出了网站所有需要被搜索引擎收录的页面。将其提交到 Google Search Console（GSC）后，Google 可以更快地发现和索引你的内容。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>加速新页面被 Google 发现的速度</li>
+      <li>确保所有重要页面都被收录</li>
+      <li>通过 GSC 监控站点地图的索引状态</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>确认站点地图 URL</h3>
+    <p>安装 Yoast 或 SEOPress 后，站点地图自动生成：</p>
+    <ul>
+      <li>Yoast：<code>你的域名/sitemap_index.xml</code></li>
+      <li>SEOPress：<code>你的域名/sitemaps.xml</code></li>
+    </ul>
+    <p>在浏览器中访问确认能正常打开。</p>
+
+    <h3>在 GSC 中提交</h3>
+    <ol>
+      <li>登录 <strong>Google Search Console</strong>（需先验证站点所有权，见 GA-1 文档）</li>
+      <li>左侧菜单选择<strong>「站点地图」</strong></li>
+      <li>在「添加新的站点地图」输入框中填入站点地图 URL</li>
+      <li>点击<strong>「提交」</strong></li>
+      <li>状态显示<strong>「成功」</strong>即完成</li>
+    </ol>
+    <div class="callout tip">提交后 Google 不会立刻索引所有页面。通常需要几天到几周时间，取决于网站规模和更新频率。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>状态「无法获取」</strong>：检查站点地图 URL 是否正确、网站是否可正常访问、有无 <code>robots.txt</code> 屏蔽</li>
+      <li><strong>只需提交一次</strong>：提交后 Google 会定期自动抓取更新，无需重复提交（除非 URL 变了）</li>
+      <li><strong>不要同时提交两个 SEO 插件的地图</strong>：如果从 Yoast 切换到 SEOPress，先删除旧的站点地图提交</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEO-3.html" class="prev"><div class="label">上一篇</div><div class="title">修改页面 slug 为英文</div></a>
+    <a href="SEO-5.html" class="next"><div class="label">下一篇</div><div class="title">Yoast：noindex 设置</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEO-1.html">安装 Yoast SEO + 基础配置向导</a>
+    <a href="SEO-2.html">Yoast：设置页面 SEO 标题/描述</a>
+    <a href="SEO-3.html">修改页面 slug 为英文</a>
+    <a href="SEO-6.html">安装 SEOPress + 基础配置</a>
+  </div></div>
+</div>
+</body>
+</html>

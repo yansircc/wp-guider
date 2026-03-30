@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>移动端菜单调整 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">theme</a>
+  <span class="sep">/</span>
+  <span class="current">移动端菜单调整</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>移动端菜单调整</h1>
+    <div class="meta">
+      <span class="tag topic">theme</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>移动端菜单（汉堡菜单）是指在小屏幕设备上，将桌面端的水平导航栏折叠为一个三横线图标按钮。点击后展开完整菜单。Astra 主题通过 Header Builder 提供了灵活的移动端菜单配置。</p>
+    <p>Astra 支持两种移动菜单展开方式：<strong>Dropdown</strong>（向下展开）和 <strong>Off-Canvas</strong>（侧边滑出面板），可根据设计需求选择。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>桌面端的水平菜单在手机上无法完整显示。如果不配置移动端菜单，用户在手机上可能看到菜单项溢出、重叠或完全消失，导致无法导航站点。</p>
+    <p>一个良好的移动端菜单应该：按钮位置明显、展开顺畅、子菜单可访问、关闭方便。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 进入 Header Builder 移动端视图</h3>
+    <p><strong>外观 → 自定义 → Header Builder</strong>，点击底部设备图标切换到手机视图。</p>
+
+    <h3>2. 配置 Toggle Button（汉堡按钮）</h3>
+    <ul>
+      <li>在 Header Builder 的移动端布局中，确保 <strong>Toggle Button</strong> 组件在合适的位置（通常右上角）</li>
+      <li>点击 Toggle Button 可设置图标样式、大小和颜色</li>
+    </ul>
+
+    <h3>3. 选择菜单展开方式</h3>
+    <p>点击 Toggle Button 设置中的 <strong>Menu</strong> 选项：</p>
+    <ul>
+      <li><strong>Dropdown</strong> — 菜单从按钮下方向下展开，适合菜单项较少的情况</li>
+      <li><strong>Off-Canvas</strong> — 从屏幕侧边滑出全屏面板，适合菜单项多或有子菜单的情况</li>
+    </ul>
+
+    <h3>4. 设置菜单内容</h3>
+    <p>在 Off-Canvas 或 Dropdown 面板中，拖入 <strong>Menu</strong> 组件，选择要显示的菜单（通常与桌面端相同的 Primary Menu）。</p>
+
+    <div class="callout tip">测试时重点关注子菜单的展开——手机上没有 hover 状态，子菜单通常靠点击箭头图标展开。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>如果手机上看不到汉堡菜单，检查 Header Builder 移动端视图是否放置了 Toggle Button</li>
+      <li>Off-Canvas 面板的背景色要与文字色有足够对比度</li>
+      <li>菜单层级不宜过深——移动端建议最多两级子菜单</li>
+      <li>Astra 的断点默认是 921px，低于此宽度切换为移动端 Header，可在自定义 → Header Builder → 全局设置中修改</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TH-1.html" class="prev"><div class="label">上一篇</div><div class="title">响应式预览</div></a>
+    <a href="TH-3.html" class="next"><div class="label">下一篇</div><div class="title">评估主题优劣</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TH-5.html">Customizer 改站点标题</a>
+  </div></div>
+</div>
+</body>
+</html>

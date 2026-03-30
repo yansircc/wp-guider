@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>综合故障注入 — 500 错误 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">troubleshooting</a>
+  <span class="sep">/</span>
+  <span class="current">综合故障注入 — 500 错误</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>综合故障注入 — 500 Internal Server Error</h1>
+    <div class="meta">
+      <span class="tag topic">troubleshooting</span>
+      <span class="tag diff d5">L5</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>HTTP 500 Internal Server Error 是一个通用的服务器端错误。它表示服务器在处理请求时遇到了意外情况，但不告诉你具体是什么。</p>
+    <p>在 WordPress 中，500 错误通常由以下原因引起：<code>.htaccess</code> 文件损坏、PHP 内存耗尽、插件/主题代码错误、或服务器配置问题。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>500 错误的棘手之处在于它的"通用性"——可能的原因太多，错误信息太少。需要系统性地逐个排除。</p>
+    <p>与白屏不同，500 错误通常在 Web 服务器级别就被截获了，WordPress 本身可能还没机会运行。因此排障需要从服务器日志开始，而不仅仅是 <code>debug.log</code>。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>系统性排障流程</h3>
+    <ol>
+      <li><strong>查看服务器错误日志</strong>
+        <pre><code># Apache 错误日志
+tail -30 /var/log/apache2/error.log
+
+# Nginx 错误日志
+tail -30 /var/log/nginx/error.log
+
+# Local 环境日志位置因系统而异</code></pre>
+      </li>
+      <li><strong>查看 WordPress 调试日志</strong>
+        <pre><code>locwp wp wp-train -- config set WP_DEBUG true --raw
+locwp wp wp-train -- config set WP_DEBUG_LOG true --raw
+tail -30 wp-content/debug.log</code></pre>
+      </li>
+      <li><strong>检查 .htaccess</strong>（Apache 环境）
+        <pre><code># 重命名 .htaccess 排除
+mv .htaccess .htaccess.bak
+
+# 重新生成
+locwp wp wp-train -- rewrite flush</code></pre>
+      </li>
+      <li><strong>检查 PHP 内存</strong>
+        <pre><code>locwp wp wp-train -- config set WP_MEMORY_LIMIT 256M --raw</code></pre>
+      </li>
+      <li><strong>标准排查</strong> — 停用插件 → 切换主题 → 检查 wp-config.php</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>500 错误可能是间歇性的——有时正常有时报错。这通常指向内存或资源限制问题</li>
+      <li>如果只有后台报 500 而前台正常，重点排查后台相关的插件功能</li>
+      <li>Local 环境使用 Nginx，不存在 <code>.htaccess</code> 问题</li>
+      <li>PHP 版本不兼容也可能导致 500 错误——特别是更新 PHP 版本后</li>
+      <li>排障时注意区分是"所有页面都 500"还是"只有特定页面 500"——范围不同，原因不同</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="TS-9.html" class="prev"><div class="label">上一篇</div><div class="title">综合故障注入-数据库</div></a>
+    <a href="TS-11.html" class="next"><div class="label">下一篇</div><div class="title">综合故障注入-权限</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="TS-3.html">插件逐个排查</a>
+    <a href="TS-5.html">切换默认主题排查</a>
+    <a href="TS-1.html">开启 WP_DEBUG</a>
+    <a href="TS-2.html">查看 debug.log</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>处理网站素材（压缩/裁剪/格式转换） - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">媒体管理</a>
+  <span class="sep">/</span>
+  <span class="current">处理网站素材</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>处理网站素材（压缩/裁剪/格式转换）</h1>
+    <div class="meta">
+      <span class="tag topic">媒体管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>网站素材处理是指在上传图片到 WordPress 之前（或之后），对图片进行压缩、裁剪和格式转换，以确保图片在网站上以最佳状态展示，同时不拖慢页面加载速度。</p>
+    <p>主要处理手段包括：<strong>压缩</strong>（减小文件体积）、<strong>裁剪/缩放</strong>（调整尺寸和比例）、<strong>格式转换</strong>（如 PNG 转 JPG、JPG 转 WebP）。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>图片通常是网页中体积最大的资源。未经优化的图片会严重影响页面加载速度——而加载速度直接影响用户体验和搜索排名。Google 的 Core Web Vitals 将加载性能作为排名因素之一。</p>
+    <p>一张手机拍摄的原始照片可能有 5-10MB，而经过优化后可以压缩到 100-300KB，视觉质量几乎无差别，但文件大小减少了 95% 以上。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>上传前处理（推荐）</h3>
+    <ol>
+      <li><strong>调整尺寸</strong>：网站用图一般不需要超过 2000 像素宽。用系统自带的图片编辑器或在线工具缩放到合适尺寸</li>
+      <li><strong>压缩</strong>：使用在线工具如 TinyPNG、Squoosh 压缩图片。有损压缩（Quality 80-85%）可大幅减小体积且肉眼难辨</li>
+      <li><strong>格式选择</strong>：
+        <ul>
+          <li><strong>JPG</strong>：照片类图片首选，压缩率高</li>
+          <li><strong>PNG</strong>：需要透明背景的图片（Logo、图标）</li>
+          <li><strong>WebP</strong>：新一代格式，同等质量下体积比 JPG 小 25-35%，现代浏览器均支持</li>
+        </ul>
+      </li>
+    </ol>
+    <h3>WordPress 内置裁剪</h3>
+    <ol>
+      <li>在 <strong>媒体 → 媒体库</strong> 中点击图片</li>
+      <li>点击 <strong>编辑图片</strong></li>
+      <li>可以进行裁剪、旋转、翻转和缩放操作</li>
+      <li>选择应用到：所有图片尺寸 / 仅缩略图 / 除缩略图外所有尺寸</li>
+    </ol>
+    <h3>使用插件自动优化</h3>
+    <p>安装图片优化插件（如 ShortPixel、Imagify、Smush）可以在上传时自动压缩图片并转换为 WebP 格式。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>不要重复压缩</strong>：对已压缩的 JPG 再次压缩会累积质量损失。保留原始文件，只压缩一次</li>
+      <li><strong>WebP 兼容性</strong>：WordPress 5.8+ 原生支持 WebP 上传，但 IE11 和部分旧浏览器不支持。优化插件通常会同时保留 JPG 回退</li>
+      <li><strong>内置裁剪功能有限</strong>：WordPress 内置的图片编辑器只能做基础裁剪和缩放，复杂编辑（调色、抠图）需使用专业工具</li>
+      <li><strong>批量优化</strong>：如果网站已有大量未优化的图片，使用优化插件的「批量优化」功能可一次性处理所有历史图片</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="MD-4.html" class="prev"><div class="label">上一篇</div><div class="title">媒体设置（缩略图尺寸）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="MD-1.html">上传图片到媒体库</a>
+    <a href="MD-2.html">编辑图片信息</a>
+  </div></div>
+</div>
+</body>
+</html>

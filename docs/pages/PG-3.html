@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创建子页面 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">页面管理</a>
+  <span class="sep">/</span>
+  <span class="current">创建子页面</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>创建子页面</h1>
+    <div class="meta">
+      <span class="tag topic">页面管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 页面支持父子层级关系。一个「子页面」从属于某个「父页面」，在 URL 结构和后台管理中体现层级关系。例如，「服务介绍」页面下可以有「网站建设」「SEO 优化」等子页面。</p>
+    <p>子页面的 URL 会自动包含父页面的 slug，如 <code>/services/web-design/</code>，这种层级结构对 SEO 和用户导航都有帮助。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>当网站内容较多时，扁平的页面结构会让后台管理变得混乱。通过父子层级，可以将相关页面组织在一起，逻辑清晰。</p>
+    <p>层级化的 URL 结构（如 <code>/about/team/</code>）让搜索引擎和用户都能更好地理解页面之间的关系，有利于 SEO 和用户体验。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>确保父页面已经创建并发布</li>
+      <li>进入 <strong>页面 → 添加页面</strong>，创建新页面</li>
+      <li>在右侧面板中找到 <strong>页面属性</strong>（Page Attributes）区域</li>
+      <li>在「父级页面」下拉菜单中选择父页面</li>
+      <li>如果看不到页面属性面板，点击右上角 <strong>设置齿轮图标</strong>，确保「页面」选项卡已展开</li>
+      <li>编辑内容后点击 <strong>发布</strong></li>
+    </ol>
+    <p>发布后，在 <strong>页面 → 所有页面</strong> 列表中，子页面会以「— 子页面名」的缩进形式显示在父页面下方。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>找不到「页面属性」面板</strong>：在区块编辑器中，页面属性位于右侧的「页面」选项卡（不是「区块」选项卡），需要向下滚动才能看到</li>
+      <li><strong>层级不宜过深</strong>：建议最多 2-3 层，过深的层级会让 URL 过长，管理困难</li>
+      <li><strong>删除父页面的影响</strong>：如果删除父页面，子页面不会被删除，但会变成顶级页面，URL 结构随之改变</li>
+      <li><strong>排序</strong>：可在页面属性中设置「排序」数字来控制同级页面的显示顺序</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PG-2.html" class="prev"><div class="label">上一篇</div><div class="title">设置静态首页</div></a>
+    <a href="PG-4.html" class="next"><div class="label">下一篇</div><div class="title">修改页面 slug</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PG-1.html">创建三个页面并发布</a>
+  </div></div>
+</div>
+</body>
+</html>

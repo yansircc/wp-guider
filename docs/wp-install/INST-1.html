@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hostinger 一键安装 WP - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">WordPress 安装</a>
+  <span class="sep">/</span>
+  <span class="current">Hostinger 一键安装 WP</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>Hostinger 一键安装 WP</h1>
+    <div class="meta">
+      <span class="tag topic">WordPress 安装</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Hostinger 提供一键安装 WordPress 的功能，自动完成数据库创建、WordPress 文件部署、基础配置等所有步骤。整个过程只需填写站点标题和管理员信息，2 分钟内即可完成。</p>
+    <p>这是目前最简单的 WordPress 安装方式，适合绝大多数建站场景。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>手动安装 WordPress 需要下载文件、创建数据库、配置 wp-config.php、上传文件等多个步骤。一键安装省去了所有技术细节，让教练可以快速搭建站点，把时间花在真正重要的配置上。</p>
+    <p>对于训练环境，一键安装是最高效的起步方式。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 Hostinger hPanel</li>
+      <li>点击 <strong>Websites → Add Website</strong>（或 <strong>Create or migrate a website</strong>）</li>
+      <li>选择 <strong>WordPress</strong> 作为建站平台</li>
+      <li>填写 WordPress 信息：
+        <ul>
+          <li><strong>网站标题</strong>（后续可修改）</li>
+          <li><strong>管理员邮箱</strong></li>
+          <li><strong>管理员密码</strong>（建议使用强密码）</li>
+        </ul>
+      </li>
+      <li>选择是否安装预设插件和主题（可跳过）</li>
+      <li>绑定域名或使用临时域名</li>
+      <li>选择服务器位置（数据中心）</li>
+      <li>点击安装，等待完成</li>
+    </ol>
+    <p>安装完成后，通过 <code>你的域名/wp-admin</code> 即可访问 WordPress 后台。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>安装时设置的密码是 WordPress 管理员密码，不是 Hostinger 账号密码</li>
+      <li>如果域名 DNS 尚未生效，可以先用 Hostinger 提供的临时域名访问</li>
+      <li>安装后第一件事：修改固定链接为"文章名"结构</li>
+      <li>Hostinger 可能会预装一些推荐插件（如 Starter Templates），不需要的可以直接删除</li>
+      <li>安装后建议立即检查 PHP 版本（hPanel → Advanced → PHP Configuration），确保使用 8.1+</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="INST-2.html" class="next"><div class="label">下一篇</div><div class="title">手动安装 WordPress</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="INST-2.html">手动安装 WordPress</a>
+    <a href="INST-3.html">绑定域名（NS 方式）</a>
+    <a href="INST-4.html">绑定域名（A 记录方式）</a>
+    <a href="INST-5.html">配置 SSL 证书</a>
+  </div></div>
+</div>
+</body>
+</html>

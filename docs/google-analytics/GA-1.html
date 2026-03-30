@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注册 Google Search Console + 验证站点所有权 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">Google Analytics</a>
+  <span class="sep">/</span>
+  <span class="current">注册 GSC + 验证所有权</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>注册 Google Search Console + 验证站点所有权</h1>
+    <div class="meta">
+      <span class="tag topic">Google Analytics</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Google Search Console（GSC）是 Google 免费提供的站长工具，用于监控网站在 Google 搜索中的表现。注册后你可以查看哪些关键词带来了流量、哪些页面被收录、是否有抓取错误等。</p>
+    <p>使用 GSC 前必须完成站点所有权验证——向 Google 证明你是网站的管理者。WordPress 站点最常用的验证方式是通过 SEO 插件（Yoast / SEOPress）添加 HTML 标签。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>没有 GSC，你对网站在 Google 搜索中的表现完全是盲的——不知道被收录了多少页面、哪些关键词有排名、是否有技术问题阻碍抓取。</p>
+    <p>GSC 是 SEO 工作的基础设施，所有后续的搜索优化工作（提交站点地图、监控排名、排查收录问题）都依赖它。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 注册 GSC</h3>
+    <ol>
+      <li>访问 <code>search.google.com/search-console</code></li>
+      <li>使用 Google 账号登录</li>
+      <li>选择资源类型：
+        <ul>
+          <li><strong>网域</strong>（Domain）：覆盖所有子域名，需要 DNS 验证</li>
+          <li><strong>网址前缀</strong>（URL Prefix）：只覆盖指定 URL，验证方式更多更简单（推荐新手使用）</li>
+        </ul>
+      </li>
+      <li>选择「网址前缀」，输入网站完整 URL（如 <code>https://example.com</code>）</li>
+    </ol>
+
+    <h3>2. 通过 SEO 插件验证所有权</h3>
+    <ol>
+      <li>在 GSC 验证页面，展开 <strong>HTML 标记</strong> 验证方式</li>
+      <li>复制 meta 标签中 <code>content</code> 的值（一串字母数字）</li>
+      <li>回到 WordPress 后台：
+        <ul>
+          <li><strong>Yoast SEO</strong>：进入 Yoast SEO → 常规 → 站长工具，粘贴到「Google 验证代码」字段</li>
+          <li><strong>SEOPress</strong>：进入 SEOPress → 高级 → Google Search Console，粘贴验证代码</li>
+        </ul>
+      </li>
+      <li>保存设置</li>
+      <li>回到 GSC 页面，点击 <strong>验证</strong></li>
+    </ol>
+
+    <div class="callout tip">验证成功后不要删除 SEO 插件中的验证代码。Google 会定期重新检查，删除后可能导致验证失效。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>http vs https</strong>：注册时 URL 必须与网站实际使用的协议一致。如果网站是 https，就输入 https 开头的地址</li>
+      <li><strong>www vs 非 www</strong>：<code>www.example.com</code> 和 <code>example.com</code> 在 GSC 中是两个不同的资源。建议用「网域」类型或两个都注册</li>
+      <li><strong>验证失败</strong>：最常见的原因是缓存——SEO 插件保存后前台还是旧页面。清除缓存后重试</li>
+      <li><strong>数据不会立即出现</strong>：GSC 需要 24-48 小时才会开始显示数据，新注册后请耐心等待</li>
+      <li><strong>本地开发环境无法验证</strong>：GSC 需要 Google 能访问到你的网站，LocalWP 等本地环境无法完成验证</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="GA-2.html" class="next"><div class="label">下一篇</div><div class="title">提交 Sitemap 到 GSC</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="GA-4.html">GA4 基础报告阅读（用户/会话/页面浏览）</a>
+    <a href="GA-5.html">GSC 性能报告（点击/展示/CTR/排名）</a>
+    <a href="GA-6.html">GA4 事件追踪（按钮点击/表单提交）</a>
+    <a href="GA-7.html">GA4 转化目标设置 + Google Ads 联动</a>
+  </div></div>
+</div>
+</body>
+</html>

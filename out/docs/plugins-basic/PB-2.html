@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>停用并删除插件 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">插件基础</a>
+  <span class="sep">/</span>
+  <span class="current">停用并删除插件</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>停用并删除插件</h1>
+    <div class="meta">
+      <span class="tag topic">插件基础</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>当不再需要某个插件时，正确的处理流程是先<strong>停用</strong>（Deactivate），再<strong>删除</strong>（Delete）。停用会关闭插件功能但保留文件在服务器上；删除则彻底移除插件文件。</p>
+    <p>WordPress 不允许直接删除正在使用的插件——必须先停用才能删除。这是一个安全机制，防止误删正在运行的功能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>不用的插件即使被停用，仍然占用服务器磁盘空间，且可能成为安全隐患——攻击者可以利用已知漏洞攻击未更新的停用插件。</p>
+    <p>保持插件列表精简是 WordPress 安全和性能维护的基本实践。规则很简单：不用的插件就删掉，不要只是停用放着。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入后台 <strong>插件 → 已安装的插件</strong></li>
+      <li>找到要移除的插件</li>
+      <li>点击 <strong>停用</strong>（Deactivate）</li>
+      <li>停用后，该插件行会变灰，出现 <strong>删除</strong>（Delete）链接</li>
+      <li>点击 <strong>删除</strong>，在确认对话框中点击 <strong>确定</strong></li>
+    </ol>
+    <h3>批量操作</h3>
+    <ol>
+      <li>勾选多个要移除的插件</li>
+      <li>在「批量操作」下拉菜单中选择 <strong>停用</strong>，点击「应用」</li>
+      <li>再次勾选已停用的插件，选择 <strong>删除</strong>，点击「应用」</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>插件数据可能残留</strong>：大多数插件删除后，其在数据库中创建的表和数据不会被自动清除。部分插件提供「卸载时清除数据」选项，需要在停用前勾选</li>
+      <li><strong>先停用测试再删除</strong>：如果不确定某个插件是否重要，先停用它，观察网站几天确认一切正常后再删除</li>
+      <li><strong>排障时的停用技巧</strong>：当网站出问题时，逐一停用插件是定位冲突的有效方法——每次停用一个，检查问题是否解决</li>
+      <li><strong>必需插件无法停用</strong>：放在 <code>wp-content/mu-plugins/</code> 目录中的「必须启用」插件不会出现在普通插件列表中，且无法通过后台停用</li>
+      <li><strong>删除后可以重新安装</strong>：删除插件不是不可逆操作，随时可以从插件目录重新安装</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PB-1.html" class="prev"><div class="label">上一篇</div><div class="title">安装并激活插件</div></a>
+    <a href="PB-3.html" class="next"><div class="label">下一篇</div><div class="title">插件选型方法论</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PB-3.html">插件选型方法论</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>位置规则 — 文章类型 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">位置规则 — 文章类型</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>位置规则 — 文章类型</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>通过位置规则将字段组绑定到特定的<strong>文章类型</strong>（Post Type），让字段只出现在该类型的所有文章编辑界面中。这是 ACF 最常用的位置规则方式。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>CPT 的核心价值就是搭配自定义字段 — 「产品」需要价格和规格字段，「团队成员」需要职位和照片字段</li>
+      <li>字段跟着文章类型走，所有该类型的文章自动拥有相同的字段结构</li>
+      <li>这是搭建内容管理系统的标准做法：CPT + 字段组 + 位置规则</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>进入 <strong>ACF → 字段组</strong>，编辑目标字段组</li>
+      <li>在底部<strong>「位置规则」</strong>区域，设置：
+        <ul>
+          <li>参数：<strong>「文章类型」</strong></li>
+          <li>运算符：<strong>「等于」</strong></li>
+          <li>值：选择目标 CPT（如 <code>product</code>）</li>
+        </ul>
+      </li>
+      <li>点击<strong>保存更改</strong></li>
+    </ol>
+
+    <h3>验证</h3>
+    <p>进入该 CPT 的文章列表，新建或编辑一篇文章，字段组应出现在编辑器下方。普通文章和页面不会显示该字段组。</p>
+
+    <h3>组合规则</h3>
+    <p>可以在同一规则组内添加 and 条件，例如：文章类型等于「产品」<strong>且</strong>当前用户角色等于「管理员」— 这样只有管理员编辑产品时才看到该字段组。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>一个 CPT 可绑定多个字段组</strong>：用多个字段组管理不同类别的字段（如「基本信息」和「技术参数」分开），编辑界面更清晰</li>
+      <li><strong>不等于</strong>：运算符选「不等于」可以排除特定类型（如「除了页面以外的所有类型都显示」）</li>
+      <li><strong>默认文章</strong>：WordPress 自带的「文章」（post）和「页面」（page）也可以作为位置规则的目标</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-21.html" class="prev"><div class="label">上一篇</div><div class="title">位置规则-特定页面</div></a>
+    <a href="ACF-23.html" class="next"><div class="label">下一篇</div><div class="title">分类法字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-4.html">开启 CPT 归档 URL（⚠️ 高级→URL→归档，不开没有 archive 页）</a>
+    <a href="ACF-5.html">删除文章类型</a>
+    <a href="ACF-8.html">编辑/删除分类法</a>
+    <a href="ACF-9.html">将分类法绑定到自定义文章类型（如「产品分类」绑「产品」）</a>
+  </div></div>
+</div>
+</body>
+</html>

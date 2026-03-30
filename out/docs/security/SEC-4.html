@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>禁用文件编辑 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">security</a>
+  <span class="sep">/</span>
+  <span class="current">禁用文件编辑</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>禁用文件编辑</h1>
+    <div class="meta">
+      <span class="tag topic">security</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 后台自带"主题编辑器"（外观 → 主题文件编辑器）和"插件编辑器"（插件 → 插件文件编辑器），允许管理员直接在浏览器中修改 PHP、CSS、JS 等源文件。</p>
+    <p>通过在 <code>wp-config.php</code> 中设置 <code>DISALLOW_FILE_EDIT</code> 常量为 <code>true</code>，可以彻底禁用这两个编辑器。设置后，后台菜单中对应的入口会消失，直接访问编辑器 URL 也会被拒绝。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>后台文件编辑器是一个巨大的安全隐患。如果攻击者通过钓鱼、密码泄露或其他方式获取了管理员账号，他们可以直接通过编辑器向主题或插件文件中注入恶意代码——不需要 FTP 权限，不需要 SSH 访问，只需要一个浏览器。</p>
+    <p>即使不考虑安全问题，后台编辑器也容易造成误操作。一个手误就可能导致白屏（PHP fatal error），而且没有版本控制，无法回滚。</p>
+    <div class="callout warning">禁用后台编辑器只是关闭了一个攻击入口，不影响通过 FTP、SSH 或本地文件系统直接修改文件。真正的文件保护需要配合正确的文件权限设置。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 通过 WP-CLI 设置常量</h3>
+    <pre><code>locwp wp wp-train -- config set DISALLOW_FILE_EDIT true --type=constant</code></pre>
+    <p>这会在 <code>wp-config.php</code> 中添加一行：</p>
+    <pre><code>define( 'DISALLOW_FILE_EDIT', true );</code></pre>
+
+    <h3>2. 验证设置生效</h3>
+    <pre><code># 确认常量值
+locwp wp wp-train -- config get DISALLOW_FILE_EDIT</code></pre>
+    <p>应返回 <code>true</code>。</p>
+
+    <h3>3. 在后台验证</h3>
+    <ol>
+      <li>登录后台，进入 <strong>外观</strong> 菜单 — "主题文件编辑器" 应该已消失</li>
+      <li>进入 <strong>插件</strong> 菜单 — "插件文件编辑器" 应该已消失</li>
+      <li>直接访问 <code>/wp-admin/theme-editor.php</code> — 应显示"抱歉，您不能编辑此站点的主题"</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <h3>DISALLOW_FILE_EDIT vs DISALLOW_FILE_MODS</h3>
+    <p>WordPress 有两个相关但不同的常量：</p>
+    <ul>
+      <li><code>DISALLOW_FILE_EDIT</code> — 仅禁用后台编辑器。插件和主题仍然可以正常安装、更新、删除</li>
+      <li><code>DISALLOW_FILE_MODS</code> — 禁用一切文件修改操作，包括安装/更新/删除插件和主题、后台编辑器、自动更新。这个常量包含了 <code>DISALLOW_FILE_EDIT</code> 的效果</li>
+    </ul>
+    <div class="callout danger">训练环境中不要启用 DISALLOW_FILE_MODS，否则你将无法通过后台安装任何插件或主题，严重影响学习进度。</div>
+
+    <h3>其他注意事项</h3>
+    <ul>
+      <li>这个设置是写在 <code>wp-config.php</code> 中的，不是数据库选项，因此不能通过后台修改</li>
+      <li>如需恢复编辑器，用 WP-CLI 删除常量：<code>locwp wp wp-train -- config delete DISALLOW_FILE_EDIT</code></li>
+      <li>生产环境中，<code>DISALLOW_FILE_EDIT</code> 应该是标配。所有代码变更应通过版本控制（Git）和部署流程完成</li>
+      <li>部分安全插件（如 Sucuri、iThemes Security）也提供禁用编辑器的选项，效果相同但本质上都是设置这个常量</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SEC-3.html" class="prev"><div class="label">上一篇</div><div class="title">隐藏登录 URL</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="SEC-1.html">安装 Wordfence + 基础安全扫描</a>
+    <a href="SEC-2.html">确认注册关闭</a>
+  </div></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>True/False 开关字段 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">ACF</a>
+  <span class="sep">/</span>
+  <span class="current">True/False 开关字段</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>True/False 开关字段</h1>
+    <div class="meta">
+      <span class="tag topic">ACF</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><strong>True/False</strong> 字段是一个简单的开关控件，只有两种状态：开（true/1）和关（false/0）。在编辑界面显示为一个拨动开关。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li>适合布尔类型的数据：是否推荐、是否显示、是否启用某功能</li>
+      <li>比复选框更直观（复选框像「勾选」，开关更像「启用/禁用」）</li>
+      <li>常用于配合条件逻辑控制其他字段的显隐</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>在字段组中添加新字段</li>
+      <li>选择字段类型 <strong>True / False</strong></li>
+      <li>配置选项：
+        <ul>
+          <li><strong>消息</strong>：开关旁边显示的描述文字（如「在首页展示此产品」）</li>
+          <li><strong>默认值</strong>：初始状态是开还是关</li>
+          <li><strong>显示样式</strong>：可选复选框或美化的开关样式</li>
+          <li><strong>开/关标签</strong>：自定义开关两种状态的文字（如「是/否」、「显示/隐藏」）</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>常见用法</h3>
+    <ul>
+      <li><strong>推荐产品</strong>：<code>is_featured</code> — 开启后在首页/推荐位展示</li>
+      <li><strong>显示价格</strong>：<code>show_price</code> — 控制前端是否显示价格</li>
+      <li><strong>新品标记</strong>：<code>is_new</code> — 自动显示「NEW」标签</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>存储值</strong>：开=1，关=0（或空），在前端判断时注意类型</li>
+      <li><strong>配合条件逻辑</strong>：True/False 字段非常适合作为条件逻辑的触发器，控制其他字段的显隐</li>
+      <li><strong>默认值</strong>：新文章的默认值由字段设置决定，注意按需求设置</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ACF-17.html" class="prev"><div class="label">上一篇</div><div class="title">选择框 / 复选框 / 单选按钮 字段</div></a>
+    <a href="ACF-19.html" class="next"><div class="label">下一篇</div><div class="title">关系 / 文章对象 字段</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ACF-1.html">安装 ACF Pro</a>
+    <a href="ACF-2.html">添加自定义文章类型（如产品）</a>
+    <a href="ACF-3.html">编辑/查看文章类型设置</a>
+    <a href="ACF-6.html">创建分类法（如产品分类）+ 开启分层</a>
+  </div></div>
+</div>
+</body>
+</html>

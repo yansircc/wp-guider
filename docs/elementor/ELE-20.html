@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Countdown 倒计时 Widget - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Countdown 倒计时 Widget</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Countdown 倒计时 Widget</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d2">L2</span><span class="tag new">NEW</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Countdown Widget 在页面上显示一个实时倒数计时器，展示距离指定日期/时间的天、时、分、秒。常用于营销活动、产品发布、限时优惠等场景，制造紧迫感（Urgency）促进转化。</p>
+    <p>Elementor Pro 的 Countdown 支持两种模式：<strong>Due Date</strong>（到期日）倒数到固定日期，以及 <strong>Evergreen</strong>（常青）每位访客看到的倒计时从首次访问开始计算。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>心理学研究表明，稀缺性和紧迫感是最强的转化驱动力之一。倒计时器直观告诉用户「机会有限，现在行动」，可以显著提升按钮点击率和表单提交率。</p>
+    <p>典型场景：限时折扣、早鸟价、活动报名截止、新产品发布倒计时。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>基础设置</h3>
+    <ol>
+      <li>拖入 <strong>Countdown</strong> Widget</li>
+      <li><strong>Content Tab</strong>：
+        <ul>
+          <li>Type 选择 <strong>Due Date</strong>（固定日期）</li>
+          <li>设置截止日期和时间</li>
+          <li>选择显示的时间单位（天/时/分/秒）</li>
+        </ul>
+      </li>
+      <li><strong>Style Tab</strong>：设置数字字号、颜色、间距，以及标签（Days/Hours 等）的样式</li>
+    </ol>
+
+    <h3>到期后动作</h3>
+    <p>在 Content Tab 底部的 <strong>Actions After Expire</strong> 设置：</p>
+    <ul>
+      <li><strong>Show Message</strong>：显示自定义文字（如「活动已结束」）</li>
+      <li><strong>Redirect</strong>：自动跳转到其他页面</li>
+      <li><strong>Hide</strong>：倒计时到期后自动隐藏</li>
+    </ul>
+
+    <h3>Evergreen 常青模式</h3>
+    <p>Type 选择 <strong>Evergreen Timer</strong>，设置倒计时时长（如 48 小时）。每位访客从首次看到页面开始倒数，使用 Cookie 记住进度。</p>
+
+    <div class="callout tip">将 Countdown 与 CTA 按钮紧密放在一起——「距离优惠结束还有 XX:XX:XX」+ 「立即下单」的组合转化效果最佳。</div>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>Due Date 到期后如果没有设置到期动作，会显示全零（00:00:00:00），体验很差</li>
+      <li>Evergreen 模式使用浏览器 Cookie——用户清除 Cookie 后倒计时会重置</li>
+      <li>不要在非促销页面滥用倒计时——没有真实截止时间的「假倒计时」会损害品牌信任</li>
+      <li>注意时区问题——Due Date 使用 WordPress 设置的时区</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-19.html" class="prev"><div class="label">上一篇</div><div class="title">Animated Headline 动态标题</div></a>
+    <a href="ELE-21.html" class="next"><div class="label">下一篇</div><div class="title">Price Table 价格表 Widget</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-1.html">安装 Elementor Pro + 激活授权</a>
+    <a href="ELE-2.html">创建第一个页面（拖拽编辑器界面认识）</a>
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-6.html">标题 / 文本编辑器 / 图片 Widget</a>
+  </div></div>
+</div></body></html>

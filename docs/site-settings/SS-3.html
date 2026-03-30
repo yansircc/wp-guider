@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关闭注册 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">站点设置</a>
+  <span class="sep">/</span>
+  <span class="current">关闭注册</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>关闭注册</h1>
+    <div class="meta">
+      <span class="tag topic">站点设置</span>
+      <span class="tag diff d1">L1</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 默认允许用户通过 <code>/wp-login.php?action=register</code> 页面自行注册账号。对于大多数企业站和展示站，这个功能是不需要的，应该关闭。</p>
+    <p>"任何人都可以注册"（Anyone can register）是 WordPress 常规设置中的一个复选框，控制是否开放前台注册。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>开放注册会带来安全风险：垃圾注册机器人会大量注册账号，占用数据库资源，甚至可能被利用进行攻击。对于不需要会员功能的网站，关闭注册是基本的安全措施。</p>
+    <p>即使需要用户注册（如电商、会员站），也应通过专用插件（如 WooCommerce）来管理，而非使用 WordPress 默认注册功能。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>登录 WordPress 后台</li>
+      <li>进入 <strong>设置 → 常规</strong>（Settings → General）</li>
+      <li>找到 <strong>成员资格</strong>（Membership）区域</li>
+      <li>确保 <strong>"任何人都可以注册"</strong>（Anyone can register）复选框<strong>未勾选</strong></li>
+      <li>点击 <strong>保存更改</strong></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>关闭注册后，管理员仍可在后台 <strong>用户 → 添加用户</strong> 手动创建账号</li>
+      <li>如果安装了 WooCommerce，客户注册由 WooCommerce 设置控制，与此设置独立</li>
+      <li>建议配合安全插件（如 Wordfence）限制登录页面访问，进一步降低风险</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="SS-2.html" class="prev"><div class="label">上一篇</div><div class="title">修改副标题</div></a>
+    <a href="SS-4.html" class="next"><div class="label">下一篇</div><div class="title">切换语言</div></a>
+  </div>
+</div>
+</body>
+</html>

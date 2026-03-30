@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All-in-One Migration 跨服务器迁移 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">备份与维护</a>
+  <span class="sep">/</span>
+  <span class="current">All-in-One Migration 跨服务器迁移</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>All-in-One Migration 跨服务器迁移</h1>
+    <div class="meta">
+      <span class="tag topic">备份与维护</span>
+      <span class="tag diff d3">L3</span>
+      <span class="tag new">NEW</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>All-in-One WP Migration 是一个站点迁移插件，可以将整个 WordPress 站点打包为单个 <code>.wpress</code> 文件，包括数据库、媒体、插件、主题——所有内容。</p>
+    <p>在目标服务器上安装同一个插件，导入这个文件即可完成迁移。它会自动处理 URL 替换、序列化数据修复等复杂问题。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>站点迁移是 WordPress 运维中最常见也最容易出错的操作之一。手动迁移需要：导出数据库、修改 URL、上传文件、修复序列化数据——每一步都可能出错。</p>
+    <p>All-in-One WP Migration 把这些步骤封装成了"导出 → 导入"两步操作，大幅降低了迁移失败的风险。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>1. 在源站点导出</h3>
+    <pre><code># 安装插件
+locwp wp wp-train -- plugin install all-in-one-wp-migration --activate</code></pre>
+    <ol>
+      <li>进入后台 <strong>All-in-One WP Migration → Export</strong></li>
+      <li>点击 <strong>Export To → File</strong></li>
+      <li>等待打包完成，下载 <code>.wpress</code> 文件</li>
+    </ol>
+
+    <h3>2. 在目标站点导入</h3>
+    <ol>
+      <li>在目标 WordPress 上安装并激活 All-in-One WP Migration</li>
+      <li>进入 <strong>All-in-One WP Migration → Import</strong></li>
+      <li>上传或拖拽 <code>.wpress</code> 文件</li>
+      <li>确认导入（会覆盖目标站点的所有数据）</li>
+      <li>导入完成后，用 <strong>源站点的管理员账号</strong> 重新登录</li>
+    </ol>
+
+    <h3>3. 导入后检查</h3>
+    <ul>
+      <li>刷新固定链接：<strong>设置 → 固定链接 → 保存</strong></li>
+      <li>检查媒体文件是否正常显示</li>
+      <li>检查表单、联系方式等功能是否正常</li>
+    </ul>
+
+    <div class="callout warning">免费版有导入文件大小限制（通常 512MB）。对于大型站点，可以使用付费扩展或在导出时排除媒体文件（单独迁移 uploads 目录）。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>导入会完全覆盖目标站点，包括管理员账号和密码</li>
+      <li>导入后必须用源站点的登录凭据登录</li>
+      <li>如果文件过大导致上传失败，检查 PHP 的 <code>upload_max_filesize</code> 和 <code>post_max_size</code> 设置</li>
+      <li>迁移后如果遇到 CSS/图片加载问题，通常是 URL 替换不完整，用 WP-CLI 的 <code>search-replace</code> 补充替换</li>
+      <li>All-in-One 适合一次性迁移；持续备份用 UpdraftPlus，快速回滚用 WP Reset</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="BM-6.html" class="prev"><div class="label">上一篇</div><div class="title">WP Reset 恢复快照</div></a>
+    <a href="BM-8.html" class="next"><div class="label">下一篇</div><div class="title">更新 WordPress</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="BM-1.html">UpdraftPlus 备份</a>
+    <a href="BM-3.html">备份策略选择</a>
+    <a href="BM-5.html">WP Reset 生成快照</a>
+    <a href="BM-6.html">WP Reset 恢复快照</a>
+  </div></div>
+</div>
+</body>
+</html>

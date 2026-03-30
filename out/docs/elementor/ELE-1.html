@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>安装 Elementor Pro 并创建第一个页面 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">安装 Elementor Pro 并创建第一个页面</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>安装 Elementor Pro 并创建第一个页面</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d1">L1</span></div><p class="merge-note">本文同时覆盖: ELE-1, ELE-2</p></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Elementor 是 WordPress 最流行的可视化页面构建器，采用前端拖拽方式编辑页面，所见即所得。Elementor Pro 是其付费版本，提供 Theme Builder、Form、Popup、WooCommerce 集成等高级功能。</p>
+    <p>安装 Elementor Pro 并创建第一个页面是学习 Elementor 建站的起点——你需要熟悉编辑器界面、Widget 面板、页面设置等基本概念。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>零代码建站</strong>：无需 HTML/CSS 知识即可创建专业页面</li>
+      <li><strong>实时预览</strong>：修改即时可见，大幅提升设计效率</li>
+      <li><strong>Pro 功能</strong>：Theme Builder 让你控制整站布局（Header/Footer/模板），而不仅仅是页面内容</li>
+      <li><strong>行业标准</strong>：Elementor 是 WordPress 生态中使用最广泛的 Page Builder，市场占有率遥遥领先</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>第一步：安装 Elementor Pro</h3>
+    <ol>
+      <li>进入 <strong>插件 → 安装插件 → 上传插件</strong></li>
+      <li>上传 <code>elementor-pro-*.zip</code> 文件并点击"立即安装"</li>
+      <li>安装完成后点击"启用插件"</li>
+      <li>进入 <strong>Elementor → License</strong>，输入授权码并激活</li>
+      <li>如果系统提示需要先安装免费版 Elementor，先到插件市场搜索安装 "Elementor" 免费版</li>
+    </ol>
+
+    <h3>第二步：创建第一个页面</h3>
+    <ol>
+      <li>进入 <strong>页面 → 新建页面</strong></li>
+      <li>输入页面标题，如"首页"</li>
+      <li>点击蓝色按钮 <strong>"使用 Elementor 编辑"</strong></li>
+      <li>进入编辑器后，认识界面布局：
+        <ul>
+          <li><strong>左侧面板</strong>：Widget 库（可搜索/拖拽到右侧画布）</li>
+          <li><strong>中间画布</strong>：页面实时预览区域</li>
+          <li><strong>底部工具栏</strong>：响应式切换、撤销/重做、发布按钮</li>
+          <li><strong>右键菜单</strong>：复制/粘贴/删除 Widget 或 Container</li>
+        </ul>
+      </li>
+      <li>从左侧拖一个 <strong>Heading</strong> Widget 到画布，输入标题文字</li>
+      <li>点击左下角的 <strong>"发布"</strong> 按钮</li>
+    </ol>
+
+    <h3>编辑器核心操作</h3>
+    <ul>
+      <li><strong>拖拽</strong>：从左侧 Widget 面板拖到画布指定位置</li>
+      <li><strong>点选编辑</strong>：点击画布中的任意元素，左侧面板显示该元素的设置</li>
+      <li><strong>三个设置 Tab</strong>：Content（内容）/ Style（样式）/ Advanced（高级/边距/动效）</li>
+      <li><strong>右键操作</strong>：复制、粘贴样式、复制整个 Widget、删除</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>白屏问题</strong>：安装后编辑器白屏，通常是 PHP 内存不足。在 <code>wp-config.php</code> 中添加 <code>define('WP_MEMORY_LIMIT', '256M');</code></li>
+      <li><strong>授权限制</strong>：Elementor Pro 按站点数授权，一个授权码不能用在多个站点</li>
+      <li><strong>兼容性</strong>：部分主题会与 Elementor 冲突，推荐使用 Hello Elementor 主题（官方配套，最轻量）</li>
+      <li><strong>页面模板</strong>：在页面设置中选择 "Elementor Canvas"（全屏无 Header/Footer）或 "Elementor Full Width"（无侧边栏）</li>
+      <li><strong>保存习惯</strong>：编辑过程中定期点击"更新"，Elementor 也有自动保存和修订历史</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <span></span>
+    <a href="ELE-2.html" class="next"><div class="label">下一篇</div><div class="title">创建第一个页面（拖拽编辑器界面认识）</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-3.html">Container 布局（Flexbox 方向/对齐/间距）</a>
+    <a href="ELE-4.html">嵌套 Container（多层布局）</a>
+    <a href="ELE-8.html">图标盒子 / 图片盒子 Widget</a>
+    <a href="ELE-9.html">视频 / 谷歌地图 Widget</a>
+  </div></div>
+</div></body></html>

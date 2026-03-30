@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Display Conditions 显示条件 - WP Guider 知识库</title><link rel="stylesheet" href="../style.css"></head><body>
+<nav class="topnav"><a href="../../topic-matrix.html" class="brand">WP Guider</a><span class="sep">/</span><a href="index.html">Elementor 建站</a>
+  <span class="sep">/</span>
+  <span class="current">Display Conditions 显示条件</span></nav>
+<div class="container">
+  <div class="doc-header"><h1>Display Conditions 显示条件（不同页面不同模板）</h1><div class="meta"><span class="tag topic">Elementor 建站</span><span class="tag diff d4">L4</span></div></div>
+
+  <div class="section"><h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>Display Conditions 是 Elementor Theme Builder 的条件显示系统。它决定每个模板（Header、Footer、Single、Archive 等）在哪些页面上生效。</p>
+    <p>通过组合 Include（包含）和 Exclude（排除）条件，你可以实现"首页用一个 Header，其他页面用另一个 Header"或"产品分类用网格归档模板，博客分类用列表归档模板"等复杂规则。</p>
+  </div>
+
+  <div class="section"><h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <ul>
+      <li><strong>差异化设计</strong>：不同类型页面的用户意图不同，需要不同的布局和信息架构</li>
+      <li><strong>精确控制</strong>：无需为每个页面单独编辑，通过规则自动匹配</li>
+      <li><strong>模板复用</strong>：创建少量模板，通过条件组合覆盖全站所有场景</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>设置 Display Conditions</h3>
+    <ol>
+      <li>在 Theme Builder 中编辑模板，点击 <strong>Publish</strong>（或已发布模板点击左下角的上箭头 → <strong>Display Conditions</strong>）</li>
+      <li>点击 <strong>Add Condition</strong></li>
+      <li>选择条件层级：
+        <ul>
+          <li><strong>Entire Site</strong>：全站生效</li>
+          <li><strong>Archives</strong>：所有归档页 / 特定分类 / 特定标签 / 作者归档 / 日期归档</li>
+          <li><strong>Singular</strong>：所有单页 / 特定 Post Type / 特定页面 / 特定文章 / 特定子页面</li>
+        </ul>
+      </li>
+      <li>点击条件前的 <strong>Include/Exclude</strong> 切换按钮选择包含或排除</li>
+      <li>可以添加多条规则，它们之间是 <strong>OR</strong>（或）关系</li>
+    </ol>
+
+    <h3>条件优先级规则</h3>
+    <p>当多个模板的条件都匹配同一个页面时，Elementor 按以下优先级决定使用哪个：</p>
+    <ol>
+      <li><strong>最具体的条件优先</strong>：指定了具体页面 ID 的条件 &gt; 指定了分类的条件 &gt; 全站条件</li>
+      <li>如果两个条件同样具体，<strong>后创建的模板优先</strong></li>
+    </ol>
+
+    <h3>实际案例</h3>
+    <ul>
+      <li>Header A：Include → Entire Site（全站默认 Header）</li>
+      <li>Header B：Include → Singular → Front Page（首页专用 Header，更具体，优先级更高）</li>
+      <li>结果：首页显示 Header B，其他所有页面显示 Header A</li>
+    </ul>
+  </div>
+
+  <div class="section"><h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>在 <strong>Templates → Theme Builder</strong> 面板中，每个模板下方会显示其当前的 Display Conditions，方便全局查看</li>
+      <li>如果某个页面没有匹配任何自定义模板，会回退到主题默认模板</li>
+      <li>Exclude 条件可以在 Include 基础上排除特定页面，如"全站生效，但排除首页"</li>
+      <li>修改 Display Conditions 不需要重新编辑模板内容，直接在已发布模板上修改即可</li>
+      <li>条件冲突时可以在 Theme Builder 面板查看哪些模板被标记了警告图标</li>
+      <li>建议用命名规范标识模板用途，如"Header - 全站默认"、"Header - 落地页专用"</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="ELE-39.html" class="prev"><div class="label">上一篇</div><div class="title">Archive 归档模板（分类/标签/作者）</div></a>
+    <a href="ELE-41.html" class="next"><div class="label">下一篇</div><div class="title">Search Results 搜索结果页模板</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="ELE-5.html">Grid Container 布局</a>
+    <a href="ELE-11.html">Design System Variables（字号/间距/圆角变量）</a>
+    <a href="ELE-12.html">CSS Classes 复用样式</a>
+    <a href="ELE-14.html">按设备隐藏/显示元素</a>
+  </div></div>
+</div></body></html>

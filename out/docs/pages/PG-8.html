@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定时发布页面 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">页面管理</a>
+  <span class="sep">/</span>
+  <span class="current">定时发布页面</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>定时发布页面（⚠️ wp-cron 不稳定）</h1>
+    <div class="meta">
+      <span class="tag topic">页面管理</span>
+      <span class="tag diff d2">L2</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p>WordPress 允许你为页面设置一个未来的发布时间。到达设定时间后，页面会自动从「预定」状态变为「已发布」。这就是定时发布（Scheduled Publishing）功能。</p>
+    <p>定时发布依赖 WordPress 内置的 <strong>wp-cron</strong> 机制——一个基于页面访问触发的伪定时任务系统。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>定时发布适用于需要在特定时间点上线的内容，例如活动公告、促销页面、新产品发布等。提前准备好内容并设定发布时间，可以避免手动操作的遗忘或延迟。</p>
+    <p>对于跨时区团队或需要在非工作时间发布内容的场景，定时发布尤为有用。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <ol>
+      <li>编辑页面，在右侧面板找到 <strong>发布</strong> 区域</li>
+      <li>点击「立即」旁边的日期/时间链接</li>
+      <li>在日期选择器中设置未来的日期和时间</li>
+      <li>注意时间基于 <strong>设置 → 常规</strong> 中配置的时区</li>
+      <li>设置完成后，「发布」按钮会变为 <strong>预定</strong>（Schedule）</li>
+      <li>点击 <strong>预定</strong> 确认</li>
+    </ol>
+    <p>预定后，页面状态变为「预定」，到达设定时间且有访客访问网站时，页面会自动发布。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li><strong>wp-cron 的根本问题</strong>：WordPress 的 wp-cron 不是真正的系统级定时任务，而是在用户访问网站时才会触发。如果在设定的发布时间前后没有访客访问，页面可能不会准时发布</li>
+      <li><strong>低流量网站尤其受影响</strong>：如果网站每天只有几十个访客，定时发布可能延迟数小时甚至更久</li>
+      <li><strong>解决方案</strong>：
+        <ul>
+          <li>在服务器上配置真正的 cron job，每分钟请求一次 <code>wp-cron.php</code></li>
+          <li>在 <code>wp-config.php</code> 中添加 <code>define('DISABLE_WP_CRON', true);</code> 禁用伪 cron</li>
+          <li>然后添加系统 cron：<code>*/1 * * * * wget -q -O - https://yoursite.com/wp-cron.php</code></li>
+        </ul>
+      </li>
+      <li><strong>「漏发」状态</strong>：如果预定时间已过但页面未发布，WordPress 会显示「Missed schedule」状态，需要手动点击发布</li>
+      <li><strong>时区一致性</strong>：确保后台设置的时区与你所在的时区一致，否则发布时间会有偏差</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="PG-7.html" class="prev"><div class="label">上一篇</div><div class="title">修改页面作者</div></a>
+    <a href="PG-9.html" class="next"><div class="label">下一篇</div><div class="title">关联 Privacy Policy 页面</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="PG-1.html">创建三个页面并发布</a>
+  </div></div>
+</div>
+</body>
+</html>

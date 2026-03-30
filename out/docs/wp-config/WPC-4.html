@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>uploads 目录 - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">wp-config</a>
+  <span class="sep">/</span>
+  <span class="current">uploads 目录</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>uploads 目录</h1>
+    <div class="meta">
+      <span class="tag topic">wp-config</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>wp-content/uploads/</code> 是 WordPress 存放所有通过媒体库上传的文件的目录。图片、文档、视频等媒体文件都保存在这里。</p>
+    <p>默认情况下，WordPress 按年和月份组织文件：<code>uploads/2026/03/photo.jpg</code>。这个行为可以在 <strong>设置 → 媒体</strong> 中关闭。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p><code>uploads</code> 目录是整个 WordPress 中唯一包含用户不可重建数据的目录。主题和插件可以重新安装，数据库可以从 SQL 恢复，但用户上传的原始文件丢了就真的丢了。</p>
+    <p>理解 uploads 的结构对于备份策略、磁盘空间管理和迁移操作都至关重要。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>查看 uploads 目录结构</h3>
+    <pre><code># 查看上传目录路径
+locwp wp wp-train -- eval "echo wp_upload_dir()['basedir'];"
+
+# 查看目录大小
+du -sh wp-content/uploads/</code></pre>
+
+    <h3>目录结构示例</h3>
+    <pre><code>uploads/
+├── 2025/
+│   ├── 01/
+│   │   ├── hero-image.jpg
+│   │   ├── hero-image-150x150.jpg    # 缩略图
+│   │   └── hero-image-300x200.jpg    # 中等尺寸
+│   └── 12/
+├── 2026/
+│   └── 03/
+└── wpcf7_uploads/   # Contact Form 7 临时目录</code></pre>
+
+    <h3>WordPress 自动生成的图片尺寸</h3>
+    <p>上传一张图片后，WordPress 会根据 <strong>设置 → 媒体</strong> 中的配置自动生成多个尺寸的副本：</p>
+    <ul>
+      <li><strong>缩略图</strong>（Thumbnail）— 默认 150x150</li>
+      <li><strong>中等</strong>（Medium）— 默认最大 300x300</li>
+      <li><strong>大</strong>（Large）— 默认最大 1024x1024</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>备份时 <code>uploads</code> 是最高优先级，其内容无法重建</li>
+      <li>图片在数据库中只存储相对路径引用，实际文件在 <code>uploads</code> 目录中</li>
+      <li>如果服务器磁盘空间不足，<code>uploads</code> 目录通常是最大的占用者</li>
+      <li>迁移站点时，如果 uploads 路径或 URL 变化，需要用 WP-CLI 的 <code>search-replace</code> 更新数据库中的引用</li>
+      <li>部分插件（如备份、表单插件）会在 <code>uploads</code> 下创建自己的子目录</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="WPC-3.html" class="prev"><div class="label">上一篇</div><div class="title">themes/plugins 目录</div></a>
+    <a href="WPC-5.html" class="next"><div class="label">下一篇</div><div class="title">查看 table_prefix</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="WPC-1.html">查看 DB_NAME</a>
+    <a href="WPC-2.html">wp-content 目录结构</a>
+    <a href="WPC-9.html">SQL 查询基础</a>
+    <a href="WPC-10.html">修复 siteurl</a>
+  </div></div>
+</div>
+</body>
+</html>

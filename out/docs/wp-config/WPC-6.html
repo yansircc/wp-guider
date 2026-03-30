@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设置 WP_MEMORY_LIMIT - WP Guider 知识库</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="topnav">
+  <a href="../../topic-matrix.html" class="brand">WP Guider</a>
+  <span class="sep">/</span>
+  <a href="index.html">wp-config</a>
+  <span class="sep">/</span>
+  <span class="current">设置 WP_MEMORY_LIMIT</span>
+</nav>
+<div class="container">
+  <div class="doc-header">
+    <h1>设置 WP_MEMORY_LIMIT</h1>
+    <div class="meta">
+      <span class="tag topic">wp-config</span>
+      <span class="tag diff d3">L3</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">📖</span> What — 这是什么</h2>
+    <p><code>WP_MEMORY_LIMIT</code> 是 WordPress 允许 PHP 使用的最大内存量。默认值是 <code>40M</code>（后台操作为 <code>256M</code>）。</p>
+    <p>当 WordPress 需要处理大量数据（如导入大文件、生成缩略图、运行复杂查询）时，可能会超出默认内存限制，导致"Allowed memory size exhausted"致命错误。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🎯</span> Why — 为什么要做</h2>
+    <p>内存不足是 WordPress 常见的白屏/崩溃原因之一。特别是安装了多个插件或使用页面构建器（如 Elementor）时，内存消耗会显著增加。</p>
+    <p>合理设置内存限制是性能调优的基础步骤。设置过低导致崩溃，设置过高则浪费服务器资源。</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">🔧</span> How — 怎么做</h2>
+    <h3>查看当前内存限制</h3>
+    <pre><code>locwp wp wp-train -- config get WP_MEMORY_LIMIT</code></pre>
+
+    <h3>设置内存限制</h3>
+    <pre><code># 设置为 256M（推荐值）
+locwp wp wp-train -- config set WP_MEMORY_LIMIT 256M --raw</code></pre>
+    <p>这会在 <code>wp-config.php</code> 中添加或更新：</p>
+    <pre><code>define( 'WP_MEMORY_LIMIT', '256M' );</code></pre>
+
+    <h3>常用值参考</h3>
+    <ul>
+      <li><code>64M</code> — 小型站点，少量插件</li>
+      <li><code>128M</code> — 中等站点，10+ 个插件</li>
+      <li><code>256M</code> — 推荐值，适合大部分场景</li>
+      <li><code>512M</code> — 大型站点/页面构建器</li>
+    </ul>
+    <div class="callout tip">WP_MEMORY_LIMIT 不能超过 PHP 本身的 <code>memory_limit</code> 设置。如果 PHP 限制为 128M，WordPress 设置 256M 也无效。</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="icon">⚠️</span> 常见问题与注意事项</h2>
+    <ul>
+      <li>值必须是字符串格式，带单位：<code>'256M'</code>，不要写成数字</li>
+      <li>共享主机可能限制了最大 PHP 内存，无法通过 WordPress 配置突破</li>
+      <li>Local 环境默认 PHP 内存通常足够，一般不需要调整</li>
+      <li>如果频繁遇到内存问题，应该排查是哪个插件/主题消耗过多内存，而不是一味增加限制</li>
+      <li><code>WP_MAX_MEMORY_LIMIT</code> 控制后台管理区域的内存上限，默认 256M</li>
+    </ul>
+  </div>
+
+  <div class="doc-nav">
+    <a href="WPC-5.html" class="prev"><div class="label">上一篇</div><div class="title">查看 table_prefix</div></a>
+    <a href="WPC-7.html" class="next"><div class="label">下一篇</div><div class="title">设置 WP_DEBUG_DISPLAY</div></a>
+  </div>
+  <div class="related"><h3>相关文档</h3><div class="related-list">
+    <a href="WPC-1.html">查看 DB_NAME</a>
+    <a href="WPC-2.html">wp-content 目录结构</a>
+    <a href="WPC-9.html">SQL 查询基础</a>
+    <a href="WPC-10.html">修复 siteurl</a>
+  </div></div>
+</div>
+</body>
+</html>
