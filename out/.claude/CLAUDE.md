@@ -18,7 +18,7 @@
 | `.claude/scripts/wp-train init` | 创建/重置训练站 + git init + SQLite |
 | `.claude/scripts/wp-train next` | 从题库选题，返回任务 JSON |
 | `.claude/scripts/wp-train next --force` | 跳过当前任务，出下一题 |
-| `.claude/scripts/wp-train next --topic=L2.1` | 指定知识点出题 |
+| `.claude/scripts/wp-train next --topic=site-settings` | 指定知识主题出题 |
 | `.claude/scripts/wp-train verify` | 声明式验证，返回 pass/fail JSON |
 | `.claude/scripts/wp-train progress` | 进度概览 JSON |
 | `.claude/scripts/wp-train status` | 当前状态 JSON |
@@ -31,11 +31,11 @@
 | `.claude/scripts/wp-train checkpoint restore <name>` | 还原到指定快照 |
 | `.claude/scripts/wp-train checkpoint list` | 列出所有快照 |
 
-题库: `.claude/references/tasks/` (按 Layer 分文件)
+题库: `.claude/references/tasks/` (按 Topic 分文件)
 知识库: `docs/` (252 篇 HTML 文档) + `topic-matrix.html` (矩阵总览)
 数据库: `~/.locwp/sites/wp-train/training/wp-guider.db`
 
-## 故障注入（Layer 8 排障训练）
+## 故障注入（排障训练）
 
 7 种故障类型：syntax-error、plugin-conflict、wrong-siteurl、memory-limit、broken-db、broken-htaccess、debug-off。
 
@@ -73,31 +73,25 @@
 - 薄弱知识点会被优先重复出题
 - 进度保存在 `~/.locwp/sites/wp-train/training/wp-guider.db`（SQLite）
 
-## 大纲结构（八层）
+## 大纲结构（六大分类 × 20 主题）
 
-### Layer 1: 初识 WordPress
-登录、仪表盘导航、站点基础设置（标题/固定链接/时区）、用户与角色
+### 🌐 基础设施
+域名管理（domain）、主机空间（hosting）、WordPress 安装（wp-install）
 
-### Layer 2: 内容管理
-页面、文章、分类/标签、媒体、区块编辑器、菜单导航、主题与插件管理
+### ⚙️ 站点设置
+站点配置（site-settings）、用户管理（user-management）
 
-### Layer 3: 文件系统与引导
-wp-content 结构、wp-config.php、请求生命周期、Hook 系统（action/filter）
+### 📝 内容管理
+页面管理（pages）、文章与分类（posts-taxonomy）、媒体管理（media）、菜单与导航（menus-nav）
 
-### Layer 4: 数据层
-核心表结构（wp_posts/wp_postmeta/wp_options/wp_terms）、WP_Query、Options API、Transients
+### 🎨 外观定制
+主题定制（theme）、Elementor 建站（elementor）、ZeroY AI 建站（zeroy）
 
-### Layer 5: 主题引擎
-模板层级、子主题、theme.json、functions.php、Block Theme / FSE
+### 🔌 插件与扩展
+插件管理（plugins-basic）、ACF 自定义字段（acf）、SEO 优化（seo）、Google 全家桶（google-analytics）
 
-### Layer 6: 插件与扩展
-插件架构、CPT/Taxonomy、Shortcode → Widget → Block 三代机制、REST API
-
-### Layer 7: HTTP 与服务器层
-.htaccess 重写、固定链接原理、wp-cron vs 系统 cron、安全基础
-
-### Layer 8: 排障
-WP_DEBUG/debug.log、白屏/404/插件冲突诊断、性能瓶颈
+### 🛠️ 运维与安全
+wp-config 与数据库（wp-config）、安全加固（security）、备份与维护（backup-maintenance）、故障排查（troubleshooting）
 
 从基础操作到深度原理，教练不需要成为开发者，但需要理解「为什么」——能从原理推断问题原因。
 

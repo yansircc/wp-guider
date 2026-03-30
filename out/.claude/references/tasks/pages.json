@@ -1,0 +1,501 @@
+{
+  "pages": {
+    "name": "页面管理",
+    "tasks": [
+      {
+        "id": "PG-1",
+        "difficulty": 1,
+        "description": "创建三个页面并发布：「首页」「关于我们」「联系我们」",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "首页",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "关于我们",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "联系我们",
+            "status": "publish"
+          }
+        ],
+        "hints": [
+          "页面 → 新建页面 → 输入标题 → 发布"
+        ],
+        "on_pass_note": "页面（Page）和文章（Post）都存储在 wp_posts 表中，通过 post_type 字段区分。页面适合静态内容，文章适合时间线内容。",
+        "chain": "企业官网",
+        "chain_order": 0
+      },
+      {
+        "id": "PG-2",
+        "difficulty": 1,
+        "description": "把「首页」设置为站点的静态首页（而不是显示最新文章）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "show_on_front",
+            "expected": "page"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$pid = get_option('page_on_front'); $p = get_post($pid); echo $p ? $p->post_title : '';",
+            "expected_output": "首页"
+          }
+        ],
+        "hints": [
+          "设置 → 阅读 → 您的主页显示 → 一个静态页面 → 主页选择「首页」"
+        ],
+        "on_pass_note": "WordPress 默认首页显示最新文章。改为静态页面后，show_on_front 变为 'page'，page_on_front 存储首页的 post ID。",
+        "chain": "企业官网",
+        "chain_order": 1
+      },
+      {
+        "id": "PG-3",
+        "difficulty": 2,
+        "description": "创建一个页面「服务项目」，把它设为「关于我们」的子页面",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "服务项目",
+            "status": "publish"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('服务项目', OBJECT, 'page'); $parent = get_post($p->post_parent); echo $parent ? $parent->post_title : '';",
+            "expected_output": "关于我们"
+          }
+        ],
+        "hints": [
+          "编辑「服务项目」→ 右侧面板 → 页面属性 → 父级页面 → 选择「关于我们」"
+        ],
+        "on_pass_note": "页面支持层级结构（post_parent 字段），URL 会变成 /about-us/services/。这对组织大型网站的信息架构很有用。",
+        "chain": "企业官网",
+        "chain_order": 2
+      },
+      {
+        "id": "PG-4",
+        "difficulty": 2,
+        "description": "把「关于我们」页面的 URL 别名（slug）改为 about",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo $p->post_name;",
+            "expected_output": "about"
+          }
+        ],
+        "hints": [
+          "编辑「关于我们」→ 右侧面板 → 链接（URL）→ 修改别名为 about"
+        ],
+        "on_pass_note": "post_name（slug）决定了页面的 URL 路径。WordPress 默认会把中文标题转成拼音或编码，手动设置英文 slug 对 SEO 和可读性都更好。slug 在同层级中必须唯一。"
+      },
+      {
+        "id": "PG-5",
+        "difficulty": 2,
+        "description": "创建一个页面「隐藏页面」，设置为私密状态（Private）而非公开发布",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "隐藏页面",
+            "status": "private"
+          }
+        ],
+        "hints": [
+          "新建页面 → 标题「隐藏页面」→ 发布面板 → 可见性 → 选择「私密」→ 发布"
+        ],
+        "on_pass_note": "私密页面只有登录的管理员和编辑能看到。WordPress 的内容可见性有四种：公开（publish）、私密（private）、密码保护、草稿（draft）。这些状态都存在 post_status 字段中。"
+      },
+      {
+        "id": "PG-6",
+        "difficulty": 1,
+        "description": "创建以下页面并发布：「Thank You」「Privacy Policy」「Terms of Service」",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "Thank You",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "Privacy Policy",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "Terms of Service",
+            "status": "publish"
+          }
+        ],
+        "hints": [
+          "页面 → 新建页面 → 输入标题 → 发布，重复三次"
+        ],
+        "on_pass_note": "Thank You 页面用于表单提交后跳转（便于转化追踪）。Privacy Policy 和 Terms of Service 是合规必备页面——GDPR 要求隐私政策，Google Ads 要求 Terms。WordPress 自带隐私政策模板（设置 → 隐私）。"
+      },
+      {
+        "id": "PG-7",
+        "difficulty": 2,
+        "description": "在「设置 → 隐私」中，将 Privacy Policy 页面设为站点的隐私政策页面",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$id = get_option('wp_page_for_privacy_policy'); $p = get_post($id); echo $p ? $p->post_title : 'none';",
+            "expected_output": "Privacy Policy"
+          }
+        ],
+        "hints": [
+          "设置 → 隐私 → 选择隐私政策页面 → Privacy Policy"
+        ],
+        "on_pass_note": "wp_page_for_privacy_policy 存储隐私政策页面的 ID。设置后 WordPress 的登录页面和注册页面会自动显示隐私政策链接。很多 Cookie Consent 插件也会自动引用这个设置。"
+      },
+      {
+        "id": "PG-8",
+        "difficulty": 1,
+        "description": "编辑「关于我们」页面，添加一个标题区块（Heading）写「我们的故事」，下面添加一个段落区块写至少 20 个字的介绍",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo (strpos($p->post_content, '我们的故事') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo mb_strlen(strip_tags($p->post_content)) >= 20 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑页面 → + 添加区块 → Heading → 输入 → 再添加 Paragraph"
+        ],
+        "on_pass_note": "区块编辑器将内容存储为带 HTML 注释标记的内容：<!-- wp:heading --> 和 <!-- wp:paragraph -->。"
+      },
+      {
+        "id": "PG-9",
+        "difficulty": 1,
+        "description": "在「联系我们」页面添加一个列表区块（List），写三条联系方式（电话、邮箱、地址，内容可以自编）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:list') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo substr_count($p->post_content, '<li') >= 3 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑「联系我们」→ + 添加 List 区块 → 输入三项"
+        ],
+        "on_pass_note": "列表区块支持有序（ol）和无序（ul）两种。区块编辑器里每种区块都有对应的 toolbar 和 sidebar 设置面板。"
+      },
+      {
+        "id": "PG-10",
+        "difficulty": 2,
+        "description": "在「首页」添加一个两列（Columns）布局：左列放一个段落写「欢迎」，右列放一个段落写「了解更多」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:columns') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); $c1 = strpos($p->post_content, '欢迎') !== false; $c2 = strpos($p->post_content, '了解更多') !== false; echo ($c1 && $c2) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑首页 → + Columns → 选 50/50 → 每列添加 Paragraph"
+        ],
+        "on_pass_note": "Columns 区块渲染为 flexbox。内部可以嵌套任意区块——图片、标题、按钮都行。这是不用页面构建器也能做出多栏布局的标准方式。"
+      },
+      {
+        "id": "PG-11",
+        "difficulty": 2,
+        "description": "在「首页」的 Columns 下方添加一个分隔线（Separator）区块，再添加一个按钮（Buttons）区块，按钮文字为「了解更多」，链接指向「关于我们」页面的 URL",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:separator') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:buttons') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "+ Separator 区块 → + Buttons 区块 → 输入文字 → 点击链接图标 → 输入 /about 或搜索「关于我们」"
+        ],
+        "on_pass_note": "Buttons 区块支持多个按钮并排。每个按钮可以设置链接、颜色、圆角等样式。Separator 是简单的 <hr> 分隔线。这两个区块组合起来能做出简洁的 CTA（Call to Action）区域。"
+      },
+      {
+        "id": "PG-12",
+        "difficulty": 3,
+        "description": "在「首页」顶部添加一个封面（Cover）区块，使用你之前上传的图片作为背景，在封面上叠加一个标题写「欢迎来到教练训练站」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:cover') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo (strpos($p->post_content, '教练训练站') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑首页 → 最顶部 + Cover 区块 → 从媒体库选图 → 在覆盖层上输入标题"
+        ],
+        "on_pass_note": "Cover 区块是做 hero section 的标准方式——背景图 + 半透明遮罩 + 叠加文字。它支持视差滚动（parallax）、焦点设置、遮罩颜色/透明度调节。比起自定义 CSS，Cover 区块是零代码做出视觉冲击力的最快途径。"
+      },
+      {
+        "id": "PG-13",
+        "difficulty": 2,
+        "description": "编辑「首页」内容，按照以下结构重新排版：1) Cover 区块作为 hero 2) 一段欢迎文字（至少 50 字）3) 一个 H2 标题 4) 三列 Columns 布局展示三个特点 5) 一个 CTA 按钮",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); $c = $p->post_content; $checks = [strpos($c,'wp:cover')!==false, strpos($c,'wp:columns')!==false, strpos($c,'wp:buttons')!==false, strpos($c,'wp:heading')!==false]; echo array_sum($checks) >= 4 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo mb_strlen(strip_tags($p->post_content)) >= 50 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "按顺序添加区块：Cover → Paragraph → Heading(H2) → Columns(3列) → Buttons"
+        ],
+        "on_pass_note": "这是一个典型的着陆页结构：Hero → 价值主张 → 特点展示 → CTA。这不是 WordPress 特有的——几乎所有专业网站都遵循这个模式。区块编辑器让你不用写代码就能实现这个结构。",
+        "chain": "首页改造",
+        "chain_order": 0
+      },
+      {
+        "id": "PG-14",
+        "difficulty": 2,
+        "description": "在「关于我们」页面中添加一个引用（Quote）区块，写一句公司理念。再添加一个 Gallery 或多张图片展示团队",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:quote') !== false || strpos($p->post_content, 'wp:pullquote') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:gallery') !== false || substr_count($p->post_content, 'wp:image') >= 2) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "+ Quote 区块（或 Pullquote）写理念",
+          "上传 2-3 张图片 → + Gallery 区块或多个 Image 区块"
+        ],
+        "on_pass_note": "Quote 和 Pullquote 的区别：Quote 是行内引用（通常较短），Pullquote 是大字强调引用（通常用于杂志风格排版）。Gallery 区块自动创建网格布局，比逐个 Image 区块更整齐。"
+      },
+      {
+        "id": "PG-15",
+        "difficulty": 2,
+        "description": "编辑「联系我们」页面，添加：一个 H2 标题「联系方式」、一个列表（电话/邮箱/地址）、一个 H2 标题「营业时间」、一个表格（Table）区块列出周一到周五的营业时间",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); $c = $p->post_content; echo (strpos($c, '联系方式') !== false && strpos($c, '营业时间') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:table') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:list') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "H2「联系方式」→ List 区块（三行）→ H2「营业时间」→ Table 区块（2 列 5 行）"
+        ],
+        "on_pass_note": "Table 区块适合结构化数据（营业时间、价格表、对比表）。注意移动端 Table 可能需要横向滚动——对于超过 3 列的表格，考虑用其他布局方式。"
+      },
+      {
+        "id": "PG-16",
+        "difficulty": 3,
+        "description": "为「首页」的三个 Columns 中的每一列都添加一个图片、一个 H3 标题和一段说明文字（模拟「我们的服务」板块）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo substr_count($p->post_content, 'wp:column --') >= 3 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo substr_count($p->post_content, 'wp:image') >= 3 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑首页 → 找到 Columns → 每列中依次添加 Image + Heading(H3) + Paragraph"
+        ],
+        "on_pass_note": "图片 + 标题 + 文字的三列布局是最经典的「服务/特点」展示模式。专业设计的关键：三列保持视觉一致（图片同尺寸、标题同长度、文字同段数）。不一致比缺内容更糟糕。",
+        "chain": "首页改造",
+        "chain_order": 1
+      },
+      {
+        "id": "PG-17",
+        "difficulty": 2,
+        "description": "客户 brief：「我开了一家咖啡馆，需要一个简单的网站。」请创建以下页面并发布：「首页」（如果已有则跳过）、「我们的故事」、「菜单」、「联系方式」",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "我们的故事",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "菜单",
+            "status": "publish"
+          },
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "联系方式",
+            "status": "publish"
+          }
+        ],
+        "hints": [
+          "根据客户需求规划页面结构，然后逐个创建"
+        ],
+        "on_pass_note": "拿到客户 brief 后第一步是规划页面结构，而不是直接动手。好的规划：首页（吸引）→ 故事（建立信任）→ 菜单（核心内容）→ 联系（转化）。这个四页结构适用于大多数小型企业站。",
+        "chain": "咖啡馆官网",
+        "chain_order": 0
+      },
+      {
+        "id": "PG-18",
+        "difficulty": 2,
+        "description": "创建导航菜单「咖啡馆导航」，按顺序包含：首页、我们的故事、菜单、联系方式",
+        "verify": [
+          {
+            "type": "menu_exists",
+            "name": "咖啡馆导航"
+          },
+          {
+            "type": "menu_has_items",
+            "menu": "咖啡馆导航",
+            "min_count": 4
+          }
+        ],
+        "hints": [
+          "外观 → 菜单 → 创建新菜单 → 添加四个页面 → 保存"
+        ],
+        "on_pass_note": "菜单顺序反映用户旅程：首先看到品牌（首页）→ 了解故事（建立情感）→ 看产品（菜单）→ 行动（联系）。这不是随便排的——是转化漏斗。",
+        "chain": "咖啡馆官网",
+        "chain_order": 1
+      },
+      {
+        "id": "PG-19",
+        "difficulty": 2,
+        "description": "给「我们的故事」页面添加内容：一个 H2 标题、至少 100 字的段落（编一个咖啡馆故事）、一张图片、一个引用区块（写一句咖啡馆的座右铭）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('我们的故事', OBJECT, 'page'); $c = $p->post_content; echo mb_strlen(strip_tags($c)) >= 100 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('我们的故事', OBJECT, 'page'); $c = $p->post_content; echo (strpos($c, 'wp:image') !== false || strpos($c, '<img') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('我们的故事', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:quote') !== false || strpos($p->post_content, 'wp:pullquote') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑页面 → 按顺序添加区块 → 内容可以虚构但要像真的"
+        ],
+        "on_pass_note": "「关于我们」页面是客户最常低估的页面——它实际上是建立信任的关键。好的故事页包含：创始故事（情感连接）、使命/价值观（品牌定位）、团队/人物照片（真实感）。",
+        "chain": "咖啡馆官网",
+        "chain_order": 2
+      },
+      {
+        "id": "PG-20",
+        "difficulty": 3,
+        "description": "设置所有页面的 SEO：每个页面都设置英文 slug（home/story/menu/contact）和 Yoast SEO meta description（每个至少 20 字）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$slugs = ['home','story','menu','contact']; $ok = true; foreach($slugs as $s) { $p = get_page_by_path($s); if(!$p) $ok = false; } echo $ok ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$pages = get_pages(); $ok = true; foreach($pages as $p) { $meta = get_post_meta($p->ID, '_yoast_wpseo_metadesc', true); if(empty($meta) || mb_strlen($meta) < 20) $ok = false; } echo $ok ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "逐个编辑每个页面 → 修改 slug → 在 Yoast 面板填写 meta description"
+        ],
+        "on_pass_note": "SEO 不是建完站再做的「额外步骤」——它应该在建站过程中同步完成。每个页面的 slug + title + meta description 是 SEO 三件套。专业建站师交付时这些都已就绪，不需要客户再费心。\n\nAgent 协作提示：让 agent 批量检查 SEO 状态时，说「检查所有页面的 slug、SEO 标题和 meta description 是否都已设置」。",
+        "chain": "咖啡馆官网",
+        "chain_order": 3
+      },
+      {
+        "id": "PG-21",
+        "difficulty": 3,
+        "description": "最终检查：确保首页设为静态首页、导航菜单完整（4 项）、所有页面都有内容（每页至少 50 字）、站点标题已改为「Bean & Brew 咖啡馆」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "Bean & Brew 咖啡馆"
+          },
+          {
+            "type": "option_equals",
+            "key": "show_on_front",
+            "expected": "page"
+          },
+          {
+            "type": "menu_has_items",
+            "menu": "咖啡馆导航",
+            "min_count": 4
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$pages = get_pages(['post_status'=>'publish']); $ok = true; foreach($pages as $p) { if(mb_strlen(strip_tags($p->post_content)) < 50) $ok = false; } echo $ok ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 站点标题",
+          "设置 → 阅读 → 静态首页",
+          "检查每个页面内容是否充实"
+        ],
+        "on_pass_note": "交付前 checklist 是专业和业余的分水岭。标准 checklist：① 所有页面有内容 ② SEO 已配置 ③ 导航完整 ④ 站点标题/图标已设 ⑤ 移动端检查通过 ⑥ 无断裂链接 ⑦ 备份已做。养成这个习惯，你的交付质量会超过 90% 的建站者。",
+        "chain": "咖啡馆官网",
+        "chain_order": 4
+      }
+    ]
+  }
+}

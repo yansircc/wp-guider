@@ -134,3 +134,19 @@ func fileExists(path string) bool {
 	_, err := os.Stat(path)
 	return err == nil
 }
+
+// topicCategory returns the category name for a topic key.
+func topicCategory(topic string) string {
+	categories := map[string]string{
+		"domain": "基础设施", "hosting": "基础设施", "wp-install": "基础设施",
+		"site-settings": "站点设置", "user-management": "站点设置",
+		"pages": "内容管理", "posts-taxonomy": "内容管理", "media": "内容管理", "menus-nav": "内容管理",
+		"theme": "外观定制", "elementor": "外观定制", "zeroy": "外观定制",
+		"plugins-basic": "插件与扩展", "acf": "插件与扩展", "seo": "插件与扩展", "google-analytics": "插件与扩展",
+		"wp-config": "运维与安全", "security": "运维与安全", "backup-maintenance": "运维与安全", "troubleshooting": "运维与安全",
+	}
+	if cat, ok := categories[topic]; ok {
+		return cat
+	}
+	return "其他"
+}

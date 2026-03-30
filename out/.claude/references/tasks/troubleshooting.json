@@ -1,0 +1,237 @@
+{
+  "troubleshooting": {
+    "name": "故障排查",
+    "tasks": [
+      {
+        "id": "TS-1",
+        "difficulty": 2,
+        "description": "在 wp-config.php 中开启 WP_DEBUG 和 WP_DEBUG_LOG，然后查看 debug.log 文件是否生成",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG",
+            "expected": "1"
+          },
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG_LOG",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "wp config set WP_DEBUG true --raw",
+          "wp config set WP_DEBUG_LOG true --raw"
+        ],
+        "on_pass_note": "WP_DEBUG 是排障第一步。开启后 WordPress 会捕获 PHP 警告和错误。WP_DEBUG_LOG 把错误写入 wp-content/debug.log。生产环境一定要关闭 WP_DEBUG_DISPLAY，只用 LOG。"
+      },
+      {
+        "id": "TS-2",
+        "difficulty": 2,
+        "description": "用 wp-cli 一次性停用所有插件（模拟排查插件冲突的第一步），然后逐个重新激活，确认站点正常运行",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$active = get_option('active_plugins'); echo count($active) >= 1 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "停用所有: wp plugin deactivate --all",
+          "逐个激活: wp plugin activate <slug>",
+          "每激活一个就检查站点是否正常"
+        ],
+        "on_pass_note": "「全部停用 → 逐个激活」是 WordPress 排查插件冲突的标准流程。如果停用所有插件后问题消失，就说明是插件引起的。这个方法虽然笨但 100% 有效。"
+      },
+      {
+        "id": "TS-3",
+        "difficulty": 3,
+        "description": "【故障注入】运行 .claude/scripts/wp-train inject plugin-conflict 注入一个插件冲突。找到 mu-plugins 目录下的故障文件并删除修复",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'alive';",
+            "expected_output": "alive"
+          }
+        ],
+        "hints": [
+          "站点报错 → 检查 debug.log 或 PHP error log",
+          "mu-plugins 下的插件会自动加载，不能在后台停用",
+          "需要手动删除 mu-plugins 下的问题文件"
+        ],
+        "on_pass_note": "mu-plugins 和普通插件的关键区别：① 自动加载，后台看不到也无法停用 ② 加载顺序在普通插件之前。出问题时必须通过文件系统操作。"
+      },
+      {
+        "id": "TS-4",
+        "difficulty": 2,
+        "description": "切换到 WordPress 默认主题（Twenty Twenty-Four 等）来排除主题问题，确认站点恢复正常后再切回原主题",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$theme = wp_get_theme(); echo $theme->exists() ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "wp theme activate twentytwentyfour",
+          "确认正常后: wp theme activate <原主题slug>",
+          "如果默认主题下问题消失，说明是原主题的问题"
+        ],
+        "on_pass_note": "切换默认主题是排障第二步（第一步是停用插件）。排障思路：先排除插件 → 再排除主题 → 最后检查核心文件。这也是为什么总要保留一个默认主题。"
+      },
+      {
+        "id": "TS-5",
+        "difficulty": 3,
+        "description": "【故障注入】运行 .claude/scripts/wp-train inject syntax-error 注入语法错误。诊断白屏（WSOD），找到错误位置并修复",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'alive';",
+            "expected_output": "alive"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$f = get_stylesheet_directory() . '/functions.php'; echo (strpos(file_get_contents($f), 'WP-GUIDER-FAULT') === false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "白屏最常见原因是 PHP 语法错误",
+          "检查 debug.log 会显示错误文件和行号",
+          "找到 functions.php 中的语法错误行并修复"
+        ],
+        "on_pass_note": "白屏（White Screen of Death）排查：① 开启 WP_DEBUG ② 查看 debug.log 中的 Fatal error ③ 定位文件和行号 ④ 修复或回滚。如果完全进不去后台，只能通过 FTP/SSH——这就是为什么你必须知道 WordPress 的文件结构。"
+      },
+      {
+        "id": "TS-6",
+        "difficulty": 2,
+        "description": "【故障注入】运行 .claude/scripts/wp-train inject wrong-siteurl 改错 siteurl。通过 wp-cli 修复 siteurl 为正确值",
+        "verify": [
+          {
+            "type": "option_contains",
+            "key": "siteurl",
+            "substring": "loc.wp"
+          }
+        ],
+        "hints": [
+          "后台打不开/重定向循环 → 常见原因是 siteurl 或 home 被改错",
+          "用 wp-cli 修复: wp option update siteurl 'https://wp-train.loc.wp'",
+          "也要检查 home: wp option update home 'https://wp-train.loc.wp'"
+        ],
+        "on_pass_note": "siteurl/home 错误是 WordPress 迁移后最常见的故障。三种修复方式：① wp-cli（最快）② wp-config.php 中 define ③ 直接改数据库。外贸站换域名时必须同时修改 siteurl、home，以及内容中的旧域名引用（用 wp search-replace）。"
+      },
+      {
+        "id": "TS-7",
+        "difficulty": 3,
+        "description": "【故障注入】运行 .claude/scripts/wp-train inject broken-db 改错数据库密码。诊断「Error establishing a database connection」，修复 wp-config.php 恢复连接",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'alive';",
+            "expected_output": "alive"
+          }
+        ],
+        "hints": [
+          "Error establishing a database connection → 数据库连接配置有问题",
+          "检查 wp-config.php 中的 DB_NAME、DB_USER、DB_PASSWORD、DB_HOST",
+          "可以从 checkpoint 恢复或查看 locwp 配置获取正确密码"
+        ],
+        "on_pass_note": "数据库连接错误排查清单：① DB_NAME 数据库是否存在 ② DB_USER 是否有权限 ③ DB_PASSWORD 是否正确 ④ DB_HOST 地址是否正确。这个错误 100% 是配置问题。"
+      },
+      {
+        "id": "TS-8",
+        "difficulty": 3,
+        "description": "【故障注入】运行 .claude/scripts/wp-train inject memory-limit 设置极低内存限制。在 wp-config.php 中找到并修复",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'alive';",
+            "expected_output": "alive"
+          }
+        ],
+        "hints": [
+          "Fatal error: Allowed memory size → PHP 内存不足",
+          "检查 wp-config.php 中是否有 WP_MEMORY_LIMIT 被设成极小值",
+          "找到故障标记行并删除或修改为合理值（如 256M）"
+        ],
+        "on_pass_note": "内存不足排查：① wp-config.php 的 WP_MEMORY_LIMIT ② PHP 的 memory_limit ③ 主机是否有限制。如果合理限制下仍不够，说明有插件存在内存泄漏——需要逐个排查。"
+      },
+      {
+        "id": "TS-9",
+        "difficulty": 2,
+        "description": "【故障注入】运行 .claude/scripts/wp-train inject debug-off 注入隐蔽故障。先开启 WP_DEBUG 和 WP_DEBUG_LOG，然后在 debug.log 中找到问题",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG",
+            "expected": "1"
+          },
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG_LOG",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "站点看起来正常但有隐藏问题 → 第一步永远是开启 WP_DEBUG",
+          "wp config set WP_DEBUG true --raw && wp config set WP_DEBUG_LOG true --raw",
+          "然后访问站点 → 查看 wp-content/debug.log"
+        ],
+        "on_pass_note": "这是最贴近真实的场景——客户说「网站有时候很慢」但页面上看不到错误。因为 WP_DEBUG 默认关闭，所有 PHP warning 被静默吞掉。排障第一步永远是「开灯看清楚」。"
+      },
+      {
+        "id": "TS-10",
+        "difficulty": 3,
+        "description": "【故障注入】运行 .claude/scripts/wp-train inject broken-htaccess 注入固定链接故障。诊断所有页面 404，修复重写规则",
+        "verify": [
+          {
+            "type": "option_contains",
+            "key": "permalink_structure",
+            "substring": "postname"
+          }
+        ],
+        "hints": [
+          "所有页面 404（首页正常）→ rewrite rules 有问题",
+          "修复：设置 → 固定链接 → 选择「文章名」→ 保存",
+          "或 wp-cli: wp rewrite structure '/%postname%/' --hard && wp rewrite flush --hard"
+        ],
+        "on_pass_note": "除首页外全部 404 → rewrite rules 坏了。最常见原因：.htaccess 被改或固定链接被重置。修复：进后台 → 设置 → 固定链接 → 直接保存（保存动作会重新生成 rewrite rules）。外贸站迁移后最容易出 404。"
+      },
+      {
+        "id": "TS-11",
+        "difficulty": 3,
+        "description": "【综合排障 SOP】执行完整的故障排查流程：1) 开启 WP_DEBUG 2) 查看 debug.log 3) wp-cli 检查插件列表 4) 检查主题状态 5) 确认 siteurl 和 home 一致",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG",
+            "expected": "1"
+          },
+          {
+            "type": "config_equals",
+            "key": "WP_DEBUG_LOG",
+            "expected": "1"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "echo get_option('siteurl') === get_option('home') ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'alive';",
+            "expected_output": "alive"
+          }
+        ],
+        "hints": [
+          "排障 SOP：",
+          "1. wp config set WP_DEBUG true --raw && wp config set WP_DEBUG_LOG true --raw",
+          "2. 查看 debug.log: tail -50 wp-content/debug.log",
+          "3. wp plugin list",
+          "4. wp theme list",
+          "5. wp option get siteurl && wp option get home"
+        ],
+        "on_pass_note": "这就是专业 WordPress 排障 SOP。记住清单：① 开灯（WP_DEBUG）② 看日志 ③ 查插件 ④ 查主题 ⑤ 查 URL ⑥ 查数据库连接 ⑦ 查文件权限。80% 的 WordPress 故障在前 5 步内定位。你不需要会写代码——你需要知道去哪里找信息。"
+      }
+    ]
+  }
+}

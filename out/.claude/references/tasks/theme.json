@@ -1,0 +1,263 @@
+{
+  "theme": {
+    "name": "主题定制",
+    "tasks": [
+      {
+        "id": "TH-1",
+        "difficulty": 1,
+        "description": "安装并激活 Twenty Twenty-Four 主题",
+        "verify": [
+          {
+            "type": "theme_active",
+            "theme": "Twenty Twenty-Four"
+          }
+        ],
+        "hints": [
+          "外观 → 主题 → 添加新主题 → 搜索 Twenty Twenty-Four → 安装 → 激活"
+        ],
+        "on_pass_note": "Twenty Twenty-Four 是 Block Theme（区块主题），支持全站编辑（FSE）。传统主题用 PHP 模板，Block Theme 用 HTML 模板 + theme.json。"
+      },
+      {
+        "id": "TH-2",
+        "difficulty": 1,
+        "description": "切换回默认主题（安装时自带的主题），然后上传一张图片作为站点图标（favicon）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo get_option('site_icon') ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 主题 → 激活默认主题",
+          "外观 → 自定义 → 站点标识 → 站点图标 → 上传"
+        ],
+        "on_pass_note": "site_icon option 存储一个 attachment ID。WordPress 会自动生成多种尺寸（16x16 到 512x512）供浏览器标签、手机书签等场景使用。"
+      },
+      {
+        "id": "TH-3",
+        "difficulty": 2,
+        "description": "在自定义器（Customizer）中上传一个 Logo 图片作为站点标识",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo get_theme_mod('custom_logo') ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 自定义 → 站点标识 → Logo → 上传图片"
+        ],
+        "on_pass_note": "Logo 通过 theme_mod 机制存储（get_theme_mod('custom_logo')），不像其他设置存在 wp_options 里。theme_mod 是主题特有的设置——切换主题后 Logo 配置不会继承到新主题。这是 theme_mod 和 option 的关键区别。"
+      },
+      {
+        "id": "TH-4",
+        "difficulty": 3,
+        "description": "安装并激活 Twenty Twenty-Three 主题，然后通过全站编辑器（Appearance → Editor）修改 Header 模板部件，在站点标题旁添加一段文字",
+        "verify": [
+          {
+            "type": "theme_active",
+            "theme": "Twenty Twenty-Three"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['post_type'=>'wp_template_part','name'=>'header','posts_per_page'=>1,'post_status'=>'publish']); echo count($posts) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 主题 → 激活 Twenty Twenty-Three",
+          "外观 → 编辑器 → 模板部件 → Header → 编辑"
+        ],
+        "on_pass_note": "全站编辑器（FSE）让你像编辑内容一样编辑 header/footer 等结构性区域。修改后的模板存储为 post_type='wp_template_part' 的记录，覆盖主题自带的默认模板。这是 WordPress 区块主题的核心创新。"
+      },
+      {
+        "id": "TH-5",
+        "difficulty": 1,
+        "description": "在编辑「首页」时，使用编辑器右上角的预览功能，切换到「平板」和「手机」预览模式查看效果",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑页面 → 右上角预览按钮（眼睛图标旁）→ 选择 Tablet / Mobile"
+        ],
+        "on_pass_note": "WordPress 编辑器内置三种预览：Desktop、Tablet、Mobile。但这只是宽度模拟——不能完全代替真实设备测试。建议额外用浏览器的开发者工具（F12 → 设备模拟）来测试，因为那里可以模拟更多设备和触摸交互。\n\nAgent 协作提示：描述布局问题时，说清楚在哪个设备宽度下出现问题（如「在 375px 宽度下 Columns 没有堆叠」）。"
+      },
+      {
+        "id": "TH-6",
+        "difficulty": 2,
+        "description": "确认站点主题的 viewport meta 标签已正确设置（这是响应式的基础）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "ob_start(); wp_head(); $head = ob_get_clean(); echo (strpos($head, 'viewport') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "在浏览器中查看站点源代码（右键 → 查看页面源代码），搜索 viewport"
+        ],
+        "on_pass_note": "viewport meta 标签（<meta name='viewport' content='width=device-width, initial-scale=1'>）告诉移动浏览器按设备宽度渲染页面。没有它，手机会按桌面宽度缩放整个页面。现代 WordPress 主题都会自动添加这个标签——但有些老主题或自定义主题可能遗漏。"
+      },
+      {
+        "id": "TH-7",
+        "difficulty": 2,
+        "description": "编辑一篇文章，添加一张图片，确认图片使用了响应式属性（在前台查看源代码，检查 img 标签是否有 srcset 属性）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['numberposts'=>1]); if($posts) { $content = apply_filters('the_content', $posts[0]->post_content); echo (strpos($content, 'srcset') !== false) ? 'yes' : 'no'; } else { echo 'no'; }",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑文章 → 插入图片 → 发布 → 前台查看 → 右键图片 → 检查元素 → 看 srcset"
+        ],
+        "on_pass_note": "WordPress 4.4+ 自动为上传的图片生成 srcset 属性，列出不同尺寸的图片 URL。浏览器根据屏幕宽度和分辨率自动选择最合适的尺寸——手机不会下载桌面版的大图。这是零配置的性能优化。"
+      },
+      {
+        "id": "TH-8",
+        "difficulty": 2,
+        "description": "在 WordPress 主题目录中搜索一个评分 4 星以上、活跃安装 10000+ 的主题并安装（不激活）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$themes = wp_get_themes(); echo count($themes) >= 4 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 主题 → 添加新主题 → 用筛选器过滤"
+        ],
+        "on_pass_note": "选主题的红线：最近 6 个月未更新、兼容性低于当前 WP 版本、评分低于 4 星、无支持论坛活跃度。"
+      },
+      {
+        "id": "TH-9",
+        "difficulty": 1,
+        "description": "进入「外观 → 自定义」（Customizer），将站点标识中的站点标题改为「Global Trade Co.」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "Global Trade Co."
+          }
+        ],
+        "hints": [
+          "外观 → 自定义 → 站点标识（Site Identity）→ 站点标题"
+        ],
+        "on_pass_note": "Customizer 是 WordPress 内置的实时预览定制工具。所有修改都先预览，点「发布」才生效。站点标题虽然也能在「设置 → 常规」改，但 Customizer 的优势是边改边看效果。",
+        "chain": "品牌定制",
+        "chain_order": 0
+      },
+      {
+        "id": "TH-10",
+        "difficulty": 2,
+        "description": "在 Customizer 中上传一个自定义 Logo",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$logo_id = get_theme_mod('custom_logo'); echo $logo_id > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 自定义 → 站点标识 → Logo → 上传图片",
+          "不同主题的 Logo 位置可能不同，大多在站点标识下"
+        ],
+        "on_pass_note": "custom_logo 通过 theme_mod 存储（不是 option），因为它和主题绑定——切换主题后 Logo 设置会丢失。这是 theme_mod 和 option 的核心区别：theme_mod 随主题走，option 全局通用。外贸站的 Logo 建议用透明背景 PNG。",
+        "chain": "品牌定制",
+        "chain_order": 2
+      },
+      {
+        "id": "TH-11",
+        "difficulty": 2,
+        "description": "在 Customizer 的「首页设置」中，确认首页显示为「静态页面」，并将文章页设为一个名为「博客」的页面（如没有则先创建）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "show_on_front",
+            "expected": "page"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$blog_id = get_option('page_for_posts'); $page = get_post($blog_id); echo $page ? $page->post_title : 'none';",
+            "expected_output": "博客"
+          }
+        ],
+        "hints": [
+          "先确认有「博客」页面，没有就创建一个",
+          "外观 → 自定义 → 首页设置 → 静态页面 → 文章页选「博客」"
+        ],
+        "on_pass_note": "page_for_posts 存储博客页的 page ID。外贸站几乎都用静态首页——客户打开网站看到的是精心设计的着陆页，不是博客列表。博客页通常放在导航的「News」或「Blog」下。"
+      },
+      {
+        "id": "TH-12",
+        "difficulty": 1,
+        "description": "进入「外观 → 小工具」（Widgets），查看当前主题有哪些可用的 Widget 区域",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wp_registered_sidebars; echo count($wp_registered_sidebars) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 查看列出的区域名称"
+        ],
+        "on_pass_note": "Widget 区域由主题通过 register_sidebar() 定义。不同主题提供的区域数量和位置完全不同。常见区域：侧边栏、页脚。Block 主题用模板编辑器替代了传统 Widget。"
+      },
+      {
+        "id": "TH-13",
+        "difficulty": 2,
+        "description": "在侧边栏（Sidebar）区域添加一个「搜索」小工具和一个「最新文章」小工具",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$sidebars = get_option('sidebars_widgets'); $has_search = false; $has_recent = false; foreach($sidebars as $area => $widgets) { if(is_array($widgets)) { foreach($widgets as $w) { if(strpos($w, 'search') !== false) $has_search = true; if(strpos($w, 'recent-posts') !== false) $has_recent = true; } } } echo ($has_search && $has_recent) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 选择侧边栏区域 → 添加「搜索」和「最新文章」"
+        ],
+        "on_pass_note": "Widget 配置存储在 wp_options 表中。外贸站侧边栏常用 Widget：产品分类、联系表单、语言切换器。"
+      },
+      {
+        "id": "TH-14",
+        "difficulty": 2,
+        "description": "在页脚 Widget 区域添加一个「自定义 HTML」小工具，内容写上：© 2026 Global Trade Co. All rights reserved.",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$widgets = get_option('widget_custom_html'); if(is_array($widgets)) { foreach($widgets as $w) { if(is_array($w) && isset($w['content']) && strpos($w['content'], 'Global Trade') !== false) { echo 'yes'; exit; } } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 找到 Footer 区域 → 添加「自定义 HTML」→ 输入版权信息"
+        ],
+        "on_pass_note": "「自定义 HTML」Widget 是万能工具——可以放任何 HTML 代码。外贸站页脚标配：公司名+版权、联系方式、社交链接、隐私政策链接。"
+      },
+      {
+        "id": "TH-15",
+        "difficulty": 3,
+        "description": "移除侧边栏中的所有默认 Widget（如「近期评论」「归档」「分类目录」等），只保留「搜索」和「最新文章」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$sidebars = get_option('sidebars_widgets'); $found = false; foreach($sidebars as $area => $widgets) { if(is_array($widgets) && strpos($area, 'sidebar') !== false) { $clean = true; foreach($widgets as $w) { if(strpos($w, 'archives') !== false || strpos($w, 'recent-comments') !== false || strpos($w, 'meta') !== false) { $clean = false; } } if(count($widgets) > 0 && $clean) $found = true; } } echo $found ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 小工具 → 侧边栏 → 逐个删除不需要的 Widget"
+        ],
+        "on_pass_note": "WordPress 默认放了几个 Widget（归档、分类、近期评论、Meta）。专业建站的第一步就是清理默认内容——客户不需要看到 Meta Widget 里的「登录」链接。"
+      }
+    ]
+  }
+}

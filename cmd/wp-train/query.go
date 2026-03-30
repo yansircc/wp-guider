@@ -3,9 +3,6 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"os"
-	"path/filepath"
-	"sort"
 	"strings"
 )
 
@@ -16,24 +13,14 @@ func cmdProgress() {
 	defer db.Close()
 	bank := loadTaskBank()
 
-	// Build layer info from task bank (no hardcoded names)
-	layerTopics := make(map[string]int)
-	layerFirstName := make(map[string]string) // first topic name as fallback
-	for key, entry := range bank {
-		layer := strings.TrimPrefix(strings.Split(key, ".")[0], "L")
-		layerTopics[layer]++
-		if _, ok := layerFirstName[layer]; !ok {
-			layerFirstName[layer] = entry.Name
-		}
+	// Build category info from task bank
+	catTopics := make(map[string]int)    // category → topic count
+	catMastered := make(map[string]int)  // category → mastered count
+	for key := range bank {
+		cat := topicCategory(key)
+		catTopics[cat]++
 	}
 
-	// Layer display names from curriculum (best effort)
-	layerNames := map[string]string{
-		"1": "初识 WordPress", "2": "内容管理", "3": "建站实战", "4": "主题与定制",
-		"5": "插件生态", "6": "内部原理", "7": "运维与安全", "8": "排障",
-	}
-
-	layerMastered := make(map[string]int)
 	rows, _ := db.Query("SELECT topic, mastered FROM topic_mastery")
 	if rows != nil {
 		defer rows.Close()
@@ -42,8 +29,8 @@ func cmdProgress() {
 			var m int
 			rows.Scan(&t, &m)
 			if m == 1 {
-				layer := strings.TrimPrefix(strings.Split(t, ".")[0], "L")
-				layerMastered[layer]++
+				cat := topicCategory(t)
+				catMastered[cat]++
 			}
 		}
 	}
@@ -52,35 +39,24 @@ func cmdProgress() {
 	totalPasses := dbGetInt(db, "SELECT COUNT(*) FROM attempts WHERE passed = 1")
 	totalT := 0
 	totalM := 0
-	for _, v := range layerTopics {
+	for _, v := range catTopics {
 		totalT += v
 	}
-	for _, v := range layerMastered {
+	for _, v := range catMastered {
 		totalM += v
 	}
 
-	// Collect all layer numbers (from bank + mastery)
-	allLayers := make(map[string]bool)
-	for l := range layerTopics {
-		allLayers[l] = true
-	}
-	var layerNums []string
-	for l := range allLayers {
-		layerNums = append(layerNums, l)
-	}
-	sort.Strings(layerNums)
-
-	var layers []map[string]any
-	for _, num := range layerNums {
-		name := layerNames[num]
-		if name == "" {
-			name = layerFirstName[num]
+	// Ordered category list
+	catOrder := []string{"基础设施", "站点设置", "内容管理", "外观定制", "插件与扩展", "运维与安全"}
+	var categories []map[string]any
+	for _, cat := range catOrder {
+		if catTopics[cat] == 0 && catMastered[cat] == 0 {
+			continue
 		}
-		layers = append(layers, map[string]any{
-			"layer":    num,
-			"name":     layerNames[num],
-			"mastered": layerMastered[num],
-			"total":    layerTopics[num],
+		categories = append(categories, map[string]any{
+			"category": cat,
+			"mastered": catMastered[cat],
+			"total":    catTopics[cat],
 		})
 	}
 
@@ -90,7 +66,7 @@ func cmdProgress() {
 	}
 
 	jprintln(map[string]any{
-		"layers": layers,
+		"categories": categories,
 		"stats": map[string]any{
 			"total_topics":   totalT,
 			"total_mastered": totalM,
@@ -147,31 +123,25 @@ func cmdSnapshot() {
 // ── explain ──────────────────────────────────────────────────────────────────
 
 func cmdExplain(topic string) {
-	curriculumPath := filepath.Join(claudeDir, "skills", "wp-train", "references", "curriculum.md")
-	data, err := os.ReadFile(curriculumPath)
-	if err != nil {
-		jprintln(map[string]any{"status": "error", "message": "Curriculum not found"})
+	bank := loadTaskBank()
+	entry, ok := bank[topic]
+	if !ok {
+		jprintln(map[string]any{"status": "error", "message": "Topic not found: " + topic})
 		return
 	}
-
-	content := string(data)
-	parts := strings.Split(strings.TrimPrefix(topic, "L"), ".")
-	if len(parts) >= 2 {
-		section := fmt.Sprintf("### %s.%s", parts[0], parts[1])
-		idx := strings.Index(content, section)
-		if idx >= 0 {
-			rest := content[idx:]
-			end := len(rest)
-			for _, prefix := range []string{"\n### ", "\n## "} {
-				if i := strings.Index(rest[1:], prefix); i >= 0 && i+1 < end {
-					end = i + 1
-				}
-			}
-			jprintln(map[string]any{"status": "ok", "topic": topic, "content": strings.TrimSpace(rest[:end])})
-			return
-		}
+	cat := topicCategory(topic)
+	taskIDs := make([]string, len(entry.Tasks))
+	for i, t := range entry.Tasks {
+		taskIDs[i] = t.ID
 	}
-	jprintln(map[string]any{"status": "error", "message": "Topic not found: " + topic})
+	jprintln(map[string]any{
+		"status":   "ok",
+		"topic":    topic,
+		"name":     entry.Name,
+		"category": cat,
+		"tasks":    len(entry.Tasks),
+		"task_ids": taskIDs,
+	})
 }
 
 // ── history ──────────────────────────────────────────────────────────────────

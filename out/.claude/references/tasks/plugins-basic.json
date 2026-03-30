@@ -1,0 +1,159 @@
+{
+  "plugins-basic": {
+    "name": "插件管理",
+    "tasks": [
+      {
+        "id": "PB-1",
+        "difficulty": 1,
+        "description": "安装并激活「WP Super Cache」插件",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "wp-super-cache"
+          }
+        ],
+        "hints": [
+          "插件 → 安装插件 → 搜索 WP Super Cache → 安装 → 激活"
+        ],
+        "on_pass_note": "缓存插件将动态 PHP 页面预渲染为静态 HTML，减少数据库查询。WP Super Cache 是最老牌的缓存插件之一。"
+      },
+      {
+        "id": "PB-2",
+        "difficulty": 1,
+        "description": "停用「WP Super Cache」，然后安装并激活「Classic Editor」插件",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "classic-editor"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "echo is_plugin_active('wp-super-cache/wp-cache.php') ? 'active' : 'inactive';",
+            "expected_output": "inactive"
+          }
+        ],
+        "hints": [
+          "插件 → 已安装的插件 → 停用 WP Super Cache → 安装插件 → Classic Editor → 激活"
+        ],
+        "on_pass_note": "插件激活状态存在 wp_options 的 active_plugins 行，是序列化 PHP 数组。后台打不开时可以直接改数据库来停用问题插件。"
+      },
+      {
+        "id": "PB-3",
+        "difficulty": 2,
+        "description": "删除「WP Super Cache」插件（不只是停用，要完全删除）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo file_exists(WP_PLUGIN_DIR . '/wp-super-cache') ? 'exists' : 'deleted';",
+            "expected_output": "deleted"
+          }
+        ],
+        "hints": [
+          "插件 → 已安装的插件 → 确保已停用 → 删除"
+        ],
+        "on_pass_note": "删除插件会触发 uninstall hook 清理数据。但很多插件在卸载时不会清理 wp_options 中的配置——这就是「插件残留」问题。"
+      },
+      {
+        "id": "PB-4",
+        "difficulty": 2,
+        "description": "安装并激活「Akismet Anti-Spam」插件（WordPress 自带但默认未激活）",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "akismet"
+          }
+        ],
+        "hints": [
+          "插件 → 已安装的插件 → 找到 Akismet → 激活"
+        ],
+        "on_pass_note": "Akismet 是 WordPress 官方反垃圾评论插件，预装在每个 WordPress 安装中。它通过云端 API 判断评论是否是垃圾。注意区分「预装未激活」和「需要安装」的区别——wp-content/plugins/ 里有文件不代表已激活。"
+      },
+      {
+        "id": "PB-5",
+        "difficulty": 3,
+        "description": "同时停用所有已激活的插件（一次性批量操作），然后只重新激活 Classic Editor",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "classic-editor"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$active = get_option('active_plugins'); echo count($active);",
+            "expected_output": "1"
+          }
+        ],
+        "hints": [
+          "插件 → 全选 → 批量操作 → 停用 → 应用",
+          "然后单独激活 Classic Editor"
+        ],
+        "on_pass_note": "批量停用插件是排障的核心技能。当站点出问题时，先停用所有插件看问题是否消失，再逐个激活找出冲突的那个——这就是「二分法排障」。active_plugins 是一个序列化数组，停用所有插件后它变成空数组 a:0:{}。"
+      },
+      {
+        "id": "PB-6",
+        "difficulty": 2,
+        "description": "在插件目录中找到一个「联系表单」插件，要求：活跃安装 100 万+、最近 3 个月内有更新、评分 4 星+。安装并激活它",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_plugins(); foreach($plugins as $p) { if(stripos($p['Name'], 'form') !== false || stripos($p['Name'], 'contact') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "插件 → 安装插件 → 搜索 contact form → 查看详情检查安装数和更新日期"
+        ],
+        "on_pass_note": "插件选型五看：① 活跃安装数（>10 万较安全）② 最近更新（<3 个月）③ 兼容 WP 版本 ④ 评分和评价内容 ⑤ 支持论坛响应速度。"
+      },
+      {
+        "id": "PB-7",
+        "difficulty": 2,
+        "description": "安装表单插件（WPForms Lite 或 Contact Form 7），创建联系表单（姓名+邮箱+消息），嵌入到「联系我们」页面",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wpforms') !== false || strpos($p->post_content, 'contact-form-7') !== false || strpos($p->post_content, 'wp:wpforms') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "安装表单插件 → 创建表单 → 在页面中嵌入（Shortcode 或区块）"
+        ],
+        "on_pass_note": "表单是企业站必备功能。生产环境记得配 SMTP 插件确保邮件能发出去——WordPress 默认的 wp_mail() 依赖服务器的 mail() 函数，很多主机不支持或者会被当垃圾邮件。"
+      },
+      {
+        "id": "PB-8",
+        "difficulty": 2,
+        "description": "配置「联系我们」页面上的表单：提交后跳转到 Thank You 页面",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "page",
+            "title": "Thank You",
+            "status": "publish"
+          }
+        ],
+        "hints": [
+          "编辑表单 → 设置 → 确认/提交后跳转 → 输入 Thank You 页面的 URL"
+        ],
+        "on_pass_note": "表单跳转到 Thank You 页面是转化追踪的基础。Google Analytics 可以把 /thank-you/ 页面设为转化目标——有人到达这个页面就说明提交了询盘。如果表单只显示成功消息而不跳转，就无法追踪转化。"
+      },
+      {
+        "id": "PB-9",
+        "difficulty": 2,
+        "description": "安装 Post SMTP 或 WP Mail SMTP 插件，确保表单提交的邮件通知能正常发送",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(stripos($p, 'smtp') !== false || stripos($p, 'mail') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "插件 → 安装 → 搜索 Post SMTP 或 WP Mail SMTP → 安装 → 激活"
+        ],
+        "on_pass_note": "WordPress 默认用 PHP mail() 发邮件，大多数主机不支持或会被当垃圾邮件。SMTP 插件让 WordPress 通过真正的邮件服务器发信（如 Gmail SMTP、SendGrid、Mailgun）。外贸站必装——否则客户提交询盘后你收不到通知邮件，等于白做。"
+      }
+    ]
+  }
+}

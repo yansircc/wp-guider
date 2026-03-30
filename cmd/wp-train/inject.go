@@ -109,8 +109,8 @@ func cmdInject(args []string) {
 	db := openDB()
 	defer db.Close()
 	taskRecord := map[string]any{
-		"topic":        "L8.2",
-		"topic_name":   "故障诊断",
+		"topic":        "troubleshooting",
+		"topic_name":   "故障排查",
 		"task_id":      "fault-" + faultType,
 		"difficulty":   3,
 		"description":  ft.desc + " — 请诊断并修复",

@@ -1,0 +1,118 @@
+{
+  "seo": {
+    "name": "SEO 优化",
+    "tasks": [
+      {
+        "id": "SEO-1",
+        "difficulty": 1,
+        "description": "安装并激活「Yoast SEO」插件",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "wordpress-seo"
+          }
+        ],
+        "hints": [
+          "插件 → 安装插件 → 搜索 Yoast SEO → 安装 → 激活"
+        ],
+        "on_pass_note": "Yoast SEO 是最流行的 WordPress SEO 插件（1200 万+活跃安装）。它在每篇内容的编辑界面下方添加 SEO 分析面板。插件的核心价值不是「自动优化 SEO」，而是「提供 SEO 检查清单」——真正的优化还是靠你的内容质量。\n\nAgent 协作提示：告诉 agent 你用的是哪个 SEO 插件（Yoast/RankMath/All in One），因为它们存储 meta 数据的方式不同。"
+      },
+      {
+        "id": "SEO-2",
+        "difficulty": 2,
+        "description": "编辑「关于我们」页面，在 Yoast SEO 面板中设置 SEO 标题为「关于我们 - 教练训练站」，Meta 描述为「了解我们的团队和使命」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo get_post_meta($p->ID, '_yoast_wpseo_title', true);",
+            "expected_output": "关于我们 - 教练训练站"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo get_post_meta($p->ID, '_yoast_wpseo_metadesc', true);",
+            "expected_output": "了解我们的团队和使命"
+          }
+        ],
+        "hints": [
+          "编辑「关于我们」→ 页面底部 Yoast SEO 面板 → 编辑代码段（Snippet）→ SEO 标题 + Meta 描述"
+        ],
+        "on_pass_note": "SEO 标题出现在搜索结果和浏览器标签中。Meta 描述出现在搜索结果摘要中。两者都存在 wp_postmeta 表（_yoast_wpseo_title / _yoast_wpseo_metadesc）。Google 会根据搜索意图决定是否使用你设置的 meta description——但设置了总比没设好。"
+      },
+      {
+        "id": "SEO-3",
+        "difficulty": 2,
+        "description": "检查「首页」的 URL 别名（slug），确保是 home 而不是中文编码。再检查「联系我们」的 slug，改为 contact",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('首页', OBJECT, 'page'); echo $p->post_name;",
+            "expected_output": "home"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('联系我们', OBJECT, 'page'); echo $p->post_name;",
+            "expected_output": "contact"
+          }
+        ],
+        "hints": [
+          "编辑页面 → 右侧面板 → 链接/URL → 修改别名"
+        ],
+        "on_pass_note": "slug 优化是 SEO 的基础功。原则：用英文、小写、短词、用连字符分隔。避免中文编码（%E9%A6%96%E9%A1%B5）——虽然 Google 能处理，但英文 slug 在分享和打印时更友好。\n\nAgent 协作提示：描述 SEO 问题时，提供当前 slug 和目标 slug，agent 可以用 wp-cli 批量修改。"
+      },
+      {
+        "id": "SEO-4",
+        "difficulty": 2,
+        "description": "编辑「关于我们」页面的内容，确保页面中只有一个 H1（即页面标题），其余小标题都用 H2 或 H3",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); $c = $p->post_content; $h1_count = preg_match_all('/<h1|wp:heading {\"level\":1/', $c); echo $h1_count <= 1 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); $c = $p->post_content; echo (strpos($c, 'wp:heading') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑页面 → 检查所有 Heading 区块 → 确保级别是 H2 或 H3，不要用 H1"
+        ],
+        "on_pass_note": "H1 是页面的唯一主标题，WordPress 自动用页面标题作为 H1。内容中的小标题应该用 H2（大节）和 H3（小节），形成清晰的层级。搜索引擎通过标题层级理解页面结构——多个 H1 会混淆语义。"
+      },
+      {
+        "id": "SEO-5",
+        "difficulty": 3,
+        "description": "在 Yoast SEO 设置中，确认 XML Sitemap 功能已开启，然后访问站点的 sitemap 地址确认可以访问",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$opts = get_option('wpseo'); echo isset($opts['enable_xml_sitemap']) ? ($opts['enable_xml_sitemap'] ? 'yes' : 'no') : 'yes';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "Yoast SEO → 设置 → 站点功能 → XML 站点地图 → 确认开启",
+          "站点地图地址通常是 /sitemap_index.xml"
+        ],
+        "on_pass_note": "XML Sitemap 告诉搜索引擎你站点有哪些页面、最后更新时间、更新频率。Yoast 自动生成并维护 sitemap。提交 sitemap 到 Google Search Console 可以加速索引。\n\nAgent 协作提示：如果 sitemap 有问题，告诉 agent SEO 插件名称和 sitemap URL，agent 可以用 wp-cli 检查配置。"
+      },
+      {
+        "id": "SEO-6",
+        "difficulty": 1,
+        "description": "在「设置 → 阅读」中，确认「建议搜索引擎不索引本站点」选项是关闭的（即允许 Google 收录）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blog_public",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "设置 → 阅读 → 最底部「对搜索引擎的可见性」→ 确保未勾选"
+        ],
+        "on_pass_note": "blog_public = 1 表示允许搜索引擎索引。开发阶段可以先关闭（设为 0），上线后务必打开。忘记打开这个选项是外贸站最常见的 SEO 事故之一——网站做好了但 Google 搜不到。WordPress 在 robots.txt 中通过 Disallow 实现此功能。"
+      }
+    ]
+  }
+}

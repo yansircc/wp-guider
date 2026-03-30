@@ -14,11 +14,11 @@ func TestLoadTaskBank(t *testing.T) {
 	// Create a temp task bank
 	dir := t.TempDir()
 	bank := map[string]any{
-		"L1.1": map[string]any{
+		"site-settings": map[string]any{
 			"name": "Test Topic",
 			"tasks": []any{
 				map[string]any{
-					"id": "L1.1-a", "difficulty": 1,
+					"id": "SS-1", "difficulty": 1,
 					"description": "Do something",
 					"verify":      []any{map[string]any{"type": "option_equals", "key": "blogname", "expected": "test"}},
 					"hints":       []any{"hint1"},
@@ -40,9 +40,9 @@ func TestLoadTaskBank(t *testing.T) {
 	if loaded == nil {
 		t.Fatal("loadTaskBank returned nil")
 	}
-	entry, ok := loaded["L1.1"]
+	entry, ok := loaded["site-settings"]
 	if !ok {
-		t.Fatal("L1.1 not found")
+		t.Fatal("site-settings not found")
 	}
 	if entry.Name != "Test Topic" {
 		t.Errorf("expected 'Test Topic', got %q", entry.Name)
@@ -50,20 +50,20 @@ func TestLoadTaskBank(t *testing.T) {
 	if len(entry.Tasks) != 1 {
 		t.Fatalf("expected 1 task, got %d", len(entry.Tasks))
 	}
-	if entry.Tasks[0].ID != "L1.1-a" {
-		t.Errorf("expected task id L1.1-a, got %q", entry.Tasks[0].ID)
+	if entry.Tasks[0].ID != "SS-1" {
+		t.Errorf("expected task id SS-1, got %q", entry.Tasks[0].ID)
 	}
 }
 
 func TestSortedKeys(t *testing.T) {
 	bank := TaskBank{
-		"L2.1": {Name: "b"},
-		"L1.1": {Name: "a"},
-		"L1.3": {Name: "c"},
-		"L1.2": {Name: "d"},
+		"pages":         {Name: "b"},
+		"site-settings": {Name: "a"},
+		"user-management": {Name: "c"},
+		"media":         {Name: "d"},
 	}
 	keys := sortedKeys(bank)
-	expected := []string{"L1.1", "L1.2", "L1.3", "L2.1"}
+	expected := []string{"media", "pages", "site-settings", "user-management"}
 	for i, k := range keys {
 		if k != expected[i] {
 			t.Errorf("position %d: expected %q, got %q", i, expected[i], k)
@@ -215,33 +215,33 @@ func TestSelectNextTask(t *testing.T) {
 	defer db.Close()
 
 	bank := TaskBank{
-		"L1.1": {Name: "Topic A", Tasks: []Task{{ID: "L1.1-a", Difficulty: 1}}},
-		"L1.2": {Name: "Topic B", Tasks: []Task{{ID: "L1.2-a", Difficulty: 1}}},
-		"L2.1": {Name: "Topic C", Tasks: []Task{{ID: "L2.1-a", Difficulty: 1}}},
+		"site-settings":   {Name: "Topic A", Tasks: []Task{{ID: "SS-1", Difficulty: 1}}},
+		"user-management": {Name: "Topic B", Tasks: []Task{{ID: "UM-1", Difficulty: 1}}},
+		"pages":           {Name: "Topic C", Tasks: []Task{{ID: "PG-1", Difficulty: 1}}},
 	}
 
-	// Should pick L1.1 first (sorted order)
+	// Should pick first sorted topic (pages)
 	topic, task := selectNextTask(db, bank)
-	if topic != "L1.1" || task.ID != "L1.1-a" {
-		t.Errorf("expected L1.1/L1.1-a, got %s/%s", topic, task.ID)
+	if topic != "pages" || task.ID != "PG-1" {
+		t.Errorf("expected pages/PG-1, got %s/%s", topic, task.ID)
 	}
 
-	// Mark L1.1 mastered → should pick L1.2
-	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('L1.1', 2, 1)")
+	// Mark pages mastered → should pick site-settings
+	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('pages', 2, 1)")
 	topic, task = selectNextTask(db, bank)
-	if topic != "L1.2" {
-		t.Errorf("expected L1.2, got %s", topic)
+	if topic != "site-settings" {
+		t.Errorf("expected site-settings, got %s", topic)
 	}
 
-	// Mark L1.2 mastered → should pick L2.1
-	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('L1.2', 2, 1)")
+	// Mark site-settings mastered → should pick user-management
+	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('site-settings', 2, 1)")
 	topic, task = selectNextTask(db, bank)
-	if topic != "L2.1" {
-		t.Errorf("expected L2.1, got %s", topic)
+	if topic != "user-management" {
+		t.Errorf("expected user-management, got %s", topic)
 	}
 
 	// Mark all mastered → should return empty
-	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('L2.1', 2, 1)")
+	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('user-management', 2, 1)")
 	topic, task = selectNextTask(db, bank)
 	if topic != "" || task != nil {
 		t.Errorf("expected empty, got %s/%v", topic, task)

@@ -1,0 +1,95 @@
+{
+  "menus-nav": {
+    "name": "菜单与导航",
+    "tasks": [
+      {
+        "id": "MN-1",
+        "difficulty": 1,
+        "description": "创建一个名为「主导航」的菜单，包含「首页」「关于我们」「联系我们」三个页面链接",
+        "verify": [
+          {
+            "type": "menu_exists",
+            "name": "主导航"
+          },
+          {
+            "type": "menu_has_items",
+            "menu": "主导航",
+            "min_count": 3
+          }
+        ],
+        "hints": [
+          "外观 → 菜单 → 菜单名「主导航」→ 创建 → 勾选页面 → 添加 → 保存"
+        ],
+        "on_pass_note": "菜单本身是 wp_terms 表中的一条记录，菜单项是 post_type='nav_menu_item' 的 posts。",
+        "chain": "导航搭建",
+        "chain_order": 0
+      },
+      {
+        "id": "MN-2",
+        "difficulty": 2,
+        "description": "在「主导航」菜单中，把「服务项目」作为「关于我们」的子菜单项",
+        "verify": [
+          {
+            "type": "menu_has_items",
+            "menu": "主导航",
+            "min_count": 4
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$menus = wp_get_nav_menus(); $menu = null; foreach($menus as $m) { if($m->name === '主导航') $menu = $m; } $items = wp_get_nav_menu_items($menu->term_id); $sub = null; foreach($items as $i) { if(strpos($i->title, '服务项目') !== false) $sub = $i; } echo $sub && $sub->menu_item_parent ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 菜单 → 添加「服务项目」→ 向右拖动缩进 → 保存"
+        ],
+        "on_pass_note": "子菜单通过 menu_item_parent 字段实现。菜单层级没有硬性限制，但超过 2 层在手机端体验会很差。",
+        "chain": "导航搭建",
+        "chain_order": 1
+      },
+      {
+        "id": "MN-3",
+        "difficulty": 2,
+        "description": "在「主导航」菜单中添加一个自定义链接：文字为「GitHub」，URL 为 https://github.com",
+        "verify": [
+          {
+            "type": "menu_has_items",
+            "menu": "主导航",
+            "min_count": 5
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$menus = wp_get_nav_menus(); $menu = null; foreach($menus as $m) { if($m->name === '主导航') $menu = $m; } $items = wp_get_nav_menu_items($menu->term_id); foreach($items as $i) { if($i->title === 'GitHub') { echo $i->url; break; } }",
+            "expected_output": "https://github.com"
+          }
+        ],
+        "hints": [
+          "外观 → 菜单 → 左侧「自定义链接」→ 填 URL 和链接文字 → 添加到菜单 → 保存"
+        ],
+        "on_pass_note": "自定义链接菜单项的 post_type 仍然是 nav_menu_item，但 _menu_item_type meta 值为 'custom'（页面链接是 'post_type'，分类链接是 'taxonomy'）。这让你可以在导航中添加任意外部链接。",
+        "chain": "导航搭建",
+        "chain_order": 2
+      },
+      {
+        "id": "MN-4",
+        "difficulty": 2,
+        "description": "创建第二个菜单「底部链接」，包含「关于我们」和「联系我们」两个页面",
+        "verify": [
+          {
+            "type": "menu_exists",
+            "name": "底部链接"
+          },
+          {
+            "type": "menu_has_items",
+            "menu": "底部链接",
+            "min_count": 2
+          }
+        ],
+        "hints": [
+          "外观 → 菜单 → 创建新菜单 → 菜单名「底部链接」→ 添加页面 → 保存"
+        ],
+        "on_pass_note": "一个站点可以有多个菜单。主题通过 register_nav_menus() 定义菜单位置（如 primary、footer），每个位置可以指定不同的菜单。header 和 footer 用不同菜单是常见模式。"
+      }
+    ]
+  }
+}

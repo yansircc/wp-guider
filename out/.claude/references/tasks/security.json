@@ -1,0 +1,96 @@
+{
+  "security": {
+    "name": "安全加固",
+    "tasks": [
+      {
+        "id": "SEC-1",
+        "difficulty": 2,
+        "description": "安装并激活一个安全插件（Wordfence 或 Sucuri Security），完成基础设置",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(stripos($p, 'wordfence') !== false || stripos($p, 'sucuri') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "插件 → 安装 → 搜索 Wordfence 或 Sucuri → 安装 → 激活 → 按引导设置"
+        ],
+        "on_pass_note": "安全插件核心功能：防火墙、登录保护、文件扫描、恶意软件检测。不要同时装两个——会互相冲突。"
+      },
+      {
+        "id": "SEC-2",
+        "difficulty": 1,
+        "description": "检查当前站点是否关闭了「任何人都可以注册」选项。如果是开启状态，将其关闭",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "users_can_register",
+            "expected": "0"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 成员资格 → 取消勾选"
+        ],
+        "on_pass_note": "开放注册是 WordPress 站点被攻击的首要入口之一。外贸站 99% 不需要前台注册功能——客户通过询盘表单联系你，不需要创建账号。",
+        "chain": "安全基线",
+        "chain_order": 0
+      },
+      {
+        "id": "SEC-3",
+        "difficulty": 2,
+        "description": "安装 WPS Hide Login 插件，将登录页面 URL 从默认的 /wp-admin/ 改为 /company-login/",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "wps-hide-login"
+          },
+          {
+            "type": "option_equals",
+            "key": "whl_page",
+            "expected": "company-login"
+          }
+        ],
+        "hints": [
+          "安装 WPS Hide Login 插件 → 激活 → 设置 → 常规 → 页面最底部 → 登录 URL 改为 company-login"
+        ],
+        "on_pass_note": "隐藏登录入口能挡住 90% 的自动化暴力破解脚本。这些脚本默认攻击 /wp-login.php。外贸站每天可能收到数百次暴力登录尝试。",
+        "chain": "安全基线",
+        "chain_order": 1
+      },
+      {
+        "id": "SEC-4",
+        "difficulty": 2,
+        "description": "在 wp-config.php 中禁止通过后台编辑主题和插件文件：设置 DISALLOW_FILE_EDIT 为 true",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "DISALLOW_FILE_EDIT",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "wp config set DISALLOW_FILE_EDIT true --raw"
+        ],
+        "on_pass_note": "DISALLOW_FILE_EDIT 关闭后台的主题编辑器和插件编辑器。如果攻击者获得了管理员权限，可以直接在编辑器中注入恶意代码。关闭后，代码修改只能通过 FTP/SSH。",
+        "chain": "安全基线",
+        "chain_order": 2
+      },
+      {
+        "id": "SEC-5",
+        "difficulty": 2,
+        "description": "安装 Redirection 插件，创建一条 301 跳转规则：将 /old-page/ 跳转到 /about/",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "redirection"
+          }
+        ],
+        "hints": [
+          "插件 → 安装 → Redirection → 激活 → 工具 → Redirection → 添加新规则"
+        ],
+        "on_pass_note": "301 是永久跳转，告诉搜索引擎「这个页面已经搬家了」。常见场景：页面改 slug 后做跳转、旧站迁移到新站、合并重复页面。302 是临时跳转，不传递 SEO 权重。外贸站改版时一定要做 301——否则已经有排名的页面全部变 404。"
+      }
+    ]
+  }
+}

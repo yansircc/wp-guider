@@ -1,0 +1,102 @@
+{
+  "media": {
+    "name": "媒体管理",
+    "tasks": [
+      {
+        "id": "MD-1",
+        "difficulty": 1,
+        "description": "上传一张图片到媒体库（任意图片都可以）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$q = new WP_Query(['post_type'=>'attachment','post_mime_type'=>'image','posts_per_page'=>1]); echo $q->found_posts > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "媒体 → 添加新文件 → 上传图片"
+        ],
+        "on_pass_note": "上传的文件存在 wp-content/uploads/YYYY/MM/ 目录下。WordPress 自动生成多种尺寸的缩略图。每个附件也是一条 wp_posts 记录，post_type = 'attachment'。"
+      },
+      {
+        "id": "MD-2",
+        "difficulty": 1,
+        "description": "给刚上传的图片设置替代文本（Alt Text）为「训练用图片」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$q = new WP_Query(['post_type'=>'attachment','post_mime_type'=>'image','posts_per_page'=>1,'orderby'=>'ID','order'=>'DESC']); if($q->have_posts()){$q->the_post(); echo get_post_meta(get_the_ID(),'_wp_attachment_image_alt',true);}",
+            "expected_output": "训练用图片"
+          }
+        ],
+        "hints": [
+          "媒体 → 媒体库 → 点击图片 → 右侧「替代文本」字段"
+        ],
+        "on_pass_note": "Alt Text 存在 wp_postmeta 表中（meta_key = _wp_attachment_image_alt）。它对无障碍访问（screen reader）和 SEO（图片搜索排名）都至关重要。每张图片都应该设置有意义的 alt text。"
+      },
+      {
+        "id": "MD-3",
+        "difficulty": 2,
+        "description": "把缩略图尺寸改为 300x300，中等尺寸改为 600x600",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "thumbnail_size_w",
+            "expected": "300"
+          },
+          {
+            "type": "option_equals",
+            "key": "thumbnail_size_h",
+            "expected": "300"
+          },
+          {
+            "type": "option_equals",
+            "key": "medium_size_w",
+            "expected": "600"
+          },
+          {
+            "type": "option_equals",
+            "key": "medium_size_h",
+            "expected": "600"
+          }
+        ],
+        "hints": [
+          "设置 → 媒体 → 缩略图尺寸 / 中等尺寸"
+        ],
+        "on_pass_note": "这些设置只影响新上传的图片。已有图片需要用 Regenerate Thumbnails 插件重新生成。"
+      },
+      {
+        "id": "MD-4",
+        "difficulty": 2,
+        "description": "编辑「关于我们」页面，在内容中插入你上传的图片",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_page_by_title('关于我们', OBJECT, 'page'); echo (strpos($p->post_content, 'wp:image') !== false || strpos($p->post_content, '<img') !== false) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑页面 → 添加 Image 区块 → 从媒体库选择图片"
+        ],
+        "on_pass_note": "图片区块（wp:image）在内容中存储为 HTML <figure><img> 标签，同时记录 attachment ID。WordPress 会根据显示场景自动选择合适的图片尺寸（srcset 属性）。"
+      },
+      {
+        "id": "MD-5",
+        "difficulty": 3,
+        "description": "关闭 WordPress 按年/月组织上传文件的功能",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "uploads_use_yearmonth_folders",
+            "expected": "0"
+          }
+        ],
+        "hints": [
+          "设置 → 媒体 → 取消「以年月目录形式组织上传内容」"
+        ],
+        "on_pass_note": "默认 WordPress 把上传文件放在 uploads/2026/03/ 这样的目录结构中。关闭后所有文件都放在 uploads/ 根目录。大型站点通常保留年月结构避免单目录文件过多——但有些页面构建器和 CDN 方案偏好扁平结构。"
+      }
+    ]
+  }
+}

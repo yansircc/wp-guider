@@ -1,0 +1,193 @@
+{
+  "posts-taxonomy": {
+    "name": "文章与分类",
+    "tasks": [
+      {
+        "id": "PT-1",
+        "difficulty": 1,
+        "description": "创建两个分类：「公司新闻」和「行业动态」",
+        "verify": [
+          {
+            "type": "term_exists",
+            "taxonomy": "category",
+            "name": "公司新闻"
+          },
+          {
+            "type": "term_exists",
+            "taxonomy": "category",
+            "name": "行业动态"
+          }
+        ],
+        "hints": [
+          "文章 → 分类目录 → 添加新分类目录"
+        ],
+        "on_pass_note": "分类（Category）是层级结构的分类法（taxonomy），存在 wp_terms 和 wp_term_taxonomy 表中。"
+      },
+      {
+        "id": "PT-2",
+        "difficulty": 1,
+        "description": "在「公司新闻」下创建一个子分类「产品发布」",
+        "verify": [
+          {
+            "type": "term_exists",
+            "taxonomy": "category",
+            "name": "产品发布"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$t = get_term_by('name', '产品发布', 'category'); $p = get_term($t->parent); echo $p->name;",
+            "expected_output": "公司新闻"
+          }
+        ],
+        "hints": [
+          "文章 → 分类目录 → 添加新分类 → 父级分类选「公司新闻」"
+        ],
+        "on_pass_note": "分类支持层级（parent 字段），标签不支持。子分类的 URL 会嵌套：/category/公司新闻/产品发布/。这对内容组织和 SEO 都有好处。"
+      },
+      {
+        "id": "PT-3",
+        "difficulty": 1,
+        "description": "发布一篇文章，标题为「欢迎来到我们的网站」，归类到「公司新闻」",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "post",
+            "title": "欢迎来到我们的网站",
+            "status": "publish"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['title'=>'欢迎来到我们的网站','post_type'=>'post']); $cats = wp_get_post_categories($posts[0]->ID, ['fields'=>'names']); echo implode(',', $cats);",
+            "expected_output": "公司新闻"
+          }
+        ],
+        "hints": [
+          "文章 → 写文章 → 填写标题 → 右侧选择分类 → 发布"
+        ],
+        "on_pass_note": "文章和分类的关系存在 wp_term_relationships 表中。一篇文章可以属于多个分类。"
+      },
+      {
+        "id": "PT-4",
+        "difficulty": 1,
+        "description": "创建两个标签（Tag）：「WordPress」和「教程」",
+        "verify": [
+          {
+            "type": "term_exists",
+            "taxonomy": "post_tag",
+            "name": "WordPress"
+          },
+          {
+            "type": "term_exists",
+            "taxonomy": "post_tag",
+            "name": "教程"
+          }
+        ],
+        "hints": [
+          "文章 → 标签 → 添加新标签"
+        ],
+        "on_pass_note": "标签是扁平结构（无层级），用于细粒度标记。分类用于主要分组，标签用于横向关联。"
+      },
+      {
+        "id": "PT-5",
+        "difficulty": 2,
+        "description": "发布第二篇文章「WordPress 入门指南」，同时归到「行业动态」分类，并添加「WordPress」和「教程」两个标签，还要写一段摘要（Excerpt）",
+        "verify": [
+          {
+            "type": "post_exists",
+            "post_type": "post",
+            "title": "WordPress 入门指南",
+            "status": "publish"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_posts(['title'=>'WordPress 入门指南','post_type'=>'post']); echo has_category('行业动态', $p[0]) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_posts(['title'=>'WordPress 入门指南','post_type'=>'post']); echo has_tag('WordPress', $p[0]) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$p = get_posts(['title'=>'WordPress 入门指南','post_type'=>'post']); echo !empty($p[0]->post_excerpt) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "写文章 → 标题 → 内容 → 右侧选分类和标签 → 文章面板底部或侧栏找到「摘要」"
+        ],
+        "on_pass_note": "摘要（post_excerpt）是文章的手动简介。如果没有设置，主题会自动截取 post_content 的前 N 个字作为摘要。手动摘要对 SEO 和列表页展示更有利。"
+      },
+      {
+        "id": "PT-6",
+        "difficulty": 3,
+        "description": "把默认分类「Uncategorized」重命名为「未分类」，并把它的 slug 改为 uncategorized",
+        "verify": [
+          {
+            "type": "term_exists",
+            "taxonomy": "category",
+            "name": "未分类"
+          },
+          {
+            "type": "wp_eval",
+            "php_code": "$t = get_term_by('name', '未分类', 'category'); echo $t->slug;",
+            "expected_output": "uncategorized"
+          }
+        ],
+        "hints": [
+          "文章 → 分类目录 → 找到 Uncategorized → 编辑 → 改名和 slug"
+        ],
+        "on_pass_note": "每个 WordPress 站点都有一个默认分类（default_category option 存储其 ID）。未指定分类的文章会归入默认分类。你可以改名但不能删除默认分类——删除时 WordPress 会自动指定另一个分类为默认。"
+      },
+      {
+        "id": "PT-7",
+        "difficulty": 2,
+        "description": "编辑文章「欢迎来到我们的网站」，为它设置一张特色图片（Featured Image）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['title'=>'欢迎来到我们的网站','post_type'=>'post']); echo has_post_thumbnail($posts[0]->ID) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑文章 → 右侧面板 → 特色图片 → 设置特色图片 → 选择或上传图片"
+        ],
+        "on_pass_note": "特色图片（Featured Image / Post Thumbnail）存在 wp_postmeta 中（_thumbnail_id 指向 attachment ID）。主题在文章列表和详情页自动显示特色图片。外贸站的博客文章必须设特色图片——没图片的文章在列表页和社交分享时非常难看。"
+      },
+      {
+        "id": "PT-8",
+        "difficulty": 2,
+        "description": "创建一篇新文章「公司年会回顾」，设置为定时发布（Schedule）：发布时间设为明天",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['title'=>'公司年会回顾','post_type'=>'post','post_status'=>'future']); echo count($posts) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "写文章 → 右侧面板 → 状态 → 定时 → 选择明天的日期 → 定时发布"
+        ],
+        "on_pass_note": "定时发布（post_status = future）依赖 wp-cron。如果 wp-cron 没正常运行，定时文章不会按时发布。这就是为什么 L7 教了用系统 cron 替代 wp-cron。外贸站定时发布常用于博客内容营销——提前写好一周的文章，每天定时发一篇。"
+      },
+      {
+        "id": "PT-9",
+        "difficulty": 1,
+        "description": "检查文章「WordPress 入门指南」的 URL 别名（slug），确认是英文。如果是中文编码，改为 wordpress-guide",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['title'=>'WordPress 入门指南','post_type'=>'post']); echo $posts[0]->post_name;",
+            "expected_output": "wordpress-guide"
+          }
+        ],
+        "hints": [
+          "编辑文章 → 右侧面板 → 链接/别名 → 修改为英文 slug"
+        ],
+        "on_pass_note": "文章发布后尽量不要修改 slug——已经被搜索引擎收录的 URL 改了会产生 404。如果必须改，要设置 301 跳转。发布前就把 slug 设好是最佳实践。外贸站所有内容的 slug 都应该用英文。"
+      }
+    ]
+  }
+}

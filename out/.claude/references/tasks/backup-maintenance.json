@@ -1,0 +1,170 @@
+{
+  "backup-maintenance": {
+    "name": "备份与维护",
+    "tasks": [
+      {
+        "id": "BM-1",
+        "difficulty": 2,
+        "description": "使用 WordPress 自带的导出功能（Tools → Export），导出「所有内容」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$uploads = wp_upload_dir(); $export_dir = $uploads['basedir']; $files = glob($export_dir . '/*.xml'); echo count($files) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "工具 → 导出 → 选择「所有内容」→ 下载导出文件"
+        ],
+        "on_pass_note": "WordPress 导出的 WXR（WordPress eXtended RSS）文件是 XML 格式，包含所有文章、页面、评论、分类、标签和自定义字段。但不包含：主题设置、插件配置、媒体文件本身（只包含 URL 引用）。这意味着 WXR 是内容级备份，不是完整站点备份。\n\nAgent 协作提示：告诉 agent 是需要「内容导出」还是「完整备份（文件+数据库）」，两者的操作完全不同。"
+      },
+      {
+        "id": "BM-2",
+        "difficulty": 2,
+        "description": "安装并激活 WordPress Importer 插件（工具 → 导入 → WordPress → 安装），确认导入器就绪",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "wordpress-importer"
+          }
+        ],
+        "hints": [
+          "工具 → 导入 → WordPress 一栏 → 现在安装 → 激活"
+        ],
+        "on_pass_note": "WordPress Importer 是官方的导入插件，但默认不预装——需要手动安装。它可以导入 WXR 文件中的所有内容，并在导入时选择把内容归属给哪个用户。大文件导入可能超时，此时需要用 wp-cli: `wp import file.xml --authors=mapping`。"
+      },
+      {
+        "id": "BM-3",
+        "difficulty": 3,
+        "description": "做一次完整的备份恢复演练：1) 记住当前有多少篇已发布的文章和页面 2) 删除所有文章（移至回收站并清空） 3) 确认文章数变为 0 4) 然后用之前导出的 WXR 文件通过「工具 → 导入」恢复",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$posts = get_posts(['post_type' => 'post', 'post_status' => 'publish', 'numberposts' => -1]); echo count($posts) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "文章 → 全选 → 批量操作 → 移至回收站 → 回收站 → 清空",
+          "工具 → 导入 → WordPress → 上传 WXR 文件 → 导入"
+        ],
+        "on_pass_note": "这个「删除→恢复」演练非常重要。真实场景中你可能面对：客户误删内容、站点被黑需要恢复、迁移到新服务器。掌握了导出/导入流程，你就有了最基本的灾难恢复能力。更完整的备份方案需要插件（UpdraftPlus），因为 WXR 不包含主题/插件/媒体文件。"
+      },
+      {
+        "id": "BM-4",
+        "difficulty": 2,
+        "description": "安装 UpdraftPlus 备份插件并进行一次手动完整备份（数据库 + 文件）",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "updraftplus"
+          }
+        ],
+        "hints": [
+          "插件 → 安装插件 → 搜索 UpdraftPlus → 安装 → 激活 → 设置 → 立即备份"
+        ],
+        "on_pass_note": "3-2-1 法则：3 份备份、2 种介质、1 份异地。UpdraftPlus 支持自动备份到 Google Drive/Dropbox/S3 等云端。"
+      },
+      {
+        "id": "BM-5",
+        "difficulty": 1,
+        "description": "进入「工具 → 站点健康」（Site Health），查看站点健康状态",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo class_exists('WP_Site_Health') ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "工具 → 站点健康 → 查看状态页面",
+          "点「信息」标签查看服务器环境详情"
+        ],
+        "on_pass_note": "站点健康是 WordPress 5.2+ 自带的诊断工具。「信息」标签包含 PHP 版本、内存限制、上传大小限制等。告诉 agent「站点健康信息页的 PHP 版本和内存限制」是最快的环境排查方式。"
+      },
+      {
+        "id": "BM-6",
+        "difficulty": 2,
+        "description": "检查所有插件和主题是否有可用更新，如果有，更新其中一个插件到最新版",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'checked';",
+            "expected_output": "checked"
+          }
+        ],
+        "hints": [
+          "仪表盘 → 更新 → 查看可用更新",
+          "或用 wp-cli: wp plugin update --all --dry-run（先查看），确认后: wp plugin update <slug>"
+        ],
+        "on_pass_note": "WordPress 80% 的安全漏洞来自过时的插件和主题。更新策略：① 先备份 ② 在 staging 测试 ③ 逐个更新 ④ 每次更新后检查站点。外贸站建议每周检查一次。"
+      },
+      {
+        "id": "BM-7",
+        "difficulty": 2,
+        "description": "删除所有未使用的主题，只保留当前激活的主题和一个默认主题作为后备",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$themes = wp_get_themes(); echo count($themes) <= 3 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 主题 → 点击未使用的主题 → 删除",
+          "保留当前主题和一个默认主题（排障时切换用）"
+        ],
+        "on_pass_note": "未使用的主题也是安全风险——攻击者可以利用未激活主题中的漏洞。WordPress 官方建议只保留一个默认主题作为 fallback。清理原则：用不到的就删掉。"
+      },
+      {
+        "id": "BM-8",
+        "difficulty": 2,
+        "description": "用 wp-cli 列出当前所有已注册的 cron 事件",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$crons = _get_cron_array(); echo count($crons) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "wp cron event list"
+        ],
+        "on_pass_note": "wp-cron 是 WordPress 内置的定时任务系统。和系统 cron 不同，wp-cron 只在有用户访问时触发——如果没人访问站点，定时任务不会执行。外贸站对海外客户可能有时差无人访问期间，需要用服务器 cron 替代。"
+      },
+      {
+        "id": "BM-9",
+        "difficulty": 3,
+        "description": "在 wp-config.php 中禁用 WordPress 内置 wp-cron（DISABLE_WP_CRON 设为 true），然后用 wp-cli 手动触发一次 cron 运行",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "DISABLE_WP_CRON",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "wp config set DISABLE_WP_CRON true --raw",
+          "手动触发: wp cron event run --due-now"
+        ],
+        "on_pass_note": "禁用 wp-cron + 系统 cron 替代是生产站标准做法。好处：① 定时任务按时执行 ② 减少每次页面请求开销（50-100ms）③ 避免高并发重复执行。"
+      },
+      {
+        "id": "BM-10",
+        "difficulty": 2,
+        "description": "安装 WP Crontrol 插件，查看所有 cron 事件和它们的下次运行时间",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "wp-crontrol"
+          }
+        ],
+        "hints": [
+          "插件 → 安装 → 搜索 WP Crontrol → 安装 → 激活",
+          "工具 → Cron Events 查看所有事件"
+        ],
+        "on_pass_note": "WP Crontrol 把 wp-cron 的内部状态可视化。排障时非常有用：如果备份没按时执行，先检查 cron 事件是否存在、是否被阻塞。"
+      }
+    ]
+  }
+}

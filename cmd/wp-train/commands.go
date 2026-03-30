@@ -165,14 +165,7 @@ func cmdNext(args []string) {
 	// Output without verify, with context
 	mastered := listMastered(db)
 	weakTopics := listWeak(db)
-	currentLayer := "1"
-	for _, key := range sortedKeys(bank) {
-		layer := strings.TrimPrefix(strings.Split(key, ".")[0], "L")
-		if !contains(mastered, key) {
-			currentLayer = layer
-			break
-		}
-	}
+	currentCategory := topicCategory(selectedTopic)
 
 	output := map[string]any{
 		"status":       "ok",
@@ -184,9 +177,9 @@ func cmdNext(args []string) {
 		"hints":        selectedTask.Hints,
 		"on_pass_note": selectedTask.OnPassNote,
 		"context": map[string]any{
-			"current_layer":   currentLayer,
-			"topics_mastered": mastered,
-			"weak_topics":     weakTopics,
+			"current_category": currentCategory,
+			"topics_mastered":  mastered,
+			"weak_topics":      weakTopics,
 			"task_attempts":   dbGetInt(db, "SELECT COUNT(*) FROM attempts WHERE task_id = ?", selectedTask.ID),
 		},
 	}

@@ -1,0 +1,103 @@
+{
+  "user-management": {
+    "name": "用户管理",
+    "tasks": [
+      {
+        "id": "UM-1",
+        "difficulty": 1,
+        "description": "把管理员的昵称（Nickname）改为「教练」，并把「公开显示为」也改为「教练」",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','admin'); echo $u->display_name;",
+            "expected_output": "教练"
+          }
+        ],
+        "hints": [
+          "用户 → 编辑个人资料 → 昵称 + 公开显示为"
+        ],
+        "on_pass_note": "WordPress 用户有 user_login（不可改）、nickname、display_name 三个名称。文章作者显示的是 display_name。"
+      },
+      {
+        "id": "UM-2",
+        "difficulty": 1,
+        "description": "创建一个新用户：用户名 editor1，角色为「编辑」（Editor），邮箱 editor1@test.com",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','editor1'); echo $u ? implode(',', $u->roles) : 'not_found';",
+            "expected_output": "editor"
+          }
+        ],
+        "hints": [
+          "用户 → 添加新用户"
+        ],
+        "on_pass_note": "WordPress 有 5 个内置角色：管理员(Administrator)、编辑(Editor)、作者(Author)、投稿者(Contributor)、订阅者(Subscriber)。每个角色有不同的权限集合（capabilities）。"
+      },
+      {
+        "id": "UM-3",
+        "difficulty": 2,
+        "description": "把默认新用户角色从「订阅者」改为「投稿者」（Contributor）",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "default_role",
+            "expected": "contributor"
+          }
+        ],
+        "hints": [
+          "设置 → 常规 → 新用户默认角色"
+        ],
+        "on_pass_note": "投稿者可以写文章但不能自行发布，需要编辑或管理员审核。这在多作者网站中是常见的权限设置。"
+      },
+      {
+        "id": "UM-4",
+        "difficulty": 1,
+        "description": "再创建一个用户：用户名 author1，角色为「作者」（Author），邮箱 author1@test.com",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','author1'); echo $u ? implode(',', $u->roles) : 'not_found';",
+            "expected_output": "author"
+          }
+        ],
+        "hints": [
+          "用户 → 添加新用户 → 角色选「作者」"
+        ],
+        "on_pass_note": "作者（Author）比投稿者多一个关键权限：可以自行发布文章，不需要审核。但作者只能管理自己的文章，不能编辑他人的。"
+      },
+      {
+        "id": "UM-5",
+        "difficulty": 2,
+        "description": "以管理员身份，代替 author1 发布一篇文章「测试文章」（在编辑文章时把作者改为 author1）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','author1'); $posts = get_posts(['author'=>$u->ID,'post_status'=>'publish']); echo count($posts) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "文章 → 写文章 → 标题「测试文章」→ 右侧面板「作者」→ 选择 author1 → 发布"
+        ],
+        "on_pass_note": "管理员可以代替任何用户发布文章（修改 post_author 字段）。这一步确保 author1 名下有内容，后续删除用户时 WordPress 才会提供「将内容归属到其他用户」的选项。"
+      },
+      {
+        "id": "UM-6",
+        "difficulty": 3,
+        "description": "删除用户 author1，并把他的所有内容归属到 admin 用户下",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$u = get_user_by('login','author1'); echo $u ? 'exists' : 'deleted';",
+            "expected_output": "deleted"
+          }
+        ],
+        "hints": [
+          "用户 → 用户列表 → 删除 author1 → 选择「将所有内容归属到」→ 选 admin"
+        ],
+        "on_pass_note": "删除用户时 WordPress 提供两个选择：删除该用户的所有内容，或把内容归属给其他用户。在生产环境中，几乎总是选择归属——防止内容丢失。数据库层面是修改 wp_posts.post_author 字段。"
+      }
+    ]
+  }
+}
