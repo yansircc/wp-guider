@@ -39,7 +39,7 @@ var faultTypes = map[string]faultDef{
 		inject: injectWrongSiteurl,
 		fix:    "通过 wp-cli 或数据库修正 siteurl",
 		verifyChecks: []map[string]any{
-			{"type": "option_contains", "key": "siteurl", "substring": "loc.wp"},
+			{"type": "option_contains", "key": "siteurl", "substring": "localhost"},
 		},
 	},
 	"memory-limit": {

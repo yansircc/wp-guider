@@ -52,11 +52,12 @@
 ## 训练站点约定
 
 - 站点名称：`wp-train`
-- 域名：`https://wp-train.loc.wp`
-- 管理后台：`https://wp-train.loc.wp/wp-admin/`
+- 域名：`http://localhost:{PORT}`（端口由 locwp 自动分配，用 `locwp list` 查看）
+- 管理后台：`http://localhost:{PORT}/wp-admin/`
 - 默认账号：`admin` / `admin`
 - 默认编辑器：Classic Editor（经典编辑器）
 - WP 根目录：`~/.locwp/sites/wp-train/wordpress`
+- 数据库：SQLite（`wp-content/database/.ht.sqlite`，无需 MySQL）
 
 ## 出题原则
 

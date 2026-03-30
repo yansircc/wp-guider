@@ -109,13 +109,13 @@
           {
             "type": "option_contains",
             "key": "siteurl",
-            "substring": "loc.wp"
+            "substring": "localhost"
           }
         ],
         "hints": [
           "后台打不开/重定向循环 → 常见原因是 siteurl 或 home 被改错",
-          "用 wp-cli 修复: wp option update siteurl 'https://wp-train.loc.wp'",
-          "也要检查 home: wp option update home 'https://wp-train.loc.wp'"
+          "用 wp-cli 修复: locwp wp wp-train -- option update siteurl $(locwp wp wp-train -- eval 'echo site_url();' 2>/dev/null || echo 'http://localhost:PORT')",
+          "也可以用 checkpoint restore pre-fault 一键恢复"
         ],
         "on_pass_note": "siteurl/home 错误是 WordPress 迁移后最常见的故障。三种修复方式：① wp-cli（最快）② wp-config.php 中 define ③ 直接改数据库。外贸站换域名时必须同时修改 siteurl、home，以及内容中的旧域名引用（用 wp search-replace）。"
       },
@@ -133,9 +133,9 @@
         "hints": [
           "Error establishing a database connection → 数据库连接配置有问题",
           "检查 wp-config.php 中的 DB_NAME、DB_USER、DB_PASSWORD、DB_HOST",
-          "可以从 checkpoint 恢复或查看 locwp 配置获取正确密码"
+          "可以从 checkpoint 恢复，或查看主机面板获取正确的数据库信息"
         ],
-        "on_pass_note": "数据库连接错误排查清单：① DB_NAME 数据库是否存在 ② DB_USER 是否有权限 ③ DB_PASSWORD 是否正确 ④ DB_HOST 地址是否正确。这个错误 100% 是配置问题。"
+        "on_pass_note": "数据库连接错误排查清单：① DB_NAME 数据库是否存在 ② DB_USER 是否有权限 ③ DB_PASSWORD 是否正确 ④ DB_HOST 地址是否正确。注意：此故障需在 MySQL/MariaDB 站点（如 Hostinger）上练习，locwp 本地站使用 SQLite 无此问题。"
       },
       {
         "id": "TS-8",

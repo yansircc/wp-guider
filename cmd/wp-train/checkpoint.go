@@ -79,7 +79,7 @@ func doCheckpointRestore(name string) {
 		fatal("checkpoint not found: " + name)
 	}
 
-	// 1. Restore wp-config.php FIRST (broken-db fault changes DB_PASSWORD)
+	// 1. Restore wp-config.php FIRST (faults may modify config)
 	configSrc := filepath.Join(dir, "wp-config.php")
 	configDst := filepath.Join(wpRoot, "wp-config.php")
 	if fileExists(configSrc) {
