@@ -16,6 +16,7 @@ description: WordPress 训练出题。根据课纲和教练掌握度动态选题
 
 {description}
 
+请在浏览器中打开 wp-admin 后台完成操作。
 完成后输入 /wp-check 检查结果。
 ```
 
