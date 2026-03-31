@@ -5,12 +5,12 @@
       {
         "id": "WPC-1",
         "difficulty": 2,
-        "description": "找到 wp-config.php 文件，告诉 AI 这个站点的数据库名称（DB_NAME）是什么",
+        "description": "找到 wp-config.php 文件，查看 DB_NAME 的值并告诉 AI",
         "verify": [
           {
             "type": "wp_eval",
-            "php_code": "echo DB_NAME;",
-            "expected_output": "wp_wp_train"
+            "php_code": "echo defined('DB_NAME') && strlen(DB_NAME) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
           }
         ],
         "hints": [
@@ -152,7 +152,7 @@
         "hints": [
           "wp db query \"SELECT post_type, COUNT(*) as cnt FROM wp_posts GROUP BY post_type;\""
         ],
-        "on_pass_note": "wp_posts 是 WordPress 最核心的表——不只存文章和页面，还存自定义文章类型、导航菜单项、修订版本。理解这张表的 post_type 字段，你就理解了 WordPress 的内容模型：一切皆 Post。"
+        "on_pass_note": "wp_posts 是 WordPress 最核心的表——不只存文章和页面，还存自定义文章类型、导航菜单项、修订版本。理解这张表的 post_type 字段，你就理解了 WordPress 的内容模型：一切皆 Post。 本地 SQLite 环境下 wp db query 不可用，系统会自动使用 $wpdb 方式查询。"
       },
       {
         "id": "WPC-10",

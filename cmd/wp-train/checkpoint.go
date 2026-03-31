@@ -45,10 +45,19 @@ func doCheckpointSave(name string) {
 	dir := filepath.Join(checkpointDir(), name)
 	os.MkdirAll(dir, 0755)
 
-	// 1. DB dump via wp-cli
-	log("Dumping database to checkpoint '" + name + "'...")
-	dumpPath := filepath.Join(dir, "db.sql")
-	shellMust(fmt.Sprintf("locwp wp %s -- db export %s --quiet", sitePort, dumpPath))
+	// 1. DB: copy SQLite file (or fallback to wp db export for MySQL)
+	log("Saving database to checkpoint '" + name + "'...")
+	sqliteDB := filepath.Join(wpContent, "database", ".ht.sqlite")
+	if fileExists(sqliteDB) {
+		// SQLite: direct file copy
+		dstDB := filepath.Join(dir, "db.sqlite")
+		src, _ := os.ReadFile(sqliteDB)
+		os.WriteFile(dstDB, src, 0644)
+	} else {
+		// MySQL fallback
+		dumpPath := filepath.Join(dir, "db.sql")
+		shellMust(fmt.Sprintf("locwp wp %s -- db export %s --quiet", sitePort, dumpPath))
+	}
 
 	// 2. Git tag in wp-content
 	log("Tagging wp-content state...")
@@ -88,10 +97,18 @@ func doCheckpointRestore(name string) {
 		os.WriteFile(configDst, data, 0644)
 	}
 
-	// 2. Restore database (now wp-config.php has correct credentials)
+	// 2. Restore database
+	sqliteDst := filepath.Join(wpContent, "database", ".ht.sqlite")
+	sqliteSrc := filepath.Join(dir, "db.sqlite")
 	dumpPath := filepath.Join(dir, "db.sql")
-	if fileExists(dumpPath) {
-		log("Restoring database from checkpoint '" + name + "'...")
+	if fileExists(sqliteSrc) {
+		// SQLite: direct file copy
+		log("Restoring SQLite database from checkpoint '" + name + "'...")
+		data, _ := os.ReadFile(sqliteSrc)
+		os.WriteFile(sqliteDst, data, 0644)
+	} else if fileExists(dumpPath) {
+		// MySQL fallback
+		log("Restoring MySQL database from checkpoint '" + name + "'...")
 		shellMust(fmt.Sprintf("locwp wp %s -- db import %s --quiet", sitePort, dumpPath))
 	}
 

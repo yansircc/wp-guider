@@ -323,9 +323,16 @@ func checkWpEval(phpCode, expectedOutput string) CheckResult {
 }
 
 func checkDBQuery(sql, expected string) CheckResult {
+	// Try wp db query first (MySQL), fallback to wp eval with $wpdb (SQLite compatible)
 	actual, err := shell(fmt.Sprintf(`locwp wp %s -- db query "%s"`, sitePort, sql))
 	if err != nil {
-		return CheckResult{Passed: false, Error: err.Error()}
+		// Fallback: use $wpdb->get_results() via wp eval
+		escapedSQL := strings.ReplaceAll(sql, "'", "\\'")
+		phpCode := fmt.Sprintf(`global $wpdb; $r = $wpdb->get_results("%s"); foreach($r as $row) { echo implode("\t", (array)$row) . "\n"; }`, escapedSQL)
+		actual, err = shell(fmt.Sprintf(`locwp wp %s -- eval '%s'`, sitePort, phpCode))
+		if err != nil {
+			return CheckResult{Passed: false, Error: "db query failed on both MySQL and SQLite: " + err.Error()}
+		}
 	}
 	if len(actual) > 500 {
 		actual = actual[:500]
