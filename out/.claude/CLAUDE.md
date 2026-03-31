@@ -24,7 +24,7 @@
 | `.claude/scripts/wp-train status` | 当前状态 JSON |
 | `.claude/scripts/wp-train snapshot` | 站点全量状态 JSON |
 | `.claude/scripts/wp-train history` | 最近尝试记录 JSON |
-| `.claude/scripts/wp-train explain <topic>` | 知识点详情 |
+| `.claude/scripts/wp-train explain <topic>` | 知识点详情（如 explain site-settings） |
 | `.claude/scripts/wp-train inject` | 列出可用故障类型 |
 | `.claude/scripts/wp-train inject <type>` | 注入故障（自动保存 checkpoint） |
 | `.claude/scripts/wp-train checkpoint save <name>` | 保存站点快照（DB + 文件 + 配置） |
@@ -33,7 +33,7 @@
 
 题库: `.claude/references/tasks/` (按 Topic 分文件)
 知识库: `docs/` (252 篇 HTML 文档) + `topic-matrix.html` (矩阵总览)
-数据库: `~/.locwp/sites/wp-train/training/wp-guider.db`
+数据库: `~/.locwp/sites/{PORT}/training/wp-guider.db`（SQLite，端口自动发现）
 
 ## 故障注入（排障训练）
 
@@ -51,13 +51,14 @@
 
 ## 训练站点约定
 
-- 站点名称：`wp-train`
-- 域名：`http://localhost:{PORT}`（端口由 locwp 自动分配，用 `locwp list` 查看）
+- 端口：由 `locwp add` 自動分配（從 10001 起遞增），用 `locwp list` 查看
+- 域名：`http://localhost:{PORT}`
 - 管理后台：`http://localhost:{PORT}/wp-admin/`
 - 默认账号：`admin` / `admin`
 - 默认编辑器：Classic Editor（经典编辑器）
-- WP 根目录：`~/.locwp/sites/wp-train/wordpress`
+- WP 根目录：`~/.locwp/sites/{PORT}/wordpress`
 - 数据库：SQLite（`wp-content/database/.ht.sqlite`，无需 MySQL）
+- 训练数据：`~/.locwp/sites/{PORT}/training/wp-guider.db`
 
 ## 出题原则
 
@@ -72,7 +73,7 @@
 - 每个知识点需要连续通过 2 次才标记「掌握」
 - 犯错一次重置计数
 - 薄弱知识点会被优先重复出题
-- 进度保存在 `~/.locwp/sites/wp-train/training/wp-guider.db`（SQLite）
+- 进度保存在 `~/.locwp/sites/{PORT}/training/wp-guider.db`（SQLite，端口自动发现）
 
 ## 大纲结构（六大分类 × 20 主题）
 

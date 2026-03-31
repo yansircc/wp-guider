@@ -14,15 +14,48 @@ import (
 // ── init ─────────────────────────────────────────────────────────────────────
 
 func cmdInit() {
-	// Check if site exists
-	out, _ := shell(fmt.Sprintf(`locwp list 2>/dev/null | grep "^%s "`, siteName))
-	if out != "" {
-		log("Deleting existing site " + siteName + "...")
-		shellMust("locwp delete " + siteName)
+	// Delete existing training site if found
+	if sitePort != defaultPort || fileExists(filepath.Join(locwpBase, "wordpress")) {
+		log("Deleting existing site on port " + sitePort + "...")
+		shell("locwp delete " + sitePort)
 	}
 
-	log("Creating site " + siteName + "...")
-	shellMust("locwp add " + siteName + " --pass admin")
+	log("Creating new site...")
+	out, err := shell("locwp add --pass admin")
+	if err != nil {
+		fatal("locwp add failed: " + out)
+	}
+	// Parse port from locwp add output (e.g., "Site created at http://localhost:10001")
+	port := ""
+	for _, line := range strings.Split(out, "\n") {
+		if idx := strings.Index(line, "localhost:"); idx >= 0 {
+			rest := line[idx+len("localhost:"):]
+			for _, c := range rest {
+				if c >= '0' && c <= '9' {
+					port += string(c)
+				} else {
+					break
+				}
+			}
+			break
+		}
+	}
+	if port == "" {
+		// Fallback: find the newest site directory
+		entries, _ := os.ReadDir(filepath.Join(homeDir, ".locwp", "sites"))
+		for i := len(entries) - 1; i >= 0; i-- {
+			if entries[i].IsDir() && entries[i].Name() >= "10001" {
+				port = entries[i].Name()
+				break
+			}
+		}
+	}
+	if port == "" {
+		fatal("could not determine site port from locwp add output")
+	}
+
+	sitePort = port
+	setSitePaths(port)
 
 	log("Installing Classic Editor...")
 	wp("plugin install classic-editor --activate")
@@ -50,7 +83,7 @@ func cmdInit() {
 	url := wp("option get siteurl")
 	jprintln(map[string]any{
 		"status":      "ok",
-		"site":        siteName,
+		"site":        sitePort,
 		"url":         url,
 		"admin_url":   url + "/wp-admin/",
 		"credentials": map[string]string{"user": "admin", "pass": "admin"},

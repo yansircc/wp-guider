@@ -114,7 +114,7 @@
         ],
         "hints": [
           "后台打不开/重定向循环 → 常见原因是 siteurl 或 home 被改错",
-          "用 wp-cli 修复: locwp wp wp-train -- option update siteurl $(locwp wp wp-train -- eval 'echo site_url();' 2>/dev/null || echo 'http://localhost:PORT')",
+          "用 wp-cli 修复: locwp wp {PORT} -- option update siteurl 'http://localhost:{PORT}'",
           "也可以用 checkpoint restore pre-fault 一键恢复"
         ],
         "on_pass_note": "siteurl/home 错误是 WordPress 迁移后最常见的故障。三种修复方式：① wp-cli（最快）② wp-config.php 中 define ③ 直接改数据库。外贸站换域名时必须同时修改 siteurl、home，以及内容中的旧域名引用（用 wp search-replace）。"

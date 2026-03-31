@@ -156,7 +156,7 @@ wp_guider_undefined_function_call();
 func injectWrongSiteurl() {
 	original := wp("option get siteurl")
 	log("Original siteurl: " + original)
-	shellMust(fmt.Sprintf("locwp wp %s -- option update siteurl https://wrong-domain.example.com", siteName))
+	shellMust(fmt.Sprintf("locwp wp %s -- option update siteurl https://wrong-domain.example.com", sitePort))
 }
 
 func injectMemoryLimit() {
@@ -172,17 +172,17 @@ func injectMemoryLimit() {
 }
 
 func injectBrokenDB() {
-	shellMust(fmt.Sprintf("locwp wp %s -- config set DB_PASSWORD 'wrong_password_wp_guider_fault' --type=constant", siteName))
+	shellMust(fmt.Sprintf("locwp wp %s -- config set DB_PASSWORD 'wrong_password_wp_guider_fault' --type=constant", sitePort))
 }
 
 func injectBrokenPermalink() {
-	shellMust(fmt.Sprintf("locwp wp %s -- rewrite structure '/broken/%%postname%%/%%nonsense%%/' --hard", siteName))
-	shellMust(fmt.Sprintf("locwp wp %s -- rewrite flush --hard", siteName))
+	shellMust(fmt.Sprintf("locwp wp %s -- rewrite structure '/broken/%%postname%%/%%nonsense%%/' --hard", sitePort))
+	shellMust(fmt.Sprintf("locwp wp %s -- rewrite flush --hard", sitePort))
 }
 
 func injectDebugOff() {
-	shell(fmt.Sprintf("locwp wp %s -- config set WP_DEBUG false --raw 2>/dev/null || true", siteName))
-	shell(fmt.Sprintf("locwp wp %s -- config set WP_DEBUG_LOG false --raw 2>/dev/null || true", siteName))
+	shell(fmt.Sprintf("locwp wp %s -- config set WP_DEBUG false --raw 2>/dev/null || true", sitePort))
+	shell(fmt.Sprintf("locwp wp %s -- config set WP_DEBUG_LOG false --raw 2>/dev/null || true", sitePort))
 	p := activeFunctionsPhp()
 	content, _ := os.ReadFile(p)
 	poison := "\n// WP-GUIDER-FAULT: debug-off\nadd_action('init', function() {\n    $undefined_var = $nonexistent;\n    error_log('WP Guider: this warning is hidden because WP_DEBUG is off');\n});\n"

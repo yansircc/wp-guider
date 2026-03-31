@@ -94,7 +94,7 @@ func runSingleCheck(typ string, params map[string]any) CheckResult {
 }
 
 func checkOptionEquals(key, expected string) CheckResult {
-	actual, err := shell(fmt.Sprintf("locwp wp %s -- option get %s", siteName, key))
+	actual, err := shell(fmt.Sprintf("locwp wp %s -- option get %s", sitePort, key))
 	if err != nil {
 		return CheckResult{Passed: false, Error: err.Error()}
 	}
@@ -102,7 +102,7 @@ func checkOptionEquals(key, expected string) CheckResult {
 }
 
 func checkOptionContains(key, substring string) CheckResult {
-	actual, err := shell(fmt.Sprintf("locwp wp %s -- option get %s", siteName, key))
+	actual, err := shell(fmt.Sprintf("locwp wp %s -- option get %s", sitePort, key))
 	if err != nil {
 		return CheckResult{Passed: false, Error: err.Error()}
 	}
@@ -257,7 +257,7 @@ func checkFileNotContains(path, pattern string) CheckResult {
 }
 
 func checkConfigEquals(key, expected string) CheckResult {
-	actual, err := shell(fmt.Sprintf("locwp wp %s -- config get %s", siteName, key))
+	actual, err := shell(fmt.Sprintf("locwp wp %s -- config get %s", sitePort, key))
 	if err != nil {
 		return CheckResult{Passed: false, Error: err.Error()}
 	}
@@ -265,7 +265,7 @@ func checkConfigEquals(key, expected string) CheckResult {
 }
 
 func checkUserMeta(user, key, expected string) CheckResult {
-	out, err := shell(fmt.Sprintf("locwp wp %s -- user meta get %s %s --format=json", siteName, user, key))
+	out, err := shell(fmt.Sprintf("locwp wp %s -- user meta get %s %s --format=json", sitePort, user, key))
 	if err != nil {
 		return CheckResult{Passed: false, Error: err.Error()}
 	}
@@ -315,7 +315,7 @@ func checkWpEval(phpCode, expectedOutput string) CheckResult {
 	// Use double quotes and escape any internal double quotes in phpCode
 	escaped := strings.ReplaceAll(phpCode, `"`, `\"`)
 	escaped = strings.ReplaceAll(escaped, `$`, `\$`)
-	actual, err := shell(fmt.Sprintf(`locwp wp %s -- eval "%s"`, siteName, escaped))
+	actual, err := shell(fmt.Sprintf(`locwp wp %s -- eval "%s"`, sitePort, escaped))
 	if err != nil {
 		return CheckResult{Passed: false, Error: err.Error()}
 	}
@@ -323,7 +323,7 @@ func checkWpEval(phpCode, expectedOutput string) CheckResult {
 }
 
 func checkDBQuery(sql, expected string) CheckResult {
-	actual, err := shell(fmt.Sprintf(`locwp wp %s -- db query "%s"`, siteName, sql))
+	actual, err := shell(fmt.Sprintf(`locwp wp %s -- db query "%s"`, sitePort, sql))
 	if err != nil {
 		return CheckResult{Passed: false, Error: err.Error()}
 	}

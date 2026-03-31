@@ -101,7 +101,7 @@ func cmdSnapshot() {
 
 	opts := make(map[string]any)
 	for _, key := range []string{"blogname", "blogdescription", "siteurl", "home", "show_on_front", "page_on_front", "page_for_posts", "permalink_structure", "template", "stylesheet"} {
-		v, err := shell(fmt.Sprintf("locwp wp %s -- option get %s", siteName, key))
+		v, err := shell(fmt.Sprintf("locwp wp %s -- option get %s", sitePort, key))
 		if err != nil {
 			opts[key] = nil
 		} else {

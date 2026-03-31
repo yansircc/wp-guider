@@ -9,30 +9,61 @@ import (
 	"strings"
 )
 
-const siteName = "wp-train"
+const defaultPort = "10001"
 
 var (
 	homeDir      string
-	locwpBase    string
+	locwpBase    string // set dynamically per site port
 	wpRoot       string
 	wpContent    string
 	trainingDir  string
 	dbPath       string
 	claudeDir    string // .claude/ directory (product root)
 	taskBankPath string
+	sitePort     string // locwp port, resolved at runtime
 )
 
 func init() {
 	homeDir, _ = os.UserHomeDir()
-	locwpBase = filepath.Join(homeDir, ".locwp", "sites", siteName)
+
+	// Find .claude/ directory first (needed for DB path to resolve port)
+	claudeDir = findClaudeDir()
+	taskBankPath = filepath.Join(claudeDir, "references", "task-bank.json") // legacy fallback only
+
+	// Resolve site port: try saved port from DB, else default
+	sitePort = resolveSitePort()
+	setSitePaths(sitePort)
+}
+
+// setSitePaths sets all path variables based on port.
+func setSitePaths(port string) {
+	locwpBase = filepath.Join(homeDir, ".locwp", "sites", port)
 	wpRoot = filepath.Join(locwpBase, "wordpress")
 	wpContent = filepath.Join(wpRoot, "wp-content")
 	trainingDir = filepath.Join(locwpBase, "training")
 	dbPath = filepath.Join(trainingDir, "wp-guider.db")
+}
 
-	// Find .claude/ directory (product root)
-	claudeDir = findClaudeDir()
-	taskBankPath = filepath.Join(claudeDir, "references", "task-bank.json") // legacy fallback only
+// resolveSitePort finds the training site port.
+// Priority: 1) WP_TRAIN_PORT env  2) saved in any existing DB  3) default 10001
+func resolveSitePort() string {
+	if p := os.Getenv("WP_TRAIN_PORT"); p != "" {
+		return p
+	}
+	// Scan ~/.locwp/sites/*/training/wp-guider.db to find existing training site
+	sitesDir := filepath.Join(homeDir, ".locwp", "sites")
+	if entries, err := os.ReadDir(sitesDir); err == nil {
+		for _, e := range entries {
+			if !e.IsDir() {
+				continue
+			}
+			db := filepath.Join(sitesDir, e.Name(), "training", "wp-guider.db")
+			if fileExists(db) {
+				return e.Name()
+			}
+		}
+	}
+	return defaultPort
 }
 
 func findClaudeDir() string {
@@ -106,7 +137,7 @@ func shellMust(command string) string {
 
 // wp runs a wp-cli command via locwp.
 func wp(args string) string {
-	return shellMust(fmt.Sprintf("locwp wp %s -- %s", siteName, args))
+	return shellMust(fmt.Sprintf("locwp wp %s -- %s", sitePort, args))
 }
 
 // wpJSON runs a wp-cli command and parses JSON output.

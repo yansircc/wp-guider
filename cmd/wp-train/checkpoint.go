@@ -48,7 +48,7 @@ func doCheckpointSave(name string) {
 	// 1. DB dump via wp-cli
 	log("Dumping database to checkpoint '" + name + "'...")
 	dumpPath := filepath.Join(dir, "db.sql")
-	shellMust(fmt.Sprintf("locwp wp %s -- db export %s --quiet", siteName, dumpPath))
+	shellMust(fmt.Sprintf("locwp wp %s -- db export %s --quiet", sitePort, dumpPath))
 
 	// 2. Git tag in wp-content
 	log("Tagging wp-content state...")
@@ -92,7 +92,7 @@ func doCheckpointRestore(name string) {
 	dumpPath := filepath.Join(dir, "db.sql")
 	if fileExists(dumpPath) {
 		log("Restoring database from checkpoint '" + name + "'...")
-		shellMust(fmt.Sprintf("locwp wp %s -- db import %s --quiet", siteName, dumpPath))
+		shellMust(fmt.Sprintf("locwp wp %s -- db import %s --quiet", sitePort, dumpPath))
 	}
 
 	// 3. Restore wp-content from git tag
