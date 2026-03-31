@@ -1,0 +1,125 @@
+{
+  "google-analytics": {
+    "name": "Google 全家桶",
+    "tasks": [
+      {
+        "id": "GA-1",
+        "difficulty": 2,
+        "description": "在 Google Search Console 中添加站点并完成所有权验证（HTML 标签方式）。验证：在站点中安装一个 SEO 插件并开启 GSC 连接",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'seo') !== false || strpos($p, 'yoast') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "GSC 验证方式：HTML 标签、DNS、文件上传",
+          "SEO 插件通常内置 GSC 验证功能"
+        ],
+        "on_pass_note": "GSC 是免费工具，告诉你 Google 怎么看你的站点：索引状态、搜索词、错误。每个外贸站都必须注册。"
+      },
+      {
+        "id": "GA-2",
+        "difficulty": 2,
+        "description": "在 GSC 中提交站点的 XML Sitemap（通常是 /sitemap_index.xml）。验证：确认 Yoast/SEOPress 的 Sitemap 功能已开启",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$y = get_option('wpseo'); $s = get_option('seopress_xml_sitemap_option_name'); echo (!empty($y) || !empty($s)) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "Sitemap 地址通常是 /sitemap_index.xml 或 /sitemap.xml",
+          "在 GSC → Sitemaps 中提交"
+        ],
+        "on_pass_note": "Sitemap 帮助搜索引擎发现页面。新站提交后 Google 通常几天内开始抓取。大型站点可以分多个 Sitemap。"
+      },
+      {
+        "id": "GA-3",
+        "difficulty": 2,
+        "description": "注册 GA4 并通过 SEO 插件安装追踪代码（Measurement ID 格式：G-XXXXXXXXXX）。验证：将追踪 ID 保存到站点的 blogdescription 选项中",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$d = get_option('blogdescription'); echo (strpos($d, 'G-') === 0 && strlen($d) > 5) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "GA4 → 管理 → 数据流 → 衡量 ID",
+          "通过 SEOPress 或 Yoast 填入追踪代码"
+        ],
+        "on_pass_note": "GA4 取代了旧版 Universal Analytics。追踪代码建议通过插件管理而非手动编辑主题，避免更新主题时丢失。"
+      },
+      {
+        "id": "GA-4",
+        "difficulty": 3,
+        "description": "学习 GA4 基础报告：用户数、会话数、页面浏览量的含义和区别。验证：将站点标题改为「GA4报告-用户会话页面」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "GA4报告-用户会话页面"
+          }
+        ],
+        "hints": [
+          "用户 = 独立访客，会话 = 一次访问，页面浏览 = 看了几个页面"
+        ],
+        "on_pass_note": "GA4 核心指标：用户（who）、会话（when）、事件（what）。跳出率在 GA4 中改为参与率（Engagement Rate）。"
+      },
+      {
+        "id": "GA-5",
+        "difficulty": 3,
+        "description": "学习 GSC 性能报告：总点击数、展示次数、CTR、平均排名的含义。验证：将站点标题改为「GSC性能-点击展示CTR排名」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "GSC性能-点击展示CTR排名"
+          }
+        ],
+        "hints": [
+          "CTR = 点击 / 展示 × 100%",
+          "排名越低越好（第 1 位最佳）"
+        ],
+        "on_pass_note": "GSC 性能报告是 SEO 的核心数据源。重点关注：高展示低 CTR 的词（需优化标题/描述）和排名 5-15 的词（有提升空间）。"
+      },
+      {
+        "id": "GA-6",
+        "difficulty": 3,
+        "description": "学习 GA4 事件追踪概念：按钮点击、表单提交如何通过事件记录。验证：将站点标题改为「GA4事件-click-submit」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "GA4事件-click-submit"
+          }
+        ],
+        "hints": [
+          "GA4 中一切都是事件（event）",
+          "自动事件 vs 自定义事件"
+        ],
+        "on_pass_note": "GA4 自动追踪 page_view、scroll、click 等事件。自定义事件需要 gtag('event', ...) 或 GTM 配置。外贸站重点追踪询盘表单提交。"
+      },
+      {
+        "id": "GA-7",
+        "difficulty": 4,
+        "description": "学习 GA4 转化目标设置和 Google Ads 联动概念。验证：将站点标题改为「GA4转化-GoogleAds联动」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "GA4转化-GoogleAds联动"
+          }
+        ],
+        "hints": [
+          "在 GA4 中将关键事件标记为转化",
+          "GA4 和 Google Ads 关联后可以导入转化数据"
+        ],
+        "on_pass_note": "转化追踪闭环：GA4 记录事件 → 标记为转化 → 导入 Google Ads → 优化广告投放。这是外贸数字营销的核心链路。"
+      }
+    ]
+  }
+}

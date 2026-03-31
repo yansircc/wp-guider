@@ -519,6 +519,406 @@
           "编辑 Header 模板 → 选中最外层 Container → Advanced → Motion Effects → Sticky: Top"
         ],
         "on_pass_note": "Sticky Header 让导航始终可见，方便用户随时点击 CTA。设置：Container → Advanced → Motion Effects → Sticky: Top。可以配合 Transparent Header + 滚动后变色效果。注意 Sticky Header 会占据屏幕空间——在手机上可能不适合。"
+      },
+      {
+        "id": "ELE-32",
+        "difficulty": 2,
+        "description": "安装并配置 Elementor 的 Floating Buttons widget，设置 WhatsApp 联系按钮",
+        "hints": [
+          "参考知识库文档 ELE-32"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-33",
+        "difficulty": 3,
+        "description": "使用 Elementor Popup Builder 创建一个 Modal 类型弹窗，包含标题和关闭按钮",
+        "hints": [
+          "参考知识库文档 ELE-33"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-34",
+        "difficulty": 4,
+        "description": "为弹窗设置触发条件：页面加载 5 秒后显示，且每个用户只显示一次",
+        "hints": [
+          "参考知识库文档 ELE-34"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-35",
+        "difficulty": 4,
+        "description": "在弹窗中添加 Elementor Form widget 收集询盘信息",
+        "hints": [
+          "参考知识库文档 ELE-35"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-36",
+        "difficulty": 3,
+        "description": "用 Theme Builder 创建自定义 Header 模板：Logo + Nav Menu + 搜索图标",
+        "hints": [
+          "参考知识库文档 ELE-36"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-37",
+        "difficulty": 3,
+        "description": "用 Theme Builder 创建自定义 Footer 模板：公司信息 + 链接列表 + 版权声明",
+        "hints": [
+          "参考知识库文档 ELE-37"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-38",
+        "difficulty": 3,
+        "description": "用 Theme Builder 创建 Single Post 模板：Post Title + Featured Image + Post Content + Author Box",
+        "hints": [
+          "参考知识库文档 ELE-38"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-39",
+        "difficulty": 4,
+        "description": "用 Theme Builder 创建 Archive 模板：归档标题 + Posts Widget 列表 + 分页",
+        "hints": [
+          "参考知识库文档 ELE-39"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-40",
+        "difficulty": 4,
+        "description": "为 Header 模板设置 Display Conditions：所有页面显示，但排除 Landing Page",
+        "hints": [
+          "参考知识库文档 ELE-40"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-41",
+        "difficulty": 3,
+        "description": "用 Theme Builder 创建搜索结果页模板",
+        "hints": [
+          "参考知识库文档 ELE-41"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-42",
+        "difficulty": 3,
+        "description": "用 Theme Builder 创建 404 错误页面：包含提示文字和返回首页按钮",
+        "hints": [
+          "参考知识库文档 ELE-42"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-43",
+        "difficulty": 3,
+        "description": "在 Heading widget 中使用 Dynamic Tag 显示站点标题，在 Image widget 中使用 Dynamic Tag 显示文章特色图",
+        "hints": [
+          "参考知识库文档 ELE-43"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-44",
+        "difficulty": 4,
+        "description": "将 ACF 自定义字段通过 Dynamic Tags 在 Elementor 模板中显示",
+        "hints": [
+          "参考知识库文档 ELE-44"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-45",
+        "difficulty": 4,
+        "description": "添加 Posts Widget 展示最新文章，配置筛选条件和分页",
+        "hints": [
+          "参考知识库文档 ELE-45"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-46",
+        "difficulty": 4,
+        "description": "添加 Portfolio Widget 展示作品集，配置悬停效果和筛选标签",
+        "hints": [
+          "参考知识库文档 ELE-46"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-47",
+        "difficulty": 3,
+        "description": "用 Theme Builder 创建 WooCommerce Single Product 模板",
+        "hints": [
+          "参考知识库文档 ELE-47"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-48",
+        "difficulty": 4,
+        "description": "用 Theme Builder 创建 Products Archive 模板：商品网格 + 筛选",
+        "hints": [
+          "参考知识库文档 ELE-48"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-49",
+        "difficulty": 3,
+        "description": "创建一个 Landing Page：Canvas 模板 + Hero + 卖点 + CTA + 表单",
+        "hints": [
+          "参考知识库文档 ELE-49"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-50",
+        "difficulty": 4,
+        "description": "学习 CTA 位置、对比测试思路。验证：将站点标题改为「CTA优化策略已掌握」",
+        "hints": [
+          "参考知识库文档 ELE-50"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "CTA优化策略已掌握"
+          }
+        ]
+      },
+      {
+        "id": "ELE-51",
+        "difficulty": 2,
+        "description": "将当前页面保存为 Elementor 模板，然后在另一个页面导入该模板",
+        "hints": [
+          "参考知识库文档 ELE-51"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-52",
+        "difficulty": 3,
+        "description": "将模板上传到 Elementor Cloud Library 实现跨站点复用",
+        "hints": [
+          "参考知识库文档 ELE-52"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-53",
+        "difficulty": 3,
+        "description": "创建可复用区块（Global Widget），修改后所有引用位置同步更新",
+        "hints": [
+          "参考知识库文档 ELE-53"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-54",
+        "difficulty": 2,
+        "description": "使用 Elementor AI 功能为 Heading 或 Text widget 生成营销文案",
+        "hints": [
+          "参考知识库文档 ELE-54"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-55",
+        "difficulty": 3,
+        "description": "使用 Elementor AI 生成或编辑图片并应用到页面",
+        "hints": [
+          "参考知识库文档 ELE-55"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ELE-56",
+        "difficulty": 4,
+        "description": "使用 Elementor AI 生成自定义 CSS 样式代码",
+        "hints": [
+          "参考知识库文档 ELE-56"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_elementor_data' AND meta_value != ''\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ]
       }
     ]
   }

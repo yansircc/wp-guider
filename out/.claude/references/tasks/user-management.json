@@ -97,6 +97,40 @@
           "用户 → 用户列表 → 删除 author1 → 选择「将所有内容归属到」→ 选 admin"
         ],
         "on_pass_note": "删除用户时 WordPress 提供两个选择：删除该用户的所有内容，或把内容归属给其他用户。在生产环境中，几乎总是选择归属——防止内容丢失。数据库层面是修改 wp_posts.post_author 字段。"
+      },
+      {
+        "id": "UM-7",
+        "difficulty": 3,
+        "description": "为管理员账号生成 Application Password（应用程序密码），用于 REST API 认证",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->usermeta WHERE meta_key = '_application_passwords'\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "用户 → 个人资料 → 应用程序密码",
+          "填写名称后点击「添加新的应用程序密码」"
+        ],
+        "on_pass_note": "Application Password 是 WordPress 5.6+ 的内置功能，用于外部应用通过 REST API 操作站点。密码只显示一次，保存好。"
+      },
+      {
+        "id": "UM-8",
+        "difficulty": 2,
+        "description": "安装 DoLogin Security 插件，为某个用户生成免密登录链接",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'dologin') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "搜索插件 DoLogin Security",
+          "用户列表 → DoLogin 链接按钮"
+        ],
+        "on_pass_note": "DoLogin 生成一次性或限时登录链接，常用于：给客户临时登录、调试时快速切换用户。注意安全风险——链接泄露等于账号泄露。"
       }
     ]
   }

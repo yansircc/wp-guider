@@ -520,6 +520,74 @@
           "重要：先填标签，然后手动清空字段名称栏位，再输入英文名"
         ],
         "on_pass_note": "Relationship 字段存储关联 post ID 的数组。常见用途：相关产品推荐、项目-团队成员关联、文章-产品关联。ACF 的 Relationship vs Post Object：Relationship 可选多个（返回数组），Post Object 只选一个（返回单个 post）。"
+      },
+      {
+        "id": "ACF-25",
+        "difficulty": 2,
+        "description": "将当前所有 ACF 字段组导出为 JSON 文件（ACF → 工具 → 导出）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo (function_exists('acf_get_field_groups') && count(acf_get_field_groups()) > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "ACF → 工具 → 导出字段组",
+          "选择所有字段组，点击导出"
+        ],
+        "on_pass_note": "ACF JSON 导出常用于团队协作（Git 同步）和站点迁移。导出的 JSON 只包含字段定义，不包含数据。"
+      },
+      {
+        "id": "ACF-26",
+        "difficulty": 2,
+        "description": "将之前导出的 ACF JSON 文件重新导入（ACF → 工具 → 导入），确认字段组恢复",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$groups = acf_get_field_groups(); echo count($groups) >= 1 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "ACF → 工具 → 导入字段组",
+          "选择 JSON 文件上传"
+        ],
+        "on_pass_note": "导入时如果字段组 key 相同会覆盖。团队协作建议将 acf-json 文件夹纳入 Git。"
+      },
+      {
+        "id": "ACF-27",
+        "difficulty": 2,
+        "description": "访问 acf-playground.vercel.app，用可视化界面拖拽创建一个包含 3 个字段的字段组，导出 JSON 并导入到 WordPress",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$groups = acf_get_field_groups(); echo count($groups) >= 2 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "打开 acf-playground.vercel.app",
+          "拖拽添加字段后点击 Export JSON"
+        ],
+        "on_pass_note": "ACF Playground 是第三方可视化工具，适合快速原型设计。生成的 JSON 导入后仍需在后台验证字段设置。"
+      },
+      {
+        "id": "ACF-28",
+        "difficulty": 2,
+        "description": "访问 acf-helper.vercel.app，用自然语言描述需求生成 ACF JSON（如'产品类型需要价格、图片、描述三个字段'），导入到 WordPress",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$groups = acf_get_field_groups(); echo count($groups) >= 3 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "打开 acf-helper.vercel.app",
+          "用中文描述你的字段需求"
+        ],
+        "on_pass_note": "AI 辅助工具可以加速 ACF 配置，但生成的 JSON 不一定 100% 符合需求，导入后务必逐个检查。"
       }
     ]
   }

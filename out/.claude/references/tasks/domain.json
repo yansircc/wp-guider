@@ -1,0 +1,108 @@
+{
+  "domain": {
+    "name": "域名管理",
+    "tasks": [
+      {
+        "id": "DOM-1",
+        "difficulty": 1,
+        "description": "在 Namesilo 注册一个域名（或模拟注册流程），记录域名和到期时间。验证：在站点后台将 blogdescription 改为你注册的域名",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$d = get_option('blogdescription'); echo (strpos($d, '.') !== false && strlen($d) > 3) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "Namesilo 是便宜的域名注册商",
+          "把域名写到站点副标题作为验证"
+        ],
+        "on_pass_note": "Namesilo 优势：价格透明无隐藏费用、免费隐私保护。注册后第一步是修改 NS 到你的主机商。"
+      },
+      {
+        "id": "DOM-2",
+        "difficulty": 1,
+        "description": "在阿里云注册域名的流程学习：搜索域名 → 加入购物车 → 实名认证。验证：将站点标题改为「阿里云域名实操完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "阿里云域名实操完成"
+          }
+        ],
+        "hints": [
+          "阿里云域名需要实名认证",
+          "国内域名适合面向国内用户的站点"
+        ],
+        "on_pass_note": "阿里云域名需要实名认证（3-5 工作日），且 .cn 域名需要备案才能解析到国内服务器。外贸站建议用 Namesilo/Cloudflare。"
+      },
+      {
+        "id": "DOM-3",
+        "difficulty": 1,
+        "description": "在 Cloudflare 注册域名的流程学习。验证：将站点标题改为「Cloudflare域名实操完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "Cloudflare域名实操完成"
+          }
+        ],
+        "hints": [
+          "Cloudflare 注册域名按成本价，零加价"
+        ],
+        "on_pass_note": "Cloudflare 域名最大优势：自动获得 CDN + DDoS 防护 + DNS 管理。缺点是不支持所有后缀。"
+      },
+      {
+        "id": "DOM-4",
+        "difficulty": 2,
+        "description": "学习 DNS A 记录解析原理：A 记录将域名指向 IP 地址。验证：将站点标题改为「DNS-A记录-指向IP」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "DNS-A记录-指向IP"
+          }
+        ],
+        "hints": [
+          "A 记录：域名 → IP 地址",
+          "TTL 建议设置为 600 秒（10 分钟）"
+        ],
+        "on_pass_note": "A 记录是最基础的 DNS 记录。@ 代表根域名，www 是子域名。修改 A 记录后需等待 TTL 过期生效。"
+      },
+      {
+        "id": "DOM-5",
+        "difficulty": 2,
+        "description": "学习 DNS CNAME 记录：CNAME 将一个域名指向另一个域名。验证：将站点标题改为「CNAME-别名记录」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "CNAME-别名记录"
+          }
+        ],
+        "hints": [
+          "CNAME：域名 → 另一个域名",
+          "常用于 www 指向根域名"
+        ],
+        "on_pass_note": "CNAME 不能和其他记录共存于同一主机名（RFC 限制）。Cloudflare 用 CNAME Flattening 解决了根域名的限制。"
+      },
+      {
+        "id": "DOM-6",
+        "difficulty": 2,
+        "description": "学习修改 NS（Name Server）到 Hostinger 的流程。验证：将站点标题改为「NS已切换到Hostinger」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "NS已切换到Hostinger"
+          }
+        ],
+        "hints": [
+          "在域名注册商处修改 NS",
+          "Hostinger NS: ns1.dns-parking.com, ns2.dns-parking.com"
+        ],
+        "on_pass_note": "修改 NS 后 DNS 由 Hostinger 管理。生效时间 24-48 小时。切换前确保在 Hostinger 已添加域名。"
+      }
+    ]
+  }
+}

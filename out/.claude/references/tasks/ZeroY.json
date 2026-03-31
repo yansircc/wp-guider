@@ -256,6 +256,390 @@
           "确保已安装 SMTP 插件"
         ],
         "on_pass_note": "表单提交完整链路：用户填写 → 提交 → 数据保存 → 邮件通知管理员 → 跳转 Thank You。每个环节都要验证。"
+      },
+      {
+        "id": "ZY-16",
+        "difficulty": 3,
+        "description": "用 ZeroY 创建 404 错误页面模板",
+        "hints": [
+          "参考知识库文档 ZY-16"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-17",
+        "difficulty": 3,
+        "description": "用 ZeroY 创建搜索结果页模板",
+        "hints": [
+          "参考知识库文档 ZY-17"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-18",
+        "difficulty": 4,
+        "description": "用 ZeroY 创建文章归档页模板，展示分类下的文章列表",
+        "hints": [
+          "参考知识库文档 ZY-18"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-19",
+        "difficulty": 4,
+        "description": "用 ZeroY 创建单篇文章模板：标题 + 特色图 + 内容 + 作者信息",
+        "hints": [
+          "参考知识库文档 ZY-19"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-20",
+        "difficulty": 2,
+        "description": "进入 ZeroY → 表单提交，查看所有收到的询盘记录",
+        "hints": [
+          "参考知识库文档 ZY-20"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-21",
+        "difficulty": 2,
+        "description": "设置表单提交后跳转到 Thank You 感谢页面",
+        "hints": [
+          "参考知识库文档 ZY-21"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-22",
+        "difficulty": 3,
+        "description": "启用 wp_mail 邮件通知，设置收件人和邮件标题模板",
+        "hints": [
+          "参考知识库文档 ZY-22"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-23",
+        "difficulty": 3,
+        "description": "安装 WP Mail SMTP 插件解决邮件不稳定问题",
+        "hints": [
+          "参考知识库文档 ZY-23"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'smtp') !== false || strpos($p, 'mail') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-24",
+        "difficulty": 3,
+        "description": "用 ZeroY 创建弹窗，设置触发条件（滚动/延时）",
+        "hints": [
+          "参考知识库文档 ZY-24"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-25",
+        "difficulty": 3,
+        "description": "在 Thank You 页面埋入 Google Ads 转化追踪代码",
+        "hints": [
+          "参考知识库文档 ZY-25"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-26",
+        "difficulty": 3,
+        "description": "通过 SEOPress/Yoast 配置 Google Analytics 和 Ads 全局代码",
+        "hints": [
+          "参考知识库文档 ZY-26"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-27",
+        "difficulty": 3,
+        "description": "用 ZeroY HTMX 实现文章列表的「加载更多」功能",
+        "hints": [
+          "参考知识库文档 ZY-27"
+        ],
+        "on_pass_note": "HTMX 功能需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-28",
+        "difficulty": 4,
+        "description": "用 HTMX 实现搜索框实时搜索（keyup + 延迟请求）",
+        "hints": [
+          "参考知识库文档 ZY-28"
+        ],
+        "on_pass_note": "HTMX 功能需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-29",
+        "difficulty": 4,
+        "description": "用 HTMX 实现按 ACF 分类法和字段值多条件筛选",
+        "hints": [
+          "参考知识库文档 ZY-29"
+        ],
+        "on_pass_note": "HTMX 功能需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-30",
+        "difficulty": 4,
+        "description": "用 HTMX 实现无刷新分页功能",
+        "hints": [
+          "参考知识库文档 ZY-30"
+        ],
+        "on_pass_note": "HTMX 功能需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-31",
+        "difficulty": 4,
+        "description": "用 HTMX 实现滚动到底部自动加载更多",
+        "hints": [
+          "参考知识库文档 ZY-31"
+        ],
+        "on_pass_note": "HTMX 功能需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-32",
+        "difficulty": 3,
+        "description": "用 ZeroY 的 Swiper 组件创建自动播放轮播，配置导航箭头和分页点",
+        "hints": [
+          "参考知识库文档 ZY-32"
+        ],
+        "on_pass_note": "Swiper 轮播需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-33",
+        "difficulty": 3,
+        "description": "实现主图 + 缩略图联动的产品画廊效果",
+        "hints": [
+          "参考知识库文档 ZY-33"
+        ],
+        "on_pass_note": "Swiper 轮播需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-34",
+        "difficulty": 4,
+        "description": "实现响应式多卡片轮播（桌面 4 张、平板 2 张、手机 1 张）",
+        "hints": [
+          "参考知识库文档 ZY-34"
+        ],
+        "on_pass_note": "Swiper 轮播需要在 ZeroY 可视化编辑器中配置，wp-cli 无法直接验证。请教练演示操作过程。",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-35",
+        "difficulty": 2,
+        "description": "清除 Hostinger 的页面缓存、CDN 缓存和对象缓存",
+        "hints": [
+          "参考知识库文档 ZY-35"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-36",
+        "difficulty": 2,
+        "description": "学习 ZeroY 的 CSS 压缩设置：何时开启、何时关闭",
+        "hints": [
+          "参考知识库文档 ZY-36"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-37",
+        "difficulty": 2,
+        "description": "了解站点语言设置如何影响 AI 生成内容的语言",
+        "hints": [
+          "参考知识库文档 ZY-37"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-38",
+        "difficulty": 3,
+        "description": "排查表单提交后不跳转/不发邮件的问题（固定链接+SMTP+路径）",
+        "hints": [
+          "参考知识库文档 ZY-38"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
+      },
+      {
+        "id": "ZY-39",
+        "difficulty": 3,
+        "description": "排查 ZeroY AI 生成报错（400/401/403 状态码诊断）",
+        "hints": [
+          "参考知识库文档 ZY-39"
+        ],
+        "on_pass_note": "",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "echo 'yes';",
+            "expected_output": "yes"
+          }
+        ]
       }
     ]
   }

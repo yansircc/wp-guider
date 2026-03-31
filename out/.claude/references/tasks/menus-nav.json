@@ -89,6 +89,23 @@
           "外观 → 菜单 → 创建新菜单 → 菜单名「底部链接」→ 添加页面 → 保存"
         ],
         "on_pass_note": "一个站点可以有多个菜单。主题通过 register_nav_menus() 定义菜单位置（如 primary、footer），每个位置可以指定不同的菜单。header 和 footer 用不同菜单是常见模式。"
+      },
+      {
+        "id": "MN-5",
+        "difficulty": 2,
+        "description": "将菜单分配到主题的主要菜单位置（Primary 或 Main Menu），确认前台导航显示正确",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$locations = get_nav_menu_locations(); echo (count($locations) > 0 && array_filter($locations)) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "外观 → 菜单 → 管理位置",
+          "或在菜单编辑页面底部勾选显示位置"
+        ],
+        "on_pass_note": "菜单位置由主题定义（register_nav_menus）。一个位置只能放一个菜单，但一个菜单可以放在多个位置。"
       }
     ]
   }

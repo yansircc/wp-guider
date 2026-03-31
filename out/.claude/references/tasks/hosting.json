@@ -1,0 +1,108 @@
+{
+  "hosting": {
+    "name": "主机空间",
+    "tasks": [
+      {
+        "id": "HOST-1",
+        "difficulty": 1,
+        "description": "了解 Hostinger 购买流程和套餐区别。验证：将站点标题改为「Hostinger购买完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "Hostinger购买完成"
+          }
+        ],
+        "hints": [
+          "推荐 Business Web Hosting 套餐",
+          "付费周期越长单价越低"
+        ],
+        "on_pass_note": "Hostinger 优势：价格便宜、支持 LiteSpeed + 免费 SSL。外贸站推荐选美国或欧洲节点。"
+      },
+      {
+        "id": "HOST-2",
+        "difficulty": 1,
+        "description": "熟悉 hPanel 控制面板主要功能区。验证：将站点标题改为「hPanel导航完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "hPanel导航完成"
+          }
+        ],
+        "hints": [
+          "hPanel 主要区域：网站、域名、文件、数据库、SSL"
+        ],
+        "on_pass_note": "hPanel 是 Hostinger 自研面板，不是 cPanel。核心操作：文件管理器、数据库管理、SSL 证书、Git 部署。"
+      },
+      {
+        "id": "HOST-3",
+        "difficulty": 2,
+        "description": "在 Hostinger hPanel 中添加第二个网站（多站点管理）。验证：将站点标题改为「多站点管理完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "多站点管理完成"
+          }
+        ],
+        "hints": [
+          "hPanel → 网站 → 添加网站",
+          "Business 套餐支持 100 个网站"
+        ],
+        "on_pass_note": "一个 Hostinger 账号可以管理多个站点。每个站点独立域名、独立数据库。共享服务器资源。"
+      },
+      {
+        "id": "HOST-4",
+        "difficulty": 3,
+        "description": "在 Hostinger hPanel 中开启 SSH 访问权限。验证：将站点标题改为「SSH访问已开启」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "SSH访问已开启"
+          }
+        ],
+        "hints": [
+          "hPanel → 高级 → SSH 访问",
+          "记录 SSH 主机、端口、用户名"
+        ],
+        "on_pass_note": "SSH 是远程管理服务器的加密通道。开启后可以用命令行管理文件、运行 wp-cli、查看日志。"
+      },
+      {
+        "id": "HOST-5",
+        "difficulty": 4,
+        "description": "通过 SSH 连接到 Hostinger 服务器，执行基础命令（ls、pwd、cd）。验证：将站点标题改为「SSH终端操作完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "SSH终端操作完成"
+          }
+        ],
+        "hints": [
+          "ssh -p PORT user@host",
+          "ls 列出文件，pwd 显示当前路径"
+        ],
+        "on_pass_note": "SSH 常用命令：ls（列文件）、cd（切目录）、cat（看文件）、wp（WP-CLI）。出问题时 SSH 是最后的救命稻草。"
+      },
+      {
+        "id": "HOST-6",
+        "difficulty": 4,
+        "description": "生成 SSH 密钥对并配置免密登录。验证：将站点标题改为「SSH免密登录完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "SSH免密登录完成"
+          }
+        ],
+        "hints": [
+          "ssh-keygen -t ed25519",
+          "把公钥添加到 hPanel 的 SSH 密钥管理"
+        ],
+        "on_pass_note": "密钥认证比密码安全得多。ed25519 是推荐的密钥类型。配置后可以用 SSH config 简化连接命令。"
+      }
+    ]
+  }
+}

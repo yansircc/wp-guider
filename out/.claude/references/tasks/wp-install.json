@@ -1,0 +1,141 @@
+{
+  "wp-install": {
+    "name": "WordPress 安装",
+    "tasks": [
+      {
+        "id": "INST-1",
+        "difficulty": 1,
+        "description": "学习 Hostinger 一键安装 WordPress 的流程。验证：将站点标题改为「一键安装WP完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "一键安装WP完成"
+          }
+        ],
+        "hints": [
+          "hPanel → 网站 → 自动安装器 → WordPress"
+        ],
+        "on_pass_note": "一键安装会自动创建数据库、下载 WordPress、运行安装向导。适合快速部署，但了解手动安装有助于排障。"
+      },
+      {
+        "id": "INST-2",
+        "difficulty": 2,
+        "description": "学习手动安装 WordPress 的步骤（下载、解压、配置 wp-config、运行安装向导）。验证：将站点标题改为「手动安装WP完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "手动安装WP完成"
+          }
+        ],
+        "hints": [
+          "wordpress.org/download 下载最新版",
+          "复制 wp-config-sample.php 为 wp-config.php"
+        ],
+        "on_pass_note": "手动安装的核心：① 数据库信息正确 ② 文件权限正确 ③ wp-config.php 配置正确。掌握后能解决 90% 的安装问题。"
+      },
+      {
+        "id": "INST-3",
+        "difficulty": 2,
+        "description": "学习通过 NS 方式绑定域名到 Hostinger。验证：将站点标题改为「NS绑定域名完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "NS绑定域名完成"
+          }
+        ],
+        "hints": [
+          "在域名注册商处修改 NS 为 Hostinger 的 NS",
+          "Hostinger hPanel → 域名 → 添加域名"
+        ],
+        "on_pass_note": "NS 方式把整个 DNS 管理权交给 Hostinger。优点是简单统一管理；缺点是 DNS 功能受限于 Hostinger。"
+      },
+      {
+        "id": "INST-4",
+        "difficulty": 2,
+        "description": "学习通过 A 记录方式绑定域名到 Hostinger。验证：将站点标题改为「A记录绑定域名完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "A记录绑定域名完成"
+          }
+        ],
+        "hints": [
+          "保持 NS 在原注册商",
+          "添加 A 记录指向 Hostinger 服务器 IP"
+        ],
+        "on_pass_note": "A 记录方式只把网站流量指向 Hostinger，DNS 管理权留在原注册商。适合同时使用 Cloudflare CDN 的场景。"
+      },
+      {
+        "id": "INST-5",
+        "difficulty": 2,
+        "description": "学习在 Hostinger 中配置 SSL 证书（免费 Let's Encrypt）。验证：将站点标题改为「SSL证书已配置」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "SSL证书已配置"
+          }
+        ],
+        "hints": [
+          "hPanel → SSL → 安装 SSL",
+          "强制 HTTPS 跳转"
+        ],
+        "on_pass_note": "SSL 是现代网站标配（SEO 加分、浏览器不报警）。Let's Encrypt 免费且自动续期。安装后记得设置 HTTP→HTTPS 跳转。"
+      },
+      {
+        "id": "INST-6",
+        "difficulty": 4,
+        "description": "使用 All-in-One WP Migration 插件导出和导入站点（插件方式迁移）。验证：确认插件已安装激活",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$plugins = get_option('active_plugins'); foreach($plugins as $p) { if(strpos($p, 'all-in-one') !== false) { echo 'yes'; exit; } } echo 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "安装 All-in-One WP Migration 插件",
+          "导出：工具 → 导出 → 导出到文件"
+        ],
+        "on_pass_note": "AIO Migration 是最简单的迁移方式。免费版限制 512MB，大站需要付费版或用手动迁移。导入前务必备份目标站点。"
+      },
+      {
+        "id": "INST-7",
+        "difficulty": 4,
+        "description": "学习手动迁移：导出数据库 + 复制文件 + 修改 wp-config。验证：将站点标题改为「手动迁移流程完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "手动迁移流程完成"
+          }
+        ],
+        "hints": [
+          "步骤：导出 SQL → 打包文件 → 上传目标服务器 → 导入 SQL → 改 wp-config → search-replace 域名"
+        ],
+        "on_pass_note": "手动迁移是最可靠的方式。核心命令：mysqldump（导出）、mysql（导入）、wp search-replace（替换域名）。插件搞不定时这是最后手段。"
+      },
+      {
+        "id": "INST-8",
+        "difficulty": 4,
+        "description": "学习已有站点更换域名的完整流程。验证：将站点标题改为「域名更换流程完成」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "域名更换流程完成"
+          }
+        ],
+        "hints": [
+          "修改 siteurl + home",
+          "wp search-replace 'old.com' 'new.com' --dry-run 先预览"
+        ],
+        "on_pass_note": "换域名清单：① 备份 ② 改 DNS ③ 改 siteurl/home ④ search-replace 全库 ⑤ 更新 GSC ⑥ 提交 301 跳转 ⑦ 更新 GA。漏任何一步都会出问题。"
+      }
+    ]
+  }
+}

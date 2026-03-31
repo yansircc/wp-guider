@@ -164,6 +164,23 @@
           "工具 → Cron Events 查看所有事件"
         ],
         "on_pass_note": "WP Crontrol 把 wp-cron 的内部状态可视化。排障时非常有用：如果备份没按时执行，先检查 cron 事件是否存在、是否被阻塞。"
+      },
+      {
+        "id": "BM-11",
+        "difficulty": 4,
+        "description": "在 wp-config.php 中设置 DISABLE_WP_CRON 为 true 禁用内置 wp-cron，然后通过系统 crontab 添加替代计划任务：每 15 分钟执行一次 wp cron event run --due-now",
+        "verify": [
+          {
+            "type": "config_equals",
+            "key": "DISABLE_WP_CRON",
+            "expected": "1"
+          }
+        ],
+        "hints": [
+          "在 wp-config.php 中 define('DISABLE_WP_CRON', true);",
+          "用 crontab -e 添加系统级定时任务"
+        ],
+        "on_pass_note": "wp-cron 依赖页面访问触发，流量低的站点定时任务不准。系统 cron 是可靠替代方案，外贸站必做。"
       }
     ]
   }

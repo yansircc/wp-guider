@@ -112,6 +112,107 @@
           "设置 → 阅读 → 最底部「对搜索引擎的可见性」→ 确保未勾选"
         ],
         "on_pass_note": "blog_public = 1 表示允许搜索引擎索引。开发阶段可以先关闭（设为 0），上线后务必打开。忘记打开这个选项是外贸站最常见的 SEO 事故之一——网站做好了但 Google 搜不到。WordPress 在 robots.txt 中通过 Disallow 实现此功能。"
+      },
+      {
+        "id": "SEO-7",
+        "difficulty": 2,
+        "description": "安装 SEOPress 插件，在任意页面设置 SEO 标题和描述",
+        "verify": [
+          {
+            "type": "plugin_active",
+            "plugin": "wp-seopress"
+          }
+        ],
+        "hints": [
+          "插件 → 添加新插件 → 搜索 SEOPress",
+          "编辑页面 → SEOPress 面板"
+        ],
+        "on_pass_note": "SEOPress 是 Yoast 的替代品，界面更简洁。两者功能类似，选一个用即可。同时安装会冲突。"
+      },
+      {
+        "id": "SEO-8",
+        "difficulty": 3,
+        "description": "在 SEOPress 中配置 Google Analytics 追踪代码（填入 GA4 的 Measurement ID）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$opts = get_option('seopress_google_analytics_option_name'); echo (!empty($opts) && is_array($opts)) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "SEOPress → Google Analytics",
+          "填入 G-XXXXXXXXXX 格式的 Measurement ID"
+        ],
+        "on_pass_note": "通过 SEO 插件管理追踪代码的优势：不怕主题更新覆盖、可以在一个地方管理所有代码片段。"
+      },
+      {
+        "id": "SEO-9",
+        "difficulty": 3,
+        "description": "在 SEOPress 中为指定页面设置 noindex 和 nofollow（如 Thank You 页面不需要被搜索引擎收录）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "global $wpdb; $r = $wpdb->get_var(\"SELECT COUNT(*) FROM $wpdb->postmeta WHERE meta_key = '_seopress_robots_index' AND meta_value = 'yes'\"); echo ($r > 0) ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "编辑页面 → SEOPress → Advanced → Robots",
+          "noindex = 不索引，nofollow = 不追踪链接"
+        ],
+        "on_pass_note": "noindex 适用于：Thank You 页、登录页、测试页。不要给重要页面加 noindex，否则 Google 不收录。"
+      },
+      {
+        "id": "SEO-10",
+        "difficulty": 3,
+        "description": "为 ACF 自定义文章类型配置统一的 SEO 标题模板（如「%%title%% | 产品 | 站点名」）",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$cpts = get_post_types(['public' => true, '_builtin' => false]); echo count($cpts) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "Yoast → 搜索外观 → 内容类型 → 自定义文章类型",
+          "SEOPress → 标题与元描述 → 文章类型"
+        ],
+        "on_pass_note": "CPT 的 SEO 标题模板确保所有同类页面有一致的格式。变量如 %%title%%、%%sitename%%、%%sep%% 会自动替换。"
+      },
+      {
+        "id": "SEO-11",
+        "difficulty": 3,
+        "description": "为 ACF 分类法（Taxonomy）配置 SEO 标题和描述模板",
+        "verify": [
+          {
+            "type": "wp_eval",
+            "php_code": "$taxs = get_taxonomies(['public' => true, '_builtin' => false]); echo count($taxs) > 0 ? 'yes' : 'no';",
+            "expected_output": "yes"
+          }
+        ],
+        "hints": [
+          "Yoast → 搜索外观 → 分类法",
+          "SEOPress → 标题与元描述 → 分类法"
+        ],
+        "on_pass_note": "分类法归档页的 SEO 常被忽略。好的分类页标题模板能带来长尾流量，如「产品分类: %%term_title%% | 站名」。"
+      },
+      {
+        "id": "SEO-12",
+        "difficulty": 4,
+        "description": "制定 CPT 单篇和归档页的 index/noindex 策略：单篇页面 index，归档页根据内容量决定。验证：将站点标题改为「CPT-SEO策略已制定」",
+        "verify": [
+          {
+            "type": "option_equals",
+            "key": "blogname",
+            "expected": "CPT-SEO策略已制定"
+          }
+        ],
+        "hints": [
+          "内容丰富的归档页 → index",
+          "薄内容的归档页 → noindex 避免被认为低质量"
+        ],
+        "on_pass_note": "SEO 策略核心：让 Google 只索引有价值的页面。CPT 归档页如果只有标题列表，noindex 更好。加了描述和内容的归档页可以 index。"
       }
     ]
   }
