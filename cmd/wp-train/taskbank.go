@@ -18,6 +18,7 @@ type TopicEntry struct {
 
 type Task struct {
 	ID          string           `json:"id"`
+	SiteProfile string           `json:"site_profile,omitempty"`
 	Difficulty  int              `json:"difficulty"`
 	Description string           `json:"description"`
 	Verify      []map[string]any `json:"verify"`
@@ -64,12 +65,40 @@ func loadTaskBank() TaskBank {
 	return bank
 }
 
-// sortedKeys returns sorted topic keys.
+// topicOrder defines the canonical curriculum progression.
+// Topics not in this list fall to the end in alphabetical order.
+var topicOrder = []string{
+	// 基础设施
+	"domain", "hosting", "wp-install",
+	// 站点设置
+	"site-settings", "user-management",
+	// 内容管理
+	"pages", "media", "menus-nav", "posts-taxonomy",
+	// 外观定制 — theme 先，再 elementor，最后 zeroy
+	"theme", "elementor", "zeroy",
+	// 插件与扩展
+	"plugins-basic", "acf", "seo", "google-analytics",
+	// 运维与安全
+	"wp-config", "security", "backup-maintenance", "troubleshooting",
+}
+
+// sortedKeys returns topic keys in curriculum order.
 func sortedKeys(bank TaskBank) []string {
-	keys := make([]string, 0, len(bank))
-	for k := range bank {
-		keys = append(keys, k)
+	ordered := make([]string, 0, len(bank))
+	seen := make(map[string]bool)
+	for _, k := range topicOrder {
+		if _, ok := bank[k]; ok {
+			ordered = append(ordered, k)
+			seen[k] = true
+		}
 	}
-	sort.Strings(keys)
-	return keys
+	// Append any remaining keys alphabetically
+	var rest []string
+	for k := range bank {
+		if !seen[k] {
+			rest = append(rest, k)
+		}
+	}
+	sort.Strings(rest)
+	return append(ordered, rest...)
 }
