@@ -11,9 +11,12 @@ import (
 
 func cmdCheckpoint(args []string) {
 	if len(args) < 1 {
-		jprintln(map[string]any{"status": "error", "message": "usage: wp-train checkpoint <save|restore|list> [name]"})
+		jprintln(map[string]any{"status": "error", "message": "usage: wp-train checkpoint <save|restore|restore-last|list> [name]"})
 		return
 	}
+
+	// Always operate on the current task's site
+	switchToCurrentTaskSite()
 
 	action := args[0]
 	name := "default"
@@ -28,15 +31,18 @@ func cmdCheckpoint(args []string) {
 	case "restore":
 		doCheckpointRestore(name)
 		jprintln(map[string]any{"status": "ok", "action": "restore", "name": name})
+	case "restore-last":
+		doCheckpointRestoreLast()
 	case "list":
 		doCheckpointList()
 	default:
-		jprintln(map[string]any{"status": "error", "message": "unknown action: " + action + " (save|restore|list)"})
+		jprintln(map[string]any{"status": "error", "message": "unknown action: " + action + " (save|restore|restore-last|list)"})
 	}
 }
 
 func checkpointDir() string {
-	d := filepath.Join(trainingDir, "checkpoints")
+	profile := profileForPort(sitePort)
+	d := filepath.Join(trainingDir, "checkpoints", profile)
 	os.MkdirAll(d, 0755)
 	return d
 }
@@ -125,32 +131,46 @@ func doCheckpointRestore(name string) {
 	log("Checkpoint '" + name + "' restored")
 }
 
-func doCheckpointList() {
-	dir := checkpointDir()
-	entries, err := os.ReadDir(dir)
-	if err != nil {
-		jprintln(map[string]any{"status": "ok", "checkpoints": []string{}})
+func doCheckpointRestoreLast() {
+	dir := filepath.Join(checkpointDir(), "latest")
+	if !fileExists(dir) {
+		jprintln(map[string]any{"status": "error", "message": "no checkpoint found for profile: " + profileForPort(sitePort) + " — complete at least one task first"})
 		return
 	}
+	doCheckpointRestore("latest")
+	jprintln(map[string]any{"status": "ok", "action": "restore-last", "profile": profileForPort(sitePort)})
+}
 
-	var checkpoints []map[string]any
-	for _, e := range entries {
-		if !e.IsDir() {
+func doCheckpointList() {
+	baseDir := filepath.Join(trainingDir, "checkpoints")
+	profiles := []string{"main", "elementor", "zeroy"}
+
+	allCheckpoints := map[string][]map[string]any{}
+	for _, profile := range profiles {
+		dir := filepath.Join(baseDir, profile)
+		entries, err := os.ReadDir(dir)
+		if err != nil {
 			continue
 		}
-		info, _ := e.Info()
-		cp := map[string]any{
-			"name": e.Name(),
+		var cps []map[string]any
+		for _, e := range entries {
+			if !e.IsDir() {
+				continue
+			}
+			info, _ := e.Info()
+			cp := map[string]any{"name": e.Name()}
+			if info != nil {
+				cp["created_at"] = info.ModTime().Format("2006-01-02 15:04:05")
+			}
+			cpDir := filepath.Join(dir, e.Name())
+			cp["has_db"] = fileExists(filepath.Join(cpDir, "db.sqlite")) || fileExists(filepath.Join(cpDir, "db.sql"))
+			cp["has_config"] = fileExists(filepath.Join(cpDir, "wp-config.php"))
+			cps = append(cps, cp)
 		}
-		if info != nil {
-			cp["created_at"] = info.ModTime().Format("2006-01-02 15:04:05")
+		if len(cps) > 0 {
+			allCheckpoints[profile] = cps
 		}
-		// Check what's in the checkpoint
-		cpDir := filepath.Join(dir, e.Name())
-		cp["has_db"] = fileExists(filepath.Join(cpDir, "db.sql"))
-		cp["has_config"] = fileExists(filepath.Join(cpDir, "wp-config.php"))
-		checkpoints = append(checkpoints, cp)
 	}
 
-	jprintln(map[string]any{"status": "ok", "checkpoints": checkpoints})
+	jprintln(map[string]any{"status": "ok", "checkpoints": allCheckpoints})
 }
