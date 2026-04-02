@@ -57,13 +57,14 @@ func TestLoadTaskBank(t *testing.T) {
 
 func TestSortedKeys(t *testing.T) {
 	bank := TaskBank{
-		"pages":         {Name: "b"},
-		"site-settings": {Name: "a"},
+		"pages":           {Name: "b"},
+		"site-settings":   {Name: "a"},
 		"user-management": {Name: "c"},
-		"media":         {Name: "d"},
+		"media":           {Name: "d"},
 	}
 	keys := sortedKeys(bank)
-	expected := []string{"media", "pages", "site-settings", "user-management"}
+	// Expected order matches topicOrder: site-settings, user-management, pages, media
+	expected := []string{"site-settings", "user-management", "pages", "media"}
 	for i, k := range keys {
 		if k != expected[i] {
 			t.Errorf("position %d: expected %q, got %q", i, expected[i], k)
@@ -220,17 +221,10 @@ func TestSelectNextTask(t *testing.T) {
 		"pages":           {Name: "Topic C", Tasks: []Task{{ID: "PG-1", Difficulty: 1}}},
 	}
 
-	// Should pick first sorted topic (pages)
+	// Curriculum order: site-settings → user-management → pages
 	topic, task := selectNextTask(db, bank)
-	if topic != "pages" || task.ID != "PG-1" {
-		t.Errorf("expected pages/PG-1, got %s/%s", topic, task.ID)
-	}
-
-	// Mark pages mastered → should pick site-settings
-	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('pages', 2, 1)")
-	topic, task = selectNextTask(db, bank)
-	if topic != "site-settings" {
-		t.Errorf("expected site-settings, got %s", topic)
+	if topic != "site-settings" || task.ID != "SS-1" {
+		t.Errorf("expected site-settings/SS-1, got %s/%s", topic, task.ID)
 	}
 
 	// Mark site-settings mastered → should pick user-management
@@ -240,8 +234,15 @@ func TestSelectNextTask(t *testing.T) {
 		t.Errorf("expected user-management, got %s", topic)
 	}
 
-	// Mark all mastered → should return empty
+	// Mark user-management mastered → should pick pages
 	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('user-management', 2, 1)")
+	topic, task = selectNextTask(db, bank)
+	if topic != "pages" {
+		t.Errorf("expected user-management, got %s", topic)
+	}
+
+	// Mark all mastered → should return empty
+	db.Exec("INSERT INTO topic_mastery (topic, consecutive_passes, mastered) VALUES ('pages', 2, 1)")
 	topic, task = selectNextTask(db, bank)
 	if topic != "" || task != nil {
 		t.Errorf("expected empty, got %s/%v", topic, task)

@@ -4,6 +4,7 @@
     "tasks": [
       {
         "id": "ZY-1",
+        "site_profile": "zeroy",
         "difficulty": 1,
         "description": "安装并激活 ZeroY 主题",
         "verify": [
@@ -20,6 +21,7 @@
       },
       {
         "id": "ZY-2",
+        "site_profile": "zeroy",
         "difficulty": 1,
         "description": "安装并激活 ZeroY 编辑器插件",
         "verify": [
@@ -36,6 +38,7 @@
       },
       {
         "id": "ZY-3",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "配置 ZeroY 的 AI 设置：填写业务上下文（About Your Business），描述你的公司和产品",
         "verify": [
@@ -53,6 +56,7 @@
       },
       {
         "id": "ZY-4",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "配置 ZeroY 的设计系统（Design System）：设置全局颜色和字体",
         "verify": [
@@ -70,6 +74,7 @@
       },
       {
         "id": "ZY-5",
+        "site_profile": "zeroy",
         "difficulty": 1,
         "description": "用 ZeroY 编辑器打开 Home 页面，使用 AI 生成功能创建首页内容",
         "verify": [
@@ -88,6 +93,7 @@
       },
       {
         "id": "ZY-6",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "用 ZeroY 编辑器修改 Home 页面中的某个区块内容（如修改标题文字或替换图片）",
         "verify": [
@@ -106,6 +112,7 @@
       },
       {
         "id": "ZY-7",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "用 ZeroY 为 About 页面生成内容，包含公司简介和团队信息",
         "verify": [
@@ -122,6 +129,7 @@
       },
       {
         "id": "ZY-8",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "用 ZeroY 为 Contact Us 页面生成内容，包含联系方式和询盘表单",
         "verify": [
@@ -138,6 +146,7 @@
       },
       {
         "id": "ZY-9",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "用 ZeroY 创建页眉（Header）动态模板：左边 Logo，中间导航，右边 CTA 按钮",
         "verify": [
@@ -157,6 +166,7 @@
       },
       {
         "id": "ZY-10",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "用 ZeroY 创建页脚（Footer）动态模板：包含公司信息、导航链接、WhatsApp 链接和版权声明",
         "verify": [
@@ -176,6 +186,7 @@
       },
       {
         "id": "ZY-11",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "用 ZeroY 创建 404 错误页面动态模板",
         "verify": [
@@ -193,6 +204,7 @@
       },
       {
         "id": "ZY-12",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "用 ZeroY 创建搜索结果页动态模板",
         "verify": [
@@ -210,6 +222,7 @@
       },
       {
         "id": "ZY-13",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "在页眉模板中设置导航菜单，包含二级下拉菜单（如 Product 下拉显示产品分类）",
         "verify": [
@@ -226,6 +239,7 @@
       },
       {
         "id": "ZY-14",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "用 ZeroY 创建一个询盘弹窗（Popup）：包含表单（姓名+邮箱+留言），设置触发条件",
         "verify": [
@@ -242,6 +256,7 @@
       },
       {
         "id": "ZY-15",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "配置询盘表单的提交后行为：跳转到 Thank You 页面，并发送邮件通知到管理员邮箱",
         "verify": [
@@ -259,6 +274,7 @@
       },
       {
         "id": "ZY-16",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "用 ZeroY 创建 404 错误页面模板",
         "hints": [
@@ -275,6 +291,7 @@
       },
       {
         "id": "ZY-17",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "用 ZeroY 创建搜索结果页模板",
         "hints": [
@@ -291,6 +308,7 @@
       },
       {
         "id": "ZY-18",
+        "site_profile": "zeroy",
         "difficulty": 4,
         "description": "用 ZeroY 创建文章归档页模板，展示分类下的文章列表",
         "hints": [
@@ -307,6 +325,7 @@
       },
       {
         "id": "ZY-19",
+        "site_profile": "zeroy",
         "difficulty": 4,
         "description": "用 ZeroY 创建单篇文章模板：标题 + 特色图 + 内容 + 作者信息",
         "hints": [
@@ -323,6 +342,7 @@
       },
       {
         "id": "ZY-20",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "进入 ZeroY → 表单提交，查看所有收到的询盘记录",
         "hints": [
@@ -339,6 +359,7 @@
       },
       {
         "id": "ZY-21",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "设置表单提交后跳转到 Thank You 感谢页面",
         "hints": [
@@ -355,6 +376,7 @@
       },
       {
         "id": "ZY-22",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "启用 wp_mail 邮件通知，设置收件人和邮件标题模板",
         "hints": [
@@ -371,6 +393,7 @@
       },
       {
         "id": "ZY-23",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "安装 WP Mail SMTP 插件解决邮件不稳定问题",
         "hints": [
@@ -387,6 +410,7 @@
       },
       {
         "id": "ZY-24",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "用 ZeroY 创建弹窗，设置触发条件（滚动/延时）",
         "hints": [
@@ -403,6 +427,7 @@
       },
       {
         "id": "ZY-25",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "在 Thank You 页面埋入 Google Ads 转化追踪代码",
         "hints": [
@@ -419,6 +444,7 @@
       },
       {
         "id": "ZY-26",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "通过 SEOPress/Yoast 配置 Google Analytics 和 Ads 全局代码",
         "hints": [
@@ -435,6 +461,7 @@
       },
       {
         "id": "ZY-27",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "用 ZeroY HTMX 实现文章列表的「加载更多」功能",
         "hints": [
@@ -451,6 +478,7 @@
       },
       {
         "id": "ZY-28",
+        "site_profile": "zeroy",
         "difficulty": 4,
         "description": "用 HTMX 实现搜索框实时搜索（keyup + 延迟请求）",
         "hints": [
@@ -467,6 +495,7 @@
       },
       {
         "id": "ZY-29",
+        "site_profile": "zeroy",
         "difficulty": 4,
         "description": "用 HTMX 实现按 ACF 分类法和字段值多条件筛选",
         "hints": [
@@ -483,6 +512,7 @@
       },
       {
         "id": "ZY-30",
+        "site_profile": "zeroy",
         "difficulty": 4,
         "description": "用 HTMX 实现无刷新分页功能",
         "hints": [
@@ -499,6 +529,7 @@
       },
       {
         "id": "ZY-31",
+        "site_profile": "zeroy",
         "difficulty": 4,
         "description": "用 HTMX 实现滚动到底部自动加载更多",
         "hints": [
@@ -515,6 +546,7 @@
       },
       {
         "id": "ZY-32",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "用 ZeroY 的 Swiper 组件创建自动播放轮播，配置导航箭头和分页点",
         "hints": [
@@ -531,6 +563,7 @@
       },
       {
         "id": "ZY-33",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "实现主图 + 缩略图联动的产品画廊效果",
         "hints": [
@@ -547,6 +580,7 @@
       },
       {
         "id": "ZY-34",
+        "site_profile": "zeroy",
         "difficulty": 4,
         "description": "实现响应式多卡片轮播（桌面 4 张、平板 2 张、手机 1 张）",
         "hints": [
@@ -563,6 +597,7 @@
       },
       {
         "id": "ZY-35",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "清除 Hostinger 的页面缓存、CDN 缓存和对象缓存",
         "hints": [
@@ -579,6 +614,7 @@
       },
       {
         "id": "ZY-36",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "学习 ZeroY 的 CSS 压缩设置：何时开启、何时关闭",
         "hints": [
@@ -595,6 +631,7 @@
       },
       {
         "id": "ZY-37",
+        "site_profile": "zeroy",
         "difficulty": 2,
         "description": "了解站点语言设置如何影响 AI 生成内容的语言",
         "hints": [
@@ -611,6 +648,7 @@
       },
       {
         "id": "ZY-38",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "排查表单提交后不跳转/不发邮件的问题（固定链接+SMTP+路径）",
         "hints": [
@@ -627,6 +665,7 @@
       },
       {
         "id": "ZY-39",
+        "site_profile": "zeroy",
         "difficulty": 3,
         "description": "排查 ZeroY AI 生成报错（400/401/403 状态码诊断）",
         "hints": [

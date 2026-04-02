@@ -14,10 +14,21 @@ import (
 // ── init ─────────────────────────────────────────────────────────────────────
 
 func cmdInit() {
-	// Delete existing training site if found
-	if sitePort != defaultPort || fileExists(filepath.Join(locwpBase, "wordpress")) {
-		log("Deleting existing site on port " + sitePort + "...")
-		shell("locwp delete " + sitePort)
+	// Delete existing builder sites before resetting
+	sm := loadSiteMap()
+	if sm.Elementor != nil {
+		log("Deleting elementor site on port " + *sm.Elementor + "...")
+		shell("locwp delete " + *sm.Elementor)
+	}
+	if sm.Zeroy != nil {
+		log("Deleting zeroy site on port " + *sm.Zeroy + "...")
+		shell("locwp delete " + *sm.Zeroy)
+	}
+
+	// Delete existing main training site if found
+	if mainPort != defaultPort || fileExists(filepath.Join(locwpBase, "wordpress")) {
+		log("Deleting existing site on port " + mainPort + "...")
+		shell("locwp delete " + mainPort)
 	}
 
 	log("Creating new site...")
@@ -25,21 +36,7 @@ func cmdInit() {
 	if err != nil {
 		fatal("locwp add failed: " + out)
 	}
-	// Parse port from locwp add output (e.g., "Site created at http://localhost:10001")
-	port := ""
-	for _, line := range strings.Split(out, "\n") {
-		if idx := strings.Index(line, "localhost:"); idx >= 0 {
-			rest := line[idx+len("localhost:"):]
-			for _, c := range rest {
-				if c >= '0' && c <= '9' {
-					port += string(c)
-				} else {
-					break
-				}
-			}
-			break
-		}
-	}
+	port := parsePort(out)
 	if port == "" {
 		// Fallback: find the newest site directory
 		entries, _ := os.ReadDir(filepath.Join(homeDir, ".locwp", "sites"))
@@ -54,8 +51,9 @@ func cmdInit() {
 		fatal("could not determine site port from locwp add output")
 	}
 
-	sitePort = port
-	setSitePaths(port)
+	mainPort = port
+	setTrainingPaths(port)
+	switchSite(port)
 
 	log("Installing Classic Editor...")
 	wp("plugin install classic-editor --activate")
@@ -76,6 +74,9 @@ func cmdInit() {
 	db := openDB()
 	db.Exec("INSERT INTO sessions (started_at) VALUES (?)", nowISO())
 	db.Close()
+
+	// Initialize sites.json with main site only (builder sites created on demand)
+	saveSiteMap(SiteMap{Main: port})
 
 	// Clean old progress.json
 	os.Remove(filepath.Join(trainingDir, "progress.json"))
@@ -187,6 +188,7 @@ func cmdNext(args []string) {
 		"hints":        selectedTask.Hints,
 		"on_pass_note": selectedTask.OnPassNote,
 		"verify":       selectedTask.Verify,
+		"site_profile": selectedTask.SiteProfile,
 	}
 	if selectedTask.Chain != "" {
 		record["chain"] = selectedTask.Chain
@@ -194,6 +196,18 @@ func cmdNext(args []string) {
 	}
 	recordJSON, _ := json.Marshal(record)
 	db.Exec("INSERT OR REPLACE INTO current_task (id, task_json, issued_at) VALUES (1, ?, ?)", string(recordJSON), nowISO())
+
+	// Ensure builder site exists (forks from main on first use)
+	activePort := mainPort
+	if selectedTask.SiteProfile != "" && selectedTask.SiteProfile != "main" {
+		port, err := ensureBuilderSite(selectedTask.SiteProfile)
+		if err != nil {
+			jprintln(map[string]any{"status": "error", "message": "failed to create builder site: " + err.Error()})
+			return
+		}
+		activePort = port
+	}
+	siteURL := fmt.Sprintf("http://localhost:%s", activePort)
 
 	// Output without verify, with context
 	mastered := listMastered(db)
@@ -209,6 +223,7 @@ func cmdNext(args []string) {
 		"description":  selectedTask.Description,
 		"hints":        selectedTask.Hints,
 		"on_pass_note": selectedTask.OnPassNote,
+		"site_url":     siteURL,
 		"context": map[string]any{
 			"current_category": currentCategory,
 			"topics_mastered":  mastered,
@@ -350,6 +365,17 @@ func cmdVerify() {
 	var task map[string]any
 	json.Unmarshal([]byte(taskJSON.String), &task)
 
+	// Switch to the task's site (builder sites use a different port)
+	profile := str(task["site_profile"])
+	if profile != "" && profile != "main" {
+		port := portForProfile(profile)
+		if port == "" {
+			jprintln(map[string]any{"status": "error", "message": "builder site not found for profile: " + profile + " — run 'next' first"})
+			return
+		}
+		switchSite(port)
+	}
+
 	// Git auto-commit and capture diff
 	var gitDiff string
 	gitStat, _ := shell(fmt.Sprintf("cd %s && git status --porcelain 2>/dev/null", wpContent))
@@ -431,6 +457,7 @@ func cmdVerify() {
 	}
 
 	if allPassed {
+		doCheckpointSave("latest")
 		db.Exec("DELETE FROM current_task WHERE id = 1")
 	}
 
