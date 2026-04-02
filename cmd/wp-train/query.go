@@ -78,9 +78,14 @@ func cmdProgress() {
 		"weak_topics":     listWeak(db),
 		"recent_attempts": recentAttempts(db, 5),
 	})
-}
 
-// ── snapshot ─────────────────────────────────────────────────────────────────
+	// auto-sync progress MD
+	if bank != nil {
+		syncProgressMD(db, bank)
+	}
+	}
+
+	// ── snapshot ─────────────────────────────────────────────────────────────────
 
 func cmdSnapshot() {
 	data := make(map[string]any)

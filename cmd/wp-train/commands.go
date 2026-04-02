@@ -229,6 +229,30 @@ func cmdNext(args []string) {
 		output["chain_total"] = total
 	}
 	jprintln(output)
+
+	// auto-sync progress after next
+	if bank != nil {
+		syncProgressMD(db, bank)
+	}
+	}
+
+// builderPreference returns the builder topic the user has started, or "" if none/both.
+func builderPreference(db *sql.DB) string {
+	zeroyCount := dbGetInt(db, "SELECT COUNT(*) FROM attempts WHERE topic = 'zeroy'")
+	elementorCount := dbGetInt(db, "SELECT COUNT(*) FROM attempts WHERE topic = 'elementor'")
+	if zeroyCount > 0 && elementorCount == 0 {
+		return "zeroy"
+	}
+	if elementorCount > 0 && zeroyCount == 0 {
+		return "elementor"
+	}
+	return ""
+}
+
+// builderExclusions defines mutually exclusive builder topic pairs.
+var builderExclusions = map[string]string{
+	"zeroy":    "elementor",
+	"elementor": "zeroy",
 }
 
 func selectNextTask(db *sql.DB, bank TaskBank) (string, *Task) {
@@ -246,9 +270,17 @@ func selectNextTask(db *sql.DB, bank TaskBank) (string, *Task) {
 		}
 	}
 
+	pref := builderPreference(db)
+
 	for _, key := range sortedKeys(bank) {
 		if mastered[key] {
 			continue
+		}
+		// Builder mutual exclusion: skip the other builder if user started one
+		if pref != "" {
+			if exclude, ok := builderExclusions[key]; ok && exclude != pref {
+				continue
+			}
 		}
 		entry := bank[key]
 		task := pickLeastAttempted(db, key, entry.Tasks)
@@ -473,9 +505,15 @@ func cmdVerify() {
 		out["hints"] = hints
 	}
 	jprintln(out)
-}
 
-// ── small helpers ────────────────────────────────────────────────────────────
+		// auto-sync progress after verify
+		bank := loadTaskBank()
+		if bank != nil {
+			syncProgressMD(db, bank)
+		}
+	}
+
+	// ── small helpers ────────────────────────────────────────────────────────────
 
 func nullStr(ns sql.NullString) any {
 	if ns.Valid {
@@ -515,4 +553,125 @@ func contains(slice []string, item string) bool {
 		}
 	}
 	return false
+}
+
+// ── progress MD sync ──────────────────────────────────────────────────────────
+
+func syncProgressMD(db *sql.DB, bank TaskBank) {
+	var sb strings.Builder
+	sb.WriteString("# WP Guider 训练进度\n")
+
+	now := time.Now().Format("2006-01-02 15:04")
+	fmt.Fprintf(&sb, "> 最后更新: %s\n\n", now)
+
+	// Current task
+	var taskJSON sql.NullString
+	db.QueryRow("SELECT task_json FROM current_task WHERE id = 1").Scan(&taskJSON)
+	if taskJSON.Valid {
+		var t map[string]any
+		json.Unmarshal([]byte(taskJSON.String), &t)
+		fmt.Fprintf(&sb, "## 当前任务\n")
+		fmt.Fprintf(&sb, "- **%s** (%s) — %s\n\n",
+			str(t["task_id"]), str(t["topic_name"]), str(t["description"]))
+	} else {
+		sb.WriteString("## 当前任务\n- 无活跃任务，运行 `wp-train next` 获取新题\n\n")
+	}
+
+	// Builder preference
+	pref := builderPreference(db)
+	if pref != "" {
+		fmt.Fprintf(&sb, "- Builder 偏好: **%s**\n\n", pref)
+	}
+
+	// Stats
+	totalTopics := len(bank)
+	masteredTopics := 0
+	rows, _ := db.Query("SELECT topic FROM topic_mastery WHERE mastered = 1")
+	if rows != nil {
+		defer rows.Close()
+		for rows.Next() {
+			var t string
+			rows.Scan(&t)
+			masteredTopics++
+		}
+	}
+	totalAttempts := dbGetInt(db, "SELECT COUNT(*) FROM attempts")
+	totalPasses := dbGetInt(db, "SELECT COUNT(*) FROM attempts WHERE passed = 1")
+	passRate := 0.0
+	if totalAttempts > 0 {
+		passRate = float64(totalPasses) / float64(totalAttempts) * 100
+	}
+
+	sb.WriteString("## 总览\n")
+	fmt.Fprintf(&sb, "- 已掌握: %d/%d 主题\n", masteredTopics, totalTopics)
+	fmt.Fprintf(&sb, "- 总尝试: %d 次 | 通过: %d 次 | 通过率: %.0f%%\n\n", totalAttempts, totalPasses, passRate)
+
+	// Category breakdown
+	catOrder := []string{"基础设施", "站点设置", "内容管理", "外观定制", "插件与扩展", "运维与安全"}
+	sb.WriteString("## 各分类进度\n")
+	for _, cat := range catOrder {
+		var topics []string
+		for _, key := range sortedKeys(bank) {
+			if topicCategory(key) == cat {
+				topics = append(topics, key)
+			}
+		}
+		if len(topics) == 0 {
+			continue
+		}
+		catMastered := 0
+		for _, t := range topics {
+			if dbGetInt(db, "SELECT mastered FROM topic_mastery WHERE topic = ?", t) == 1 {
+				catMastered++
+			}
+		}
+		fmt.Fprintf(&sb, "### %s (%d/%d)\n", cat, catMastered, len(topics))
+		for _, t := range topics {
+			mastered := dbGetInt(db, "SELECT mastered FROM topic_mastery WHERE topic = ?", t) == 1
+			entry := bank[t]
+			if mastered {
+				fmt.Fprintf(&sb, "- ✅ %s (%s)\n", entry.Name, t)
+			} else {
+				cp := dbGetInt(db, "SELECT consecutive_passes FROM topic_mastery WHERE topic = ?", t)
+				attempts := dbGetInt(db, "SELECT COUNT(*) FROM attempts WHERE topic = ?", t)
+				if attempts > 0 {
+					fmt.Fprintf(&sb, "- 🔵 %s (%s) — 连续通过 %d/2 | 尝试 %d 次\n", entry.Name, t, cp, attempts)
+				} else {
+					fmt.Fprintf(&sb, "- ⬜ %s (%s)\n", entry.Name, t)
+				}
+			}
+		}
+		sb.WriteString("\n")
+	}
+
+	// Weak topics
+	weak := listWeak(db)
+	if len(weak) > 0 {
+		sb.WriteString("## 薄弱主题\n")
+		for _, w := range weak {
+			topic, _ := w["topic"].(string)
+			cp, _ := w["consecutive_passes"].(int)
+			attempts, _ := w["attempts"].(int)
+			fmt.Fprintf(&sb, "- ⚠️ %s — 连续通过 %d/2 | 尝试 %d 次\n", topic, cp, attempts)
+		}
+		sb.WriteString("\n")
+	}
+
+	// Recent attempts
+	sb.WriteString("## 最近记录\n")
+	recent := recentAttempts(db, 5)
+	for _, r := range recent {
+		passed, _ := r["passed"].(bool)
+		topic, _ := r["topic"].(string)
+		taskID, _ := r["task_id"].(string)
+		mark := "✅"
+		if !passed {
+			mark = "❌"
+		}
+		fmt.Fprintf(&sb, "- %s %s/%s\n", mark, topic, taskID)
+	}
+
+	// Write file
+	mdPath := filepath.Join(claudeDir, "PROGRESS.md")
+	os.WriteFile(mdPath, []byte(sb.String()), 0644)
 }
